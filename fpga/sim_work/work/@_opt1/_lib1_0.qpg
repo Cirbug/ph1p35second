@@ -10,36 +10,36 @@ z2
 cModel Technology
 Z0 dD:/BaiduNetdiskDownload/02_F02_FC02_PH1P35/fpga_11/ph1p35second/fpga/sim_work
 T_opt
-!s110 1793197303
-V6:Wa;:S0aVX9:bCLT[E>n2
-04 14 4 work tb_cam_cfg_i2c fast 0
-=1-78465c4e0bf3-6ae204f7-14-8b38
+!s110 1793217741
+V9zd8c[?cBdCJk1zDhQ3zB3
+04 19 4 work tb_csi2_bank_switch fast 0
+=1-78465c4e0bf3-6ae254cd-182-a0f8
 Z1 o-quiet -auto_acc_if_foreign -work work
 Z2 tCvgOpt 0
 n@_opt
 Z3 OL;O;2020.4;71
 R0
 T_opt1
-!s110 1793215987
-VgooNW9c7HSN;?=4B98SFn2
-04 10 4 work tb_tx_cont fast 0
-=1-78465c4e0bf3-6ae24df3-36-29b8
+!s110 1793217761
+VmA2ao:<ILFmKK^KdmHU]51
+04 16 4 work tb_csi2_pipeline fast 0
+=1-78465c4e0bf3-6ae254e1-f0-acf4
 R1
 R2
 n@_opt1
 R3
 T_opt2
-!s110 1793215963
-VBBGS?@GIHi9BQ46=TiNXm1
-04 17 4 work tb_csi2_tx_packet fast 0
-=1-78465c4e0bf3-6ae24ddb-121-94d4
+!s110 1793217743
+V5]KZNHAShcMLmREJ26mjD0
+04 17 4 work tb_csi2_lane_swap fast 0
+=1-78465c4e0bf3-6ae254cf-12b-1d0
 R1
 R2
 n@_opt2
 R3
 R0
 vae_set
-Z4 !s110 1793197282
+Z4 !s110 1793217724
 !i10b 1
 !s100 PQMCbhAM0@DbKhX4Lf?5?2
 Z5 !s11b Dg1SIo80bB@j0V0VzS_@n1
@@ -48,14 +48,14 @@ R0
 w1739152390
 8..\uisrc\01_rtl\ae\ae_set.v
 F..\uisrc\01_rtl\ae\ae_set.v
-!i122 12
+!i122 33
 L0 33 89
 Z6 VDg1SIo80bB@j0V0VzS_@n1
 Z7 OL;L;2020.4;71
 r1
 !s85 0
 31
-Z8 !s108 1793197282.000000
+Z8 !s108 1793217724.000000
 Z9 !s107 ..\uisrc\02_sim\tb_cam_cfg_i2c.v|..\uisrc\02_sim\tb_csi2_lane_swap.v|..\uisrc\02_sim\tb_csi2_bank_switch.v|..\uisrc\02_sim\tb_csi2_full_line.v|..\uisrc\02_sim\tb_csi2_tx_top.v|..\uisrc\02_sim\tb_csi2_ptr_fifo.v|..\uisrc\02_sim\tb_csi2_pipeline.v|..\uisrc\02_sim\tb_csi2_rx_parse.v|..\uisrc\02_sim\tb_csi2_tx_packet.v|..\uisrc\02_sim\tb_crc_par2.v|..\uisrc\02_sim\tb_csi2_ecc_crc.v|..\uisrc\01_rtl\ae\ae_set.v|..\uisrc\01_rtl\csi2_tx_top.v|..\uisrc\01_rtl\uics500_cfg\uicfgcs500.v|..\uisrc\01_rtl\uics500_cfg\uics500regAE.v|..\uisrc\01_rtl\uics500_cfg\uics500reg.v|..\uisrc\01_rtl\uics500_cfg\SC500GainTbl.v|..\uisrc\01_rtl\uics500_cfg\uii2c.v|..\uisrc\01_rtl\csi2\csi2_ptr_fifo.v|..\uisrc\01_rtl\csi2\csi2_rx_parse.v|..\uisrc\01_rtl\csi2\csi2_tx_packet.v|..\uisrc\01_rtl\csi2\crc16_par2.v|..\uisrc\01_rtl\csi2\crc16_csi.v|..\uisrc\01_rtl\csi2\csi2_ecc.v|..\uisrc\02_sim\stub_top_deps.v|
 Z10 !s90 -quiet|..\uisrc\02_sim\stub_top_deps.v|..\uisrc\01_rtl\csi2\csi2_ecc.v|..\uisrc\01_rtl\csi2\crc16_csi.v|..\uisrc\01_rtl\csi2\crc16_par2.v|..\uisrc\01_rtl\csi2\csi2_tx_packet.v|..\uisrc\01_rtl\csi2\csi2_rx_parse.v|..\uisrc\01_rtl\csi2\csi2_ptr_fifo.v|..\uisrc\01_rtl\uics500_cfg\uii2c.v|..\uisrc\01_rtl\uics500_cfg\SC500GainTbl.v|..\uisrc\01_rtl\uics500_cfg\uics500reg.v|..\uisrc\01_rtl\uics500_cfg\uics500regAE.v|..\uisrc\01_rtl\uics500_cfg\uicfgcs500.v|..\uisrc\01_rtl\csi2_tx_top.v|..\uisrc\01_rtl\ae\ae_set.v|..\uisrc\02_sim\tb_csi2_ecc_crc.v|..\uisrc\02_sim\tb_crc_par2.v|..\uisrc\02_sim\tb_csi2_tx_packet.v|..\uisrc\02_sim\tb_csi2_rx_parse.v|..\uisrc\02_sim\tb_csi2_pipeline.v|..\uisrc\02_sim\tb_csi2_ptr_fifo.v|..\uisrc\02_sim\tb_csi2_tx_top.v|..\uisrc\02_sim\tb_csi2_full_line.v|..\uisrc\02_sim\tb_csi2_bank_switch.v|..\uisrc\02_sim\tb_csi2_lane_swap.v|..\uisrc\02_sim\tb_cam_cfg_i2c.v|
 !i113 0
@@ -71,7 +71,7 @@ R0
 w1793194045
 8..\uisrc\01_rtl\csi2\crc16_csi.v
 F..\uisrc\01_rtl\csi2\crc16_csi.v
-!i122 12
+!i122 33
 L0 11 31
 R6
 R7
@@ -85,48 +85,48 @@ R10
 R11
 R2
 vcrc16_par2
-!s110 1793215940
+R4
 !i10b 1
-!s100 oBBfQBbcC_C6h6A6[hkHT2
+!s100 7CoCNzGH?glK=h9BOESkB1
 R5
-I6;DQLO63[_E<_Ba=HQ`4>3
+ID>z0o<g<>InEcR?OO0]5^1
 R0
 w1793194663
-8D:\BaiduNetdiskDownload\02_F02_FC02_PH1P35\fpga_11\ph1p35second\fpga\uisrc\01_rtl\csi2\crc16_par2.v
-FD:\BaiduNetdiskDownload\02_F02_FC02_PH1P35\fpga_11\ph1p35second\fpga\uisrc\01_rtl\csi2\crc16_par2.v
-!i122 19
+8..\uisrc\01_rtl\csi2\crc16_par2.v
+F..\uisrc\01_rtl\csi2\crc16_par2.v
+!i122 33
 L0 10 26
 R6
 R7
 r1
 !s85 0
 31
-!s108 1793215940.000000
-!s107 D:\BaiduNetdiskDownload\02_F02_FC02_PH1P35\fpga_11\ph1p35second\fpga\uisrc\02_sim\tb_csi2_tx_packet.v|D:\BaiduNetdiskDownload\02_F02_FC02_PH1P35\fpga_11\ph1p35second\fpga\uisrc\01_rtl\csi2\csi2_tx_packet.v|D:\BaiduNetdiskDownload\02_F02_FC02_PH1P35\fpga_11\ph1p35second\fpga\uisrc\01_rtl\csi2\crc16_par2.v|D:\BaiduNetdiskDownload\02_F02_FC02_PH1P35\fpga_11\ph1p35second\fpga\uisrc\01_rtl\csi2\csi2_ecc.v|
-!s90 -quiet|D:\BaiduNetdiskDownload\02_F02_FC02_PH1P35\fpga_11\ph1p35second\fpga\uisrc\01_rtl\csi2\csi2_ecc.v|D:\BaiduNetdiskDownload\02_F02_FC02_PH1P35\fpga_11\ph1p35second\fpga\uisrc\01_rtl\csi2\crc16_par2.v|D:\BaiduNetdiskDownload\02_F02_FC02_PH1P35\fpga_11\ph1p35second\fpga\uisrc\01_rtl\csi2\csi2_tx_packet.v|D:\BaiduNetdiskDownload\02_F02_FC02_PH1P35\fpga_11\ph1p35second\fpga\uisrc\02_sim\tb_csi2_tx_packet.v|
+R8
+R9
+R10
 !i113 0
 R11
 R2
 vcsi2_ecc
-Z12 !s110 1793215985
+Z12 !s110 1793217760
 !i10b 1
 !s100 X1UbhR[Ub6n=FL4zkMOUT1
 R5
-Izi2<_<i>=d?J?:8J_c:QS0
+IBzFAmQJ]9R@8WWT:AaCim3
 R0
 w1793213130
-8D:\BaiduNetdiskDownload\02_F02_FC02_PH1P35\fpga_11\ph1p35second\fpga\uisrc\01_rtl\csi2\csi2_ecc.v
-FD:\BaiduNetdiskDownload\02_F02_FC02_PH1P35\fpga_11\ph1p35second\fpga\uisrc\01_rtl\csi2\csi2_ecc.v
-!i122 23
+8..\uisrc\01_rtl\csi2\csi2_ecc.v
+F..\uisrc\01_rtl\csi2\csi2_ecc.v
+!i122 34
 L0 13 14
 R6
 R7
 r1
 !s85 0
 31
-Z13 !s108 1793215985.000000
-Z14 !s107 D:\BaiduNetdiskDownload\02_F02_FC02_PH1P35\fpga_11\ph1p35second\fpga\uisrc\02_sim\tb_tx_cont.v|D:\BaiduNetdiskDownload\02_F02_FC02_PH1P35\fpga_11\ph1p35second\fpga\uisrc\01_rtl\csi2\csi2_tx_packet.v|D:\BaiduNetdiskDownload\02_F02_FC02_PH1P35\fpga_11\ph1p35second\fpga\uisrc\01_rtl\csi2\csi2_ecc.v|
-Z15 !s90 -quiet|D:\BaiduNetdiskDownload\02_F02_FC02_PH1P35\fpga_11\ph1p35second\fpga\uisrc\01_rtl\csi2\csi2_ecc.v|D:\BaiduNetdiskDownload\02_F02_FC02_PH1P35\fpga_11\ph1p35second\fpga\uisrc\01_rtl\csi2\csi2_tx_packet.v|D:\BaiduNetdiskDownload\02_F02_FC02_PH1P35\fpga_11\ph1p35second\fpga\uisrc\02_sim\tb_tx_cont.v|
+Z13 !s108 1793217760.000000
+Z14 !s107 ..\uisrc\02_sim\tb_csi2_pipeline.v|..\uisrc\01_rtl\csi2\csi2_rx_parse.v|..\uisrc\01_rtl\csi2\csi2_tx_packet.v|..\uisrc\01_rtl\csi2\csi2_ecc.v|
+Z15 !s90 -quiet|..\uisrc\01_rtl\csi2\csi2_ecc.v|..\uisrc\01_rtl\csi2\csi2_tx_packet.v|..\uisrc\01_rtl\csi2\csi2_rx_parse.v|..\uisrc\02_sim\tb_csi2_pipeline.v|
 !i113 0
 R11
 R2
@@ -140,7 +140,7 @@ R0
 w1793195630
 8..\uisrc\01_rtl\csi2\csi2_ptr_fifo.v
 F..\uisrc\01_rtl\csi2\csi2_ptr_fifo.v
-!i122 12
+!i122 33
 L0 18 95
 R6
 R7
@@ -154,39 +154,39 @@ R10
 R11
 R2
 vcsi2_rx_parse
-R4
+R12
 !i10b 1
-!s100 fGnWlMG9lSL];[BWZS=`23
+!s100 PV6j57JAIadi6Fa;>V=;53
 R5
-IPJaK>jY3GXolK3N89<0_j3
+I^OJ64_Zh:c`jgQFCMl?B[1
 R0
-w1793194975
+w1793215624
 8..\uisrc\01_rtl\csi2\csi2_rx_parse.v
 F..\uisrc\01_rtl\csi2\csi2_rx_parse.v
-!i122 12
-L0 17 121
+!i122 34
+L0 16 115
 R6
 R7
 r1
 !s85 0
 31
-R8
-R9
-R10
+R13
+R14
+R15
 !i113 0
 R11
 R2
 vcsi2_tx_packet
 R12
 !i10b 1
-!s100 nHLB:6BOi;aF[zT7NN?BD2
+!s100 0bj=A1Y>Ll<eY?bm[0O><2
 R5
-IizG69KW^dUeP_W7`NUP071
+ITNbXRbNQj7JmW[kZI9Zef3
 R0
-w1793215985
-8D:\BaiduNetdiskDownload\02_F02_FC02_PH1P35\fpga_11\ph1p35second\fpga\uisrc\01_rtl\csi2\csi2_tx_packet.v
-FD:\BaiduNetdiskDownload\02_F02_FC02_PH1P35\fpga_11\ph1p35second\fpga\uisrc\01_rtl\csi2\csi2_tx_packet.v
-!i122 23
+w1793217626
+8..\uisrc\01_rtl\csi2\csi2_tx_packet.v
+F..\uisrc\01_rtl\csi2\csi2_tx_packet.v
+!i122 34
 L0 12 224
 R6
 R7
@@ -202,15 +202,15 @@ R2
 vcsi2_tx_top
 R4
 !i10b 1
-!s100 RbjG2T67d;_K3amRmA<V43
+!s100 8527n1?k>k3U5jGcMT]cI1
 R5
-IhTF0K6CfS=jYX<:?3d73:3
+IIz?:Z^80]]KN7fz?>W_9^1
 R0
-w1793197106
+w1793217666
 8..\uisrc\01_rtl\csi2_tx_top.v
 F..\uisrc\01_rtl\csi2_tx_top.v
-!i122 12
-L0 20 383
+!i122 33
+L0 20 692
 R6
 R7
 r1
@@ -219,6 +219,29 @@ r1
 R8
 R9
 R10
+!i113 0
+R11
+R2
+vdbg_uart
+!s110 1793217666
+!i10b 1
+!s100 JF[KC>f5aHPOb`QQ6M19A3
+R5
+Ijh=52Cc4lM[zbDfIMomfX3
+R0
+w1793208008
+8..\uisrc\01_rtl\dbg\dbg_uart.v
+F..\uisrc\01_rtl\dbg\dbg_uart.v
+!i122 31
+L0 12 165
+R6
+R7
+r1
+!s85 0
+31
+!s108 1793217666.000000
+!s107 ..\uisrc\01_rtl\csi2_tx_top.v|..\uisrc\01_rtl\dbg\dbg_uart.v|..\uisrc\01_rtl\ae\ae_set.v|..\uisrc\01_rtl\uics500_cfg\SC500GainTbl.v|..\uisrc\01_rtl\uics500_cfg\uii2c.v|..\uisrc\01_rtl\uics500_cfg\uicfgcs500.v|..\uisrc\01_rtl\uics500_cfg\uics500regAE.v|..\uisrc\01_rtl\uics500_cfg\uics500reg.v|..\uisrc\01_rtl\csi2\csi2_ptr_fifo.v|..\uisrc\01_rtl\csi2\csi2_rx_parse.v|..\uisrc\01_rtl\csi2\csi2_tx_packet.v|..\uisrc\01_rtl\csi2\crc16_par2.v|..\uisrc\01_rtl\csi2\csi2_ecc.v|
+!s90 -quiet|..\uisrc\01_rtl\csi2\csi2_ecc.v|..\uisrc\01_rtl\csi2\crc16_par2.v|..\uisrc\01_rtl\csi2\csi2_tx_packet.v|..\uisrc\01_rtl\csi2\csi2_rx_parse.v|..\uisrc\01_rtl\csi2\csi2_ptr_fifo.v|..\uisrc\01_rtl\uics500_cfg\uics500reg.v|..\uisrc\01_rtl\uics500_cfg\uics500regAE.v|..\uisrc\01_rtl\uics500_cfg\uicfgcs500.v|..\uisrc\01_rtl\uics500_cfg\uii2c.v|..\uisrc\01_rtl\uics500_cfg\SC500GainTbl.v|..\uisrc\01_rtl\ae\ae_set.v|..\uisrc\01_rtl\dbg\dbg_uart.v|..\uisrc\01_rtl\csi2_tx_top.v|
 !i113 0
 R11
 R2
@@ -232,7 +255,7 @@ R0
 Z16 w1793195478
 Z17 8..\uisrc\02_sim\stub_top_deps.v
 Z18 F..\uisrc\02_sim\stub_top_deps.v
-!i122 12
+!i122 33
 L0 29 46
 R6
 R7
@@ -255,7 +278,7 @@ R0
 R16
 R17
 R18
-!i122 12
+!i122 33
 L0 77 51
 R6
 R7
@@ -278,7 +301,7 @@ R0
 R16
 R17
 R18
-!i122 12
+!i122 33
 L0 16 11
 R6
 R7
@@ -301,7 +324,7 @@ R0
 w1688526678
 8..\uisrc\01_rtl\uics500_cfg\SC500GainTbl.v
 F..\uisrc\01_rtl\uics500_cfg\SC500GainTbl.v
-!i122 12
+!i122 33
 L0 6 19
 R6
 R7
@@ -325,7 +348,7 @@ R0
 w1793197273
 8..\uisrc\02_sim\tb_cam_cfg_i2c.v
 F..\uisrc\02_sim\tb_cam_cfg_i2c.v
-!i122 12
+!i122 33
 L0 16 162
 R6
 R7
@@ -348,7 +371,7 @@ R0
 w1793194624
 8..\uisrc\02_sim\tb_crc_par2.v
 F..\uisrc\02_sim\tb_crc_par2.v
-!i122 12
+!i122 33
 L0 9 100
 R6
 R7
@@ -371,7 +394,7 @@ R0
 w1793196805
 8..\uisrc\02_sim\tb_csi2_bank_switch.v
 F..\uisrc\02_sim\tb_csi2_bank_switch.v
-!i122 12
+!i122 33
 L0 15 176
 R6
 R7
@@ -394,7 +417,7 @@ R0
 w1793194053
 8..\uisrc\02_sim\tb_csi2_ecc_crc.v
 F..\uisrc\02_sim\tb_csi2_ecc_crc.v
-!i122 12
+!i122 33
 L0 9 110
 R6
 R7
@@ -410,6 +433,33 @@ R2
 vtb_csi2_full_line
 R4
 !i10b 1
-!s100 oNiD5TFNgPJSdOEFlb?l_2
+!s100 9fe]NP6EV4Y7HNS:i[bU<0
 R5
-ILA0
+IdejkOf1c4k61;cNLUVLcC2
+R0
+Z19 w1793217724
+8..\uisrc\02_sim\tb_csi2_full_line.v
+F..\uisrc\02_sim\tb_csi2_full_line.v
+!i122 33
+L0 15 203
+R6
+R7
+r1
+!s85 0
+31
+R8
+R9
+R10
+!i113 0
+R11
+R2
+vtb_csi2_lane_swap
+R4
+!i10b 1
+!s100 nYmQZlMo<Mil48Pe<32EQ0
+R5
+IVLcKSNbPfkInOb^UJ6A`D3
+R0
+w1793196963
+8..\uisrc\02_sim\tb_csi2_lane_swap.v
+F..\uisrc\02_sim\tb_csi2_

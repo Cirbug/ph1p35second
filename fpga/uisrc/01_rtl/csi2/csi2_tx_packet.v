@@ -175,7 +175,7 @@ module csi2_tx_packet #(
             S_FS, S_FE: begin
                 O_hs_en   <= 1'b1;
                 O_hs_data <= { beat_hi, beat_lo };
-                O_hs_last <= 1'b1;
+                O_hs_last <= (byte_cnt >= pkt_bytes - 16'd2);   // 只有最后一拍
                 if (byte_cnt >= pkt_bytes - 16'd2) begin
                     gap <= 16'd0;
                     st  <= S_GAP;          // 本拍仍输出，GAP 才拉低 hs_en
@@ -203,7 +203,7 @@ module csi2_tx_packet #(
             S_GAP: begin
                 O_hs_en   <= 1'b0;
                 O_hs_last <= 1'b0;
-                if (gap >= 16'd200) st <= S_IDLE;
+                if (gap >= 16'd8) st <= S_IDLE;
                 else                gap <= gap + 16'd1;
             end
 

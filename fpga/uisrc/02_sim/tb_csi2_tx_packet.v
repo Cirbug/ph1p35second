@@ -159,7 +159,7 @@ module tb_csi2_tx_packet;
             $display("FAIL: FS 长度 %0d，应为 4", pkt_end_i[0]);
             errs = errs + 1;
         end
-        ref_hdr = 24'h00_0000;
+        ref_hdr = { 8'h00, 8'h00, 8'h00 };
         #1;
         if (got[0] !== 8'h00 || got[1] !== 8'h00 || got[2] !== 8'h00
             || got[3] !== ref_ecc) begin
@@ -171,9 +171,9 @@ module tb_csi2_tx_packet;
         end
 
         //---- 包 2：长包 ----
-        wc_be  = { got[5], got[6] };
+        wc_be  = { got[6], got[5] };   // CSI-2: 低字节先发
         di_long = got[4];
-        ref_hdr = { di_long, wc_be };
+        ref_hdr = { got[6], got[5], di_long };  // ECC 输入顺序 {WC_MSB, WC_LSB, DI}
         #1;
         if (di_long !== { 2'b00, 6'h2B }) begin
             $display("FAIL: 长包 DI=%02h，期望 2B", di_long);
@@ -213,7 +213,7 @@ module tb_csi2_tx_packet;
         end
 
         //---- 包 3：帧尾 ----
-        ref_hdr = 24'h01_0000;
+        ref_hdr = { 8'h00, 8'h00, 8'h01 };   // ECC 输入顺序 {WC_MSB, WC_LSB, DI}
         #1;
         if (got[26] !== 8'h01 || got[27] !== 8'h00 || got[28] !== 8'h00
             || got[29] !== ref_ecc) begin

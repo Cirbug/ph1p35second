@@ -124,9 +124,9 @@ module tb_csi2_tx_top;
             rx_beat({ 8'h00, ref_ecc });
             rx_gap(8);
 
-            rx_beat({ 8'h2B, WC[15:8] });
-            ref_hdr = { 8'h2B, WC[15:0] }; #1;
-            rx_beat({ WC[7:0], ref_ecc });
+            rx_beat({ 8'h2B, WC[7:0] });
+            ref_hdr = { WC[15:8], WC[7:0], 8'h2B }; #1;
+            rx_beat({ WC[15:8], ref_ecc });
 
             for (i = 0; i < WC/2; i = i + 1) begin
                 exp_pay[2*i]     = 8'hA0 + i[7:0];
@@ -136,7 +136,7 @@ module tb_csi2_tx_top;
             rx_beat({ 8'hC0, 8'hDE });
             rx_gap(8);
 
-            ref_hdr = 24'h01_0000; #1;
+            ref_hdr = 24'h00_0001; #1;
             rx_beat({ 8'h01, 8'h00 });
             rx_beat({ 8'h00, ref_ecc });
             rx_gap(10);
@@ -160,12 +160,12 @@ module tb_csi2_tx_top;
                 $display("FAIL: FS wrong"); errs = errs + 1;
             end else $display("PASS: FS  = 00 00 00 %02h", ref_ecc);
 
-            ref_hdr = { got[4], got[5], got[6] }; #1;
+            ref_hdr = { got[6], got[5], got[4] }; #1;
             if (got[4] !== 8'h2B) begin
                 $display("FAIL: long DT=%02h", got[4]); errs = errs + 1;
             end
-            if ({got[5],got[6]} !== WC[15:0]) begin
-                $display("FAIL: long WC=%0d", {got[5],got[6]}); errs = errs + 1;
+            if ({got[6],got[5]} !== WC[15:0]) begin
+                $display("FAIL: long WC=%0d", {got[6],got[5]}); errs = errs + 1;
             end
             if (got[7] !== ref_ecc) begin
                 $display("FAIL: long ECC=%02h", got[7]); errs = errs + 1;
@@ -186,7 +186,7 @@ module tb_csi2_tx_top;
                 errs = errs + 1;
             end
 
-            ref_hdr = 24'h01_0000; #1;
+            ref_hdr = 24'h00_0001; #1;
             if (got[8+WC+2] !== 8'h01 || got[8+WC+5] !== ref_ecc) begin
                 $display("FAIL: FE wrong"); errs = errs + 1;
             end else $display("PASS: FE  = 01 00 00 %02h", ref_ecc);

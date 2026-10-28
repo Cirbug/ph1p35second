@@ -122,6 +122,8 @@ module csi2_tx_top #(
         .O_ag          ( ag_val       )
     );
 
+    wire [8:0] dbg_regidx;     // 摄像头配置进度（仅调试用）
+
     uicfgcs500 #(
         .CLK_DIV ( 24000000 / 100000 - 1 )      // 24MHz -> 100kHz I2C
     ) u_cam_cfg (
@@ -536,7 +538,6 @@ module csi2_tx_top #(
     // 8. 调试串口（115200 8N1，每 ~100ms 打印一行）
     //    这些信号跨时钟域直接采样，仅用于观察，不参与逻辑
     //==================================================================
-    wire [8:0] dbg_regidx;
     reg [15:0] dbg_frame;
     reg [15:0] dbg_wc;
     reg [7:0]  dbg_dt;
