@@ -8,48 +8,48 @@ IO Statistics
   #inout                   21
 
 Gate Statistics
-#Basic gates             3103
-  #and                    108
+#Basic gates             3072
+  #and                    112
   #nand                     0
-  #or                      48
+  #or                      47
   #nor                      0
-  #xor                    198
+  #xor                     84
   #xnor                     0
   #buf                      0
-  #not                    271
+  #not                    305
   #bufif1                   1
-  #MX21                   378
+  #MX21                   417
   #FADD                     0
-  #DFF                   2099
+  #DFF                   2106
   #LATCH                    0
-#MACRO_ADD                116
-#MACRO_EQ                  71
-#MACRO_MUX               1156
+#MACRO_ADD                117
+#MACRO_EQ                  70
+#MACRO_MUX               1213
 #MACRO_OTHERS               4
 
 Report Hierarchy Area:
 +---------------------------------------------------------------------------------------------------------------+
 |Instance                                        |Module                                |gates  |seq    |macros |
 +---------------------------------------------------------------------------------------------------------------+
-|top                                             |csi2_tx_top                           |1004   |2099   |191    |
+|top                                             |csi2_tx_top                           |966    |2106   |191    |
 |  u_ae_set                                      |ae_set                                |10     |43     |8      |
-|  u_cam_cfg                                     |uicfgcs500                            |290    |91     |16     |
+|  u_cam_cfg                                     |uicfgcs500                            |337    |91     |16     |
 |    gain_tbl                                    |SC500GainTbl                          |0      |10     |0      |
-|    uics500regAE_inst                           |uics500regAE                          |14     |0      |0      |
-|    uics500reg_inst                             |uics500reg                            |137    |0      |0      |
+|    uics500regAE_inst                           |uics500regAE                          |29     |0      |0      |
+|    uics500reg_inst                             |uics500reg                            |168    |0      |0      |
 |    uii2c_inst                                  |uii2c                                 |53     |33     |13     |
-|  u_dbg_uart                                    |dbg_uart                              |116    |55     |72     |
-|  u_dphy_rx                                     |mipi_dphy_rx_ph1p_mipiio_wrapper      |114    |342    |33     |
+|  u_dbg_uart                                    |dbg_uart                              |117    |55     |72     |
+|  u_dphy_rx                                     |mipi_dphy_rx_ph1p_mipiio_wrapper      |115    |342    |33     |
 |    u_byte_aligner_wrapper                      |byte_aligner_wrapper                  |87     |114    |18     |
 |      BYTE_ALIGNER_GEN[0]$u_byte_aligner        |byte_aligner                          |45     |58     |9      |
 |      BYTE_ALIGNER_GEN[1]$u_byte_aligner        |byte_aligner                          |42     |56     |9      |
 |    u_channel_aligner_wrapper                   |channel_aligner_wrapper               |17     |81     |0      |
 |      ALIGNER_CHANNEL_GEN[0]$u_channel_aligner  |channel_aligner                       |9      |41     |0      |
 |      ALIGNER_CHANNEL_GEN[1]$u_channel_aligner  |channel_aligner                       |7      |40     |0      |
-|    u_ph1p_mipiio_rx_wrapper                    |ph1p_mipiio_rx_wrapper                |9      |147    |15     |
+|    u_ph1p_mipiio_rx_wrapper                    |ph1p_mipiio_rx_wrapper                |10     |147    |15     |
 |      u_lane0_hs_detect                         |hs_detect                             |4      |12     |3      |
-|  u_dphy_tx                                     |mipi_dphy_tx_over_ph1p_mipiio_wrapper |49     |899    |21     |
-|    u_hs_tx_wrapper                             |hs_tx_wrapper                         |48     |818    |20     |
+|  u_dphy_tx                                     |mipi_dphy_tx_over_ph1p_mipiio_wrapper |48     |899    |21     |
+|    u_hs_tx_wrapper                             |hs_tx_wrapper                         |47     |818    |20     |
 |      MIPI_DATA_LANE_GEN[0]$u_data_lane_wrapper |data_lane_wrapper                     |14     |444    |15     |
 |        u_data_hs_generate                      |data_hs_generate                      |8      |410    |7      |
 |          u_dphy_tx_fifo                        |dphy_tx_fifo                          |0      |328    |0      |
@@ -61,9 +61,8 @@ Report Hierarchy Area:
 |    u_ph1p_mipiio_tx_wrapper                    |ph1p_mipiio_tx_wrapper                |1      |81     |1      |
 |  u_pll                                         |pll                                   |0      |0      |2      |
 |    ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst      |ph1p_phy_pll_wrapper_6ba8d3e44c24     |0      |0      |0      |
-|  u_rx_parse                                    |csi2_rx_parse                         |53     |87     |5      |
+|  u_rx_parse                                    |csi2_rx_parse                         |54     |87     |6      |
 |  u_tk_fifo                                     |csi2_ptr_fifo                         |25     |96     |4      |
-|  u_tx_packet                                   |csi2_tx_packet                        |262    |148    |16     |
-|    u_crc                                       |crc16_par2                            |126    |0      |0      |
-|    u_ecc                                       |csi2_ecc                              |50     |0      |0      |
+|  u_tx_packet                                   |csi2_tx_packet                        |181    |155    |16     |
+|    u_ecc                                       |csi2_ecc                              |46     |0      |0      |
 +---------------------------------------------------------------------------------------------------------------+

@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- HMAC is: 815d917ca4008212b2858d55ac79541fd379c08d77d849babf5b0ab41e8cef97 -->
+<!-- HMAC is: ccda55502af30af877e1f2789a48be511c84b7708b72e27d2cf8728535f09f3b -->
 <All_Bram_Infos>
-    <Ucode>11010111</Ucode>
+    <Ucode>11001011</Ucode>
     <AL_PHY_ERAM>
         <INST_1>
-            <rid>0X00000022</rid>
-            <wid>0X00000022</wid>
+            <rid>0X00000021</rid>
+            <wid>0X00000021</wid>
             <is_debuggable>n</is_debuggable>
             <is_initialize>y</is_initialize>
             <model_type>AL_PHY_ERAM</model_type>
-            <name>u_cam_cfg/gain_tbl/mux0_syn_15</name>
+            <name>u_cam_cfg/gain_tbl/mux0_syn_17</name>
             <width_a>10</width_a>
             <width_b>10</width_b>
-            <logic_name>u_cam_cfg/gain_tbl/mux0_syn_14</logic_name>
+            <logic_name>u_cam_cfg/gain_tbl/mux0_syn_16</logic_name>
             <logic_width>10</logic_width>
             <logic_depth>128</logic_depth>
             <sub_bid_info>
@@ -34,129 +34,5 @@
                 </working_mode>
             </sub_bid_info>
         </INST_1>
-        <INST_2>
-            <rid>0X0000000E</rid>
-            <wid>0X0000000E</wid>
-            <is_debuggable>n</is_debuggable>
-            <is_initialize>y</is_initialize>
-            <model_type>AL_PHY_ERAM</model_type>
-            <name>u_tx_packet/ramread0_syn_31</name>
-            <width_a>1</width_a>
-            <width_b>1</width_b>
-            <logic_name>u_tx_packet/ramread0_syn_12</logic_name>
-            <logic_width>16</logic_width>
-            <logic_depth>4096</logic_depth>
-            <sub_bid_info>
-                <address_offset>0</address_offset>
-                <data_offset>15</data_offset>
-                <depth>4096</depth>
-                <width>1</width>
-                <num_section>1</num_section>
-                <section_size>16</section_size>
-                <width_per_section>1</width_per_section>
-                <bytes_in_per_section>1</bytes_in_per_section>
-                <working_mode>
-                    <address_step>1</address_step>
-                    <depth>16384</depth>
-                    <mode_type>161</mode_type>
-                    <width>1</width>
-                    <num_byte>1</num_byte>
-                    <ecc>0</ecc>
-                </working_mode>
-            </sub_bid_info>
-        </INST_2>
-        <INST_3>
-            <rid>0X00000013</rid>
-            <wid>0X00000013</wid>
-            <is_debuggable>n</is_debuggable>
-            <is_initialize>y</is_initialize>
-            <model_type>AL_PHY_ERAM</model_type>
-            <name>u_tx_packet/ramread0_syn_25</name>
-            <width_a>5</width_a>
-            <width_b>5</width_b>
-            <logic_name>u_tx_packet/ramread0_syn_12</logic_name>
-            <logic_width>16</logic_width>
-            <logic_depth>4096</logic_depth>
-            <sub_bid_info>
-                <address_offset>0</address_offset>
-                <data_offset>10</data_offset>
-                <depth>4096</depth>
-                <width>5</width>
-                <num_section>1</num_section>
-                <section_size>16</section_size>
-                <width_per_section>5</width_per_section>
-                <bytes_in_per_section>1</bytes_in_per_section>
-                <working_mode>
-                    <address_step>1</address_step>
-                    <depth>4096</depth>
-                    <mode_type>161</mode_type>
-                    <width>5</width>
-                    <num_byte>1</num_byte>
-                    <ecc>0</ecc>
-                </working_mode>
-            </sub_bid_info>
-        </INST_3>
-        <INST_4>
-            <rid>0X00000012</rid>
-            <wid>0X00000012</wid>
-            <is_debuggable>n</is_debuggable>
-            <is_initialize>y</is_initialize>
-            <model_type>AL_PHY_ERAM</model_type>
-            <name>u_tx_packet/ramread0_syn_13</name>
-            <width_a>5</width_a>
-            <width_b>5</width_b>
-            <logic_name>u_tx_packet/ramread0_syn_12</logic_name>
-            <logic_width>16</logic_width>
-            <logic_depth>4096</logic_depth>
-            <sub_bid_info>
-                <address_offset>0</address_offset>
-                <data_offset>0</data_offset>
-                <depth>4096</depth>
-                <width>5</width>
-                <num_section>1</num_section>
-                <section_size>16</section_size>
-                <width_per_section>5</width_per_section>
-                <bytes_in_per_section>1</bytes_in_per_section>
-                <working_mode>
-                    <address_step>1</address_step>
-                    <depth>4096</depth>
-                    <mode_type>161</mode_type>
-                    <width>5</width>
-                    <num_byte>1</num_byte>
-                    <ecc>0</ecc>
-                </working_mode>
-            </sub_bid_info>
-        </INST_4>
-        <INST_5>
-            <rid>0X0000000F</rid>
-            <wid>0X0000000F</wid>
-            <is_debuggable>n</is_debuggable>
-            <is_initialize>y</is_initialize>
-            <model_type>AL_PHY_ERAM</model_type>
-            <name>u_tx_packet/ramread0_syn_19</name>
-            <width_a>5</width_a>
-            <width_b>5</width_b>
-            <logic_name>u_tx_packet/ramread0_syn_12</logic_name>
-            <logic_width>16</logic_width>
-            <logic_depth>4096</logic_depth>
-            <sub_bid_info>
-                <address_offset>0</address_offset>
-                <data_offset>5</data_offset>
-                <depth>4096</depth>
-                <width>5</width>
-                <num_section>1</num_section>
-                <section_size>16</section_size>
-                <width_per_section>5</width_per_section>
-                <bytes_in_per_section>1</bytes_in_per_section>
-                <working_mode>
-                    <address_step>1</address_step>
-                    <depth>4096</depth>
-                    <mode_type>161</mode_type>
-                    <width>5</width>
-                    <num_byte>1</num_byte>
-                    <ecc>0</ecc>
-                </working_mode>
-            </sub_bid_info>
-        </INST_5>
     </AL_PHY_ERAM>
 </All_Bram_Infos>

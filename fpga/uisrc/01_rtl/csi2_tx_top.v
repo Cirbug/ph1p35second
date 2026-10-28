@@ -323,6 +323,7 @@ module csi2_tx_top #(
             tk_wdata <= 18'd0;
         end else if (!tk_full) begin
             tk_we <= 1'b1;
+            // 00=载荷  01=帧起  10=行结束(带WC)  11=帧尾
             if (p_wr_en)
                 tk_wdata <= { 2'b00, p_wr_data };
             else if (gen_fs)
@@ -415,12 +416,12 @@ module csi2_tx_top #(
     wire tx_ovf;
     wire tx_wcerr;
 
+    // 行缓冲 + CSI-2 打包（B 板后续要在此处插入识别/OSD，需保留像素流）
     csi2_tx_packet #(
         .LANE_NUM ( LANES  ),
         .VC       ( 2'b00  ),
         .DT       ( 8'h2B  ),
-        // 摄像头实测输出 1928x1088，RAW10 每行 2410 字节 = 1205 word。
-        // BUF_AW=11 -> 每 bank 2048 word（4096 字节），可覆盖到 3276 像素宽。
+        .LANE_SWAP( 1       ),   // 两块转接板的 D0/D1 顺序相反，需交换
         .BUF_AW   ( 11     )
     ) u_tx_packet (
         .I_clk        ( tx_clk      ),
@@ -496,8 +497,10 @@ module csi2_tx_top #(
         .L1_OUTPUT_DELAY       ( 0          ),
         .L2_OUTPUT_DELAY       ( 0          ),
         .L3_OUTPUT_DELAY       ( 0          ),
-        // VCO = 100MHz * (11+1) = 1200MHz  ->  linerate 600Mbps  ->  byte clk 75MHz
-        .DPLL_MULTI_RATIO      ( 11 ),
+        // VCO = 100MHz * (6+1) = 700MHz -> linerate 350Mbps -> byte clk 43.75MHz
+        // 摄像头用 A 板的 2592x1944@30fps 配置：约 756Mbps/lane，RX 字节时钟约 97MHz，
+        // 所以发 800Mbps（100MHz）留一点余量。
+        .DPLL_MULTI_RATIO      ( 6  ),
         .DPLL_DIV_RATIO        ( 1  ),
         .T_DATA_LPX            ( 10 ),
         .T_DATA_HS_PREPARE     ( 10 ),
@@ -586,6 +589,13 @@ module csi2_tx_top #(
         end
     end
 
+    // TX 实际发出的拍数：为 0 就说明一个字节都没发出去
+    reg [15:0] txbeat_cnt;
+    always @(posedge tx_clk or negedge rst_n_tx) begin
+        if (!rst_n_tx) txbeat_cnt <= 16'd0;
+        else if (tx_hs_en && txbeat_cnt != 16'hFFFF) txbeat_cnt <= txbeat_cnt + 16'd1;
+    end
+
     reg [15:0] dbg_fs, dbg_fe;
 
     // 统计每个 HS 突发的拍数（valid 连续为高的长度），用于判断包尾结构
@@ -671,7 +681,7 @@ module csi2_tx_top #(
         dbg_txcnt <= txclk_cnt;
         dbg_burst <= burst_last;
         dbg_fs    <= fs_cnt;
-        dbg_fe    <= fe_cnt;
+        dbg_fe    <= txbeat_cnt;
         dbg_h0    <= h0_r;
         dbg_h1    <= h1_r;
     end

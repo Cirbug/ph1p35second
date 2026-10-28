@@ -113,7 +113,7 @@ module dbg_uart #(
         8'd61: msg_byte = hx(I_st_gapmax[7:4]);
         8'd62: msg_byte = hx(I_st_gapmax[3:0]);
         8'd63: msg_byte = 8'h20;
-        8'd64: msg_byte = 8'h42;   // B = DT==0x01 的包计数
+        8'd64: msg_byte = 8'h54;   // T = TX 实际发出的拍数
         8'd65: msg_byte = 8'h3D;
         8'd66: msg_byte = hx(I_st_pktcnt[15:12]);
         8'd67: msg_byte = hx(I_st_pktcnt[11:8]);
