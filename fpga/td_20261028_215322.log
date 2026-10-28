@@ -1,0 +1,349 @@
+============================================================
+   Tang Dynasty, V6.2.168116
+   Copyright (c) 2012-2025 Anlogic Inc.
+   Executable = D:/TD/bin/td_commands_prompt.exe
+   Built at =   16:32:07 Jun 12 2025
+   Run by =     XIAOXIAO
+   Run Date =   Wed Oct 28 21:53:22 2026
+
+   Run on =     LAPTOP-T95VR7F4
+============================================================
+RUN-1002 : start command "import_device ph1_35p.db -package PH1P35MDG324 -speed 3"
+ARC-1001 : Device Initialization.
+ARC-1001 : ----------------------------------------------------------------
+ARC-1001 :           OPTION          |          IO           |   SETTING   
+ARC-1001 : ----------------------------------------------------------------
+ARC-1001 :   non_jtag_persist(none)  |        35 IOs         |    gpio    
+ARC-1001 :            jtag           |  P13/P15/L14/R13/T13  |  dedicate  
+ARC-1001 : ----------------------------------------------------------------
+RUN-1003 : finish command "import_device ph1_35p.db -package PH1P35MDG324 -speed 3" in  1.330614s wall, 1.046875s user + 0.031250s system = 1.078125s CPU (81.0%)
+
+RUN-1004 : used memory is 323 MB, reserved memory is 321 MB, peak memory is 323 MB
+RUN-1002 : start command "open_project fpga_prj.al -single_run"
+PRJ-5611 WARNING: uisrc/01_rtl/mipi_dphy_rx/ph1p_mipiio_rx_wrapper.v and uisrc/01_rtl/csi2/csi2_ptr_fifo.v have the same CompileOrder value.
+PRJ-5611 WARNING: uisrc/01_rtl/mipi_dphy_rx/mipi_dphy_rx_ph1p_mipiio_wrapper.sv and uisrc/01_rtl/csi2_tx_top.v have the same CompileOrder value.
+PRJ-5611 WARNING: uisrc/03_ip/pll/pll.xml and uisrc/01_rtl/csi2/csi2_ecc.v have the same CompileOrder value.
+RUN-1002 : start command "commit_param -step design"
+RUN-1001 : Print Global Property
+RUN-1001 : -------------------------------------------------------------
+RUN-1001 :     Parameters    |   Settings   |  Default Values  |  Note  
+RUN-1001 : -------------------------------------------------------------
+RUN-1001 :    enable_seed    |     off      |       off        |        
+RUN-1001 :    hfn_to_clock   |  1000000000  |    1000000000    |        
+RUN-1001 :      message      |   standard   |     standard     |        
+RUN-1001 :    qor_monitor    |      on      |        on        |        
+RUN-1001 :   speedup_effort  |      0       |        0         |        
+RUN-1001 :    syn_ip_flow    |     off      |       off        |        
+RUN-1001 :       thread      |     auto     |       auto       |        
+RUN-1001 : -------------------------------------------------------------
+RUN-1001 : Print Design Property
+RUN-1001 : ----------------------------------------------------------------
+RUN-1001 :       Parameters       |  Settings  |  Default Values  |  Note  
+RUN-1001 : ----------------------------------------------------------------
+RUN-1001 :   default_reg_initial  |    auto    |       auto       |        
+RUN-1001 :    hdl_warning_level   |   normal   |      normal      |        
+RUN-1001 : ----------------------------------------------------------------
+HDL-1007 : analyze verilog file uisrc/03_ip/pll/RTL/ph1p_phy_pll_wrapper_6ba8d3e44c24.v
+HDL-1007 : analyze verilog file uisrc/03_ip/pll/pll.v
+HDL-1007 : analyze verilog file uisrc/01_rtl/csi2/csi2_ecc.v
+HDL-1007 : analyze verilog file uisrc/01_rtl/csi2/crc16_csi.v
+HDL-1007 : analyze verilog file uisrc/01_rtl/csi2/crc16_par2.v
+HDL-1007 : analyze verilog file uisrc/01_rtl/csi2/csi2_tx_packet.v
+HDL-1007 : analyze verilog file uisrc/01_rtl/csi2/csi2_rx_parse.v
+HDL-1007 : analyze verilog file uisrc/01_rtl/mipi_dphy_tx/mipi_dphy_tx_over_ph1p_mipiio_wrapper.v
+HDL-1007 : analyze verilog file uisrc/01_rtl/mipi_dphy_tx/ph1p_mipiio_tx_wrapper.v
+HDL-1007 : analyze verilog file uisrc/01_rtl/mipi_dphy_tx/hs_tx_wrapper_merge.enc.v
+Copyright (c) 1998-2019 The OpenSSL Project.  All rights reserved.
+This product includes software developed by the OpenSSL Project
+for use in the OpenSSL Toolkit (http://www.openssl.org/)
+Copyright (C) 1995-1998 Eric Young (eay@cryptsoft.com)
+All rights reserved.
+This product includes cryptographic software written by Eric Young (eay@cryptsoft.com)
+HDL-5007 WARNING: block identifier is required on this block in uisrc/01_rtl/mipi_dphy_tx/hs_tx_wrapper_merge.enc.v(895)
+HDL-1007 : back to file 'uisrc/01_rtl/mipi_dphy_tx/hs_tx_wrapper_merge.enc.v' in uisrc/01_rtl/mipi_dphy_tx/hs_tx_wrapper_merge.enc.v(49)
+HDL-1007 : analyze verilog file uisrc/01_rtl/mipi_dphy_rx/hs_detect.enc.v
+HDL-1007 : back to file 'uisrc/01_rtl/mipi_dphy_rx/hs_detect.enc.v' in uisrc/01_rtl/mipi_dphy_rx/hs_detect.enc.v(13)
+HDL-1007 : analyze verilog file uisrc/01_rtl/mipi_dphy_rx/byte_aligner.enc.v
+HDL-1007 : back to file 'uisrc/01_rtl/mipi_dphy_rx/byte_aligner.enc.v' in uisrc/01_rtl/mipi_dphy_rx/byte_aligner.enc.v(18)
+HDL-1007 : analyze verilog file uisrc/01_rtl/mipi_dphy_rx/channel_aligner.enc.v
+HDL-1007 : back to file 'uisrc/01_rtl/mipi_dphy_rx/channel_aligner.enc.v' in uisrc/01_rtl/mipi_dphy_rx/channel_aligner.enc.v(17)
+HDL-1007 : analyze verilog file uisrc/01_rtl/uics500_cfg/uii2c.v
+HDL-1007 : analyze verilog file uisrc/01_rtl/uics500_cfg/SC500GainTbl.v
+HDL-1007 : analyze verilog file uisrc/01_rtl/uics500_cfg/uics500reg.v
+HDL-1007 : analyze verilog file uisrc/01_rtl/uics500_cfg/uics500regAE.v
+HDL-1007 : analyze verilog file uisrc/01_rtl/uics500_cfg/uicfgcs500.v
+HDL-1007 : analyze verilog file uisrc/01_rtl/mipi_dphy_rx/ph1p_mipiio_rx_wrapper.v
+HDL-1007 : analyze verilog file uisrc/01_rtl/csi2/csi2_ptr_fifo.v
+HDL-1007 : analyze verilog file uisrc/01_rtl/mipi_dphy_rx/mipi_dphy_rx_ph1p_mipiio_wrapper.sv
+HDL-1007 : analyze verilog file uisrc/01_rtl/csi2_tx_top.v
+HDL-1007 : analyze verilog file uisrc/01_rtl/mipi_dphy_rx/byte_aligner_wrapper.enc.sv
+HDL-1007 : back to file 'uisrc/01_rtl/mipi_dphy_rx/byte_aligner_wrapper.enc.sv' in uisrc/01_rtl/mipi_dphy_rx/byte_aligner_wrapper.enc.sv(20)
+HDL-1007 : analyze verilog file uisrc/01_rtl/mipi_dphy_rx/channel_aligner_wrapper.enc.sv
+HDL-1007 : back to file 'uisrc/01_rtl/mipi_dphy_rx/channel_aligner_wrapper.enc.sv' in uisrc/01_rtl/mipi_dphy_rx/channel_aligner_wrapper.enc.sv(17)
+PRJ-1401 : Successfully analyzed 24 source files.
+RUN-1002 : start command "load_run_param -run syn_1"
+RUN-1002 : start command "commit_param -step design"
+RUN-1001 : Print Global Property
+RUN-1001 : -------------------------------------------------------------
+RUN-1001 :     Parameters    |   Settings   |  Default Values  |  Note  
+RUN-1001 : -------------------------------------------------------------
+RUN-1001 :    enable_seed    |     off      |       off        |        
+RUN-1001 :    hfn_to_clock   |  1000000000  |    1000000000    |        
+RUN-1001 :      message      |   standard   |     standard     |        
+RUN-1001 :    qor_monitor    |      on      |        on        |        
+RUN-1001 :   speedup_effort  |      0       |        0         |        
+RUN-1001 :    syn_ip_flow    |     off      |       off        |        
+RUN-1001 :       thread      |     auto     |       auto       |        
+RUN-1001 : -------------------------------------------------------------
+RUN-1001 : Print Design Property
+RUN-1001 : ----------------------------------------------------------------
+RUN-1001 :       Parameters       |  Settings  |  Default Values  |  Note  
+RUN-1001 : ----------------------------------------------------------------
+RUN-1001 :   default_reg_initial  |    auto    |       auto       |        
+RUN-1001 :    hdl_warning_level   |   normal   |      normal      |        
+RUN-1001 : ----------------------------------------------------------------
+RUN-1002 : start command "elaborate -top csi2_tx_top"
+HDL-1007 : elaborate module csi2_tx_top in uisrc/01_rtl/csi2_tx_top.v(20)
+HDL-1007 : elaborate module pll in uisrc/03_ip/pll/pll.v(27)
+HDL-1007 : elaborate module PH1P_LOGIC_BUFG in D:\TD\arch/ph1p_macro.v(8085)
+HDL-1007 : elaborate module ph1p_phy_pll_wrapper_6ba8d3e44c24(FBKCLK_INT="CLKC0_EXT",FIN="25.000000000",FBCLK_DIV=4,CLKC0_ENABLE="ENABLE",CLKC0_DIV=12,CLKC0_CPHASE=11,CLKC0_DUTY_INT=6,CLKC1_ENABLE="ENABLE",CLKC1_DIV=50,CLKC1_CPHASE=49,CLKC1_DUTY_INT=25,PLL_FEED_TYPE="EXTERNAL",LPF_CAP=0,ICP_CUR=0) in uisrc/03_ip/pll/RTL/ph1p_phy_pll_wrapper_6ba8d3e44c24.v(2)
+HDL-1007 : elaborate module PH1P_PHY_PLL_V2(FBKCLK_INT="CLKC0_EXT",FIN="25.000000000",FBCLK_DIV=4,CLKC0_CPHASE=11,CLKC1_CPHASE=49,CLKC0_DIV=12,CLKC1_DIV=50,CLKC0_DUTY_INT=6,CLKC1_DUTY_INT=25,CLKC0_ENABLE="ENABLE",CLKC1_ENABLE="ENABLE",PLL_FEED_TYPE="EXTERNAL",LPF_CAP=0,ICP_CUR=0) in D:\TD\arch/ph1p_macro.v(1091)
+HDL-1007 : port 'O_iic_bus_error' remains unconnected for this instance in uisrc/01_rtl/uics500_cfg/uicfgcs500.v(123)
+HDL-1007 : port 'IO_iic_sda_dg' remains unconnected for this instance in uisrc/01_rtl/uics500_cfg/uicfgcs500.v(123)
+HDL-1007 : elaborate module uicfgcs500(CLK_DIV=239) in uisrc/01_rtl/uics500_cfg/uicfgcs500.v(37)
+HDL-1007 : elaborate module uii2c(WMEN_LEN=4,RMEN_LEN=1,CLK_DIV=239) in uisrc/01_rtl/uics500_cfg/uii2c.v(41)
+HDL-1007 : elaborate module uics500reg in uisrc/01_rtl/uics500_cfg/uics500reg.v(35)
+HDL-5007 WARNING: actual bit length 24 differs from formal bit length 32 for port 'REG_DATA' in uisrc/01_rtl/uics500_cfg/uicfgcs500.v(150)
+HDL-1007 : elaborate module SC500GainTbl in uisrc/01_rtl/uics500_cfg/SC500GainTbl.v(6)
+HDL-5007 WARNING: actual bit length 32 differs from formal bit length 7 for port 'I' in uisrc/01_rtl/uics500_cfg/uicfgcs500.v(154)
+HDL-1007 : elaborate module uics500regAE in uisrc/01_rtl/uics500_cfg/uics500regAE.v(33)
+HDL-5007 WARNING: actual bit length 24 differs from formal bit length 32 for port 'REG_DATA' in uisrc/01_rtl/uics500_cfg/uicfgcs500.v(160)
+HDL-1007 : elaborate module mipi_dphy_rx_ph1p_mipiio_wrapper(HS_VGA_GAIN="8dB",LANE_NUM=2) in uisrc/01_rtl/mipi_dphy_rx/mipi_dphy_rx_ph1p_mipiio_wrapper.sv(4)
+HDL-1007 : elaborate module channel_aligner_wrapper(CH_NUM=2) in uisrc/01_rtl/mipi_dphy_rx/channel_aligner_wrapper.enc.sv(3)
+HDL-1007 : elaborate module channel_aligner in uisrc/01_rtl/mipi_dphy_rx/channel_aligner.enc.v(3)
+HDL-1007 : elaborate module byte_aligner_wrapper(LANE_NUM=2) in uisrc/01_rtl/mipi_dphy_rx/byte_aligner_wrapper.enc.sv(4)
+HDL-1007 : elaborate module byte_aligner in uisrc/01_rtl/mipi_dphy_rx/byte_aligner.enc.v(3)
+HDL-1007 : elaborate module ph1p_mipiio_rx_wrapper(HS_VGA_GAIN="8dB",LANE_NUM=2) in uisrc/01_rtl/mipi_dphy_rx/ph1p_mipiio_rx_wrapper.v(4)
+HDL-1007 : elaborate module hs_detect in uisrc/01_rtl/mipi_dphy_rx/hs_detect.enc.v(3)
+HDL-1007 : elaborate module PH1P_LOGIC_DPHY_MIPI_RX(CK_HS_VGA_GAIN="8dB",L0_HS_SLAVE_DESER_CLK_OFFSET="0ps",L0_HS_VGA_GAIN="8dB",L1_HS_SLAVE_DESER_CLK_OFFSET="0ps",L1_HS_VGA_GAIN="8dB",L2_HS_SLAVE_DESER_CLK_OFFSET="0ps",L2_HS_VGA_GAIN="8dB",L3_HS_SLAVE_DESER_CLK_OFFSET="0ps",L3_HS_VGA_GAIN="8dB") in D:\TD\arch/ph1p_macro.v(2017)
+HDL-1007 : elaborate module csi2_rx_parse in uisrc/01_rtl/csi2/csi2_rx_parse.v(17)
+HDL-1007 : elaborate module csi2_ptr_fifo in uisrc/01_rtl/csi2/csi2_ptr_fifo.v(13)
+HDL-1007 : extracting RAM for identifier 'mem' in uisrc/01_rtl/csi2/csi2_ptr_fifo.v(31)
+HDL-1007 : elaborate module csi2_tx_packet in uisrc/01_rtl/csi2/csi2_tx_packet.v(24)
+HDL-1007 : extracting RAM for identifier 'mem' in uisrc/01_rtl/csi2/csi2_tx_packet.v(59)
+HDL-1007 : elaborate module csi2_ecc in uisrc/01_rtl/csi2/csi2_ecc.v(19)
+HDL-1007 : elaborate module crc16_par2 in uisrc/01_rtl/csi2/crc16_par2.v(10)
+HDL-1007 : elaborate module mipi_dphy_tx_over_ph1p_mipiio_wrapper(DPHY_TX_LOCATION="DPHY1",LANE_NUM=2,HS_OUTPUT_VOD="200mV",DPLL_MULTI_RATIO=11,T_DATA_LPX=10,T_DATA_HS_PREPARE=10,T_DATA_HS_ZERO=20,T_CLK_LPX=10,T_CLK_PREPARE=10) in uisrc/01_rtl/mipi_dphy_tx/mipi_dphy_tx_over_ph1p_mipiio_wrapper.v(2)
+HDL-1007 : elaborate module hs_tx_wrapper(LANE_NUM=2,CLK_LANE_MODE="CONTINUE",T_DATA_LPX=10,T_DATA_HS_PREPARE=10,T_DATA_HS_ZERO=20,T_CLK_LPX=10,T_CLK_PREPARE=10) in uisrc/01_rtl/mipi_dphy_tx/hs_tx_wrapper_merge.enc.v(1)
+HDL-1007 : elaborate module ** in uisrc/01_rtl/mipi_dphy_tx/hs_tx_wrapper_merge.enc.v(117)
+HDL-1007 : elaborate module ** in uisrc/01_rtl/mipi_dphy_tx/hs_tx_wrapper_merge.enc.v(269)
+HDL-1007 : elaborate module ** in uisrc/01_rtl/mipi_dphy_tx/hs_tx_wrapper_merge.enc.v(338)
+HDL-1007 : elaborate module ** in uisrc/01_rtl/mipi_dphy_tx/hs_tx_wrapper_merge.enc.v(424)
+HDL-1007 : elaborate module ** in uisrc/01_rtl/mipi_dphy_tx/hs_tx_wrapper_merge.enc.v(502)
+HDL-1007 : elaborate module ** in uisrc/01_rtl/mipi_dphy_tx/hs_tx_wrapper_merge.enc.v(600)
+HDL-1007 : elaborate module ** in uisrc/01_rtl/mipi_dphy_tx/hs_tx_wrapper_merge.enc.v(680)
+HDL-1007 : elaborate module ** in uisrc/01_rtl/mipi_dphy_tx/hs_tx_wrapper_merge.enc.v(875)
+HDL-1007 : elaborate module ph1p_mipiio_tx_wrapper(LANE_NUM=2,DPHY_TX_LOCATION="DPHY1",HS_OUTPUT_VOD="200mV") in uisrc/01_rtl/mipi_dphy_tx/ph1p_mipiio_tx_wrapper.v(5)
+HDL-1007 : elaborate module PH1P_LOGIC_DPHY_MIPI_TX(DPHY_TX_LOCATION="DPHY1",HS_OUTPUT_VOD="200mV",CK_LP_OUTPUT_SLEW_RATE="FAST",L0_LP_OUTPUT_SLEW_RATE="FAST",L1_LP_OUTPUT_SLEW_RATE="FAST",L2_LP_OUTPUT_SLEW_RATE="FAST",L3_LP_OUTPUT_SLEW_RATE="FAST") in D:\TD\arch/ph1p_macro.v(2173)
+HDL-5007 WARNING: actual bit length 32 differs from formal bit length 4 for port 'i_ck_hs_odelay_value' in uisrc/01_rtl/mipi_dphy_tx/ph1p_mipiio_tx_wrapper.v(439)
+HDL-5007 WARNING: actual bit length 32 differs from formal bit length 4 for port 'i_l0_hs_odelay_value' in uisrc/01_rtl/mipi_dphy_tx/ph1p_mipiio_tx_wrapper.v(448)
+HDL-5007 WARNING: actual bit length 32 differs from formal bit length 4 for port 'i_l1_hs_odelay_value' in uisrc/01_rtl/mipi_dphy_tx/ph1p_mipiio_tx_wrapper.v(457)
+HDL-5007 WARNING: actual bit length 32 differs from formal bit length 4 for port 'i_l2_hs_odelay_value' in uisrc/01_rtl/mipi_dphy_tx/ph1p_mipiio_tx_wrapper.v(466)
+HDL-5007 WARNING: actual bit length 32 differs from formal bit length 4 for port 'i_l3_hs_odelay_value' in uisrc/01_rtl/mipi_dphy_tx/ph1p_mipiio_tx_wrapper.v(475)
+HDL-5007 WARNING: actual bit length 32 differs from formal bit length 7 for port 'I_mipiio_pll_multi_ratio' in uisrc/01_rtl/mipi_dphy_tx/mipi_dphy_tx_over_ph1p_mipiio_wrapper.v(140)
+HDL-5007 WARNING: actual bit length 32 differs from formal bit length 6 for port 'I_mipiio_pll_div_ratio' in uisrc/01_rtl/mipi_dphy_tx/mipi_dphy_tx_over_ph1p_mipiio_wrapper.v(141)
+HDL-1200 : Current top model is csi2_tx_top
+HDL-5106 WARNING: Initial value omitted on non-DFF net "scl_r" in uisrc/01_rtl/uics500_cfg/uii2c.v(127) 
+HDL-5106 WARNING: Initial value omitted on non-DFF net "sda_o" in uisrc/01_rtl/uics500_cfg/uii2c.v(135) 
+HDL-1100 : Inferred 2 RAMs.
+RUN-1002 : start command "read_adc uisrc/04_pin/fpga_pin.adc"
+RUN-1002 : start command "set_pin_assignment  I_sys_clk   LOCATION = C4;  IOSTANDARD = LVCMOS33; PULLTYPE = PULLUP; "
+RUN-1002 : start command "set_pin_assignment  I_rst_n   LOCATION = R10; IOSTANDARD = LVCMOS33; PULLTYPE = PULLUP; "
+RUN-1002 : start command "set_pin_assignment  O_cam_scl   LOCATION = T9; IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 8; PULLTYPE = PULLUP; "
+RUN-1002 : start command "set_pin_assignment  IO_cam_sda   LOCATION = U9; IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 8; PULLTYPE = PULLUP; "
+RUN-1002 : start command "set_pin_assignment  O_cam_24m   LOCATION = V9; IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 8; PULLTYPE = PULLUP; "
+RUN-1002 : start command "set_pin_assignment  O_cam_rst   LOCATION = V8; IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 8; PULLTYPE = PULLUP; "
+RUN-1002 : start command "set_pin_assignment  O_overflow   LOCATION = K16; IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 8; PULLTYPE = NONE; "
+RUN-1002 : start command "set_pin_assignment  O_wc_err   LOCATION = K17; IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 8; PULLTYPE = NONE; "
+RUN-1001 : Starting of IO setups legality check.
+RUN-1002 : start command "read_sdc uisrc/04_pin/timing.sdc"
+RUN-1002 : start command "export_db fpga_prj_elaborate.db"
+RUN-1001 : Exported flow parameters
+RUN-1001 : Exported /
+RUN-1001 : Exported libs
+RUN-1001 : Exported entities
+RUN-1001 : Exported ports
+RUN-1001 : Exported pins
+RUN-1001 : Exported instances
+RUN-1001 : Exported nets
+RUN-1001 : Exported buses
+RUN-1001 : Exported models
+RUN-1001 : Exported packer
+RUN-1001 : Exported congestions
+RUN-1001 : Exported violations
+RUN-1001 : Exported ATMR Setting
+RUN-1001 : Exported timing constraints
+RUN-1001 : Exported IO constraints
+RUN-1001 : Exported Inst constraints
+RUN-1001 : Exported ChipWatcher
+RUN-1002 : start command "commit_param -step rtl"
+RUN-1001 : Print Global Property
+RUN-1001 : -------------------------------------------------------------
+RUN-1001 :     Parameters    |   Settings   |  Default Values  |  Note  
+RUN-1001 : -------------------------------------------------------------
+RUN-1001 :    enable_seed    |     off      |       off        |        
+RUN-1001 :    hfn_to_clock   |  1000000000  |    1000000000    |        
+RUN-1001 :      message      |   standard   |     standard     |        
+RUN-1001 :    qor_monitor    |      on      |        on        |        
+RUN-1001 :   speedup_effort  |      0       |        0         |        
+RUN-1001 :    syn_ip_flow    |     off      |       off        |        
+RUN-1001 :       thread      |     auto     |       auto       |        
+RUN-1001 : -------------------------------------------------------------
+RUN-1001 : Print Rtl Property
+RUN-1001 : -------------------------------------------------------------------
+RUN-1001 :         Parameters        |  Settings  |  Default Values  |  Note  
+RUN-1001 : -------------------------------------------------------------------
+RUN-1001 :        fix_undriven       |     0      |        0         |        
+RUN-1001 :   gated_clock_conversion  |    off     |       off        |        
+RUN-1001 :         infer_fsm         |    auto    |       auto       |        
+RUN-1001 :         infer_rom         |     on     |        on        |        
+RUN-1001 :       infer_shifter       |     on     |        on        |        
+RUN-1001 :       keep_hierarchy      |    auto    |       auto       |        
+RUN-1001 :        merge_equal        |     on     |        on        |        
+RUN-1001 :      min_control_set      |     8      |        8         |        
+RUN-1001 :       min_ripple_len      |    auto    |       auto       |        
+RUN-1001 :          seq_syn          |     on     |        on        |        
+RUN-1001 : -------------------------------------------------------------------
+RUN-1002 : start command "insert_debugger"
+RUN-1002 : start command "optimize_rtl"
+RUN-1001 : Open license file D:/TD/license/Anlogic.lic
+SYN-1001 : Stage 1 | Optimize RTL
+SYN-1001 : Stage 1.1 | Check Design Sanity
+SYN-1001 : End Stage 1.1 | Check Design Sanity; Time: 0.005076s wall, 0.000000s user + 0.000000s system = 0.000000s CPU (n/a%); Memory(MB): used = 338, reserved = 457, peak = 338;
+
+SYN-1079 : finish stage Check Design Sanity. Total instances: 5274, Total nets: 10111.
+
+SYN-1001 : Stage 1.2 | Initialize Design
+SYN-1001 : End Stage 1.2 | Initialize Design; Time: 0.145527s wall, 0.156250s user + 0.000000s system = 0.156250s CPU (107.4%); Memory(MB): used = 338, reserved = 457, peak = 338;
+
+SYN-1079 : finish stage Initialize Design. Total instances: 1903, Total nets: 6281.
+
+SYN-1001 : Stage 1.3 | Flatten Module
+SYN-1011 : Flatten model csi2_tx_top
+SYN-1001 : End Stage 1.3 | Flatten Module; Time: 0.027404s wall, 0.015625s user + 0.000000s system = 0.015625s CPU (57.0%); Memory(MB): used = 338, reserved = 457, peak = 338;
+
+SYN-1079 : finish stage Flatten Module. Total instances: 2117, Total nets: 6141.
+
+SYN-1001 : Stage 1.4 | Uniform Instance
+SYN-5025 WARNING: Using 0 for all undriven pins and nets
+SYN-1001 : End Stage 1.4 | Uniform Instance; Time: 0.007347s wall, 0.015625s user + 0.000000s system = 0.015625s CPU (212.7%); Memory(MB): used = 333, reserved = 452, peak = 338;
+
+SYN-1079 : finish stage Uniform Instance. Total instances: 2080, Total nets: 6101.
+
+SYN-1001 : Stage 1.5 | Optimize Design
+SYN-1066 : Inferred FSM for state register 'u_cam_cfg/TS_S_reg' in module 'csi2_tx_top'
+--------------------------------------------
+     Previous Encoding     New Encoding
+--------------------------------------------
+                    00             0001
+                    01             0010
+                    10             0100
+                    11             1000
+--------------------------------------------
+SYN-1067 : encoded FSM with state register 'u_cam_cfg/TS_S_reg' using encoding 'one_hot' in model 'csi2_tx_top'
+SYN-1066 : Inferred FSM for state register 'u_dphy_rx/u_ph1p_mipiio_rx_wrapper/u_lane0_hs_detect/S_lp_state_reg' in module 'csi2_tx_top'
+--------------------------------------------
+     Previous Encoding     New Encoding
+--------------------------------------------
+                   000            00001
+                   001            00010
+                   010            00100
+                   011            01000
+                   100            10000
+--------------------------------------------
+SYN-1067 : encoded FSM with state register 'u_dphy_rx/u_ph1p_mipiio_rx_wrapper/u_lane0_hs_detect/S_lp_state_reg' using encoding 'one_hot' in model 'csi2_tx_top'
+SYN-1066 : Inferred FSM for state register 'u_rx_parse/st_reg' in module 'csi2_tx_top'
+--------------------------------------------
+     Previous Encoding     New Encoding
+--------------------------------------------
+                    00             0001
+                    01             0010
+                    10             0100
+                    11             1000
+--------------------------------------------
+SYN-1067 : encoded FSM with state register 'u_rx_parse/st_reg' using encoding 'one_hot' in model 'csi2_tx_top'
+SYN-1057 : Inferred 3 FSM(s)
+SYN-5033 CRITICAL-WARNING: The model (csi2_tx_top) has (1) unstable comb insts loops, which may lead to self oscillation. Please consider rewriting code. Print one loop:
+		<Inst: u_tk_fifo/add1> <Inpin: u_tk_fifo/add1.i1[0]> <Outpin: u_tk_fifo/add1.o[10]>   // uisrc/01_rtl/csi2/csi2_ptr_fifo.v(42)
+		<Net: u_tk_fifo/wgray_next[10]>   // uisrc/01_rtl/csi2/csi2_ptr_fifo.v(43)
+		<Inst: u_tk_fifo/wgray_next_b_i> <Inpin: u_tk_fifo/wgray_next_b_i.I[0]> <Outpin: u_tk_fifo/wgray_next_b_i.O>   // uisrc/01_rtl/csi2/csi2_ptr_fifo.v(43)
+		<Net: u_tk_fifo/wgray_next[0]>   // uisrc/01_rtl/csi2/csi2_ptr_fifo.v(43)
+		<Inst: u_tk_fifo/eq0> <Inpin: u_tk_fifo/eq0.i0[0]> <Outpin: u_tk_fifo/eq0.o>   // uisrc/01_rtl/csi2/csi2_ptr_fifo.v(70)
+		<Net: u_tk_fifo/O_wfull>   // uisrc/01_rtl/csi2/csi2_ptr_fifo.v(22)
+		<Inst: u_tk_fifo/mem_i1> <Inpin: u_tk_fifo/mem_i1.I> <Outpin: u_tk_fifo/mem_i1.O>   // uisrc/01_rtl/csi2/csi2_ptr_fifo.v(42)
+		<Net: u_tk_fifo/mem_n1>   
+		<Inst: u_tk_fifo/mem_i> <Inpin: u_tk_fifo/mem_i.I[1]> <Outpin: u_tk_fifo/mem_i.O>   // uisrc/01_rtl/csi2/csi2_ptr_fifo.v(42)
+		<Net: u_tk_fifo/mem_n>   
+
+SYN-5033 CRITICAL-WARNING: The model (csi2_tx_top) has (1) unstable comb insts loops, which may lead to self oscillation. Please consider rewriting code. Print one loop:
+		<Inst: u_tk_fifo/add1> <Inpin: u_tk_fifo/add1.i1[0]> <Outpin: u_tk_fifo/add1.o[10]>   // uisrc/01_rtl/csi2/csi2_ptr_fifo.v(42)
+		<Net: u_tk_fifo/wgray_next[10]>   // uisrc/01_rtl/csi2/csi2_ptr_fifo.v(43)
+		<Inst: u_tk_fifo/wgray_next_b_i> <Inpin: u_tk_fifo/wgray_next_b_i.I[1]> <Outpin: u_tk_fifo/wgray_next_b_i.O>   // uisrc/01_rtl/csi2/csi2_ptr_fifo.v(43)
+		<Net: u_tk_fifo/wgray_next[0]>   // uisrc/01_rtl/csi2/csi2_ptr_fifo.v(43)
+		<Inst: u_tk_fifo/eq0> <Inpin: u_tk_fifo/eq0.i0[0]> <Outpin: u_tk_fifo/eq0.o>   // uisrc/01_rtl/csi2/csi2_ptr_fifo.v(70)
+		<Net: u_tk_fifo/O_wfull>   // uisrc/01_rtl/csi2/csi2_ptr_fifo.v(22)
+		<Inst: u_tk_fifo/mem_i1> <Inpin: u_tk_fifo/mem_i1.I> <Outpin: u_tk_fifo/mem_i1.O>   // uisrc/01_rtl/csi2/csi2_ptr_fifo.v(42)
+		<Net: u_tk_fifo/mem_n1>   
+		<Inst: u_tk_fifo/mem_i> <Inpin: u_tk_fifo/mem_i.I[1]> <Outpin: u_tk_fifo/mem_i.O>   // uisrc/01_rtl/csi2/csi2_ptr_fifo.v(42)
+		<Net: u_tk_fifo/mem_n>   
+
+SYN-1032 : 5668/69 useful/useless nets, 1962/18 useful/useless insts
+SYN-1068 : Optimized 2 binary mux instances.
+SYN-1019 : Optimized 1 mux instances.
+SYN-1021 : Optimized 2 onehot mux instances.
+SYN-1021 : Optimized 4 onehot mux instances.
+SYN-1016 : Merged 318 instances.
+SYN-1035 : Inferred 1 ROM(s)
+SYN-1016 : Merged 134 instances.
+SYN-1001 : End Stage 1.5 | Optimize Design; Time: 0.438583s wall, 0.437500s user + 0.000000s system = 0.437500s CPU (99.8%); Memory(MB): used = 346, reserved = 423, peak = 349;
+
+SYN-1079 : finish stage Optimize Design. Total instances: 3991, Total nets: 4418.
+
+SYN-1001 : Stage 1.6 | Optimize Iteratively
+SYN-1021 : Optimized 108 onehot mux instances.
+SYN-1014 : Optimize round 1
+SYN-1044 : Optimized 20 inv instances.
+SYN-1017 : Remove 11 const input seq instances
+SYN-1019 : Optimized 45 mux instances.
+SYN-1020 : Optimized 125 distributor mux.
+SYN-1001 : Optimize 6 less-than instances
+SYN-1019 : Optimized 13 mux instances.
+SYN-1016 : Merged 1363 instances.
+SYN-1015 : Optimize round 1, 2920 better
+SYN-1014 : Optimize round 2
+SYN-1044 : Optimized 3 inv instances.
+SYN-1017 : Remove 1 const input seq instances
+SYN-1019 : Optimized 5 mux instances.
+SYN-1020 : Optimized 7 distributor mux.
+SYN-1019 : Optimized 75 mux instances.
+SYN-1016 : Merged 15 instances.
+SYN-1015 : Optimize round 2, 128 better
+SYN-8613 ERROR: Couldn't find D_NET net "tk_we_n" when elaborating sequential instance "tk_we_reg". Please contact customer support for more information.
+SYN-3010 : Optimized 12 DFF(s)
+SYN-1001 : End Stage 1.6 | Optimize Iteratively; Time: 1.201975s wall, 1.187500s user + 0.015625s system = 1.203125s CPU (100.1%); Memory(MB): used = 356, reserved = 428, peak = 364;
+
+SYN-1079 : finish stage Optimize Iteratively. Total instances: 4179, Total nets: 4603.
+
+SYN-1001 : Stage 1.7 | Check Design
+SYN-1001 : End Stage 1.7 | Check Design; Time: 0.000017s wall, 0.000000s user + 0.000000s system = 0.000000s CPU (n/a%); Memory(MB): used = 356, reserved = 428, peak = 364;
+
+SYN-1079 : finish stage Check Design. Total instances: 4179, Total nets: 4603.
+
+SYN-1001 : End Stage 1 | Optimize RTL; Time: 1.826636s wall, 1.812500s user + 0.015625s system = 1.828125s CPU (100.1%); Memory(MB): used = 356, reserved = 428, peak = 364;
+
+SYN-1079 : finish stage Optimize RTL. Total instances: 4179, Total nets: 4603.
+
+RUN-1003 : finish command "optimize_rtl" in  1.842139s wall, 1.812500s user + 0.015625s system = 1.828125s CPU (99.2%)
+
+RUN-1004 : used memory is 356 MB, reserved memory is 428 MB, peak memory is 364 MB
+

@@ -1,0 +1,26 @@
+============================================================
+   Tang Dynasty, V6.2.168116
+   Copyright (c) 2012-2025 Anlogic Inc.
+   Executable = D:/TD/bin/td_commands_prompt.exe
+   Built at =   16:32:07 Jun 12 2025
+   Run by =     XIAOXIAO
+   Run Date =   Thu Oct 29 00:03:19 2026
+
+   Run on =     LAPTOP-T95VR7F4
+============================================================
+PRJ-5611 WARNING: uisrc/01_rtl/mipi_dphy_rx/ph1p_mipiio_rx_wrapper.v and uisrc/01_rtl/csi2/csi2_ptr_fifo.v have the same CompileOrder value.
+PRJ-5611 WARNING: uisrc/01_rtl/mipi_dphy_rx/mipi_dphy_rx_ph1p_mipiio_wrapper.sv and uisrc/01_rtl/csi2_tx_top.v have the same CompileOrder value.
+PRJ-5611 WARNING: uisrc/01_rtl/mipi_dphy_rx/byte_aligner_wrapper.enc.sv and uisrc/01_rtl/ae/ae_set.v have the same CompileOrder value.
+PRJ-5611 WARNING: uisrc/01_rtl/mipi_dphy_rx/channel_aligner_wrapper.enc.sv and uisrc/01_rtl/dbg/dbg_uart.v have the same CompileOrder value.
+PRJ-5611 WARNING: uisrc/03_ip/pll/pll.xml and uisrc/01_rtl/csi2/csi2_ecc.v have the same CompileOrder value.
+Copyright (c) 1998-2019 The OpenSSL Project.  All rights reserved.
+This product includes software developed by the OpenSSL Project
+for use in the OpenSSL Toolkit (http://www.openssl.org/)
+Copyright (C) 1995-1998 Eric Young (eay@cryptsoft.com)
+All rights reserved.
+This product includes cryptographic software written by Eric Young (eay@cryptsoft.com)
+HDL-5007 WARNING: block identifier is required on this block in uisrc/01_rtl/mipi_dphy_tx/hs_tx_wrapper_merge.enc.v(895)
+HDL-7225 CRITICAL-WARNING: 'dbg_regidx' is already implicitly declared on line 139 in uisrc/01_rtl/csi2_tx_top.v(463)
+HDL-8007 ERROR: 'p_frame_end' is not declared in uisrc/01_rtl/csi2_tx_top.v(476)
+HDL-8007 ERROR: ignore module module due to previous errors in uisrc/01_rtl/csi2_tx_top.v(20)
+PRJ-8644 ERROR: Failed to analyze source file(s).

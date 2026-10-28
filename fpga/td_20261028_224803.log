@@ -1,0 +1,103 @@
+============================================================
+   Tang Dynasty, V6.2.168116
+   Copyright (c) 2012-2025 Anlogic Inc.
+   Executable = D:/TD/bin/td_commands_prompt.exe
+   Built at =   16:32:07 Jun 12 2025
+   Run by =     XIAOXIAO
+   Run Date =   Wed Oct 28 22:48:03 2026
+
+   Run on =     LAPTOP-T95VR7F4
+============================================================
+RUN-1002 : start command "list_devices"
+RUN-1001 : Device Table
+RUN-1001 : -----------------------------------------------------
+RUN-1001 :   Family  |   Device    |     Package      |  Speed  
+RUN-1001 : -----------------------------------------------------
+RUN-1001 :    dr1    |   dr1_90    |   DR1M90GEG400   |   2/3   
+RUN-1001 :           |             |   DR1M90GEG484   |   2/3   
+RUN-1001 :           |             |  DR1M90GEG484A   |    3    
+RUN-1001 :           |             |   DR1M90MEG484   |   2/3   
+RUN-1001 :           |             |   DR1V90GEG400   |   2/3   
+RUN-1001 :           |             |   DR1V90GEG484   |   2/3   
+RUN-1001 :           |             |   DR1V90MEG484   |   2/3   
+RUN-1001 : -----------------------------------------------------
+RUN-1001 :    ef2    |    ef2_1    |   EF2L15BG256B   |   NA    
+RUN-1001 :           |             |   EF2L15LG100B   |   NA    
+RUN-1001 :           |             |   EF2L15LG144B   |   NA    
+RUN-1001 :           |    ef2_2    |   EF2L25BG256B   |   NA    
+RUN-1001 :           |             |   EF2L25XG42B    |   NA    
+RUN-1001 :           |    ef2_4    |   EF2L45BG256B   |   NA    
+RUN-1001 :           |             |   EF2L45LG144B   |   NA    
+RUN-1001 :           |             |   EF2L45UG132B   |   NA    
+RUN-1001 :           |             |   EF2M45LG100B   |   NA    
+RUN-1001 :           |             |   EF2M45LG144B   |   NA    
+RUN-1001 :           |             |   EF2M45LG48B    |   NA    
+RUN-1001 :           |   ef2_s4    |   EF2M45VG81C    |   NA    
+RUN-1001 :           |             |   EF2S45VG81C    |   NA    
+RUN-1001 : -----------------------------------------------------
+RUN-1001 :    ef3    |    ef3_1    |   EF3L15CG256B   |   NA    
+RUN-1001 :           |   ef3_10    |   EF3LA0CG484B   |   NA    
+RUN-1001 :           |             |   EF3LA0CG642B   |   NA    
+RUN-1001 :           |    ef3_4    |   EF3L40CG324B   |   NA    
+RUN-1001 :           |             |   EF3L40CG332B   |   NA    
+RUN-1001 :           |   ef3_45    |   EF3L45CG256B   |   NA    
+RUN-1001 :           |             |  EF3L45CG256BH   |   NA    
+RUN-1001 :           |    ef3_5    |   EF3L50CG256B   |   NA    
+RUN-1001 :           |    ef3_7    |   EF3L70CG256B   |   NA    
+RUN-1001 :           |    ef3_9    |   EF3L90CG324B   |   NA    
+RUN-1001 :           |             |   EF3L90CG400B   |   NA    
+RUN-1001 : -----------------------------------------------------
+RUN-1001 :    ef4    |    ef4_9    |   EF4L90CG324A   |   NA    
+RUN-1001 : -----------------------------------------------------
+RUN-1001 :    eg4    |  eagle_15   |   EG4A15BG256    |   NA    
+RUN-1001 :           |             |   EG4X15BG256    |   NA    
+RUN-1001 :           |  eagle_20   |   EG4A20BG256    |   NA    
+RUN-1001 :           |             |    EG4A20NG88    |   NA    
+RUN-1001 :           |             |   EG4X20BG256    |   NA    
+RUN-1001 :           |             |   EG4X20LG144    |   NA    
+RUN-1001 :           |  eagle_s20  |   EG4D20EG176    |   NA    
+RUN-1001 :           |             |   EG4S20BG256    |   NA    
+RUN-1001 :           |             |   EG4S20CG324    |   NA    
+RUN-1001 :           |             |    EG4S20NG88    |   NA    
+RUN-1001 : -----------------------------------------------------
+RUN-1001 :    ph1    |   ph1_100   |  PH1A100GCG324   |   2/3   
+RUN-1001 :           |             |  PH1A100GSG324   |   2/3   
+RUN-1001 :           |             |  PH1A100SFG676   |   2/3   
+RUN-1001 :           |             |  PH1A100SFG676X  |   2/3   
+RUN-1001 :           |  ph1_100p   |  PH1P100GEG324   |    3    
+RUN-1001 :           |             |  PH1P100SBG484   |    3    
+RUN-1001 :           |             |  PH1P100SBG676   |    3    
+RUN-1001 :           |             |  PH1P100SBG677   |    3    
+RUN-1001 :           |   ph1_180   |  PH1A180SFG676   |   2/3   
+RUN-1001 :           |   ph1_35p   |   PH1P35MBG484   |    3    
+RUN-1001 :           |             |   PH1P35MDG324   |    3    
+RUN-1001 :           |             |   PH1P35MEG324   |    3    
+RUN-1001 :           |             |  PH1P35MEG324A   |    A    
+RUN-1001 :           |             |   PH1P35MHG324   |    3    
+RUN-1001 :           |   ph1_400   |  PH1A400SFG676   |   2/3   
+RUN-1001 :           |             |  PH1A400SFG900   |   2/3   
+RUN-1001 :           |             |  PH1A400SFX900   |   2/3   
+RUN-1001 :           |   ph1_50p   |   PH1P50GEG324   |    3    
+RUN-1001 :           |             |  PH1P50MEG324A   |    A    
+RUN-1001 :           |             |   PH1P50SBG484   |    3    
+RUN-1001 :           |   ph1_60    |   PH1A60GEG324   |    3    
+RUN-1001 :           |   ph1_60c   |  PH1A60GEG324C   |    3    
+RUN-1001 :           |   ph1_90    |   PH1A90SBG484   |   2/3   
+RUN-1001 :           |             |   PH1A90SEG324   |   2/3   
+RUN-1001 :           |             |   PH1A90SEG325   |   2/3   
+RUN-1001 : -----------------------------------------------------
+RUN-1001 :    ph2    |   ph2_106   |  PH2A106FLG676   |  2/3/1  
+RUN-1001 :           |             |  PH2A106FLG900   |  2/3/1  
+RUN-1001 : -----------------------------------------------------
+RUN-1001 :    sf1    |    sf1_6    |   SF1N60VG81C    |   NA    
+RUN-1001 :           |             |   SF1S60CG121I   |   NA    
+RUN-1001 :           |             |   SF1S60VG81C    |   NA    
+RUN-1001 :           |             |   SF1S60VG81E    |   NA    
+RUN-1001 : -----------------------------------------------------
+RUN-1001 :    sf2    |    sf2_1    |   SF2S50VG90C    |   NA    
+RUN-1001 : -----------------------------------------------------
+RUN-1001 : -----------------------------------------------------
+RUN-1002 : start command "read_device_id"
+PRG-9505 ERROR: USB device open error, please re-connect the USB cable!
+PRG-9505 ERROR: USB device open error, please re-connect the USB cable!
+

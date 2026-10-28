@@ -1,0 +1,601 @@
+m255
+K4
+z2
+!s11f vlog 2020.4 2020.10, Oct 13 2020
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dD:/BaiduNetdiskDownload/02_F02_FC02_PH1P35/fpga_11/ph1p35second/fpga/sim_work
+T_opt
+!s110 1793197297
+V]nFM>elH[_e50oVQI`L2;3
+04 17 4 work tb_csi2_full_line fast 0
+=1-78465c4e0bf3-6ae204f1-162-2394
+Z1 o-quiet -auto_acc_if_foreign -work work
+Z2 tCvgOpt 0
+n@_opt
+Z3 OL;O;2020.4;71
+R0
+T_opt1
+!s110 1793197299
+VlX<bQ:zMP2D>5T0o26SC^2
+04 19 4 work tb_csi2_bank_switch fast 0
+=1-78465c4e0bf3-6ae204f3-119-9aa4
+R1
+R2
+n@_opt1
+R3
+R0
+T_opt2
+!s110 1793197301
+VjD@:RBbg3Q4a3B4_:IGbG1
+04 17 4 work tb_csi2_lane_swap fast 0
+=1-78465c4e0bf3-6ae204f5-9f-2330
+R1
+R2
+n@_opt2
+R3
+vae_set
+Z4 !s110 1793197282
+!i10b 1
+!s100 PQMCbhAM0@DbKhX4Lf?5?2
+Z5 !s11b Dg1SIo80bB@j0V0VzS_@n1
+IO9Vi_cBIA5lFCn2dS=>6T1
+R0
+w1739152390
+8..\uisrc\01_rtl\ae\ae_set.v
+F..\uisrc\01_rtl\ae\ae_set.v
+!i122 12
+L0 33 89
+Z6 VDg1SIo80bB@j0V0VzS_@n1
+Z7 OL;L;2020.4;71
+r1
+!s85 0
+31
+Z8 !s108 1793197282.000000
+Z9 !s107 ..\uisrc\02_sim\tb_cam_cfg_i2c.v|..\uisrc\02_sim\tb_csi2_lane_swap.v|..\uisrc\02_sim\tb_csi2_bank_switch.v|..\uisrc\02_sim\tb_csi2_full_line.v|..\uisrc\02_sim\tb_csi2_tx_top.v|..\uisrc\02_sim\tb_csi2_ptr_fifo.v|..\uisrc\02_sim\tb_csi2_pipeline.v|..\uisrc\02_sim\tb_csi2_rx_parse.v|..\uisrc\02_sim\tb_csi2_tx_packet.v|..\uisrc\02_sim\tb_crc_par2.v|..\uisrc\02_sim\tb_csi2_ecc_crc.v|..\uisrc\01_rtl\ae\ae_set.v|..\uisrc\01_rtl\csi2_tx_top.v|..\uisrc\01_rtl\uics500_cfg\uicfgcs500.v|..\uisrc\01_rtl\uics500_cfg\uics500regAE.v|..\uisrc\01_rtl\uics500_cfg\uics500reg.v|..\uisrc\01_rtl\uics500_cfg\SC500GainTbl.v|..\uisrc\01_rtl\uics500_cfg\uii2c.v|..\uisrc\01_rtl\csi2\csi2_ptr_fifo.v|..\uisrc\01_rtl\csi2\csi2_rx_parse.v|..\uisrc\01_rtl\csi2\csi2_tx_packet.v|..\uisrc\01_rtl\csi2\crc16_par2.v|..\uisrc\01_rtl\csi2\crc16_csi.v|..\uisrc\01_rtl\csi2\csi2_ecc.v|..\uisrc\02_sim\stub_top_deps.v|
+Z10 !s90 -quiet|..\uisrc\02_sim\stub_top_deps.v|..\uisrc\01_rtl\csi2\csi2_ecc.v|..\uisrc\01_rtl\csi2\crc16_csi.v|..\uisrc\01_rtl\csi2\crc16_par2.v|..\uisrc\01_rtl\csi2\csi2_tx_packet.v|..\uisrc\01_rtl\csi2\csi2_rx_parse.v|..\uisrc\01_rtl\csi2\csi2_ptr_fifo.v|..\uisrc\01_rtl\uics500_cfg\uii2c.v|..\uisrc\01_rtl\uics500_cfg\SC500GainTbl.v|..\uisrc\01_rtl\uics500_cfg\uics500reg.v|..\uisrc\01_rtl\uics500_cfg\uics500regAE.v|..\uisrc\01_rtl\uics500_cfg\uicfgcs500.v|..\uisrc\01_rtl\csi2_tx_top.v|..\uisrc\01_rtl\ae\ae_set.v|..\uisrc\02_sim\tb_csi2_ecc_crc.v|..\uisrc\02_sim\tb_crc_par2.v|..\uisrc\02_sim\tb_csi2_tx_packet.v|..\uisrc\02_sim\tb_csi2_rx_parse.v|..\uisrc\02_sim\tb_csi2_pipeline.v|..\uisrc\02_sim\tb_csi2_ptr_fifo.v|..\uisrc\02_sim\tb_csi2_tx_top.v|..\uisrc\02_sim\tb_csi2_full_line.v|..\uisrc\02_sim\tb_csi2_bank_switch.v|..\uisrc\02_sim\tb_csi2_lane_swap.v|..\uisrc\02_sim\tb_cam_cfg_i2c.v|
+!i113 0
+Z11 o-quiet -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R2
+vcrc16_csi
+R4
+!i10b 1
+!s100 nEe2VRk??6ETC>mZc[0Ll0
+R5
+I=SjZCO<kE@dn_U`o43G0W3
+R0
+Z12 w1793194045
+8..\uisrc\01_rtl\csi2\crc16_csi.v
+F..\uisrc\01_rtl\csi2\crc16_csi.v
+!i122 12
+L0 11 31
+R6
+R7
+r1
+!s85 0
+31
+R8
+R9
+R10
+!i113 0
+R11
+R2
+vcrc16_par2
+R4
+!i10b 1
+!s100 7CoCNzGH?glK=h9BOESkB1
+R5
+ID>z0o<g<>InEcR?OO0]5^1
+R0
+w1793194663
+8..\uisrc\01_rtl\csi2\crc16_par2.v
+F..\uisrc\01_rtl\csi2\crc16_par2.v
+!i122 12
+L0 10 26
+R6
+R7
+r1
+!s85 0
+31
+R8
+R9
+R10
+!i113 0
+R11
+R2
+vcsi2_ecc
+R4
+!i10b 1
+!s100 8Y`_CG9CQYfNC2D[PA^kR1
+R5
+I@z2WOmX7?gUVVEHU2>4P;0
+R0
+R12
+8..\uisrc\01_rtl\csi2\csi2_ecc.v
+F..\uisrc\01_rtl\csi2\csi2_ecc.v
+!i122 12
+L0 19 34
+R6
+R7
+r1
+!s85 0
+31
+R8
+R9
+R10
+!i113 0
+R11
+R2
+vcsi2_ptr_fifo
+R4
+!i10b 1
+!s100 0nGiOl^VZ>ze5U;7:nhC@2
+R5
+IAkS9DG0VW0ODbM?9Y>d;c1
+R0
+w1793195630
+8..\uisrc\01_rtl\csi2\csi2_ptr_fifo.v
+F..\uisrc\01_rtl\csi2\csi2_ptr_fifo.v
+!i122 12
+L0 18 95
+R6
+R7
+r1
+!s85 0
+31
+R8
+R9
+R10
+!i113 0
+R11
+R2
+vcsi2_rx_parse
+R4
+!i10b 1
+!s100 fGnWlMG9lSL];[BWZS=`23
+R5
+IPJaK>jY3GXolK3N89<0_j3
+R0
+w1793194975
+8..\uisrc\01_rtl\csi2\csi2_rx_parse.v
+F..\uisrc\01_rtl\csi2\csi2_rx_parse.v
+!i122 12
+L0 17 121
+R6
+R7
+r1
+!s85 0
+31
+R8
+R9
+R10
+!i113 0
+R11
+R2
+vcsi2_tx_packet
+R4
+!i10b 1
+!s100 cQLG51dYg:=9Hl?1P7BIL1
+R5
+Ihnd>SiW7cd@ll5e86_Q@>3
+R0
+w1793196930
+8..\uisrc\01_rtl\csi2\csi2_tx_packet.v
+F..\uisrc\01_rtl\csi2\csi2_tx_packet.v
+!i122 12
+L0 24 226
+R6
+R7
+r1
+!s85 0
+31
+R8
+R9
+R10
+!i113 0
+R11
+R2
+vcsi2_tx_top
+R4
+!i10b 1
+!s100 RbjG2T67d;_K3amRmA<V43
+R5
+IhTF0K6CfS=jYX<:?3d73:3
+R0
+w1793197106
+8..\uisrc\01_rtl\csi2_tx_top.v
+F..\uisrc\01_rtl\csi2_tx_top.v
+!i122 12
+L0 20 383
+R6
+R7
+r1
+!s85 0
+31
+R8
+R9
+R10
+!i113 0
+R11
+R2
+vmipi_dphy_rx_ph1p_mipiio_wrapper
+R4
+!i10b 1
+!s100 daMCF:clVTRRA=JW5`GjH2
+R5
+Id?zREVBe:QcCOf9MLz27@1
+R0
+Z13 w1793195478
+Z14 8..\uisrc\02_sim\stub_top_deps.v
+Z15 F..\uisrc\02_sim\stub_top_deps.v
+!i122 12
+L0 29 46
+R6
+R7
+r1
+!s85 0
+31
+R8
+R9
+R10
+!i113 0
+R11
+R2
+vmipi_dphy_tx_over_ph1p_mipiio_wrapper
+R4
+!i10b 1
+!s100 S[eaC3h7>k4nEj;Z=5No:3
+R5
+I@I=U4;RBF5Ud^:Ie2D9ml0
+R0
+R13
+R14
+R15
+!i122 12
+L0 77 51
+R6
+R7
+r1
+!s85 0
+31
+R8
+R9
+R10
+!i113 0
+R11
+R2
+vpll
+R4
+!i10b 1
+!s100 e8W0=gdcGT1bS`K<ILh^E2
+R5
+IU@L:2gQGQWoWbo9::8hhS2
+R0
+R13
+R14
+R15
+!i122 12
+L0 16 11
+R6
+R7
+r1
+!s85 0
+31
+R8
+R9
+R10
+!i113 0
+R11
+R2
+vSC500GainTbl
+R4
+!i10b 1
+!s100 ^zGQ=XNT3:nD@2SVfmEE?1
+R5
+IfaSa35GdJ^5F86YY^b:9S3
+R0
+w1688526678
+8..\uisrc\01_rtl\uics500_cfg\SC500GainTbl.v
+F..\uisrc\01_rtl\uics500_cfg\SC500GainTbl.v
+!i122 12
+L0 6 19
+R6
+R7
+r1
+!s85 0
+31
+R8
+R9
+R10
+!i113 0
+R11
+R2
+n@s@c500@gain@tbl
+vtb_cam_cfg_i2c
+R4
+!i10b 1
+!s100 6zc8?m8Ea@V1DEFi28cCF1
+R5
+IXdSo2<=W8cT;NHJZe2z[W3
+R0
+w1793197273
+8..\uisrc\02_sim\tb_cam_cfg_i2c.v
+F..\uisrc\02_sim\tb_cam_cfg_i2c.v
+!i122 12
+L0 16 162
+R6
+R7
+r1
+!s85 0
+31
+R8
+R9
+R10
+!i113 0
+R11
+R2
+vtb_crc_par2
+R4
+!i10b 1
+!s100 4M5iXUBlk1d4IzW?YW;8l1
+R5
+I0Ek5?LToY<8z?Snk7mMhR3
+R0
+w1793194624
+8..\uisrc\02_sim\tb_crc_par2.v
+F..\uisrc\02_sim\tb_crc_par2.v
+!i122 12
+L0 9 100
+R6
+R7
+r1
+!s85 0
+31
+R8
+R9
+R10
+!i113 0
+R11
+R2
+vtb_csi2_bank_switch
+R4
+!i10b 1
+!s100 bU4>QXDQ[GAD[69nhkFaD0
+R5
+IOBU1ESM4cUSM;>0b8WUhE2
+R0
+w1793196805
+8..\uisrc\02_sim\tb_csi2_bank_switch.v
+F..\uisrc\02_sim\tb_csi2_bank_switch.v
+!i122 12
+L0 15 176
+R6
+R7
+r1
+!s85 0
+31
+R8
+R9
+R10
+!i113 0
+R11
+R2
+vtb_csi2_ecc_crc
+R4
+!i10b 1
+!s100 J^nSRBlz>>;EJ@M9R6bR:3
+R5
+In@ZdDNPdEbNXSCZX@SNl:2
+R0
+w1793194053
+8..\uisrc\02_sim\tb_csi2_ecc_crc.v
+F..\uisrc\02_sim\tb_csi2_ecc_crc.v
+!i122 12
+L0 9 110
+R6
+R7
+r1
+!s85 0
+31
+R8
+R9
+R10
+!i113 0
+R11
+R2
+vtb_csi2_full_line
+R4
+!i10b 1
+!s100 oNiD5TFNgPJSdOEFlb?l_2
+R5
+ILA0jjioZ5aDihGo0jdkQP2
+R0
+Z16 w1793197120
+8..\uisrc\02_sim\tb_csi2_full_line.v
+F..\uisrc\02_sim\tb_csi2_full_line.v
+!i122 12
+L0 15 203
+R6
+R7
+r1
+!s85 0
+31
+R8
+R9
+R10
+!i113 0
+R11
+R2
+vtb_csi2_lane_swap
+R4
+!i10b 1
+!s100 nYmQZlMo<Mil48Pe<32EQ0
+R5
+IVLcKSNbPfkInOb^UJ6A`D3
+R0
+w1793196963
+8..\uisrc\02_sim\tb_csi2_lane_swap.v
+F..\uisrc\02_sim\tb_csi2_lane_swap.v
+!i122 12
+L0 12 152
+R6
+R7
+r1
+!s85 0
+31
+R8
+R9
+R10
+!i113 0
+R11
+R2
+vtb_csi2_pipeline
+R4
+!i10b 1
+!s100 e>bLo23Ai6`9a>VTB>W>X2
+R5
+IaH3ld_zJoBaVhKKUoj3=k1
+R0
+w1793195013
+8..\uisrc\02_sim\tb_csi2_pipeline.v
+F..\uisrc\02_sim\tb_csi2_pipeline.v
+!i122 12
+L0 10 234
+R6
+R7
+r1
+!s85 0
+31
+R8
+R9
+R10
+!i113 0
+R11
+R2
+vtb_csi2_ptr_fifo
+R4
+!i10b 1
+!s100 UZjh`m1KeLMg0aOBlNQ7[2
+R5
+I;?3CL7U]2noG3gnZT0=jG3
+R0
+w1793195251
+8..\uisrc\02_sim\tb_csi2_ptr_fifo.v
+F..\uisrc\02_sim\tb_csi2_ptr_fifo.v
+!i122 12
+L0 8 106
+R6
+R7
+r1
+!s85 0
+31
+R8
+R9
+R10
+!i113 0
+R11
+R2
+vtb_csi2_rx_parse
+R4
+!i10b 1
+!s100 HQR:5VLX_K]X^DPgnPjRO3
+R5
+I]c0=12n7DQA@NTPzF^J252
+R0
+w1793194990
+8..\uisrc\02_sim\tb_csi2_rx_parse.v
+F..\uisrc\02_sim\tb_csi2_rx_parse.v
+!i122 12
+L0 10 174
+R6
+R7
+r1
+!s85 0
+31
+R8
+R9
+R10
+!i113 0
+R11
+R2
+vtb_csi2_tx_packet
+R4
+!i10b 1
+!s100 h^hFH97FA4`?zZmU@nQm?2
+R5
+I>F:FZW`fRD^54R=f>Y>T90
+R0
+w1793194910
+8..\uisrc\02_sim\tb_csi2_tx_packet.v
+F..\uisrc\02_sim\tb_csi2_tx_packet.v
+!i122 12
+L0 9 229
+R6
+R7
+r1
+!s85 0
+31
+R8
+R9
+R10
+!i113 0
+R11
+R2
+vtb_csi2_tx_top
+R4
+!i10b 1
+!s100 YodJOl6?IG@GeKQA@XaTQ1
+R5
+IUj7QWk^80n2M<XHRYR`0V0
+R0
+R16
+8..\uisrc\02_sim\tb_csi2_tx_top.v
+F..\uisrc\02_sim\tb_csi2_tx_top.v
+!i122 12
+L0 9 201
+R6
+R7
+r1
+!s85 0
+31
+R8
+R9
+R10
+!i113 0
+R11
+R2
+vuicfgcs500
+R4
+!i10b 1
+!s100 @RNS149_mLVj?h_]?o9hb1
+R5
+IL>f<GJ2BD;MYRZlMNNX_N2
+R0
+w1793195414
+8..\uisrc\01_rtl\uics500_cfg\uicfgcs500.v
+F..\uisrc\01_rtl\uics500_cfg\uicfgcs500.v
+!i122 12
+L0 37 132
+R6
+R7
+r1
+!s85 0
+31
+R8
+R9
+R10
+!i113 0
+R11
+R2
+vuics500reg
+R4
+!i10b 1
+!s100 hQdKWMRXTL:M6j@N[0gSW2
+R5
+IKdhjEZB9c630diiWCf39X0
+R0
+w16885

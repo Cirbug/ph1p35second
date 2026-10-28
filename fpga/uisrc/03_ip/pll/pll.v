@@ -5,35 +5,45 @@
 /************************************************************\
 **	Build time: Aug 20 2025 10:13:30
 **	TD version	:	6.2.168116
-************************************************************/
+**
+**	手工修改：增加 C1 = 24MHz 输出（摄像头 XCLK）
+**	  VCO = 1200MHz；f_k = 1200 / CLKCk_DIV
+**	    C0: DIV=12 -> 100.000 MHz  (逻辑主时钟 / MIPI DPLL 参考)
+**	    C1: DIV=50 ->  24.000 MHz  (SC500CS XCLK)
+**	  若在 TD 的 IP 界面重新生成 PLL，请按同样参数配置，
+**	  否则本文件会被覆盖回单路 200MHz。
+\************************************************************/
 ///////////////////////////////////////////////////////////////////////////////
 //	Input frequency:                25.000000000 MHz
-//	Clock multiplication factor: 8
+//	Clock multiplication factor: 4
 //	Clock division factor:       1
 //	Clock information:
-//		Clock name	| Frequency 	| Phase shift 
-//		C0        	| 200.000000   MHz	    |  0.0000 DEG 
+//		Clock name	| Frequency 	| Phase shift
+//		C0        	| 100.000000   MHz	    |  0.0000 DEG
+//		C1        	| 24.000000    MHz	    |  0.0000 DEG
 ///////////////////////////////////////////////////////////////////////////////
-`timescale 1 ns / 100 fs 
+`timescale 1 ns / 100 fs
 
 module pll
 (
   input                         refclk,
   output                        clk0_out,
+  output                        clk1_out,
   output                        lock,
   input                         reset
 );
   wire							  clk0_buf;
+  wire							  clk1_buf;
+
 PH1P_LOGIC_BUFG bufg_feedback (
- .i(clk0_buf), 
- .o(clk0_out) 
- ); 
+ .i(clk0_buf),
+ .o(clk0_out)
+ );
 
-
-
-
-
-
+PH1P_LOGIC_BUFG bufg_clk1 (
+ .i(clk1_buf),
+ .o(clk1_out)
+ );
 
 
   ph1p_phy_pll_wrapper_6ba8d3e44c24
@@ -42,14 +52,21 @@ PH1P_LOGIC_BUFG bufg_feedback (
       .FBKCLK_INT("CLKC0_EXT"),
       .FIN("25.000000000"),
       .REFCLK_DIV(1),
-      .FBCLK_DIV(8),
+      .FBCLK_DIV(4),
       .CLKC0_ENABLE("ENABLE"),
-      .CLKC0_DIV(6),
-      .CLKC0_CPHASE(5),
+      .CLKC0_DIV(12),
+      .CLKC0_CPHASE(11),
       .CLKC0_FPHASE(0),
       .CLKC0_FPHASE_RSTSEL(0),
       .CLKC0_DUTY50("ENABLE"),
-      .CLKC0_DUTY_INT(3),
+      .CLKC0_DUTY_INT(6),
+      .CLKC1_ENABLE("ENABLE"),
+      .CLKC1_DIV(50),
+      .CLKC1_CPHASE(49),
+      .CLKC1_FPHASE(0),
+      .CLKC1_FPHASE_RSTSEL(0),
+      .CLKC1_DUTY50("ENABLE"),
+      .CLKC1_DUTY_INT(25),
       .PLL_USR_RST("ENABLE"),
       .PLL_FEED_TYPE("EXTERNAL"),
       .PLL_FASTLOOP("DISABLE"),
@@ -66,8 +83,8 @@ PH1P_LOGIC_BUFG bufg_feedback (
       .DYN_CPHASE_EN("DISABLE")
   )ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst
   (
-      .clk1_en(1'b0),
-      .clk1_out(),
+      .clk1_en(1'b1),
+      .clk1_out(clk1_buf),
       .clkb1_out(),
       .clk2_en(1'b0),
       .clk2_out(),
