@@ -1,0 +1,23 @@
+Location         : F:\work\03_H\F02\3_1_01_fpga_base\02_fpga_start\fpga_prj_Runs\syn_1
+Running with     : Tang Dynasty v6.2.168116
+                   Copyright (c) 2012-2025 Anlogic Inc.
+Top Model        : pll_test
+Device           : PH1P35MDG324
+Speed            : 3
+
+Timing Mode      : basic
+Setup            : WNS  2775ps  TNS        0ps  NUM_FEPS     0
+Hold             : WNS  1077ps  TNS        0ps  NUM_FEPS     0
+
+Flow Statistics  :
+--------------------------------------------------------------------------------------------------
+     command     |  #calls  |  wall time  |  cpu time(s)  |  used memory(mb)  |  peak memory(mb)  
+--------------------------------------------------------------------------------------------------
+  import_device  |    1     |  1s(100%)   |    1(100%)    |        323        |        323        
+  optimize_gate  |    1     |   0s(0%)    |     0(0%)     |        321        |        333        
+  optimize_rtl   |    1     |   0s(0%)    |     0(0%)     |        298        |        333        
+    read_adc     |    1     |   0s(0%)    |     0(0%)     |        329        |        329        
+    read_sdc     |    1     |   0s(0%)    |     0(0%)     |        329        |        329        
+--------------------------------------------------------------------------------------------------
+      total      |    5     |     1s      |       1       |        329        |        333        
+--------------------------------------------------------------------------------------------------

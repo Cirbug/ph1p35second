@@ -1,0 +1,23 @@
+============================================================
+   Tang Dynasty, V6.2.168116
+   Copyright (c) 2012-2025 Anlogic Inc.
+   Executable = D:/TD6.2.1/bin/td.exe
+   Built at =   16:32:07 Jun 12 2025
+   Run by =     Administrator
+   Run Date =   Wed Aug 20 09:36:36 2025
+
+   Run on =     BF-202404291754
+============================================================
+GUI-6001 WARNING: File F:/work/03_H/F02/3_1_01_fpga_base/02_fpga_start/al_ip/mypll/mypll.v does not exist!
+GUI-6001 WARNING: File F:/work/03_H/F02/3_1_01_fpga_base/02_fpga_start/al_ip/mypll/RTL/ph1p_phy_pll_wrapper_e03b832d62cd.v does not exist!
+GUI-5005 WARNING: Unknown file icon ...
+PRJ-5303 WARNING: Run syn_1 failed.
+Copyright (c) 1998-2019 The OpenSSL Project.  All rights reserved.
+This product includes software developed by the OpenSSL Project
+for use in the OpenSSL Toolkit (http://www.openssl.org/)
+Copyright (C) 1995-1998 Eric Young (eay@cryptsoft.com)
+All rights reserved.
+This product includes cryptographic software written by Eric Young (eay@cryptsoft.com)
+USR-8130 CRITICAL-WARNING: No clock match the pattern: mypll_u/ph1p_phy_pll_wrapper_e03b832d62cd_Inst/u_PH1P_PHY_PLL.clkc\[0\].
+USR-8124 CRITICAL-WARNING: Rename_clock: please specify object list.
+USR-8159 CRITICAL-WARNING: Command rename_clock -name {clk0} [get_clocks {mypll_u/ph1p_phy_pll_wrapper_e03b832d62cd_Inst/u_PH1P_PHY_PLL.clkc[0]}] in F:/work/03_H/F02/3_1_01_fpga_base/02_fpga_start/uisrc/04_pin/timing.sdc(4) fails.

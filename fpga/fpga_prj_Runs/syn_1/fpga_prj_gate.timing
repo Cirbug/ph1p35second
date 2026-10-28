@@ -1,0 +1,1938 @@
+Created by          : Tang Dynasty v6.2.168116
+                    : Copyright (c) 2012-2025 Anlogic Inc.
+Generated           : Wed Aug 20 10:23:11 2025
+
+Top Model           : pll_test
+Device              : PH1P35MDG324
+Speed               : 3
+STA coverage        : 85.91%
+Constraint File     : F:/work/03_H/F02/3_1_01_fpga_base/02_fpga_start/uisrc/04_pin/timing.sdc;
+Confidence          : Synthesized
+Check Corner        : Both (Slow and Fast)
+CRPR Enabled        : Yes
+Report Scheme       : 10 end point(s) per path group, 1 path(s) per end point
+
+
+Check Status
+-------------
+
+Corner   | Max      Min     
+------------------------------------
+Slow     | yes      yes     
+Fast     | yes      yes     
+
+
+Timing Status
+--------------------
+	SWNS: 2.775ns, STNS: 0.000ns
+	HWNS: 1.077ns, HTNS: 0.000ns
+	Period Check WNS: 0.000ns
+
+
+Clock Summary
+--------------------
+
+       Clock-Id:       C-Freq       Fanout   Clock-Name
+--------------------------------------------------------------------------------
+           clk0:      200.000           26   clk0
+           clk1:       25.000            1   sysclk
+--------------------------------------------------------------------------------
+
+       Name            Type         Rise(ns)   Fall(ns)          C-Period(ns)     C-Freq(MHz)          R-Period(ns)     R-Freq(MHz)         SWNS(ns)   STNS(ns)         HWNS(ns)   HTNS(ns)         Skew(ns)           Fanout        Max-Level        CC-From    CC-To
+       clk0           local            0.000      2.500                 5.000         200.000                 2.225         449.438            2.775      0.000            1.077      0.000            0.000               26                2             no       no
+       clk1           local            0.000     20.000                40.000          25.000                40.000          25.000            0.000      0.000            0.000      0.000            0.000                1                0             no       no
+
+Notes
+----------
+C-Period  :  constraint period
+C-Freq    :  constraint freq
+R-Period  :  report min period
+R-Freq    :  report fmax
+CC-From   :  has path(s) from cross-domain clock
+CC-To     :  has path(s) to cross-domain clock
+
+
+*   Clock R-Period data only takes intra-clock timing. SWNS/STNS/HWNS/HTNS take both intra-clock and inter-clock timing.
+*   If there is mismatch between R-Period and SWNS, check inter-clock timing of this clock as capture clock.
+*   SWNS/STNS/HWNS/HTNS of timing exception (SMCP/SMD) only counted in global Timing Status, not counted in Clock Summary.
+
+Intra clock domain timing
+--------------------------------------------------
+
+----------------------------------------------------------------------------------------------------
+Path Group     :     clk0 -> clk0
+Type           :     Self
+From Clock     :     clk0
+To Clock       :     clk0
+Min Period     :     2.225ns
+Fmax           :     449.438MHz
+
+Statistics:
+Max            : SWNS      2.775ns, STNS      0.000ns,         0 Viol Endpoints,        26 Total Endpoints,        26 Paths Analyzed
+Min            : HWNS      1.077ns, HTNS      0.000ns,         0 Viol Endpoints,        26 Total Endpoints,        26 Paths Analyzed
+----------------------------------------------------------------------------------------------------
+
+Max Paths
+----------------------------------------------------------------------------------------------------
+Slack               : 2.775ns
+Begin Point         : cnt_reg[0].clk (rising edge triggered by clock clk0  { rise@0.000000ns  fall@2.500000ns  period=5.000000 })
+End Point           : cnt_reg[23].d (rising edge triggered by clock clk0  { rise@0.000000ns  fall@2.500000ns  period=5.000000 })
+Check Type          : setup
+Process             : slow_125c
+Budget              : 5.000ns { clk0 rising@5.000ns - clk0 rising@0.000ns }
+Data Path Delay     : 2.161ns (cell 0.939ns (43%), net 1.222ns (57%))
+Clock Skew          : 0.000ns
+Logic Level         : 2 ( ADDER=2 )
+Max Fanout          : 2
+Clock Uncertainty   : 0.000ns (sdc uncertainty: 0.000ns, default uncertainty: 0.000ns)
+
+Delay Type          Location             Incr           Path   Level  Netlist Info
+--------------------------------------------------------------------  ---------------
+source latency                          0.000          0.000               
+port                C4                  0.000          0.000          pin: I_sysclk
+hierarchy                               0.000          0.000          pin: I_sysclk_syn_2.ipad
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.sg09_di
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.di
+net (fo=1)                              0.000          0.000          net: I_sysclk_dup_1,  ../../uisrc/01_rtl/pll_test.v(33)
+                                                                      pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.refclk
+PLL                                     0.000          0.000          pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.clkc[0]
+net (fo=1)                              0.000          0.000          net: pll_inst/clk0_buf,  ../../uisrc/03_ip/pll/pll.v(26)
+                                                                      pin: pll_inst/bufg_feedback.clkin[0]
+GCLK                                    0.000          0.000          pin: pll_inst/bufg_feedback.clkout
+net (fo=27)                             0.000          0.000          net: pll_inst/clk0_out,  ../../uisrc/03_ip/pll/pll.v(22)
+                                                                      pin: cnt_reg[0].clk
+launch edge                             0.000    r     0.000               
+--------------------------------------------------------------------  ---------------
+SEQ (clk2q)                             0.076    f     0.076          pin: cnt_reg[0].q
+net (fo=2)                              0.478          0.554          net: cnt[0],  ../../uisrc/01_rtl/pll_test.v(37)
+                                                                      pin: add0_syn_158.id
+ADDER                                   0.290    r     0.844       1  pin: add0_syn_158.fco
+net (fo=1)                              0.000          0.844          net: add0_syn_132,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_159.fci
+ADDER                                   0.052    r     0.896          pin: add0_syn_159.fco
+net (fo=1)                              0.000          0.896          net: add0_syn_133,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_160.fci
+ADDER                                   0.052    r     0.948          pin: add0_syn_160.fco
+net (fo=1)                              0.000          0.948          net: add0_syn_134,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_161.fci
+ADDER                                   0.052    r     1.000          pin: add0_syn_161.fco
+net (fo=1)                              0.000          1.000          net: add0_syn_135,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_162.fci
+ADDER                                   0.000    f     1.000          pin: add0_syn_162.fco_f
+net (fo=1)                              0.000          1.000          net: add0_syn_188,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_163.fci_f
+ADDER                                   0.000    f     1.000          pin: add0_syn_163.fco_f
+net (fo=1)                              0.000          1.000          net: add0_syn_189,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_164.fci_f
+ADDER                                   0.000    f     1.000          pin: add0_syn_164.fco_f
+net (fo=1)                              0.000          1.000          net: add0_syn_190,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_165.fci_f
+ADDER                                   0.000    f     1.000          pin: add0_syn_165.fco_f
+net (fo=1)                              0.074          1.074          net: add0_syn_191,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_166.fci_f
+ADDER                                   0.000    f     1.074          pin: add0_syn_166.fco_f
+net (fo=1)                              0.000          1.074          net: add0_syn_192,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_167.fci_f
+ADDER                                   0.000    f     1.074          pin: add0_syn_167.fco_f
+net (fo=1)                              0.000          1.074          net: add0_syn_193,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_168.fci_f
+ADDER                                   0.000    f     1.074          pin: add0_syn_168.fco_f
+net (fo=1)                              0.000          1.074          net: add0_syn_194,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_169.fci_f
+ADDER                                   0.000    f     1.074          pin: add0_syn_169.fco_f
+net (fo=1)                              0.074          1.148          net: add0_syn_195,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_170.fci_f
+ADDER                                   0.000    f     1.148          pin: add0_syn_170.fco_f
+net (fo=1)                              0.000          1.148          net: add0_syn_196,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_171.fci_f
+ADDER                                   0.000    f     1.148          pin: add0_syn_171.fco_f
+net (fo=1)                              0.000          1.148          net: add0_syn_197,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_172.fci_f
+ADDER                                   0.000    f     1.148          pin: add0_syn_172.fco_f
+net (fo=1)                              0.000          1.148          net: add0_syn_198,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_173.fci_f
+ADDER                                   0.000    f     1.148          pin: add0_syn_173.fco_f
+net (fo=1)                              0.074          1.222          net: add0_syn_199,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_174.fci_f
+ADDER                                   0.000    f     1.222          pin: add0_syn_174.fco_f
+net (fo=1)                              0.000          1.222          net: add0_syn_200,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_175.fci_f
+ADDER                                   0.000    f     1.222          pin: add0_syn_175.fco_f
+net (fo=1)                              0.000          1.222          net: add0_syn_201,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_176.fci_f
+ADDER                                   0.000    f     1.222          pin: add0_syn_176.fco_f
+net (fo=1)                              0.000          1.222          net: add0_syn_202,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_177.fci_f
+ADDER                                   0.000    f     1.222          pin: add0_syn_177.fco_f
+net (fo=1)                              0.074          1.296          net: add0_syn_203,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_178.fci_f
+ADDER                                   0.052    r     1.348          pin: add0_syn_178.fco
+net (fo=1)                              0.000          1.348          net: add0_syn_152,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_179.fci
+ADDER                                   0.052    r     1.400          pin: add0_syn_179.fco
+net (fo=1)                              0.000          1.400          net: add0_syn_153,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_180.fci
+ADDER                                   0.052    r     1.452          pin: add0_syn_180.fco
+net (fo=1)                              0.000          1.452          net: add0_syn_154,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_181.fci
+ADDER                                   0.220    r     1.672       2  pin: add0_syn_181.ofb
+net (fo=1)                              0.448          2.120          net: cnt_b[23],  NOFILE(0)
+                                                                      pin: cnt_reg[23].d
+SEQ (reg)                               0.041    f     2.161               
+--------------------------------------------------------------------  ---------------
+Arrival                                                2.161               
+
+source latency                          0.000          0.000               
+port                C4                  0.000          0.000          pin: I_sysclk
+hierarchy                               0.000          0.000          pin: I_sysclk_syn_2.ipad
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.sg09_di
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.di
+net (fo=1)                              0.000          0.000          net: I_sysclk_dup_1,  ../../uisrc/01_rtl/pll_test.v(33)
+                                                                      pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.refclk
+PLL                                     0.000          0.000          pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.clkc[0]
+net (fo=1)                              0.000          0.000          net: pll_inst/clk0_buf,  ../../uisrc/03_ip/pll/pll.v(26)
+                                                                      pin: pll_inst/bufg_feedback.clkin[0]
+GCLK                                    0.000          0.000          pin: pll_inst/bufg_feedback.clkout
+net (fo=27)                             0.000          0.000          net: pll_inst/clk0_out,  ../../uisrc/03_ip/pll/pll.v(22)
+                                                                      pin: cnt_reg[23].clk
+capture edge                            5.000    r     5.000               
+--------------------------------------------------------------------  ---------------
+setup                                  -0.064          4.936               
+clock uncertainty                       0.000          4.936               
+clock pessimism                         0.000          4.936               
+--------------------------------------------------------------------  ---------------
+Required                                               4.936               
+--------------------------------------------------------------------  ---------------
+Slack                                                  2.775               
+
+Slack               : 2.805ns
+Begin Point         : cnt_reg[0].clk (rising edge triggered by clock clk0  { rise@0.000000ns  fall@2.500000ns  period=5.000000 })
+End Point           : cnt_reg[25].d (rising edge triggered by clock clk0  { rise@0.000000ns  fall@2.500000ns  period=5.000000 })
+Check Type          : setup
+Process             : slow_125c
+Budget              : 5.000ns { clk0 rising@5.000ns - clk0 rising@0.000ns }
+Data Path Delay     : 2.131ns (cell 0.835ns (39%), net 1.296ns (61%))
+Clock Skew          : 0.000ns
+Logic Level         : 2 ( ADDER=2 )
+Max Fanout          : 2
+Clock Uncertainty   : 0.000ns (sdc uncertainty: 0.000ns, default uncertainty: 0.000ns)
+
+Delay Type          Location             Incr           Path   Level  Netlist Info
+--------------------------------------------------------------------  ---------------
+source latency                          0.000          0.000               
+port                C4                  0.000          0.000          pin: I_sysclk
+hierarchy                               0.000          0.000          pin: I_sysclk_syn_2.ipad
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.sg09_di
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.di
+net (fo=1)                              0.000          0.000          net: I_sysclk_dup_1,  ../../uisrc/01_rtl/pll_test.v(33)
+                                                                      pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.refclk
+PLL                                     0.000          0.000          pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.clkc[0]
+net (fo=1)                              0.000          0.000          net: pll_inst/clk0_buf,  ../../uisrc/03_ip/pll/pll.v(26)
+                                                                      pin: pll_inst/bufg_feedback.clkin[0]
+GCLK                                    0.000          0.000          pin: pll_inst/bufg_feedback.clkout
+net (fo=27)                             0.000          0.000          net: pll_inst/clk0_out,  ../../uisrc/03_ip/pll/pll.v(22)
+                                                                      pin: cnt_reg[0].clk
+launch edge                             0.000    r     0.000               
+--------------------------------------------------------------------  ---------------
+SEQ (clk2q)                             0.076    f     0.076          pin: cnt_reg[0].q
+net (fo=2)                              0.478          0.554          net: cnt[0],  ../../uisrc/01_rtl/pll_test.v(37)
+                                                                      pin: add0_syn_158.id
+ADDER                                   0.290    r     0.844       1  pin: add0_syn_158.fco
+net (fo=1)                              0.000          0.844          net: add0_syn_132,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_159.fci
+ADDER                                   0.052    r     0.896          pin: add0_syn_159.fco
+net (fo=1)                              0.000          0.896          net: add0_syn_133,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_160.fci
+ADDER                                   0.052    r     0.948          pin: add0_syn_160.fco
+net (fo=1)                              0.000          0.948          net: add0_syn_134,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_161.fci
+ADDER                                   0.052    r     1.000          pin: add0_syn_161.fco
+net (fo=1)                              0.000          1.000          net: add0_syn_135,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_162.fci
+ADDER                                   0.000    f     1.000          pin: add0_syn_162.fco_f
+net (fo=1)                              0.000          1.000          net: add0_syn_188,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_163.fci_f
+ADDER                                   0.000    f     1.000          pin: add0_syn_163.fco_f
+net (fo=1)                              0.000          1.000          net: add0_syn_189,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_164.fci_f
+ADDER                                   0.000    f     1.000          pin: add0_syn_164.fco_f
+net (fo=1)                              0.000          1.000          net: add0_syn_190,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_165.fci_f
+ADDER                                   0.000    f     1.000          pin: add0_syn_165.fco_f
+net (fo=1)                              0.074          1.074          net: add0_syn_191,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_166.fci_f
+ADDER                                   0.000    f     1.074          pin: add0_syn_166.fco_f
+net (fo=1)                              0.000          1.074          net: add0_syn_192,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_167.fci_f
+ADDER                                   0.000    f     1.074          pin: add0_syn_167.fco_f
+net (fo=1)                              0.000          1.074          net: add0_syn_193,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_168.fci_f
+ADDER                                   0.000    f     1.074          pin: add0_syn_168.fco_f
+net (fo=1)                              0.000          1.074          net: add0_syn_194,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_169.fci_f
+ADDER                                   0.000    f     1.074          pin: add0_syn_169.fco_f
+net (fo=1)                              0.074          1.148          net: add0_syn_195,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_170.fci_f
+ADDER                                   0.000    f     1.148          pin: add0_syn_170.fco_f
+net (fo=1)                              0.000          1.148          net: add0_syn_196,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_171.fci_f
+ADDER                                   0.000    f     1.148          pin: add0_syn_171.fco_f
+net (fo=1)                              0.000          1.148          net: add0_syn_197,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_172.fci_f
+ADDER                                   0.000    f     1.148          pin: add0_syn_172.fco_f
+net (fo=1)                              0.000          1.148          net: add0_syn_198,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_173.fci_f
+ADDER                                   0.000    f     1.148          pin: add0_syn_173.fco_f
+net (fo=1)                              0.074          1.222          net: add0_syn_199,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_174.fci_f
+ADDER                                   0.000    f     1.222          pin: add0_syn_174.fco_f
+net (fo=1)                              0.000          1.222          net: add0_syn_200,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_175.fci_f
+ADDER                                   0.000    f     1.222          pin: add0_syn_175.fco_f
+net (fo=1)                              0.000          1.222          net: add0_syn_201,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_176.fci_f
+ADDER                                   0.000    f     1.222          pin: add0_syn_176.fco_f
+net (fo=1)                              0.000          1.222          net: add0_syn_202,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_177.fci_f
+ADDER                                   0.000    f     1.222          pin: add0_syn_177.fco_f
+net (fo=1)                              0.074          1.296          net: add0_syn_203,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_178.fci_f
+ADDER                                   0.000    f     1.296          pin: add0_syn_178.fco_f
+net (fo=1)                              0.000          1.296          net: add0_syn_204,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_179.fci_f
+ADDER                                   0.000    f     1.296          pin: add0_syn_179.fco_f
+net (fo=1)                              0.000          1.296          net: add0_syn_205,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_180.fci_f
+ADDER                                   0.000    f     1.296          pin: add0_syn_180.fco_f
+net (fo=1)                              0.000          1.296          net: add0_syn_206,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_181.fci_f
+ADDER                                   0.000    f     1.296          pin: add0_syn_181.fco_f
+net (fo=1)                              0.074          1.370          net: add0_syn_207,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_182.fci_f
+ADDER                                   0.052    r     1.422          pin: add0_syn_182.fco
+net (fo=1)                              0.000          1.422          net: add0_syn_156,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_183.fci
+ADDER                                   0.220    r     1.642       2  pin: add0_syn_183.ofb
+net (fo=1)                              0.448          2.090          net: cnt_b[25],  NOFILE(0)
+                                                                      pin: cnt_reg[25].d
+SEQ (reg)                               0.041    f     2.131               
+--------------------------------------------------------------------  ---------------
+Arrival                                                2.131               
+
+source latency                          0.000          0.000               
+port                C4                  0.000          0.000          pin: I_sysclk
+hierarchy                               0.000          0.000          pin: I_sysclk_syn_2.ipad
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.sg09_di
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.di
+net (fo=1)                              0.000          0.000          net: I_sysclk_dup_1,  ../../uisrc/01_rtl/pll_test.v(33)
+                                                                      pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.refclk
+PLL                                     0.000          0.000          pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.clkc[0]
+net (fo=1)                              0.000          0.000          net: pll_inst/clk0_buf,  ../../uisrc/03_ip/pll/pll.v(26)
+                                                                      pin: pll_inst/bufg_feedback.clkin[0]
+GCLK                                    0.000          0.000          pin: pll_inst/bufg_feedback.clkout
+net (fo=27)                             0.000          0.000          net: pll_inst/clk0_out,  ../../uisrc/03_ip/pll/pll.v(22)
+                                                                      pin: cnt_reg[25].clk
+capture edge                            5.000    r     5.000               
+--------------------------------------------------------------------  ---------------
+setup                                  -0.064          4.936               
+clock uncertainty                       0.000          4.936               
+clock pessimism                         0.000          4.936               
+--------------------------------------------------------------------  ---------------
+Required                                               4.936               
+--------------------------------------------------------------------  ---------------
+Slack                                                  2.805               
+
+Slack               : 2.827ns
+Begin Point         : cnt_reg[0].clk (rising edge triggered by clock clk0  { rise@0.000000ns  fall@2.500000ns  period=5.000000 })
+End Point           : cnt_reg[22].d (rising edge triggered by clock clk0  { rise@0.000000ns  fall@2.500000ns  period=5.000000 })
+Check Type          : setup
+Process             : slow_125c
+Budget              : 5.000ns { clk0 rising@5.000ns - clk0 rising@0.000ns }
+Data Path Delay     : 2.109ns (cell 0.887ns (42%), net 1.222ns (58%))
+Clock Skew          : 0.000ns
+Logic Level         : 2 ( ADDER=2 )
+Max Fanout          : 2
+Clock Uncertainty   : 0.000ns (sdc uncertainty: 0.000ns, default uncertainty: 0.000ns)
+
+Delay Type          Location             Incr           Path   Level  Netlist Info
+--------------------------------------------------------------------  ---------------
+source latency                          0.000          0.000               
+port                C4                  0.000          0.000          pin: I_sysclk
+hierarchy                               0.000          0.000          pin: I_sysclk_syn_2.ipad
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.sg09_di
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.di
+net (fo=1)                              0.000          0.000          net: I_sysclk_dup_1,  ../../uisrc/01_rtl/pll_test.v(33)
+                                                                      pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.refclk
+PLL                                     0.000          0.000          pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.clkc[0]
+net (fo=1)                              0.000          0.000          net: pll_inst/clk0_buf,  ../../uisrc/03_ip/pll/pll.v(26)
+                                                                      pin: pll_inst/bufg_feedback.clkin[0]
+GCLK                                    0.000          0.000          pin: pll_inst/bufg_feedback.clkout
+net (fo=27)                             0.000          0.000          net: pll_inst/clk0_out,  ../../uisrc/03_ip/pll/pll.v(22)
+                                                                      pin: cnt_reg[0].clk
+launch edge                             0.000    r     0.000               
+--------------------------------------------------------------------  ---------------
+SEQ (clk2q)                             0.076    f     0.076          pin: cnt_reg[0].q
+net (fo=2)                              0.478          0.554          net: cnt[0],  ../../uisrc/01_rtl/pll_test.v(37)
+                                                                      pin: add0_syn_158.id
+ADDER                                   0.290    r     0.844       1  pin: add0_syn_158.fco
+net (fo=1)                              0.000          0.844          net: add0_syn_132,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_159.fci
+ADDER                                   0.052    r     0.896          pin: add0_syn_159.fco
+net (fo=1)                              0.000          0.896          net: add0_syn_133,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_160.fci
+ADDER                                   0.052    r     0.948          pin: add0_syn_160.fco
+net (fo=1)                              0.000          0.948          net: add0_syn_134,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_161.fci
+ADDER                                   0.052    r     1.000          pin: add0_syn_161.fco
+net (fo=1)                              0.000          1.000          net: add0_syn_135,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_162.fci
+ADDER                                   0.000    f     1.000          pin: add0_syn_162.fco_f
+net (fo=1)                              0.000          1.000          net: add0_syn_188,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_163.fci_f
+ADDER                                   0.000    f     1.000          pin: add0_syn_163.fco_f
+net (fo=1)                              0.000          1.000          net: add0_syn_189,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_164.fci_f
+ADDER                                   0.000    f     1.000          pin: add0_syn_164.fco_f
+net (fo=1)                              0.000          1.000          net: add0_syn_190,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_165.fci_f
+ADDER                                   0.000    f     1.000          pin: add0_syn_165.fco_f
+net (fo=1)                              0.074          1.074          net: add0_syn_191,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_166.fci_f
+ADDER                                   0.000    f     1.074          pin: add0_syn_166.fco_f
+net (fo=1)                              0.000          1.074          net: add0_syn_192,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_167.fci_f
+ADDER                                   0.000    f     1.074          pin: add0_syn_167.fco_f
+net (fo=1)                              0.000          1.074          net: add0_syn_193,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_168.fci_f
+ADDER                                   0.000    f     1.074          pin: add0_syn_168.fco_f
+net (fo=1)                              0.000          1.074          net: add0_syn_194,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_169.fci_f
+ADDER                                   0.000    f     1.074          pin: add0_syn_169.fco_f
+net (fo=1)                              0.074          1.148          net: add0_syn_195,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_170.fci_f
+ADDER                                   0.000    f     1.148          pin: add0_syn_170.fco_f
+net (fo=1)                              0.000          1.148          net: add0_syn_196,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_171.fci_f
+ADDER                                   0.000    f     1.148          pin: add0_syn_171.fco_f
+net (fo=1)                              0.000          1.148          net: add0_syn_197,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_172.fci_f
+ADDER                                   0.000    f     1.148          pin: add0_syn_172.fco_f
+net (fo=1)                              0.000          1.148          net: add0_syn_198,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_173.fci_f
+ADDER                                   0.000    f     1.148          pin: add0_syn_173.fco_f
+net (fo=1)                              0.074          1.222          net: add0_syn_199,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_174.fci_f
+ADDER                                   0.000    f     1.222          pin: add0_syn_174.fco_f
+net (fo=1)                              0.000          1.222          net: add0_syn_200,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_175.fci_f
+ADDER                                   0.000    f     1.222          pin: add0_syn_175.fco_f
+net (fo=1)                              0.000          1.222          net: add0_syn_201,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_176.fci_f
+ADDER                                   0.000    f     1.222          pin: add0_syn_176.fco_f
+net (fo=1)                              0.000          1.222          net: add0_syn_202,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_177.fci_f
+ADDER                                   0.000    f     1.222          pin: add0_syn_177.fco_f
+net (fo=1)                              0.074          1.296          net: add0_syn_203,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_178.fci_f
+ADDER                                   0.052    r     1.348          pin: add0_syn_178.fco
+net (fo=1)                              0.000          1.348          net: add0_syn_152,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_179.fci
+ADDER                                   0.052    r     1.400          pin: add0_syn_179.fco
+net (fo=1)                              0.000          1.400          net: add0_syn_153,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_180.fci
+ADDER                                   0.220    r     1.620       2  pin: add0_syn_180.ofb
+net (fo=1)                              0.448          2.068          net: cnt_b[22],  NOFILE(0)
+                                                                      pin: cnt_reg[22].d
+SEQ (reg)                               0.041    f     2.109               
+--------------------------------------------------------------------  ---------------
+Arrival                                                2.109               
+
+source latency                          0.000          0.000               
+port                C4                  0.000          0.000          pin: I_sysclk
+hierarchy                               0.000          0.000          pin: I_sysclk_syn_2.ipad
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.sg09_di
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.di
+net (fo=1)                              0.000          0.000          net: I_sysclk_dup_1,  ../../uisrc/01_rtl/pll_test.v(33)
+                                                                      pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.refclk
+PLL                                     0.000          0.000          pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.clkc[0]
+net (fo=1)                              0.000          0.000          net: pll_inst/clk0_buf,  ../../uisrc/03_ip/pll/pll.v(26)
+                                                                      pin: pll_inst/bufg_feedback.clkin[0]
+GCLK                                    0.000          0.000          pin: pll_inst/bufg_feedback.clkout
+net (fo=27)                             0.000          0.000          net: pll_inst/clk0_out,  ../../uisrc/03_ip/pll/pll.v(22)
+                                                                      pin: cnt_reg[22].clk
+capture edge                            5.000    r     5.000               
+--------------------------------------------------------------------  ---------------
+setup                                  -0.064          4.936               
+clock uncertainty                       0.000          4.936               
+clock pessimism                         0.000          4.936               
+--------------------------------------------------------------------  ---------------
+Required                                               4.936               
+--------------------------------------------------------------------  ---------------
+Slack                                                  2.827               
+
+Slack               : 2.849ns
+Begin Point         : cnt_reg[0].clk (rising edge triggered by clock clk0  { rise@0.000000ns  fall@2.500000ns  period=5.000000 })
+End Point           : cnt_reg[19].d (rising edge triggered by clock clk0  { rise@0.000000ns  fall@2.500000ns  period=5.000000 })
+Check Type          : setup
+Process             : slow_125c
+Budget              : 5.000ns { clk0 rising@5.000ns - clk0 rising@0.000ns }
+Data Path Delay     : 2.087ns (cell 0.939ns (44%), net 1.148ns (56%))
+Clock Skew          : 0.000ns
+Logic Level         : 2 ( ADDER=2 )
+Max Fanout          : 2
+Clock Uncertainty   : 0.000ns (sdc uncertainty: 0.000ns, default uncertainty: 0.000ns)
+
+Delay Type          Location             Incr           Path   Level  Netlist Info
+--------------------------------------------------------------------  ---------------
+source latency                          0.000          0.000               
+port                C4                  0.000          0.000          pin: I_sysclk
+hierarchy                               0.000          0.000          pin: I_sysclk_syn_2.ipad
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.sg09_di
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.di
+net (fo=1)                              0.000          0.000          net: I_sysclk_dup_1,  ../../uisrc/01_rtl/pll_test.v(33)
+                                                                      pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.refclk
+PLL                                     0.000          0.000          pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.clkc[0]
+net (fo=1)                              0.000          0.000          net: pll_inst/clk0_buf,  ../../uisrc/03_ip/pll/pll.v(26)
+                                                                      pin: pll_inst/bufg_feedback.clkin[0]
+GCLK                                    0.000          0.000          pin: pll_inst/bufg_feedback.clkout
+net (fo=27)                             0.000          0.000          net: pll_inst/clk0_out,  ../../uisrc/03_ip/pll/pll.v(22)
+                                                                      pin: cnt_reg[0].clk
+launch edge                             0.000    r     0.000               
+--------------------------------------------------------------------  ---------------
+SEQ (clk2q)                             0.076    f     0.076          pin: cnt_reg[0].q
+net (fo=2)                              0.478          0.554          net: cnt[0],  ../../uisrc/01_rtl/pll_test.v(37)
+                                                                      pin: add0_syn_158.id
+ADDER                                   0.290    r     0.844       1  pin: add0_syn_158.fco
+net (fo=1)                              0.000          0.844          net: add0_syn_132,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_159.fci
+ADDER                                   0.052    r     0.896          pin: add0_syn_159.fco
+net (fo=1)                              0.000          0.896          net: add0_syn_133,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_160.fci
+ADDER                                   0.052    r     0.948          pin: add0_syn_160.fco
+net (fo=1)                              0.000          0.948          net: add0_syn_134,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_161.fci
+ADDER                                   0.052    r     1.000          pin: add0_syn_161.fco
+net (fo=1)                              0.000          1.000          net: add0_syn_135,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_162.fci
+ADDER                                   0.000    f     1.000          pin: add0_syn_162.fco_f
+net (fo=1)                              0.000          1.000          net: add0_syn_188,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_163.fci_f
+ADDER                                   0.000    f     1.000          pin: add0_syn_163.fco_f
+net (fo=1)                              0.000          1.000          net: add0_syn_189,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_164.fci_f
+ADDER                                   0.000    f     1.000          pin: add0_syn_164.fco_f
+net (fo=1)                              0.000          1.000          net: add0_syn_190,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_165.fci_f
+ADDER                                   0.000    f     1.000          pin: add0_syn_165.fco_f
+net (fo=1)                              0.074          1.074          net: add0_syn_191,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_166.fci_f
+ADDER                                   0.000    f     1.074          pin: add0_syn_166.fco_f
+net (fo=1)                              0.000          1.074          net: add0_syn_192,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_167.fci_f
+ADDER                                   0.000    f     1.074          pin: add0_syn_167.fco_f
+net (fo=1)                              0.000          1.074          net: add0_syn_193,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_168.fci_f
+ADDER                                   0.000    f     1.074          pin: add0_syn_168.fco_f
+net (fo=1)                              0.000          1.074          net: add0_syn_194,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_169.fci_f
+ADDER                                   0.000    f     1.074          pin: add0_syn_169.fco_f
+net (fo=1)                              0.074          1.148          net: add0_syn_195,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_170.fci_f
+ADDER                                   0.000    f     1.148          pin: add0_syn_170.fco_f
+net (fo=1)                              0.000          1.148          net: add0_syn_196,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_171.fci_f
+ADDER                                   0.000    f     1.148          pin: add0_syn_171.fco_f
+net (fo=1)                              0.000          1.148          net: add0_syn_197,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_172.fci_f
+ADDER                                   0.000    f     1.148          pin: add0_syn_172.fco_f
+net (fo=1)                              0.000          1.148          net: add0_syn_198,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_173.fci_f
+ADDER                                   0.000    f     1.148          pin: add0_syn_173.fco_f
+net (fo=1)                              0.074          1.222          net: add0_syn_199,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_174.fci_f
+ADDER                                   0.052    r     1.274          pin: add0_syn_174.fco
+net (fo=1)                              0.000          1.274          net: add0_syn_148,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_175.fci
+ADDER                                   0.052    r     1.326          pin: add0_syn_175.fco
+net (fo=1)                              0.000          1.326          net: add0_syn_149,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_176.fci
+ADDER                                   0.052    r     1.378          pin: add0_syn_176.fco
+net (fo=1)                              0.000          1.378          net: add0_syn_150,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_177.fci
+ADDER                                   0.220    r     1.598       2  pin: add0_syn_177.ofb
+net (fo=1)                              0.448          2.046          net: cnt_b[19],  NOFILE(0)
+                                                                      pin: cnt_reg[19].d
+SEQ (reg)                               0.041    f     2.087               
+--------------------------------------------------------------------  ---------------
+Arrival                                                2.087               
+
+source latency                          0.000          0.000               
+port                C4                  0.000          0.000          pin: I_sysclk
+hierarchy                               0.000          0.000          pin: I_sysclk_syn_2.ipad
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.sg09_di
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.di
+net (fo=1)                              0.000          0.000          net: I_sysclk_dup_1,  ../../uisrc/01_rtl/pll_test.v(33)
+                                                                      pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.refclk
+PLL                                     0.000          0.000          pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.clkc[0]
+net (fo=1)                              0.000          0.000          net: pll_inst/clk0_buf,  ../../uisrc/03_ip/pll/pll.v(26)
+                                                                      pin: pll_inst/bufg_feedback.clkin[0]
+GCLK                                    0.000          0.000          pin: pll_inst/bufg_feedback.clkout
+net (fo=27)                             0.000          0.000          net: pll_inst/clk0_out,  ../../uisrc/03_ip/pll/pll.v(22)
+                                                                      pin: cnt_reg[19].clk
+capture edge                            5.000    r     5.000               
+--------------------------------------------------------------------  ---------------
+setup                                  -0.064          4.936               
+clock uncertainty                       0.000          4.936               
+clock pessimism                         0.000          4.936               
+--------------------------------------------------------------------  ---------------
+Required                                               4.936               
+--------------------------------------------------------------------  ---------------
+Slack                                                  2.849               
+
+Slack               : 2.857ns
+Begin Point         : cnt_reg[0].clk (rising edge triggered by clock clk0  { rise@0.000000ns  fall@2.500000ns  period=5.000000 })
+End Point           : cnt_reg[24].d (rising edge triggered by clock clk0  { rise@0.000000ns  fall@2.500000ns  period=5.000000 })
+Check Type          : setup
+Process             : slow_125c
+Budget              : 5.000ns { clk0 rising@5.000ns - clk0 rising@0.000ns }
+Data Path Delay     : 2.079ns (cell 0.783ns (37%), net 1.296ns (63%))
+Clock Skew          : 0.000ns
+Logic Level         : 2 ( ADDER=2 )
+Max Fanout          : 2
+Clock Uncertainty   : 0.000ns (sdc uncertainty: 0.000ns, default uncertainty: 0.000ns)
+
+Delay Type          Location             Incr           Path   Level  Netlist Info
+--------------------------------------------------------------------  ---------------
+source latency                          0.000          0.000               
+port                C4                  0.000          0.000          pin: I_sysclk
+hierarchy                               0.000          0.000          pin: I_sysclk_syn_2.ipad
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.sg09_di
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.di
+net (fo=1)                              0.000          0.000          net: I_sysclk_dup_1,  ../../uisrc/01_rtl/pll_test.v(33)
+                                                                      pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.refclk
+PLL                                     0.000          0.000          pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.clkc[0]
+net (fo=1)                              0.000          0.000          net: pll_inst/clk0_buf,  ../../uisrc/03_ip/pll/pll.v(26)
+                                                                      pin: pll_inst/bufg_feedback.clkin[0]
+GCLK                                    0.000          0.000          pin: pll_inst/bufg_feedback.clkout
+net (fo=27)                             0.000          0.000          net: pll_inst/clk0_out,  ../../uisrc/03_ip/pll/pll.v(22)
+                                                                      pin: cnt_reg[0].clk
+launch edge                             0.000    r     0.000               
+--------------------------------------------------------------------  ---------------
+SEQ (clk2q)                             0.076    f     0.076          pin: cnt_reg[0].q
+net (fo=2)                              0.478          0.554          net: cnt[0],  ../../uisrc/01_rtl/pll_test.v(37)
+                                                                      pin: add0_syn_158.id
+ADDER                                   0.290    r     0.844       1  pin: add0_syn_158.fco
+net (fo=1)                              0.000          0.844          net: add0_syn_132,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_159.fci
+ADDER                                   0.052    r     0.896          pin: add0_syn_159.fco
+net (fo=1)                              0.000          0.896          net: add0_syn_133,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_160.fci
+ADDER                                   0.052    r     0.948          pin: add0_syn_160.fco
+net (fo=1)                              0.000          0.948          net: add0_syn_134,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_161.fci
+ADDER                                   0.052    r     1.000          pin: add0_syn_161.fco
+net (fo=1)                              0.000          1.000          net: add0_syn_135,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_162.fci
+ADDER                                   0.000    f     1.000          pin: add0_syn_162.fco_f
+net (fo=1)                              0.000          1.000          net: add0_syn_188,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_163.fci_f
+ADDER                                   0.000    f     1.000          pin: add0_syn_163.fco_f
+net (fo=1)                              0.000          1.000          net: add0_syn_189,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_164.fci_f
+ADDER                                   0.000    f     1.000          pin: add0_syn_164.fco_f
+net (fo=1)                              0.000          1.000          net: add0_syn_190,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_165.fci_f
+ADDER                                   0.000    f     1.000          pin: add0_syn_165.fco_f
+net (fo=1)                              0.074          1.074          net: add0_syn_191,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_166.fci_f
+ADDER                                   0.000    f     1.074          pin: add0_syn_166.fco_f
+net (fo=1)                              0.000          1.074          net: add0_syn_192,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_167.fci_f
+ADDER                                   0.000    f     1.074          pin: add0_syn_167.fco_f
+net (fo=1)                              0.000          1.074          net: add0_syn_193,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_168.fci_f
+ADDER                                   0.000    f     1.074          pin: add0_syn_168.fco_f
+net (fo=1)                              0.000          1.074          net: add0_syn_194,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_169.fci_f
+ADDER                                   0.000    f     1.074          pin: add0_syn_169.fco_f
+net (fo=1)                              0.074          1.148          net: add0_syn_195,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_170.fci_f
+ADDER                                   0.000    f     1.148          pin: add0_syn_170.fco_f
+net (fo=1)                              0.000          1.148          net: add0_syn_196,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_171.fci_f
+ADDER                                   0.000    f     1.148          pin: add0_syn_171.fco_f
+net (fo=1)                              0.000          1.148          net: add0_syn_197,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_172.fci_f
+ADDER                                   0.000    f     1.148          pin: add0_syn_172.fco_f
+net (fo=1)                              0.000          1.148          net: add0_syn_198,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_173.fci_f
+ADDER                                   0.000    f     1.148          pin: add0_syn_173.fco_f
+net (fo=1)                              0.074          1.222          net: add0_syn_199,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_174.fci_f
+ADDER                                   0.000    f     1.222          pin: add0_syn_174.fco_f
+net (fo=1)                              0.000          1.222          net: add0_syn_200,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_175.fci_f
+ADDER                                   0.000    f     1.222          pin: add0_syn_175.fco_f
+net (fo=1)                              0.000          1.222          net: add0_syn_201,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_176.fci_f
+ADDER                                   0.000    f     1.222          pin: add0_syn_176.fco_f
+net (fo=1)                              0.000          1.222          net: add0_syn_202,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_177.fci_f
+ADDER                                   0.000    f     1.222          pin: add0_syn_177.fco_f
+net (fo=1)                              0.074          1.296          net: add0_syn_203,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_178.fci_f
+ADDER                                   0.000    f     1.296          pin: add0_syn_178.fco_f
+net (fo=1)                              0.000          1.296          net: add0_syn_204,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_179.fci_f
+ADDER                                   0.000    f     1.296          pin: add0_syn_179.fco_f
+net (fo=1)                              0.000          1.296          net: add0_syn_205,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_180.fci_f
+ADDER                                   0.000    f     1.296          pin: add0_syn_180.fco_f
+net (fo=1)                              0.000          1.296          net: add0_syn_206,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_181.fci_f
+ADDER                                   0.000    f     1.296          pin: add0_syn_181.fco_f
+net (fo=1)                              0.074          1.370          net: add0_syn_207,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_182.fci_f
+ADDER                                   0.220    r     1.590       2  pin: add0_syn_182.ofb
+net (fo=1)                              0.448          2.038          net: cnt_b[24],  NOFILE(0)
+                                                                      pin: cnt_reg[24].d
+SEQ (reg)                               0.041    f     2.079               
+--------------------------------------------------------------------  ---------------
+Arrival                                                2.079               
+
+source latency                          0.000          0.000               
+port                C4                  0.000          0.000          pin: I_sysclk
+hierarchy                               0.000          0.000          pin: I_sysclk_syn_2.ipad
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.sg09_di
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.di
+net (fo=1)                              0.000          0.000          net: I_sysclk_dup_1,  ../../uisrc/01_rtl/pll_test.v(33)
+                                                                      pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.refclk
+PLL                                     0.000          0.000          pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.clkc[0]
+net (fo=1)                              0.000          0.000          net: pll_inst/clk0_buf,  ../../uisrc/03_ip/pll/pll.v(26)
+                                                                      pin: pll_inst/bufg_feedback.clkin[0]
+GCLK                                    0.000          0.000          pin: pll_inst/bufg_feedback.clkout
+net (fo=27)                             0.000          0.000          net: pll_inst/clk0_out,  ../../uisrc/03_ip/pll/pll.v(22)
+                                                                      pin: cnt_reg[24].clk
+capture edge                            5.000    r     5.000               
+--------------------------------------------------------------------  ---------------
+setup                                  -0.064          4.936               
+clock uncertainty                       0.000          4.936               
+clock pessimism                         0.000          4.936               
+--------------------------------------------------------------------  ---------------
+Required                                               4.936               
+--------------------------------------------------------------------  ---------------
+Slack                                                  2.857               
+
+Slack               : 2.879ns
+Begin Point         : cnt_reg[0].clk (rising edge triggered by clock clk0  { rise@0.000000ns  fall@2.500000ns  period=5.000000 })
+End Point           : cnt_reg[21].d (rising edge triggered by clock clk0  { rise@0.000000ns  fall@2.500000ns  period=5.000000 })
+Check Type          : setup
+Process             : slow_125c
+Budget              : 5.000ns { clk0 rising@5.000ns - clk0 rising@0.000ns }
+Data Path Delay     : 2.057ns (cell 0.835ns (40%), net 1.222ns (60%))
+Clock Skew          : 0.000ns
+Logic Level         : 2 ( ADDER=2 )
+Max Fanout          : 2
+Clock Uncertainty   : 0.000ns (sdc uncertainty: 0.000ns, default uncertainty: 0.000ns)
+
+Delay Type          Location             Incr           Path   Level  Netlist Info
+--------------------------------------------------------------------  ---------------
+source latency                          0.000          0.000               
+port                C4                  0.000          0.000          pin: I_sysclk
+hierarchy                               0.000          0.000          pin: I_sysclk_syn_2.ipad
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.sg09_di
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.di
+net (fo=1)                              0.000          0.000          net: I_sysclk_dup_1,  ../../uisrc/01_rtl/pll_test.v(33)
+                                                                      pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.refclk
+PLL                                     0.000          0.000          pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.clkc[0]
+net (fo=1)                              0.000          0.000          net: pll_inst/clk0_buf,  ../../uisrc/03_ip/pll/pll.v(26)
+                                                                      pin: pll_inst/bufg_feedback.clkin[0]
+GCLK                                    0.000          0.000          pin: pll_inst/bufg_feedback.clkout
+net (fo=27)                             0.000          0.000          net: pll_inst/clk0_out,  ../../uisrc/03_ip/pll/pll.v(22)
+                                                                      pin: cnt_reg[0].clk
+launch edge                             0.000    r     0.000               
+--------------------------------------------------------------------  ---------------
+SEQ (clk2q)                             0.076    f     0.076          pin: cnt_reg[0].q
+net (fo=2)                              0.478          0.554          net: cnt[0],  ../../uisrc/01_rtl/pll_test.v(37)
+                                                                      pin: add0_syn_158.id
+ADDER                                   0.290    r     0.844       1  pin: add0_syn_158.fco
+net (fo=1)                              0.000          0.844          net: add0_syn_132,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_159.fci
+ADDER                                   0.052    r     0.896          pin: add0_syn_159.fco
+net (fo=1)                              0.000          0.896          net: add0_syn_133,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_160.fci
+ADDER                                   0.052    r     0.948          pin: add0_syn_160.fco
+net (fo=1)                              0.000          0.948          net: add0_syn_134,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_161.fci
+ADDER                                   0.052    r     1.000          pin: add0_syn_161.fco
+net (fo=1)                              0.000          1.000          net: add0_syn_135,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_162.fci
+ADDER                                   0.000    f     1.000          pin: add0_syn_162.fco_f
+net (fo=1)                              0.000          1.000          net: add0_syn_188,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_163.fci_f
+ADDER                                   0.000    f     1.000          pin: add0_syn_163.fco_f
+net (fo=1)                              0.000          1.000          net: add0_syn_189,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_164.fci_f
+ADDER                                   0.000    f     1.000          pin: add0_syn_164.fco_f
+net (fo=1)                              0.000          1.000          net: add0_syn_190,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_165.fci_f
+ADDER                                   0.000    f     1.000          pin: add0_syn_165.fco_f
+net (fo=1)                              0.074          1.074          net: add0_syn_191,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_166.fci_f
+ADDER                                   0.000    f     1.074          pin: add0_syn_166.fco_f
+net (fo=1)                              0.000          1.074          net: add0_syn_192,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_167.fci_f
+ADDER                                   0.000    f     1.074          pin: add0_syn_167.fco_f
+net (fo=1)                              0.000          1.074          net: add0_syn_193,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_168.fci_f
+ADDER                                   0.000    f     1.074          pin: add0_syn_168.fco_f
+net (fo=1)                              0.000          1.074          net: add0_syn_194,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_169.fci_f
+ADDER                                   0.000    f     1.074          pin: add0_syn_169.fco_f
+net (fo=1)                              0.074          1.148          net: add0_syn_195,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_170.fci_f
+ADDER                                   0.000    f     1.148          pin: add0_syn_170.fco_f
+net (fo=1)                              0.000          1.148          net: add0_syn_196,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_171.fci_f
+ADDER                                   0.000    f     1.148          pin: add0_syn_171.fco_f
+net (fo=1)                              0.000          1.148          net: add0_syn_197,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_172.fci_f
+ADDER                                   0.000    f     1.148          pin: add0_syn_172.fco_f
+net (fo=1)                              0.000          1.148          net: add0_syn_198,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_173.fci_f
+ADDER                                   0.000    f     1.148          pin: add0_syn_173.fco_f
+net (fo=1)                              0.074          1.222          net: add0_syn_199,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_174.fci_f
+ADDER                                   0.000    f     1.222          pin: add0_syn_174.fco_f
+net (fo=1)                              0.000          1.222          net: add0_syn_200,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_175.fci_f
+ADDER                                   0.000    f     1.222          pin: add0_syn_175.fco_f
+net (fo=1)                              0.000          1.222          net: add0_syn_201,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_176.fci_f
+ADDER                                   0.000    f     1.222          pin: add0_syn_176.fco_f
+net (fo=1)                              0.000          1.222          net: add0_syn_202,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_177.fci_f
+ADDER                                   0.000    f     1.222          pin: add0_syn_177.fco_f
+net (fo=1)                              0.074          1.296          net: add0_syn_203,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_178.fci_f
+ADDER                                   0.052    r     1.348          pin: add0_syn_178.fco
+net (fo=1)                              0.000          1.348          net: add0_syn_152,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_179.fci
+ADDER                                   0.220    r     1.568       2  pin: add0_syn_179.ofb
+net (fo=1)                              0.448          2.016          net: cnt_b[21],  NOFILE(0)
+                                                                      pin: cnt_reg[21].d
+SEQ (reg)                               0.041    f     2.057               
+--------------------------------------------------------------------  ---------------
+Arrival                                                2.057               
+
+source latency                          0.000          0.000               
+port                C4                  0.000          0.000          pin: I_sysclk
+hierarchy                               0.000          0.000          pin: I_sysclk_syn_2.ipad
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.sg09_di
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.di
+net (fo=1)                              0.000          0.000          net: I_sysclk_dup_1,  ../../uisrc/01_rtl/pll_test.v(33)
+                                                                      pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.refclk
+PLL                                     0.000          0.000          pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.clkc[0]
+net (fo=1)                              0.000          0.000          net: pll_inst/clk0_buf,  ../../uisrc/03_ip/pll/pll.v(26)
+                                                                      pin: pll_inst/bufg_feedback.clkin[0]
+GCLK                                    0.000          0.000          pin: pll_inst/bufg_feedback.clkout
+net (fo=27)                             0.000          0.000          net: pll_inst/clk0_out,  ../../uisrc/03_ip/pll/pll.v(22)
+                                                                      pin: cnt_reg[21].clk
+capture edge                            5.000    r     5.000               
+--------------------------------------------------------------------  ---------------
+setup                                  -0.064          4.936               
+clock uncertainty                       0.000          4.936               
+clock pessimism                         0.000          4.936               
+--------------------------------------------------------------------  ---------------
+Required                                               4.936               
+--------------------------------------------------------------------  ---------------
+Slack                                                  2.879               
+
+Slack               : 2.901ns
+Begin Point         : cnt_reg[0].clk (rising edge triggered by clock clk0  { rise@0.000000ns  fall@2.500000ns  period=5.000000 })
+End Point           : cnt_reg[18].d (rising edge triggered by clock clk0  { rise@0.000000ns  fall@2.500000ns  period=5.000000 })
+Check Type          : setup
+Process             : slow_125c
+Budget              : 5.000ns { clk0 rising@5.000ns - clk0 rising@0.000ns }
+Data Path Delay     : 2.035ns (cell 0.887ns (43%), net 1.148ns (57%))
+Clock Skew          : 0.000ns
+Logic Level         : 2 ( ADDER=2 )
+Max Fanout          : 2
+Clock Uncertainty   : 0.000ns (sdc uncertainty: 0.000ns, default uncertainty: 0.000ns)
+
+Delay Type          Location             Incr           Path   Level  Netlist Info
+--------------------------------------------------------------------  ---------------
+source latency                          0.000          0.000               
+port                C4                  0.000          0.000          pin: I_sysclk
+hierarchy                               0.000          0.000          pin: I_sysclk_syn_2.ipad
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.sg09_di
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.di
+net (fo=1)                              0.000          0.000          net: I_sysclk_dup_1,  ../../uisrc/01_rtl/pll_test.v(33)
+                                                                      pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.refclk
+PLL                                     0.000          0.000          pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.clkc[0]
+net (fo=1)                              0.000          0.000          net: pll_inst/clk0_buf,  ../../uisrc/03_ip/pll/pll.v(26)
+                                                                      pin: pll_inst/bufg_feedback.clkin[0]
+GCLK                                    0.000          0.000          pin: pll_inst/bufg_feedback.clkout
+net (fo=27)                             0.000          0.000          net: pll_inst/clk0_out,  ../../uisrc/03_ip/pll/pll.v(22)
+                                                                      pin: cnt_reg[0].clk
+launch edge                             0.000    r     0.000               
+--------------------------------------------------------------------  ---------------
+SEQ (clk2q)                             0.076    f     0.076          pin: cnt_reg[0].q
+net (fo=2)                              0.478          0.554          net: cnt[0],  ../../uisrc/01_rtl/pll_test.v(37)
+                                                                      pin: add0_syn_158.id
+ADDER                                   0.290    r     0.844       1  pin: add0_syn_158.fco
+net (fo=1)                              0.000          0.844          net: add0_syn_132,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_159.fci
+ADDER                                   0.052    r     0.896          pin: add0_syn_159.fco
+net (fo=1)                              0.000          0.896          net: add0_syn_133,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_160.fci
+ADDER                                   0.052    r     0.948          pin: add0_syn_160.fco
+net (fo=1)                              0.000          0.948          net: add0_syn_134,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_161.fci
+ADDER                                   0.052    r     1.000          pin: add0_syn_161.fco
+net (fo=1)                              0.000          1.000          net: add0_syn_135,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_162.fci
+ADDER                                   0.000    f     1.000          pin: add0_syn_162.fco_f
+net (fo=1)                              0.000          1.000          net: add0_syn_188,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_163.fci_f
+ADDER                                   0.000    f     1.000          pin: add0_syn_163.fco_f
+net (fo=1)                              0.000          1.000          net: add0_syn_189,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_164.fci_f
+ADDER                                   0.000    f     1.000          pin: add0_syn_164.fco_f
+net (fo=1)                              0.000          1.000          net: add0_syn_190,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_165.fci_f
+ADDER                                   0.000    f     1.000          pin: add0_syn_165.fco_f
+net (fo=1)                              0.074          1.074          net: add0_syn_191,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_166.fci_f
+ADDER                                   0.000    f     1.074          pin: add0_syn_166.fco_f
+net (fo=1)                              0.000          1.074          net: add0_syn_192,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_167.fci_f
+ADDER                                   0.000    f     1.074          pin: add0_syn_167.fco_f
+net (fo=1)                              0.000          1.074          net: add0_syn_193,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_168.fci_f
+ADDER                                   0.000    f     1.074          pin: add0_syn_168.fco_f
+net (fo=1)                              0.000          1.074          net: add0_syn_194,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_169.fci_f
+ADDER                                   0.000    f     1.074          pin: add0_syn_169.fco_f
+net (fo=1)                              0.074          1.148          net: add0_syn_195,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_170.fci_f
+ADDER                                   0.000    f     1.148          pin: add0_syn_170.fco_f
+net (fo=1)                              0.000          1.148          net: add0_syn_196,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_171.fci_f
+ADDER                                   0.000    f     1.148          pin: add0_syn_171.fco_f
+net (fo=1)                              0.000          1.148          net: add0_syn_197,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_172.fci_f
+ADDER                                   0.000    f     1.148          pin: add0_syn_172.fco_f
+net (fo=1)                              0.000          1.148          net: add0_syn_198,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_173.fci_f
+ADDER                                   0.000    f     1.148          pin: add0_syn_173.fco_f
+net (fo=1)                              0.074          1.222          net: add0_syn_199,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_174.fci_f
+ADDER                                   0.052    r     1.274          pin: add0_syn_174.fco
+net (fo=1)                              0.000          1.274          net: add0_syn_148,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_175.fci
+ADDER                                   0.052    r     1.326          pin: add0_syn_175.fco
+net (fo=1)                              0.000          1.326          net: add0_syn_149,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_176.fci
+ADDER                                   0.220    r     1.546       2  pin: add0_syn_176.ofb
+net (fo=1)                              0.448          1.994          net: cnt_b[18],  NOFILE(0)
+                                                                      pin: cnt_reg[18].d
+SEQ (reg)                               0.041    f     2.035               
+--------------------------------------------------------------------  ---------------
+Arrival                                                2.035               
+
+source latency                          0.000          0.000               
+port                C4                  0.000          0.000          pin: I_sysclk
+hierarchy                               0.000          0.000          pin: I_sysclk_syn_2.ipad
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.sg09_di
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.di
+net (fo=1)                              0.000          0.000          net: I_sysclk_dup_1,  ../../uisrc/01_rtl/pll_test.v(33)
+                                                                      pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.refclk
+PLL                                     0.000          0.000          pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.clkc[0]
+net (fo=1)                              0.000          0.000          net: pll_inst/clk0_buf,  ../../uisrc/03_ip/pll/pll.v(26)
+                                                                      pin: pll_inst/bufg_feedback.clkin[0]
+GCLK                                    0.000          0.000          pin: pll_inst/bufg_feedback.clkout
+net (fo=27)                             0.000          0.000          net: pll_inst/clk0_out,  ../../uisrc/03_ip/pll/pll.v(22)
+                                                                      pin: cnt_reg[18].clk
+capture edge                            5.000    r     5.000               
+--------------------------------------------------------------------  ---------------
+setup                                  -0.064          4.936               
+clock uncertainty                       0.000          4.936               
+clock pessimism                         0.000          4.936               
+--------------------------------------------------------------------  ---------------
+Required                                               4.936               
+--------------------------------------------------------------------  ---------------
+Slack                                                  2.901               
+
+Slack               : 2.923ns
+Begin Point         : cnt_reg[0].clk (rising edge triggered by clock clk0  { rise@0.000000ns  fall@2.500000ns  period=5.000000 })
+End Point           : cnt_reg[15].d (rising edge triggered by clock clk0  { rise@0.000000ns  fall@2.500000ns  period=5.000000 })
+Check Type          : setup
+Process             : slow_125c
+Budget              : 5.000ns { clk0 rising@5.000ns - clk0 rising@0.000ns }
+Data Path Delay     : 2.013ns (cell 0.939ns (46%), net 1.074ns (54%))
+Clock Skew          : 0.000ns
+Logic Level         : 2 ( ADDER=2 )
+Max Fanout          : 2
+Clock Uncertainty   : 0.000ns (sdc uncertainty: 0.000ns, default uncertainty: 0.000ns)
+
+Delay Type          Location             Incr           Path   Level  Netlist Info
+--------------------------------------------------------------------  ---------------
+source latency                          0.000          0.000               
+port                C4                  0.000          0.000          pin: I_sysclk
+hierarchy                               0.000          0.000          pin: I_sysclk_syn_2.ipad
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.sg09_di
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.di
+net (fo=1)                              0.000          0.000          net: I_sysclk_dup_1,  ../../uisrc/01_rtl/pll_test.v(33)
+                                                                      pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.refclk
+PLL                                     0.000          0.000          pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.clkc[0]
+net (fo=1)                              0.000          0.000          net: pll_inst/clk0_buf,  ../../uisrc/03_ip/pll/pll.v(26)
+                                                                      pin: pll_inst/bufg_feedback.clkin[0]
+GCLK                                    0.000          0.000          pin: pll_inst/bufg_feedback.clkout
+net (fo=27)                             0.000          0.000          net: pll_inst/clk0_out,  ../../uisrc/03_ip/pll/pll.v(22)
+                                                                      pin: cnt_reg[0].clk
+launch edge                             0.000    r     0.000               
+--------------------------------------------------------------------  ---------------
+SEQ (clk2q)                             0.076    f     0.076          pin: cnt_reg[0].q
+net (fo=2)                              0.478          0.554          net: cnt[0],  ../../uisrc/01_rtl/pll_test.v(37)
+                                                                      pin: add0_syn_158.id
+ADDER                                   0.290    r     0.844       1  pin: add0_syn_158.fco
+net (fo=1)                              0.000          0.844          net: add0_syn_132,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_159.fci
+ADDER                                   0.052    r     0.896          pin: add0_syn_159.fco
+net (fo=1)                              0.000          0.896          net: add0_syn_133,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_160.fci
+ADDER                                   0.052    r     0.948          pin: add0_syn_160.fco
+net (fo=1)                              0.000          0.948          net: add0_syn_134,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_161.fci
+ADDER                                   0.052    r     1.000          pin: add0_syn_161.fco
+net (fo=1)                              0.000          1.000          net: add0_syn_135,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_162.fci
+ADDER                                   0.000    f     1.000          pin: add0_syn_162.fco_f
+net (fo=1)                              0.000          1.000          net: add0_syn_188,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_163.fci_f
+ADDER                                   0.000    f     1.000          pin: add0_syn_163.fco_f
+net (fo=1)                              0.000          1.000          net: add0_syn_189,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_164.fci_f
+ADDER                                   0.000    f     1.000          pin: add0_syn_164.fco_f
+net (fo=1)                              0.000          1.000          net: add0_syn_190,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_165.fci_f
+ADDER                                   0.000    f     1.000          pin: add0_syn_165.fco_f
+net (fo=1)                              0.074          1.074          net: add0_syn_191,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_166.fci_f
+ADDER                                   0.000    f     1.074          pin: add0_syn_166.fco_f
+net (fo=1)                              0.000          1.074          net: add0_syn_192,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_167.fci_f
+ADDER                                   0.000    f     1.074          pin: add0_syn_167.fco_f
+net (fo=1)                              0.000          1.074          net: add0_syn_193,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_168.fci_f
+ADDER                                   0.000    f     1.074          pin: add0_syn_168.fco_f
+net (fo=1)                              0.000          1.074          net: add0_syn_194,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_169.fci_f
+ADDER                                   0.000    f     1.074          pin: add0_syn_169.fco_f
+net (fo=1)                              0.074          1.148          net: add0_syn_195,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_170.fci_f
+ADDER                                   0.052    r     1.200          pin: add0_syn_170.fco
+net (fo=1)                              0.000          1.200          net: add0_syn_144,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_171.fci
+ADDER                                   0.052    r     1.252          pin: add0_syn_171.fco
+net (fo=1)                              0.000          1.252          net: add0_syn_145,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_172.fci
+ADDER                                   0.052    r     1.304          pin: add0_syn_172.fco
+net (fo=1)                              0.000          1.304          net: add0_syn_146,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_173.fci
+ADDER                                   0.220    r     1.524       2  pin: add0_syn_173.ofb
+net (fo=1)                              0.448          1.972          net: cnt_b[15],  NOFILE(0)
+                                                                      pin: cnt_reg[15].d
+SEQ (reg)                               0.041    f     2.013               
+--------------------------------------------------------------------  ---------------
+Arrival                                                2.013               
+
+source latency                          0.000          0.000               
+port                C4                  0.000          0.000          pin: I_sysclk
+hierarchy                               0.000          0.000          pin: I_sysclk_syn_2.ipad
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.sg09_di
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.di
+net (fo=1)                              0.000          0.000          net: I_sysclk_dup_1,  ../../uisrc/01_rtl/pll_test.v(33)
+                                                                      pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.refclk
+PLL                                     0.000          0.000          pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.clkc[0]
+net (fo=1)                              0.000          0.000          net: pll_inst/clk0_buf,  ../../uisrc/03_ip/pll/pll.v(26)
+                                                                      pin: pll_inst/bufg_feedback.clkin[0]
+GCLK                                    0.000          0.000          pin: pll_inst/bufg_feedback.clkout
+net (fo=27)                             0.000          0.000          net: pll_inst/clk0_out,  ../../uisrc/03_ip/pll/pll.v(22)
+                                                                      pin: cnt_reg[15].clk
+capture edge                            5.000    r     5.000               
+--------------------------------------------------------------------  ---------------
+setup                                  -0.064          4.936               
+clock uncertainty                       0.000          4.936               
+clock pessimism                         0.000          4.936               
+--------------------------------------------------------------------  ---------------
+Required                                               4.936               
+--------------------------------------------------------------------  ---------------
+Slack                                                  2.923               
+
+Slack               : 2.931ns
+Begin Point         : cnt_reg[0].clk (rising edge triggered by clock clk0  { rise@0.000000ns  fall@2.500000ns  period=5.000000 })
+End Point           : cnt_reg[20].d (rising edge triggered by clock clk0  { rise@0.000000ns  fall@2.500000ns  period=5.000000 })
+Check Type          : setup
+Process             : slow_125c
+Budget              : 5.000ns { clk0 rising@5.000ns - clk0 rising@0.000ns }
+Data Path Delay     : 2.005ns (cell 0.783ns (39%), net 1.222ns (61%))
+Clock Skew          : 0.000ns
+Logic Level         : 2 ( ADDER=2 )
+Max Fanout          : 2
+Clock Uncertainty   : 0.000ns (sdc uncertainty: 0.000ns, default uncertainty: 0.000ns)
+
+Delay Type          Location             Incr           Path   Level  Netlist Info
+--------------------------------------------------------------------  ---------------
+source latency                          0.000          0.000               
+port                C4                  0.000          0.000          pin: I_sysclk
+hierarchy                               0.000          0.000          pin: I_sysclk_syn_2.ipad
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.sg09_di
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.di
+net (fo=1)                              0.000          0.000          net: I_sysclk_dup_1,  ../../uisrc/01_rtl/pll_test.v(33)
+                                                                      pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.refclk
+PLL                                     0.000          0.000          pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.clkc[0]
+net (fo=1)                              0.000          0.000          net: pll_inst/clk0_buf,  ../../uisrc/03_ip/pll/pll.v(26)
+                                                                      pin: pll_inst/bufg_feedback.clkin[0]
+GCLK                                    0.000          0.000          pin: pll_inst/bufg_feedback.clkout
+net (fo=27)                             0.000          0.000          net: pll_inst/clk0_out,  ../../uisrc/03_ip/pll/pll.v(22)
+                                                                      pin: cnt_reg[0].clk
+launch edge                             0.000    r     0.000               
+--------------------------------------------------------------------  ---------------
+SEQ (clk2q)                             0.076    f     0.076          pin: cnt_reg[0].q
+net (fo=2)                              0.478          0.554          net: cnt[0],  ../../uisrc/01_rtl/pll_test.v(37)
+                                                                      pin: add0_syn_158.id
+ADDER                                   0.290    r     0.844       1  pin: add0_syn_158.fco
+net (fo=1)                              0.000          0.844          net: add0_syn_132,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_159.fci
+ADDER                                   0.052    r     0.896          pin: add0_syn_159.fco
+net (fo=1)                              0.000          0.896          net: add0_syn_133,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_160.fci
+ADDER                                   0.052    r     0.948          pin: add0_syn_160.fco
+net (fo=1)                              0.000          0.948          net: add0_syn_134,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_161.fci
+ADDER                                   0.052    r     1.000          pin: add0_syn_161.fco
+net (fo=1)                              0.000          1.000          net: add0_syn_135,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_162.fci
+ADDER                                   0.000    f     1.000          pin: add0_syn_162.fco_f
+net (fo=1)                              0.000          1.000          net: add0_syn_188,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_163.fci_f
+ADDER                                   0.000    f     1.000          pin: add0_syn_163.fco_f
+net (fo=1)                              0.000          1.000          net: add0_syn_189,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_164.fci_f
+ADDER                                   0.000    f     1.000          pin: add0_syn_164.fco_f
+net (fo=1)                              0.000          1.000          net: add0_syn_190,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_165.fci_f
+ADDER                                   0.000    f     1.000          pin: add0_syn_165.fco_f
+net (fo=1)                              0.074          1.074          net: add0_syn_191,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_166.fci_f
+ADDER                                   0.000    f     1.074          pin: add0_syn_166.fco_f
+net (fo=1)                              0.000          1.074          net: add0_syn_192,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_167.fci_f
+ADDER                                   0.000    f     1.074          pin: add0_syn_167.fco_f
+net (fo=1)                              0.000          1.074          net: add0_syn_193,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_168.fci_f
+ADDER                                   0.000    f     1.074          pin: add0_syn_168.fco_f
+net (fo=1)                              0.000          1.074          net: add0_syn_194,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_169.fci_f
+ADDER                                   0.000    f     1.074          pin: add0_syn_169.fco_f
+net (fo=1)                              0.074          1.148          net: add0_syn_195,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_170.fci_f
+ADDER                                   0.000    f     1.148          pin: add0_syn_170.fco_f
+net (fo=1)                              0.000          1.148          net: add0_syn_196,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_171.fci_f
+ADDER                                   0.000    f     1.148          pin: add0_syn_171.fco_f
+net (fo=1)                              0.000          1.148          net: add0_syn_197,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_172.fci_f
+ADDER                                   0.000    f     1.148          pin: add0_syn_172.fco_f
+net (fo=1)                              0.000          1.148          net: add0_syn_198,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_173.fci_f
+ADDER                                   0.000    f     1.148          pin: add0_syn_173.fco_f
+net (fo=1)                              0.074          1.222          net: add0_syn_199,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_174.fci_f
+ADDER                                   0.000    f     1.222          pin: add0_syn_174.fco_f
+net (fo=1)                              0.000          1.222          net: add0_syn_200,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_175.fci_f
+ADDER                                   0.000    f     1.222          pin: add0_syn_175.fco_f
+net (fo=1)                              0.000          1.222          net: add0_syn_201,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_176.fci_f
+ADDER                                   0.000    f     1.222          pin: add0_syn_176.fco_f
+net (fo=1)                              0.000          1.222          net: add0_syn_202,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_177.fci_f
+ADDER                                   0.000    f     1.222          pin: add0_syn_177.fco_f
+net (fo=1)                              0.074          1.296          net: add0_syn_203,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_178.fci_f
+ADDER                                   0.220    r     1.516       2  pin: add0_syn_178.ofb
+net (fo=1)                              0.448          1.964          net: cnt_b[20],  NOFILE(0)
+                                                                      pin: cnt_reg[20].d
+SEQ (reg)                               0.041    f     2.005               
+--------------------------------------------------------------------  ---------------
+Arrival                                                2.005               
+
+source latency                          0.000          0.000               
+port                C4                  0.000          0.000          pin: I_sysclk
+hierarchy                               0.000          0.000          pin: I_sysclk_syn_2.ipad
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.sg09_di
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.di
+net (fo=1)                              0.000          0.000          net: I_sysclk_dup_1,  ../../uisrc/01_rtl/pll_test.v(33)
+                                                                      pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.refclk
+PLL                                     0.000          0.000          pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.clkc[0]
+net (fo=1)                              0.000          0.000          net: pll_inst/clk0_buf,  ../../uisrc/03_ip/pll/pll.v(26)
+                                                                      pin: pll_inst/bufg_feedback.clkin[0]
+GCLK                                    0.000          0.000          pin: pll_inst/bufg_feedback.clkout
+net (fo=27)                             0.000          0.000          net: pll_inst/clk0_out,  ../../uisrc/03_ip/pll/pll.v(22)
+                                                                      pin: cnt_reg[20].clk
+capture edge                            5.000    r     5.000               
+--------------------------------------------------------------------  ---------------
+setup                                  -0.064          4.936               
+clock uncertainty                       0.000          4.936               
+clock pessimism                         0.000          4.936               
+--------------------------------------------------------------------  ---------------
+Required                                               4.936               
+--------------------------------------------------------------------  ---------------
+Slack                                                  2.931               
+
+Slack               : 2.953ns
+Begin Point         : cnt_reg[0].clk (rising edge triggered by clock clk0  { rise@0.000000ns  fall@2.500000ns  period=5.000000 })
+End Point           : cnt_reg[17].d (rising edge triggered by clock clk0  { rise@0.000000ns  fall@2.500000ns  period=5.000000 })
+Check Type          : setup
+Process             : slow_125c
+Budget              : 5.000ns { clk0 rising@5.000ns - clk0 rising@0.000ns }
+Data Path Delay     : 1.983ns (cell 0.835ns (42%), net 1.148ns (58%))
+Clock Skew          : 0.000ns
+Logic Level         : 2 ( ADDER=2 )
+Max Fanout          : 2
+Clock Uncertainty   : 0.000ns (sdc uncertainty: 0.000ns, default uncertainty: 0.000ns)
+
+Delay Type          Location             Incr           Path   Level  Netlist Info
+--------------------------------------------------------------------  ---------------
+source latency                          0.000          0.000               
+port                C4                  0.000          0.000          pin: I_sysclk
+hierarchy                               0.000          0.000          pin: I_sysclk_syn_2.ipad
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.sg09_di
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.di
+net (fo=1)                              0.000          0.000          net: I_sysclk_dup_1,  ../../uisrc/01_rtl/pll_test.v(33)
+                                                                      pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.refclk
+PLL                                     0.000          0.000          pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.clkc[0]
+net (fo=1)                              0.000          0.000          net: pll_inst/clk0_buf,  ../../uisrc/03_ip/pll/pll.v(26)
+                                                                      pin: pll_inst/bufg_feedback.clkin[0]
+GCLK                                    0.000          0.000          pin: pll_inst/bufg_feedback.clkout
+net (fo=27)                             0.000          0.000          net: pll_inst/clk0_out,  ../../uisrc/03_ip/pll/pll.v(22)
+                                                                      pin: cnt_reg[0].clk
+launch edge                             0.000    r     0.000               
+--------------------------------------------------------------------  ---------------
+SEQ (clk2q)                             0.076    f     0.076          pin: cnt_reg[0].q
+net (fo=2)                              0.478          0.554          net: cnt[0],  ../../uisrc/01_rtl/pll_test.v(37)
+                                                                      pin: add0_syn_158.id
+ADDER                                   0.290    r     0.844       1  pin: add0_syn_158.fco
+net (fo=1)                              0.000          0.844          net: add0_syn_132,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_159.fci
+ADDER                                   0.052    r     0.896          pin: add0_syn_159.fco
+net (fo=1)                              0.000          0.896          net: add0_syn_133,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_160.fci
+ADDER                                   0.052    r     0.948          pin: add0_syn_160.fco
+net (fo=1)                              0.000          0.948          net: add0_syn_134,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_161.fci
+ADDER                                   0.052    r     1.000          pin: add0_syn_161.fco
+net (fo=1)                              0.000          1.000          net: add0_syn_135,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_162.fci
+ADDER                                   0.000    f     1.000          pin: add0_syn_162.fco_f
+net (fo=1)                              0.000          1.000          net: add0_syn_188,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_163.fci_f
+ADDER                                   0.000    f     1.000          pin: add0_syn_163.fco_f
+net (fo=1)                              0.000          1.000          net: add0_syn_189,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_164.fci_f
+ADDER                                   0.000    f     1.000          pin: add0_syn_164.fco_f
+net (fo=1)                              0.000          1.000          net: add0_syn_190,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_165.fci_f
+ADDER                                   0.000    f     1.000          pin: add0_syn_165.fco_f
+net (fo=1)                              0.074          1.074          net: add0_syn_191,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_166.fci_f
+ADDER                                   0.000    f     1.074          pin: add0_syn_166.fco_f
+net (fo=1)                              0.000          1.074          net: add0_syn_192,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_167.fci_f
+ADDER                                   0.000    f     1.074          pin: add0_syn_167.fco_f
+net (fo=1)                              0.000          1.074          net: add0_syn_193,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_168.fci_f
+ADDER                                   0.000    f     1.074          pin: add0_syn_168.fco_f
+net (fo=1)                              0.000          1.074          net: add0_syn_194,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_169.fci_f
+ADDER                                   0.000    f     1.074          pin: add0_syn_169.fco_f
+net (fo=1)                              0.074          1.148          net: add0_syn_195,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_170.fci_f
+ADDER                                   0.000    f     1.148          pin: add0_syn_170.fco_f
+net (fo=1)                              0.000          1.148          net: add0_syn_196,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_171.fci_f
+ADDER                                   0.000    f     1.148          pin: add0_syn_171.fco_f
+net (fo=1)                              0.000          1.148          net: add0_syn_197,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_172.fci_f
+ADDER                                   0.000    f     1.148          pin: add0_syn_172.fco_f
+net (fo=1)                              0.000          1.148          net: add0_syn_198,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_173.fci_f
+ADDER                                   0.000    f     1.148          pin: add0_syn_173.fco_f
+net (fo=1)                              0.074          1.222          net: add0_syn_199,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_174.fci_f
+ADDER                                   0.052    r     1.274          pin: add0_syn_174.fco
+net (fo=1)                              0.000          1.274          net: add0_syn_148,  ../../uisrc/01_rtl/pll_test.v(54)
+                                                                      pin: add0_syn_175.fci
+ADDER                                   0.220    r     1.494       2  pin: add0_syn_175.ofb
+net (fo=1)                              0.448          1.942          net: cnt_b[17],  NOFILE(0)
+                                                                      pin: cnt_reg[17].d
+SEQ (reg)                               0.041    f     1.983               
+--------------------------------------------------------------------  ---------------
+Arrival                                                1.983               
+
+source latency                          0.000          0.000               
+port                C4                  0.000          0.000          pin: I_sysclk
+hierarchy                               0.000          0.000          pin: I_sysclk_syn_2.ipad
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.sg09_di
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.di
+net (fo=1)                              0.000          0.000          net: I_sysclk_dup_1,  ../../uisrc/01_rtl/pll_test.v(33)
+                                                                      pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.refclk
+PLL                                     0.000          0.000          pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.clkc[0]
+net (fo=1)                              0.000          0.000          net: pll_inst/clk0_buf,  ../../uisrc/03_ip/pll/pll.v(26)
+                                                                      pin: pll_inst/bufg_feedback.clkin[0]
+GCLK                                    0.000          0.000          pin: pll_inst/bufg_feedback.clkout
+net (fo=27)                             0.000          0.000          net: pll_inst/clk0_out,  ../../uisrc/03_ip/pll/pll.v(22)
+                                                                      pin: cnt_reg[17].clk
+capture edge                            5.000    r     5.000               
+--------------------------------------------------------------------  ---------------
+setup                                  -0.064          4.936               
+clock uncertainty                       0.000          4.936               
+clock pessimism                         0.000          4.936               
+--------------------------------------------------------------------  ---------------
+Required                                               4.936               
+--------------------------------------------------------------------  ---------------
+Slack                                                  2.953               
+
+
+
+Min Paths
+----------------------------------------------------------------------------------------------------
+Slack               : 1.077ns
+Begin Point         : cnt_reg[0].clk (rising edge triggered by clock clk0  { rise@0.000000ns  fall@2.500000ns  period=5.000000 })
+End Point           : cnt_reg[0].d (rising edge triggered by clock clk0  { rise@0.000000ns  fall@2.500000ns  period=5.000000 })
+Check Type          : hold
+Process             : fast_125c
+Budget              : 0.000ns { clk0 rising@0.000ns - clk0 rising@0.000ns }
+Data Path Delay     : 1.091ns (cell 0.165ns (15%), net 0.926ns (85%))
+Clock Skew          : 0.000ns
+Logic Level         : 1 ( LUT1=1 )
+Max Fanout          : 2
+Clock Uncertainty   : 0.000ns (sdc uncertainty: 0.000ns, default uncertainty: 0.000ns)
+
+Delay Type          Location             Incr           Path   Level  Netlist Info
+--------------------------------------------------------------------  ---------------
+source latency                          0.000          0.000               
+port                C4                  0.000          0.000          pin: I_sysclk
+hierarchy                               0.000          0.000          pin: I_sysclk_syn_2.ipad
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.sg09_di
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.di
+net (fo=1)                              0.000          0.000          net: I_sysclk_dup_1,  ../../uisrc/01_rtl/pll_test.v(33)
+                                                                      pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.refclk
+PLL                                     0.000          0.000          pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.clkc[0]
+net (fo=1)                              0.000          0.000          net: pll_inst/clk0_buf,  ../../uisrc/03_ip/pll/pll.v(26)
+                                                                      pin: pll_inst/bufg_feedback.clkin[0]
+GCLK                                    0.000          0.000          pin: pll_inst/bufg_feedback.clkout
+net (fo=27)                             0.000          0.000          net: pll_inst/clk0_out,  ../../uisrc/03_ip/pll/pll.v(22)
+                                                                      pin: cnt_reg[0].clk
+launch edge                             0.000    r     0.000               
+--------------------------------------------------------------------  ---------------
+SEQ (clk2q)                             0.053    f     0.053          pin: cnt_reg[0].q
+net (fo=2)                              0.478          0.531          net: cnt[0],  ../../uisrc/01_rtl/pll_test.v(37)
+                                                                      pin: cnt[0]_syn_3.a
+LUT1                                    0.097    f     0.628       1  pin: cnt[0]_syn_3.o
+net (fo=1)                              0.448          1.076          net: cnt[0]_syn_2,  ../../uisrc/01_rtl/pll_test.v(37)
+                                                                      pin: cnt_reg[0].d
+SEQ (reg)                               0.015    f     1.091               
+--------------------------------------------------------------------  ---------------
+Arrival                                                1.091               
+
+source latency                          0.000          0.000               
+port                C4                  0.000          0.000          pin: I_sysclk
+hierarchy                               0.000          0.000          pin: I_sysclk_syn_2.ipad
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.sg09_di
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.di
+net (fo=1)                              0.000          0.000          net: I_sysclk_dup_1,  ../../uisrc/01_rtl/pll_test.v(33)
+                                                                      pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.refclk
+PLL                                     0.000          0.000          pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.clkc[0]
+net (fo=1)                              0.000          0.000          net: pll_inst/clk0_buf,  ../../uisrc/03_ip/pll/pll.v(26)
+                                                                      pin: pll_inst/bufg_feedback.clkin[0]
+GCLK                                    0.000          0.000          pin: pll_inst/bufg_feedback.clkout
+net (fo=27)                             0.000          0.000          net: pll_inst/clk0_out,  ../../uisrc/03_ip/pll/pll.v(22)
+                                                                      pin: cnt_reg[0].clk
+capture edge                            0.000    r     0.000               
+--------------------------------------------------------------------  ---------------
+hold                                    0.014          0.014               
+clock uncertainty                       0.000          0.014               
+clock pessimism                         0.000          0.014               
+--------------------------------------------------------------------  ---------------
+Required                                               0.014               
+--------------------------------------------------------------------  ---------------
+Slack                                                  1.077               
+
+Slack               : 1.127ns
+Begin Point         : cnt_reg[1].clk (rising edge triggered by clock clk0  { rise@0.000000ns  fall@2.500000ns  period=5.000000 })
+End Point           : cnt_reg[1].d (rising edge triggered by clock clk0  { rise@0.000000ns  fall@2.500000ns  period=5.000000 })
+Check Type          : hold
+Process             : fast_125c
+Budget              : 0.000ns { clk0 rising@0.000ns - clk0 rising@0.000ns }
+Data Path Delay     : 1.141ns (cell 0.245ns (21%), net 0.896ns (79%))
+Clock Skew          : 0.000ns
+Logic Level         : 1 ( unknown=1 )
+Max Fanout          : 1
+Clock Uncertainty   : 0.000ns (sdc uncertainty: 0.000ns, default uncertainty: 0.000ns)
+
+Delay Type          Location             Incr           Path   Level  Netlist Info
+--------------------------------------------------------------------  ---------------
+source latency                          0.000          0.000               
+port                C4                  0.000          0.000          pin: I_sysclk
+hierarchy                               0.000          0.000          pin: I_sysclk_syn_2.ipad
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.sg09_di
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.di
+net (fo=1)                              0.000          0.000          net: I_sysclk_dup_1,  ../../uisrc/01_rtl/pll_test.v(33)
+                                                                      pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.refclk
+PLL                                     0.000          0.000          pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.clkc[0]
+net (fo=1)                              0.000          0.000          net: pll_inst/clk0_buf,  ../../uisrc/03_ip/pll/pll.v(26)
+                                                                      pin: pll_inst/bufg_feedback.clkin[0]
+GCLK                                    0.000          0.000          pin: pll_inst/bufg_feedback.clkout
+net (fo=27)                             0.000          0.000          net: pll_inst/clk0_out,  ../../uisrc/03_ip/pll/pll.v(22)
+                                                                      pin: cnt_reg[1].clk
+launch edge                             0.000    r     0.000               
+--------------------------------------------------------------------  ---------------
+SEQ (clk2q)                             0.053    f     0.053          pin: cnt_reg[1].q
+net (fo=1)                              0.448          0.501          net: cnt[1],  ../../uisrc/01_rtl/pll_test.v(37)
+                                                                      pin: add0_syn_159.id
+                                        0.177    r     0.678       1  pin: add0_syn_159.ofb
+net (fo=1)                              0.448          1.126          net: cnt_b[1],  NOFILE(0)
+                                                                      pin: cnt_reg[1].d
+SEQ (reg)                               0.015    f     1.141               
+--------------------------------------------------------------------  ---------------
+Arrival                                                1.141               
+
+source latency                          0.000          0.000               
+port                C4                  0.000          0.000          pin: I_sysclk
+hierarchy                               0.000          0.000          pin: I_sysclk_syn_2.ipad
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.sg09_di
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.di
+net (fo=1)                              0.000          0.000          net: I_sysclk_dup_1,  ../../uisrc/01_rtl/pll_test.v(33)
+                                                                      pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.refclk
+PLL                                     0.000          0.000          pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.clkc[0]
+net (fo=1)                              0.000          0.000          net: pll_inst/clk0_buf,  ../../uisrc/03_ip/pll/pll.v(26)
+                                                                      pin: pll_inst/bufg_feedback.clkin[0]
+GCLK                                    0.000          0.000          pin: pll_inst/bufg_feedback.clkout
+net (fo=27)                             0.000          0.000          net: pll_inst/clk0_out,  ../../uisrc/03_ip/pll/pll.v(22)
+                                                                      pin: cnt_reg[1].clk
+capture edge                            0.000    r     0.000               
+--------------------------------------------------------------------  ---------------
+hold                                    0.014          0.014               
+clock uncertainty                       0.000          0.014               
+clock pessimism                         0.000          0.014               
+--------------------------------------------------------------------  ---------------
+Required                                               0.014               
+--------------------------------------------------------------------  ---------------
+Slack                                                  1.127               
+
+Slack               : 1.127ns
+Begin Point         : cnt_reg[2].clk (rising edge triggered by clock clk0  { rise@0.000000ns  fall@2.500000ns  period=5.000000 })
+End Point           : cnt_reg[2].d (rising edge triggered by clock clk0  { rise@0.000000ns  fall@2.500000ns  period=5.000000 })
+Check Type          : hold
+Process             : fast_125c
+Budget              : 0.000ns { clk0 rising@0.000ns - clk0 rising@0.000ns }
+Data Path Delay     : 1.141ns (cell 0.245ns (21%), net 0.896ns (79%))
+Clock Skew          : 0.000ns
+Logic Level         : 1 ( unknown=1 )
+Max Fanout          : 1
+Clock Uncertainty   : 0.000ns (sdc uncertainty: 0.000ns, default uncertainty: 0.000ns)
+
+Delay Type          Location             Incr           Path   Level  Netlist Info
+--------------------------------------------------------------------  ---------------
+source latency                          0.000          0.000               
+port                C4                  0.000          0.000          pin: I_sysclk
+hierarchy                               0.000          0.000          pin: I_sysclk_syn_2.ipad
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.sg09_di
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.di
+net (fo=1)                              0.000          0.000          net: I_sysclk_dup_1,  ../../uisrc/01_rtl/pll_test.v(33)
+                                                                      pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.refclk
+PLL                                     0.000          0.000          pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.clkc[0]
+net (fo=1)                              0.000          0.000          net: pll_inst/clk0_buf,  ../../uisrc/03_ip/pll/pll.v(26)
+                                                                      pin: pll_inst/bufg_feedback.clkin[0]
+GCLK                                    0.000          0.000          pin: pll_inst/bufg_feedback.clkout
+net (fo=27)                             0.000          0.000          net: pll_inst/clk0_out,  ../../uisrc/03_ip/pll/pll.v(22)
+                                                                      pin: cnt_reg[2].clk
+launch edge                             0.000    r     0.000               
+--------------------------------------------------------------------  ---------------
+SEQ (clk2q)                             0.053    f     0.053          pin: cnt_reg[2].q
+net (fo=1)                              0.448          0.501          net: cnt[2],  ../../uisrc/01_rtl/pll_test.v(37)
+                                                                      pin: add0_syn_160.id
+                                        0.177    r     0.678       1  pin: add0_syn_160.ofb
+net (fo=1)                              0.448          1.126          net: cnt_b[2],  NOFILE(0)
+                                                                      pin: cnt_reg[2].d
+SEQ (reg)                               0.015    f     1.141               
+--------------------------------------------------------------------  ---------------
+Arrival                                                1.141               
+
+source latency                          0.000          0.000               
+port                C4                  0.000          0.000          pin: I_sysclk
+hierarchy                               0.000          0.000          pin: I_sysclk_syn_2.ipad
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.sg09_di
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.di
+net (fo=1)                              0.000          0.000          net: I_sysclk_dup_1,  ../../uisrc/01_rtl/pll_test.v(33)
+                                                                      pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.refclk
+PLL                                     0.000          0.000          pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.clkc[0]
+net (fo=1)                              0.000          0.000          net: pll_inst/clk0_buf,  ../../uisrc/03_ip/pll/pll.v(26)
+                                                                      pin: pll_inst/bufg_feedback.clkin[0]
+GCLK                                    0.000          0.000          pin: pll_inst/bufg_feedback.clkout
+net (fo=27)                             0.000          0.000          net: pll_inst/clk0_out,  ../../uisrc/03_ip/pll/pll.v(22)
+                                                                      pin: cnt_reg[2].clk
+capture edge                            0.000    r     0.000               
+--------------------------------------------------------------------  ---------------
+hold                                    0.014          0.014               
+clock uncertainty                       0.000          0.014               
+clock pessimism                         0.000          0.014               
+--------------------------------------------------------------------  ---------------
+Required                                               0.014               
+--------------------------------------------------------------------  ---------------
+Slack                                                  1.127               
+
+Slack               : 1.127ns
+Begin Point         : cnt_reg[3].clk (rising edge triggered by clock clk0  { rise@0.000000ns  fall@2.500000ns  period=5.000000 })
+End Point           : cnt_reg[3].d (rising edge triggered by clock clk0  { rise@0.000000ns  fall@2.500000ns  period=5.000000 })
+Check Type          : hold
+Process             : fast_125c
+Budget              : 0.000ns { clk0 rising@0.000ns - clk0 rising@0.000ns }
+Data Path Delay     : 1.141ns (cell 0.245ns (21%), net 0.896ns (79%))
+Clock Skew          : 0.000ns
+Logic Level         : 1 ( unknown=1 )
+Max Fanout          : 1
+Clock Uncertainty   : 0.000ns (sdc uncertainty: 0.000ns, default uncertainty: 0.000ns)
+
+Delay Type          Location             Incr           Path   Level  Netlist Info
+--------------------------------------------------------------------  ---------------
+source latency                          0.000          0.000               
+port                C4                  0.000          0.000          pin: I_sysclk
+hierarchy                               0.000          0.000          pin: I_sysclk_syn_2.ipad
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.sg09_di
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.di
+net (fo=1)                              0.000          0.000          net: I_sysclk_dup_1,  ../../uisrc/01_rtl/pll_test.v(33)
+                                                                      pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.refclk
+PLL                                     0.000          0.000          pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.clkc[0]
+net (fo=1)                              0.000          0.000          net: pll_inst/clk0_buf,  ../../uisrc/03_ip/pll/pll.v(26)
+                                                                      pin: pll_inst/bufg_feedback.clkin[0]
+GCLK                                    0.000          0.000          pin: pll_inst/bufg_feedback.clkout
+net (fo=27)                             0.000          0.000          net: pll_inst/clk0_out,  ../../uisrc/03_ip/pll/pll.v(22)
+                                                                      pin: cnt_reg[3].clk
+launch edge                             0.000    r     0.000               
+--------------------------------------------------------------------  ---------------
+SEQ (clk2q)                             0.053    f     0.053          pin: cnt_reg[3].q
+net (fo=1)                              0.448          0.501          net: cnt[3],  ../../uisrc/01_rtl/pll_test.v(37)
+                                                                      pin: add0_syn_161.id
+                                        0.177    r     0.678       1  pin: add0_syn_161.ofb
+net (fo=1)                              0.448          1.126          net: cnt_b[3],  NOFILE(0)
+                                                                      pin: cnt_reg[3].d
+SEQ (reg)                               0.015    f     1.141               
+--------------------------------------------------------------------  ---------------
+Arrival                                                1.141               
+
+source latency                          0.000          0.000               
+port                C4                  0.000          0.000          pin: I_sysclk
+hierarchy                               0.000          0.000          pin: I_sysclk_syn_2.ipad
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.sg09_di
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.di
+net (fo=1)                              0.000          0.000          net: I_sysclk_dup_1,  ../../uisrc/01_rtl/pll_test.v(33)
+                                                                      pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.refclk
+PLL                                     0.000          0.000          pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.clkc[0]
+net (fo=1)                              0.000          0.000          net: pll_inst/clk0_buf,  ../../uisrc/03_ip/pll/pll.v(26)
+                                                                      pin: pll_inst/bufg_feedback.clkin[0]
+GCLK                                    0.000          0.000          pin: pll_inst/bufg_feedback.clkout
+net (fo=27)                             0.000          0.000          net: pll_inst/clk0_out,  ../../uisrc/03_ip/pll/pll.v(22)
+                                                                      pin: cnt_reg[3].clk
+capture edge                            0.000    r     0.000               
+--------------------------------------------------------------------  ---------------
+hold                                    0.014          0.014               
+clock uncertainty                       0.000          0.014               
+clock pessimism                         0.000          0.014               
+--------------------------------------------------------------------  ---------------
+Required                                               0.014               
+--------------------------------------------------------------------  ---------------
+Slack                                                  1.127               
+
+Slack               : 1.127ns
+Begin Point         : cnt_reg[4].clk (rising edge triggered by clock clk0  { rise@0.000000ns  fall@2.500000ns  period=5.000000 })
+End Point           : cnt_reg[4].d (rising edge triggered by clock clk0  { rise@0.000000ns  fall@2.500000ns  period=5.000000 })
+Check Type          : hold
+Process             : fast_125c
+Budget              : 0.000ns { clk0 rising@0.000ns - clk0 rising@0.000ns }
+Data Path Delay     : 1.141ns (cell 0.245ns (21%), net 0.896ns (79%))
+Clock Skew          : 0.000ns
+Logic Level         : 1 ( unknown=1 )
+Max Fanout          : 1
+Clock Uncertainty   : 0.000ns (sdc uncertainty: 0.000ns, default uncertainty: 0.000ns)
+
+Delay Type          Location             Incr           Path   Level  Netlist Info
+--------------------------------------------------------------------  ---------------
+source latency                          0.000          0.000               
+port                C4                  0.000          0.000          pin: I_sysclk
+hierarchy                               0.000          0.000          pin: I_sysclk_syn_2.ipad
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.sg09_di
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.di
+net (fo=1)                              0.000          0.000          net: I_sysclk_dup_1,  ../../uisrc/01_rtl/pll_test.v(33)
+                                                                      pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.refclk
+PLL                                     0.000          0.000          pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.clkc[0]
+net (fo=1)                              0.000          0.000          net: pll_inst/clk0_buf,  ../../uisrc/03_ip/pll/pll.v(26)
+                                                                      pin: pll_inst/bufg_feedback.clkin[0]
+GCLK                                    0.000          0.000          pin: pll_inst/bufg_feedback.clkout
+net (fo=27)                             0.000          0.000          net: pll_inst/clk0_out,  ../../uisrc/03_ip/pll/pll.v(22)
+                                                                      pin: cnt_reg[4].clk
+launch edge                             0.000    r     0.000               
+--------------------------------------------------------------------  ---------------
+SEQ (clk2q)                             0.053    f     0.053          pin: cnt_reg[4].q
+net (fo=1)                              0.448          0.501          net: cnt[4],  ../../uisrc/01_rtl/pll_test.v(37)
+                                                                      pin: add0_syn_162.id
+                                        0.177    r     0.678       1  pin: add0_syn_162.ofb
+net (fo=1)                              0.448          1.126          net: cnt_b[4],  NOFILE(0)
+                                                                      pin: cnt_reg[4].d
+SEQ (reg)                               0.015    f     1.141               
+--------------------------------------------------------------------  ---------------
+Arrival                                                1.141               
+
+source latency                          0.000          0.000               
+port                C4                  0.000          0.000          pin: I_sysclk
+hierarchy                               0.000          0.000          pin: I_sysclk_syn_2.ipad
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.sg09_di
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.di
+net (fo=1)                              0.000          0.000          net: I_sysclk_dup_1,  ../../uisrc/01_rtl/pll_test.v(33)
+                                                                      pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.refclk
+PLL                                     0.000          0.000          pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.clkc[0]
+net (fo=1)                              0.000          0.000          net: pll_inst/clk0_buf,  ../../uisrc/03_ip/pll/pll.v(26)
+                                                                      pin: pll_inst/bufg_feedback.clkin[0]
+GCLK                                    0.000          0.000          pin: pll_inst/bufg_feedback.clkout
+net (fo=27)                             0.000          0.000          net: pll_inst/clk0_out,  ../../uisrc/03_ip/pll/pll.v(22)
+                                                                      pin: cnt_reg[4].clk
+capture edge                            0.000    r     0.000               
+--------------------------------------------------------------------  ---------------
+hold                                    0.014          0.014               
+clock uncertainty                       0.000          0.014               
+clock pessimism                         0.000          0.014               
+--------------------------------------------------------------------  ---------------
+Required                                               0.014               
+--------------------------------------------------------------------  ---------------
+Slack                                                  1.127               
+
+Slack               : 1.127ns
+Begin Point         : cnt_reg[5].clk (rising edge triggered by clock clk0  { rise@0.000000ns  fall@2.500000ns  period=5.000000 })
+End Point           : cnt_reg[5].d (rising edge triggered by clock clk0  { rise@0.000000ns  fall@2.500000ns  period=5.000000 })
+Check Type          : hold
+Process             : fast_125c
+Budget              : 0.000ns { clk0 rising@0.000ns - clk0 rising@0.000ns }
+Data Path Delay     : 1.141ns (cell 0.245ns (21%), net 0.896ns (79%))
+Clock Skew          : 0.000ns
+Logic Level         : 1 ( unknown=1 )
+Max Fanout          : 1
+Clock Uncertainty   : 0.000ns (sdc uncertainty: 0.000ns, default uncertainty: 0.000ns)
+
+Delay Type          Location             Incr           Path   Level  Netlist Info
+--------------------------------------------------------------------  ---------------
+source latency                          0.000          0.000               
+port                C4                  0.000          0.000          pin: I_sysclk
+hierarchy                               0.000          0.000          pin: I_sysclk_syn_2.ipad
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.sg09_di
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.di
+net (fo=1)                              0.000          0.000          net: I_sysclk_dup_1,  ../../uisrc/01_rtl/pll_test.v(33)
+                                                                      pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.refclk
+PLL                                     0.000          0.000          pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.clkc[0]
+net (fo=1)                              0.000          0.000          net: pll_inst/clk0_buf,  ../../uisrc/03_ip/pll/pll.v(26)
+                                                                      pin: pll_inst/bufg_feedback.clkin[0]
+GCLK                                    0.000          0.000          pin: pll_inst/bufg_feedback.clkout
+net (fo=27)                             0.000          0.000          net: pll_inst/clk0_out,  ../../uisrc/03_ip/pll/pll.v(22)
+                                                                      pin: cnt_reg[5].clk
+launch edge                             0.000    r     0.000               
+--------------------------------------------------------------------  ---------------
+SEQ (clk2q)                             0.053    f     0.053          pin: cnt_reg[5].q
+net (fo=1)                              0.448          0.501          net: cnt[5],  ../../uisrc/01_rtl/pll_test.v(37)
+                                                                      pin: add0_syn_163.id
+                                        0.177    r     0.678       1  pin: add0_syn_163.ofb
+net (fo=1)                              0.448          1.126          net: cnt_b[5],  NOFILE(0)
+                                                                      pin: cnt_reg[5].d
+SEQ (reg)                               0.015    f     1.141               
+--------------------------------------------------------------------  ---------------
+Arrival                                                1.141               
+
+source latency                          0.000          0.000               
+port                C4                  0.000          0.000          pin: I_sysclk
+hierarchy                               0.000          0.000          pin: I_sysclk_syn_2.ipad
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.sg09_di
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.di
+net (fo=1)                              0.000          0.000          net: I_sysclk_dup_1,  ../../uisrc/01_rtl/pll_test.v(33)
+                                                                      pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.refclk
+PLL                                     0.000          0.000          pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.clkc[0]
+net (fo=1)                              0.000          0.000          net: pll_inst/clk0_buf,  ../../uisrc/03_ip/pll/pll.v(26)
+                                                                      pin: pll_inst/bufg_feedback.clkin[0]
+GCLK                                    0.000          0.000          pin: pll_inst/bufg_feedback.clkout
+net (fo=27)                             0.000          0.000          net: pll_inst/clk0_out,  ../../uisrc/03_ip/pll/pll.v(22)
+                                                                      pin: cnt_reg[5].clk
+capture edge                            0.000    r     0.000               
+--------------------------------------------------------------------  ---------------
+hold                                    0.014          0.014               
+clock uncertainty                       0.000          0.014               
+clock pessimism                         0.000          0.014               
+--------------------------------------------------------------------  ---------------
+Required                                               0.014               
+--------------------------------------------------------------------  ---------------
+Slack                                                  1.127               
+
+Slack               : 1.127ns
+Begin Point         : cnt_reg[6].clk (rising edge triggered by clock clk0  { rise@0.000000ns  fall@2.500000ns  period=5.000000 })
+End Point           : cnt_reg[6].d (rising edge triggered by clock clk0  { rise@0.000000ns  fall@2.500000ns  period=5.000000 })
+Check Type          : hold
+Process             : fast_125c
+Budget              : 0.000ns { clk0 rising@0.000ns - clk0 rising@0.000ns }
+Data Path Delay     : 1.141ns (cell 0.245ns (21%), net 0.896ns (79%))
+Clock Skew          : 0.000ns
+Logic Level         : 1 ( unknown=1 )
+Max Fanout          : 1
+Clock Uncertainty   : 0.000ns (sdc uncertainty: 0.000ns, default uncertainty: 0.000ns)
+
+Delay Type          Location             Incr           Path   Level  Netlist Info
+--------------------------------------------------------------------  ---------------
+source latency                          0.000          0.000               
+port                C4                  0.000          0.000          pin: I_sysclk
+hierarchy                               0.000          0.000          pin: I_sysclk_syn_2.ipad
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.sg09_di
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.di
+net (fo=1)                              0.000          0.000          net: I_sysclk_dup_1,  ../../uisrc/01_rtl/pll_test.v(33)
+                                                                      pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.refclk
+PLL                                     0.000          0.000          pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.clkc[0]
+net (fo=1)                              0.000          0.000          net: pll_inst/clk0_buf,  ../../uisrc/03_ip/pll/pll.v(26)
+                                                                      pin: pll_inst/bufg_feedback.clkin[0]
+GCLK                                    0.000          0.000          pin: pll_inst/bufg_feedback.clkout
+net (fo=27)                             0.000          0.000          net: pll_inst/clk0_out,  ../../uisrc/03_ip/pll/pll.v(22)
+                                                                      pin: cnt_reg[6].clk
+launch edge                             0.000    r     0.000               
+--------------------------------------------------------------------  ---------------
+SEQ (clk2q)                             0.053    f     0.053          pin: cnt_reg[6].q
+net (fo=1)                              0.448          0.501          net: cnt[6],  ../../uisrc/01_rtl/pll_test.v(37)
+                                                                      pin: add0_syn_164.id
+                                        0.177    r     0.678       1  pin: add0_syn_164.ofb
+net (fo=1)                              0.448          1.126          net: cnt_b[6],  NOFILE(0)
+                                                                      pin: cnt_reg[6].d
+SEQ (reg)                               0.015    f     1.141               
+--------------------------------------------------------------------  ---------------
+Arrival                                                1.141               
+
+source latency                          0.000          0.000               
+port                C4                  0.000          0.000          pin: I_sysclk
+hierarchy                               0.000          0.000          pin: I_sysclk_syn_2.ipad
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.sg09_di
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.di
+net (fo=1)                              0.000          0.000          net: I_sysclk_dup_1,  ../../uisrc/01_rtl/pll_test.v(33)
+                                                                      pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.refclk
+PLL                                     0.000          0.000          pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.clkc[0]
+net (fo=1)                              0.000          0.000          net: pll_inst/clk0_buf,  ../../uisrc/03_ip/pll/pll.v(26)
+                                                                      pin: pll_inst/bufg_feedback.clkin[0]
+GCLK                                    0.000          0.000          pin: pll_inst/bufg_feedback.clkout
+net (fo=27)                             0.000          0.000          net: pll_inst/clk0_out,  ../../uisrc/03_ip/pll/pll.v(22)
+                                                                      pin: cnt_reg[6].clk
+capture edge                            0.000    r     0.000               
+--------------------------------------------------------------------  ---------------
+hold                                    0.014          0.014               
+clock uncertainty                       0.000          0.014               
+clock pessimism                         0.000          0.014               
+--------------------------------------------------------------------  ---------------
+Required                                               0.014               
+--------------------------------------------------------------------  ---------------
+Slack                                                  1.127               
+
+Slack               : 1.127ns
+Begin Point         : cnt_reg[7].clk (rising edge triggered by clock clk0  { rise@0.000000ns  fall@2.500000ns  period=5.000000 })
+End Point           : cnt_reg[7].d (rising edge triggered by clock clk0  { rise@0.000000ns  fall@2.500000ns  period=5.000000 })
+Check Type          : hold
+Process             : fast_125c
+Budget              : 0.000ns { clk0 rising@0.000ns - clk0 rising@0.000ns }
+Data Path Delay     : 1.141ns (cell 0.245ns (21%), net 0.896ns (79%))
+Clock Skew          : 0.000ns
+Logic Level         : 1 ( unknown=1 )
+Max Fanout          : 1
+Clock Uncertainty   : 0.000ns (sdc uncertainty: 0.000ns, default uncertainty: 0.000ns)
+
+Delay Type          Location             Incr           Path   Level  Netlist Info
+--------------------------------------------------------------------  ---------------
+source latency                          0.000          0.000               
+port                C4                  0.000          0.000          pin: I_sysclk
+hierarchy                               0.000          0.000          pin: I_sysclk_syn_2.ipad
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.sg09_di
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.di
+net (fo=1)                              0.000          0.000          net: I_sysclk_dup_1,  ../../uisrc/01_rtl/pll_test.v(33)
+                                                                      pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.refclk
+PLL                                     0.000          0.000          pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.clkc[0]
+net (fo=1)                              0.000          0.000          net: pll_inst/clk0_buf,  ../../uisrc/03_ip/pll/pll.v(26)
+                                                                      pin: pll_inst/bufg_feedback.clkin[0]
+GCLK                                    0.000          0.000          pin: pll_inst/bufg_feedback.clkout
+net (fo=27)                             0.000          0.000          net: pll_inst/clk0_out,  ../../uisrc/03_ip/pll/pll.v(22)
+                                                                      pin: cnt_reg[7].clk
+launch edge                             0.000    r     0.000               
+--------------------------------------------------------------------  ---------------
+SEQ (clk2q)                             0.053    f     0.053          pin: cnt_reg[7].q
+net (fo=1)                              0.448          0.501          net: cnt[7],  ../../uisrc/01_rtl/pll_test.v(37)
+                                                                      pin: add0_syn_165.id
+                                        0.177    r     0.678       1  pin: add0_syn_165.ofb
+net (fo=1)                              0.448          1.126          net: cnt_b[7],  NOFILE(0)
+                                                                      pin: cnt_reg[7].d
+SEQ (reg)                               0.015    f     1.141               
+--------------------------------------------------------------------  ---------------
+Arrival                                                1.141               
+
+source latency                          0.000          0.000               
+port                C4                  0.000          0.000          pin: I_sysclk
+hierarchy                               0.000          0.000          pin: I_sysclk_syn_2.ipad
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.sg09_di
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.di
+net (fo=1)                              0.000          0.000          net: I_sysclk_dup_1,  ../../uisrc/01_rtl/pll_test.v(33)
+                                                                      pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.refclk
+PLL                                     0.000          0.000          pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.clkc[0]
+net (fo=1)                              0.000          0.000          net: pll_inst/clk0_buf,  ../../uisrc/03_ip/pll/pll.v(26)
+                                                                      pin: pll_inst/bufg_feedback.clkin[0]
+GCLK                                    0.000          0.000          pin: pll_inst/bufg_feedback.clkout
+net (fo=27)                             0.000          0.000          net: pll_inst/clk0_out,  ../../uisrc/03_ip/pll/pll.v(22)
+                                                                      pin: cnt_reg[7].clk
+capture edge                            0.000    r     0.000               
+--------------------------------------------------------------------  ---------------
+hold                                    0.014          0.014               
+clock uncertainty                       0.000          0.014               
+clock pessimism                         0.000          0.014               
+--------------------------------------------------------------------  ---------------
+Required                                               0.014               
+--------------------------------------------------------------------  ---------------
+Slack                                                  1.127               
+
+Slack               : 1.127ns
+Begin Point         : cnt_reg[8].clk (rising edge triggered by clock clk0  { rise@0.000000ns  fall@2.500000ns  period=5.000000 })
+End Point           : cnt_reg[8].d (rising edge triggered by clock clk0  { rise@0.000000ns  fall@2.500000ns  period=5.000000 })
+Check Type          : hold
+Process             : fast_125c
+Budget              : 0.000ns { clk0 rising@0.000ns - clk0 rising@0.000ns }
+Data Path Delay     : 1.141ns (cell 0.245ns (21%), net 0.896ns (79%))
+Clock Skew          : 0.000ns
+Logic Level         : 1 ( unknown=1 )
+Max Fanout          : 1
+Clock Uncertainty   : 0.000ns (sdc uncertainty: 0.000ns, default uncertainty: 0.000ns)
+
+Delay Type          Location             Incr           Path   Level  Netlist Info
+--------------------------------------------------------------------  ---------------
+source latency                          0.000          0.000               
+port                C4                  0.000          0.000          pin: I_sysclk
+hierarchy                               0.000          0.000          pin: I_sysclk_syn_2.ipad
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.sg09_di
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.di
+net (fo=1)                              0.000          0.000          net: I_sysclk_dup_1,  ../../uisrc/01_rtl/pll_test.v(33)
+                                                                      pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.refclk
+PLL                                     0.000          0.000          pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.clkc[0]
+net (fo=1)                              0.000          0.000          net: pll_inst/clk0_buf,  ../../uisrc/03_ip/pll/pll.v(26)
+                                                                      pin: pll_inst/bufg_feedback.clkin[0]
+GCLK                                    0.000          0.000          pin: pll_inst/bufg_feedback.clkout
+net (fo=27)                             0.000          0.000          net: pll_inst/clk0_out,  ../../uisrc/03_ip/pll/pll.v(22)
+                                                                      pin: cnt_reg[8].clk
+launch edge                             0.000    r     0.000               
+--------------------------------------------------------------------  ---------------
+SEQ (clk2q)                             0.053    f     0.053          pin: cnt_reg[8].q
+net (fo=1)                              0.448          0.501          net: cnt[8],  ../../uisrc/01_rtl/pll_test.v(37)
+                                                                      pin: add0_syn_166.id
+                                        0.177    r     0.678       1  pin: add0_syn_166.ofb
+net (fo=1)                              0.448          1.126          net: cnt_b[8],  NOFILE(0)
+                                                                      pin: cnt_reg[8].d
+SEQ (reg)                               0.015    f     1.141               
+--------------------------------------------------------------------  ---------------
+Arrival                                                1.141               
+
+source latency                          0.000          0.000               
+port                C4                  0.000          0.000          pin: I_sysclk
+hierarchy                               0.000          0.000          pin: I_sysclk_syn_2.ipad
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.sg09_di
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.di
+net (fo=1)                              0.000          0.000          net: I_sysclk_dup_1,  ../../uisrc/01_rtl/pll_test.v(33)
+                                                                      pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.refclk
+PLL                                     0.000          0.000          pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.clkc[0]
+net (fo=1)                              0.000          0.000          net: pll_inst/clk0_buf,  ../../uisrc/03_ip/pll/pll.v(26)
+                                                                      pin: pll_inst/bufg_feedback.clkin[0]
+GCLK                                    0.000          0.000          pin: pll_inst/bufg_feedback.clkout
+net (fo=27)                             0.000          0.000          net: pll_inst/clk0_out,  ../../uisrc/03_ip/pll/pll.v(22)
+                                                                      pin: cnt_reg[8].clk
+capture edge                            0.000    r     0.000               
+--------------------------------------------------------------------  ---------------
+hold                                    0.014          0.014               
+clock uncertainty                       0.000          0.014               
+clock pessimism                         0.000          0.014               
+--------------------------------------------------------------------  ---------------
+Required                                               0.014               
+--------------------------------------------------------------------  ---------------
+Slack                                                  1.127               
+
+Slack               : 1.127ns
+Begin Point         : cnt_reg[9].clk (rising edge triggered by clock clk0  { rise@0.000000ns  fall@2.500000ns  period=5.000000 })
+End Point           : cnt_reg[9].d (rising edge triggered by clock clk0  { rise@0.000000ns  fall@2.500000ns  period=5.000000 })
+Check Type          : hold
+Process             : fast_125c
+Budget              : 0.000ns { clk0 rising@0.000ns - clk0 rising@0.000ns }
+Data Path Delay     : 1.141ns (cell 0.245ns (21%), net 0.896ns (79%))
+Clock Skew          : 0.000ns
+Logic Level         : 1 ( unknown=1 )
+Max Fanout          : 1
+Clock Uncertainty   : 0.000ns (sdc uncertainty: 0.000ns, default uncertainty: 0.000ns)
+
+Delay Type          Location             Incr           Path   Level  Netlist Info
+--------------------------------------------------------------------  ---------------
+source latency                          0.000          0.000               
+port                C4                  0.000          0.000          pin: I_sysclk
+hierarchy                               0.000          0.000          pin: I_sysclk_syn_2.ipad
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.sg09_di
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.di
+net (fo=1)                              0.000          0.000          net: I_sysclk_dup_1,  ../../uisrc/01_rtl/pll_test.v(33)
+                                                                      pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.refclk
+PLL                                     0.000          0.000          pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.clkc[0]
+net (fo=1)                              0.000          0.000          net: pll_inst/clk0_buf,  ../../uisrc/03_ip/pll/pll.v(26)
+                                                                      pin: pll_inst/bufg_feedback.clkin[0]
+GCLK                                    0.000          0.000          pin: pll_inst/bufg_feedback.clkout
+net (fo=27)                             0.000          0.000          net: pll_inst/clk0_out,  ../../uisrc/03_ip/pll/pll.v(22)
+                                                                      pin: cnt_reg[9].clk
+launch edge                             0.000    r     0.000               
+--------------------------------------------------------------------  ---------------
+SEQ (clk2q)                             0.053    f     0.053          pin: cnt_reg[9].q
+net (fo=1)                              0.448          0.501          net: cnt[9],  ../../uisrc/01_rtl/pll_test.v(37)
+                                                                      pin: add0_syn_167.id
+                                        0.177    r     0.678       1  pin: add0_syn_167.ofb
+net (fo=1)                              0.448          1.126          net: cnt_b[9],  NOFILE(0)
+                                                                      pin: cnt_reg[9].d
+SEQ (reg)                               0.015    f     1.141               
+--------------------------------------------------------------------  ---------------
+Arrival                                                1.141               
+
+source latency                          0.000          0.000               
+port                C4                  0.000          0.000          pin: I_sysclk
+hierarchy                               0.000          0.000          pin: I_sysclk_syn_2.ipad
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.sg09_di
+HDIO                                    0.000          0.000          pin: I_sysclk_syn_2.di
+net (fo=1)                              0.000          0.000          net: I_sysclk_dup_1,  ../../uisrc/01_rtl/pll_test.v(33)
+                                                                      pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.refclk
+PLL                                     0.000          0.000          pin: pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.clkc[0]
+net (fo=1)                              0.000          0.000          net: pll_inst/clk0_buf,  ../../uisrc/03_ip/pll/pll.v(26)
+                                                                      pin: pll_inst/bufg_feedback.clkin[0]
+GCLK                                    0.000          0.000          pin: pll_inst/bufg_feedback.clkout
+net (fo=27)                             0.000          0.000          net: pll_inst/clk0_out,  ../../uisrc/03_ip/pll/pll.v(22)
+                                                                      pin: cnt_reg[9].clk
+capture edge                            0.000    r     0.000               
+--------------------------------------------------------------------  ---------------
+hold                                    0.014          0.014               
+clock uncertainty                       0.000          0.014               
+clock pessimism                         0.000          0.014               
+--------------------------------------------------------------------  ---------------
+Required                                               0.014               
+--------------------------------------------------------------------  ---------------
+Slack                                                  1.127               
+
+
+Inter clock domain timing
+--------------------------------------------------
+
+IP timing
+--------------------------------------------------

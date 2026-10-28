@@ -1,0 +1,35 @@
+standard
+***Report Model: pll_test Device: PH1P35MDG324***
+
+IO Statistics
+#IO                         3
+  #input                    1
+  #output                   2
+  #inout                    0
+
+Gate Statistics
+#Basic gates               27
+  #and                      0
+  #nand                     0
+  #or                       0
+  #nor                      0
+  #xor                      0
+  #xnor                     0
+  #buf                      0
+  #not                      1
+  #bufif1                   0
+  #MX21                     0
+  #FADD                     0
+  #DFF                     26
+  #LATCH                    0
+#MACRO_ADD                  1
+#MACRO_OTHERS               1
+
+Report Hierarchy Area:
++------------------------------------------------------------------------------------------------------+
+|Instance                                   |Module                            |gates  |seq    |macros |
++------------------------------------------------------------------------------------------------------+
+|top                                        |pll_test                          |1      |26     |2      |
+|  pll_inst                                 |pll                               |0      |0      |1      |
+|    ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst |ph1p_phy_pll_wrapper_6ba8d3e44c24 |0      |0      |0      |
++------------------------------------------------------------------------------------------------------+

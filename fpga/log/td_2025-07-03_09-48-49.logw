@@ -1,0 +1,13 @@
+============================================================
+   Tang Dynasty, V5.9.151508
+   Copyright (c) 2012-2025 Anlogic Inc.
+   Executable = D:/anlogic/TD_5.9.1_DR1_2025.1_151.508/bin/td.exe
+   Built at =   12:47:27 Feb 21 2025
+   Run by =     MLK
+   Run Date =   Thu Jul  3 09:48:49 2025
+
+   Run on =     MLK-TJY
+============================================================
+GUI-6001 WARNING: File D:/al_data/02_F3P_DR1M90GEG400/F3P_DR1M90G/01_start/01_start_fpga/00_for_starter/02_fpga_start/al_ip/mypll/dr1_phy_pll_b0258fe933a8.v does not exist!
+GUI-8003 ERROR: al_ip/mypll/dr1_phy_pll_b0258fe933a8.v is missing!
+GUI-6001 WARNING: File D:/al_data/02_F3P_DR1M90GEG400/F3P_DR1M90G/01_start/01_start_fpga/00_for_starter/02_fpga_start/fpga_prj_Runs/phy_1/fpga_prj.bit does not exist!

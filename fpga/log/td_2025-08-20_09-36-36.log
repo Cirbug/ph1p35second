@@ -1,0 +1,223 @@
+============================================================
+   Tang Dynasty, V6.2.168116
+   Copyright (c) 2012-2025 Anlogic Inc.
+   Executable = D:/TD6.2.1/bin/td.exe
+   Built at =   16:32:07 Jun 12 2025
+   Run by =     Administrator
+   Run Date =   Wed Aug 20 09:36:36 2025
+
+   Run on =     BF-202404291754
+============================================================
+PRJ-1412 : reset_run syn_1 phy_1.
+RUN-1002 : start command "import_device ph1_35p.db -package PH1P35MDG324 -speed 3"
+ARC-1001 : Device Initialization.
+ARC-1001 : ----------------------------------------------------------------
+ARC-1001 :           OPTION          |          IO           |   SETTING   
+ARC-1001 : ----------------------------------------------------------------
+ARC-1001 :   non_jtag_persist(none)  |        35 IOs         |    gpio    
+ARC-1001 :            jtag           |  P13/P15/L14/R13/T13  |  dedicate  
+ARC-1001 : ----------------------------------------------------------------
+RUN-1003 : finish command "import_device ph1_35p.db -package PH1P35MDG324 -speed 3" in  1.611726s wall, 1.203125s user + 0.078125s system = 1.281250s CPU (79.5%)
+
+RUN-1004 : used memory is 447 MB, reserved memory is 409 MB, peak memory is 481 MB
+RUN-1002 : start command "commit_param -step design"
+RUN-1001 : Print Global Property
+RUN-1001 : -------------------------------------------------------------
+RUN-1001 :     Parameters    |   Settings   |  Default Values  |  Note  
+RUN-1001 : -------------------------------------------------------------
+RUN-1001 :    enable_seed    |     off      |       off        |        
+RUN-1001 :    hfn_to_clock   |  1000000000  |    1000000000    |        
+RUN-1001 :      message      |   standard   |     standard     |        
+RUN-1001 :    qor_monitor    |      on      |        on        |        
+RUN-1001 :   speedup_effort  |      0       |        0         |        
+RUN-1001 :    syn_ip_flow    |     off      |       off        |        
+RUN-1001 :       thread      |     auto     |       auto       |        
+RUN-1001 : -------------------------------------------------------------
+RUN-1001 : Print Design Property
+RUN-1001 : ----------------------------------------------------------------
+RUN-1001 :       Parameters       |  Settings  |  Default Values  |  Note  
+RUN-1001 : ----------------------------------------------------------------
+RUN-1001 :   default_reg_initial  |    auto    |       auto       |        
+RUN-1001 :    hdl_warning_level   |   normal   |      normal      |        
+RUN-1001 : ----------------------------------------------------------------
+HDL-1007 : analyze verilog file al_ip/mypll/RTL/ph1p_phy_pll_wrapper_e03b832d62cd.v
+HDL-1007 : analyze verilog file al_ip/mypll/mypll.v
+HDL-1007 : analyze verilog file uisrc/01_rtl/pll_test.v
+RUN-1002 : start command "commit_param -step design"
+RUN-1001 : Print Global Property
+RUN-1001 : -------------------------------------------------------------
+RUN-1001 :     Parameters    |   Settings   |  Default Values  |  Note  
+RUN-1001 : -------------------------------------------------------------
+RUN-1001 :    enable_seed    |     off      |       off        |        
+RUN-1001 :    hfn_to_clock   |  1000000000  |    1000000000    |        
+RUN-1001 :      message      |   standard   |     standard     |        
+RUN-1001 :    qor_monitor    |      on      |        on        |        
+RUN-1001 :   speedup_effort  |      0       |        0         |        
+RUN-1001 :    syn_ip_flow    |     off      |       off        |        
+RUN-1001 :       thread      |     auto     |       auto       |        
+RUN-1001 : -------------------------------------------------------------
+RUN-1001 : Print Design Property
+RUN-1001 : ----------------------------------------------------------------
+RUN-1001 :       Parameters       |  Settings  |  Default Values  |  Note  
+RUN-1001 : ----------------------------------------------------------------
+RUN-1001 :   default_reg_initial  |    auto    |       auto       |        
+RUN-1001 :    hdl_warning_level   |   normal   |      normal      |        
+RUN-1001 : ----------------------------------------------------------------
+HDL-1007 : analyze verilog file uisrc/01_rtl/pll_test.v
+GUI-6001 WARNING: File F:/work/03_H/F02/3_1_01_fpga_base/02_fpga_start/al_ip/mypll/mypll.v does not exist!
+GUI-6001 WARNING: File F:/work/03_H/F02/3_1_01_fpga_base/02_fpga_start/al_ip/mypll/RTL/ph1p_phy_pll_wrapper_e03b832d62cd.v does not exist!
+RUN-1002 : start command "commit_param -step design"
+RUN-1001 : Print Global Property
+RUN-1001 : -------------------------------------------------------------
+RUN-1001 :     Parameters    |   Settings   |  Default Values  |  Note  
+RUN-1001 : -------------------------------------------------------------
+RUN-1001 :    enable_seed    |     off      |       off        |        
+RUN-1001 :    hfn_to_clock   |  1000000000  |    1000000000    |        
+RUN-1001 :      message      |   standard   |     standard     |        
+RUN-1001 :    qor_monitor    |      on      |        on        |        
+RUN-1001 :   speedup_effort  |      0       |        0         |        
+RUN-1001 :    syn_ip_flow    |     off      |       off        |        
+RUN-1001 :       thread      |     auto     |       auto       |        
+RUN-1001 : -------------------------------------------------------------
+RUN-1001 : Print Design Property
+RUN-1001 : ----------------------------------------------------------------
+RUN-1001 :       Parameters       |  Settings  |  Default Values  |  Note  
+RUN-1001 : ----------------------------------------------------------------
+RUN-1001 :   default_reg_initial  |    auto    |       auto       |        
+RUN-1001 :    hdl_warning_level   |   normal   |      normal      |        
+RUN-1001 : ----------------------------------------------------------------
+HDL-1007 : analyze verilog file uisrc/01_rtl/pll_test.v
+RUN-1002 : start command "commit_param -step design"
+RUN-1001 : Print Global Property
+RUN-1001 : -------------------------------------------------------------
+RUN-1001 :     Parameters    |   Settings   |  Default Values  |  Note  
+RUN-1001 : -------------------------------------------------------------
+RUN-1001 :    enable_seed    |     off      |       off        |        
+RUN-1001 :    hfn_to_clock   |  1000000000  |    1000000000    |        
+RUN-1001 :      message      |   standard   |     standard     |        
+RUN-1001 :    qor_monitor    |      on      |        on        |        
+RUN-1001 :   speedup_effort  |      0       |        0         |        
+RUN-1001 :    syn_ip_flow    |     off      |       off        |        
+RUN-1001 :       thread      |     auto     |       auto       |        
+RUN-1001 : -------------------------------------------------------------
+RUN-1001 : Print Design Property
+RUN-1001 : ----------------------------------------------------------------
+RUN-1001 :       Parameters       |  Settings  |  Default Values  |  Note  
+RUN-1001 : ----------------------------------------------------------------
+RUN-1001 :   default_reg_initial  |    auto    |       auto       |        
+RUN-1001 :    hdl_warning_level   |   normal   |      normal      |        
+RUN-1001 : ----------------------------------------------------------------
+HDL-1007 : analyze verilog file uisrc/03_ip/pll/RTL/ph1p_phy_pll_wrapper_6ba8d3e44c24.v
+HDL-1007 : analyze verilog file uisrc/03_ip/pll/pll.v
+HDL-1007 : analyze verilog file uisrc/01_rtl/pll_test.v
+GUI-5005 WARNING: Unknown file icon ...
+RUN-1002 : start command "commit_param -step design"
+RUN-1001 : Print Global Property
+RUN-1001 : -------------------------------------------------------------
+RUN-1001 :     Parameters    |   Settings   |  Default Values  |  Note  
+RUN-1001 : -------------------------------------------------------------
+RUN-1001 :    enable_seed    |     off      |       off        |        
+RUN-1001 :    hfn_to_clock   |  1000000000  |    1000000000    |        
+RUN-1001 :      message      |   standard   |     standard     |        
+RUN-1001 :    qor_monitor    |      on      |        on        |        
+RUN-1001 :   speedup_effort  |      0       |        0         |        
+RUN-1001 :    syn_ip_flow    |     off      |       off        |        
+RUN-1001 :       thread      |     auto     |       auto       |        
+RUN-1001 : -------------------------------------------------------------
+RUN-1001 : Print Design Property
+RUN-1001 : ----------------------------------------------------------------
+RUN-1001 :       Parameters       |  Settings  |  Default Values  |  Note  
+RUN-1001 : ----------------------------------------------------------------
+RUN-1001 :   default_reg_initial  |    auto    |       auto       |        
+RUN-1001 :    hdl_warning_level   |   normal   |      normal      |        
+RUN-1001 : ----------------------------------------------------------------
+HDL-1007 : analyze verilog file uisrc/03_ip/pll/RTL/ph1p_phy_pll_wrapper_6ba8d3e44c24.v
+HDL-1007 : analyze verilog file uisrc/03_ip/pll/pll.v
+HDL-1007 : analyze verilog file uisrc/01_rtl/pll_test.v
+HDL-1007 : undeclared symbol 'pll_lock', assumed default net type 'wire' in uisrc/01_rtl/pll_test.v(43)
+HDL-1007 : undeclared symbol 'clk0', assumed default net type 'wire' in uisrc/01_rtl/pll_test.v(44)
+PRJ-1411 : launch_runs syn_1 -step opt_gate.
+PRJ-1412 : reset_run phy_1.
+RUN-1002 : start command "save_best_bits"
+PRJ-5303 WARNING: Run syn_1 failed.
+PRJ-1412 : reset_run syn_1 phy_1.
+PRJ-1409 : launch_runs syn_1 phy_1  -jobs 6.
+PRJ-1410 : Run syn_1 success.
+RUN-1002 : start command "save_best_bits"
+PRJ-1424 : The implemented result of phy_1 is saved as best result.
+PRJ-1410 : Run phy_1 success.
+RUN-1002 : start command "import_db F:/work/03_H/F02/3_1_01_fpga_base/02_fpga_start/fpga_prj_Runs/phy_1/fpga_prj_pr.db"
+RUN-1001 : Importing database generated by Tang Dynasty, V6.2.168116.
+RUN-1001 : Database version number 46207
+RUN-1001 : Import flow parameters
+RUN-1001 : Import netlist
+RUN-1001 : Constructing routing connections ...
+PHY-1001 : End build routing graph; 1.649460s wall, 3.453125s user + 0.609375s system = 4.062500s CPU (246.3%)
+
+RUN-1001 : Import phy database
+RUN-1001 : Import timing constraints
+RUN-1001 : Import IO constraints
+RUN-1001 : Import Inst constraints
+RUN-1001 : Import ChipWatcher
+RUN-1001 : Import design success TD_VERSION=6.2.168116 , DB_VERSION=46207
+RUN-1003 : finish command "import_db F:/work/03_H/F02/3_1_01_fpga_base/02_fpga_start/fpga_prj_Runs/phy_1/fpga_prj_pr.db" in  1.668216s wall, 3.468750s user + 0.609375s system = 4.078125s CPU (244.5%)
+
+RUN-1004 : used memory is 694 MB, reserved memory is 631 MB, peak memory is 702 MB
+Copyright (c) 1998-2019 The OpenSSL Project.  All rights reserved.
+This product includes software developed by the OpenSSL Project
+for use in the OpenSSL Toolkit (http://www.openssl.org/)
+Copyright (C) 1995-1998 Eric Young (eay@cryptsoft.com)
+All rights reserved.
+This product includes cryptographic software written by Eric Young (eay@cryptsoft.com)
+RUN-1002 : start command "update_timing -mode final -ctr"
+RUN-1002 : start command "start_timer"
+USR-1002 : Derived clock:  create_generated_clock -name {pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.clkc[0]} -source [get_ports {I_sysclk}] -master_clock {sysclk} -multiply_by 8.0000 -duty_cycle 50.0000 [get_pins {pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.clkc[0]}]
+USR-8130 CRITICAL-WARNING: No clock match the pattern: mypll_u/ph1p_phy_pll_wrapper_e03b832d62cd_Inst/u_PH1P_PHY_PLL.clkc\[0\].
+USR-8124 CRITICAL-WARNING: Rename_clock: please specify object list.
+USR-8159 CRITICAL-WARNING: Command rename_clock -name {clk0} [get_clocks {mypll_u/ph1p_phy_pll_wrapper_e03b832d62cd_Inst/u_PH1P_PHY_PLL.clkc[0]}] in F:/work/03_H/F02/3_1_01_fpga_base/02_fpga_start/uisrc/04_pin/timing.sdc(4) fails.
+TMR-2502 : Net delay update with mode: Routed
+RUN-1002 : start command "get_pins -regexp .*"
+RUN-1002 : start command "get_regs -regexp .*"
+USR-1002 : Derived clock:  create_generated_clock -name {pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.clkc[0]} -source [get_ports {I_sysclk}] -master_clock {sysclk} -multiply_by 8.0000 -duty_cycle 50.0000 [get_pins {pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.clkc[0]}]
+RUN-1002 : start command "get_ports I_sysclk"
+RUN-1002 : start command "get_pins pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.clkc[0]"
+RUN-1002 : start command "create_generated_clock -name pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.clkc[0] -source  -master_clock sysclk -multiply_by 8.0000 -duty_cycle 50.0000 "
+RUN-1002 : start command "get_ports I_sysclk"
+RUN-1002 : start command "create_clock -name sysclk -period 40.000 -waveform 0.000 20.000 "
+RUN-1002 : start command "derive_clocks"
+USR-1002 : Derived clock:  create_generated_clock -name {pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.clkc[0]} -source [get_ports {I_sysclk}] -master_clock {sysclk} -multiply_by 8.0000 -duty_cycle 50.0000 [get_pins {pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.clkc[0]}]
+RUN-1002 : start command "get_ports I_sysclk"
+RUN-1002 : start command "get_pins pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.clkc[0]"
+RUN-1002 : start command "create_generated_clock -name pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.clkc[0] -source  -master_clock sysclk -multiply_by 8.0000 -duty_cycle 50.0000 "
+RUN-1002 : start command "get_clocks pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.clkc[0]"
+RUN-1002 : start command "rename_clock -name clk0 "
+PRJ-1412 : reset_run syn_1 phy_1.
+PRJ-1409 : launch_runs syn_1 phy_1  -jobs 6.
+PRJ-1410 : Run syn_1 success.
+RUN-1002 : start command "save_best_bits"
+PRJ-1424 : The implemented result of phy_1 is saved as best result.
+PRJ-1410 : Run phy_1 success.
+RUN-1002 : start command "import_db F:/work/03_H/F02/3_1_01_fpga_base/02_fpga_start/fpga_prj_Runs/phy_1/fpga_prj_pr.db"
+RUN-1001 : Importing database generated by Tang Dynasty, V6.2.168116.
+RUN-1001 : Database version number 46207
+RUN-1001 : Import flow parameters
+RUN-1001 : Import netlist
+RUN-1001 : Constructing routing connections ...
+PHY-1001 : End build routing graph; 1.391477s wall, 3.656250s user + 0.062500s system = 3.718750s CPU (267.3%)
+
+RUN-1001 : Import phy database
+RUN-1001 : Import timing constraints
+RUN-1001 : Import IO constraints
+RUN-1001 : Import Inst constraints
+RUN-1001 : Import ChipWatcher
+RUN-1001 : Import design success TD_VERSION=6.2.168116 , DB_VERSION=46207
+RUN-1003 : finish command "import_db F:/work/03_H/F02/3_1_01_fpga_base/02_fpga_start/fpga_prj_Runs/phy_1/fpga_prj_pr.db" in  1.473604s wall, 3.703125s user + 0.109375s system = 3.812500s CPU (258.7%)
+
+RUN-1004 : used memory is 716 MB, reserved memory is 650 MB, peak memory is 724 MB
+RUN-1002 : start command "update_timing -mode final -ctr"
+RUN-1002 : start command "start_timer"
+USR-1002 : Derived clock:  create_generated_clock -name {pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.clkc[0]} -source [get_ports {I_sysclk}] -master_clock {sysclk} -multiply_by 8.0000 -duty_cycle 50.0000 [get_pins {pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.clkc[0]}]
+TMR-2502 : Net delay update with mode: Routed
+RUN-1002 : start command "get_pins -regexp .*"
+RUN-1002 : start command "get_regs -regexp .*"
+RUN-1002 : start command "report_timing_summary -include_ignored -name report1 -path_num 1 -nofile -ep_num 10 -report_type max_min"
