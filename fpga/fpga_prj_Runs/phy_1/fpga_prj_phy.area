@@ -1,39 +1,40 @@
 standard
-***Report Model: pll_test Device: PH1P35MDG324***
+***Report Model: csi2_tx_top Device: PH1P35MDG324***
 
 Design Statistics
-#IO                         3   out of    160    1.88%
-  #input                    1
-  #output                   2
-  #inout                    0
-#lut6                      27   out of  21216    0.13%
-#reg                       26
-  #slice reg               26   out of  42432    0.06%
+#IO                        12   out of    160    7.50%
+  #input                    4
+  #output                   7
+  #inout                    1
+#lut6                    6666   out of  21216   31.42%
+#reg                     3161
+  #slice reg             3161   out of  42432    7.45%
   #pad reg                  0
 
 Utilization Statistics
-#slice                     27   out of  21216    0.13%
-  #used ram                 0
-    #dram lut               0
-    #shifter lut            0
-  #used logic              27
-    #with luts              1
-    #with adder            26
-    #reg only               0
-#f7mux                      0   out of  10608    0.00%
-#f8mux                      0   out of   5304    0.00%
-#eram                       0   out of    108    0.00%
-  #eram20k                  0
+#slice                   6966   out of  21216   32.83%
+  #used ram              1920
+    #dram lut            1904
+    #shifter lut           16
+  #used logic            5046
+    #with luts           4177
+    #with adder           569
+    #reg only             300
+#feedthrough             1297
+#f7mux                    201   out of  10608    1.89%
+#f8mux                    100   out of   5304    1.89%
+#eram                      15   out of    108   13.89%
+  #eram20k                 15
   #fifo20k                  0
-#dsp                        0   out of     40    0.00%
+#dsp                        6   out of     40   15.00%
 #ddr_byte                   0   out of     12    0.00%
-#mipi_tx                    0   out of      2    0.00%
-#mipi_rx                    0   out of      2    0.00%
-#pad                        3   out of    160    1.88%
+#mipi_tx                    1   out of      2   50.00%
+#mipi_rx                    1   out of      2   50.00%
+#pad                       12   out of    160    7.50%
 #pll                        1   out of      6   16.67%
-#gclk                       1   out of     32    3.12%
+#gclk                       5   out of     32   15.62%
 #lclk                       0   out of     12    0.00%
-#sclk                       2   out of     48    4.17%
+#sclk                      13   out of     48   27.08%
 #mlclk                      0   out of      6    0.00%
 #ioclk                      0   out of     18    0.00%
 
@@ -41,35 +42,94 @@ Utilization Statistics
 Detailed IO Report
 
      Name        Direction    Location    IOStandard    IOType    DriveStrength    PullType    PackReg  
-   I_sysclk        INPUT         C4        LVCMOS33      HDIO          N/A          PULLUP      NONE    
-  O_up_led[1]     OUTPUT        K17        LVCMOS33      HRIO           8            NONE       NONE    
-  O_up_led[0]     OUTPUT        K16        LVCMOS33      HRIO           8            NONE       NONE    
+  I_button[1]      INPUT        J14        LVCMOS33      HRIO          N/A          PULLUP      NONE    
+  I_button[0]      INPUT         N2        LVCMOS33      HDIO          N/A          PULLUP      NONE    
+    I_rst_n        INPUT        R10        LVCMOS33      HDIO          N/A          PULLUP      NONE    
+   I_sys_clk       INPUT         C4        LVCMOS33      HDIO          N/A          PULLUP      NONE    
+   O_cam_24m      OUTPUT         V9        LVCMOS33      HDIO           8           PULLUP      NONE    
+   O_cam_rst      OUTPUT         V8        LVCMOS33      HDIO           8           PULLUP      NONE    
+   O_cam_scl      OUTPUT         T9        LVCMOS33      HDIO           8           PULLUP      NONE    
+  O_led_beat      OUTPUT        K16        LVCMOS33      HRIO           8            NONE       NONE    
+   O_led_cfg      OUTPUT        J18        LVCMOS33      HRIO           8            NONE       NONE    
+   O_led_err      OUTPUT        K17        LVCMOS33      HRIO           8            NONE       NONE    
+   O_uart_tx      OUTPUT         J3        LVCMOS33      HDIO           8           PULLUP      NONE    
+  IO_cam_sda       INOUT         U9        LVCMOS33      HDIO           8           PULLUP      NONE    
 
 Report Clock Domain Luts:
 
-------------------------------------------------------------------------------------------------------------
-  Index   |  Name   |  Frequency   |  LUT As Logic   |  LUT As Shifter   |  LUT As Dram   |  BRAM   |  DSP
-------------------------------------------------------------------------------------------------------------
-  #1      |  clk0   |  200MHz      |  26             |  0                |  0             |  0      |  0
-------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  Index   |  Name                                                                              |  Frequency   |  LUT As Logic   |  LUT As Shifter   |  LUT As Dram   |  BRAM   |  DSP
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  #1      |  MIPI_RX_BYTE_CLK                                                                  |  112MHz      |  569            |  0                |  0             |  4      |  0
+  #2      |  MIPI_TX_BYTE_CLK                                                                  |  43MHz       |  844            |  32               |  1600          |  0      |  0
+  #3      |  pll_clk_100m                                                                      |  100MHz      |  3332           |  0                |  76            |  14     |  6
+  #4      |  pll_clk_24m                                                                       |  23MHz       |  375            |  0                |  0             |  1      |  0
+  #5      |  u_dphy_tx/u_ph1p_mipiio_tx_wrapper/u_PH1P_LOGIC_DPHY_MIPI_TX.ln2_data_c16_sample  |  43MHz       |  1              |  0                |  0             |  0      |  0
+  #6      |  u_dphy_tx/u_ph1p_mipiio_tx_wrapper/u_PH1P_LOGIC_DPHY_MIPI_TX.lnck_data_c16_sam... |  43MHz       |  1              |  0                |  0             |  0      |  0
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Clock Resource Statistics
-Index     ClockNet             Type        DriverType         Driver                                                                  ClockFanout        GclkLocation
-#1        pll_inst/clk0_buf    UserGclk    pll                pll_inst/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.clkc0    27                 x23y39z16
+Index     ClockNet                                                 Type            DriverType         Driver                                                                              ClockFanout        GclkLocation
+#1        u_pll/clk0_buf                                           UserGclk        pll                u_pll/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.clkc0                   1591               x23y39z16
+#2        u_dphy_tx/u_ph1p_mipiio_tx_wrapper/S_hs_tx_clk           UserGclk        mipiio             u_dphy_tx/u_ph1p_mipiio_tx_wrapper/u_PH1P_LOGIC_DPHY_MIPI_TX.o_fabric_div4_8_clk    578                x23y39z0
+#3        u_dphy_rx/u_ph1p_mipiio_rx_wrapper/S_mipiio_hs_rx_clk    UserGclk        mipiio             u_dphy_rx/u_ph1p_mipiio_rx_wrapper/u_PH1P_LOGIC_DPHY_MIPI_RX.o_fabric_div4_8_clk    400                x23y39z1
+#4        u_pll/clk1_buf                                           UserGclk        pll                u_pll/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.clkc1                   129                x23y39z17
+#5        u_cam_cfg/uii2c_inst/scl_clk                             InferredGclk    lslice             u_cam_cfg/uii2c_inst/scl_clk_reg_syn_11.oqa                                         17                 x23y39z2
 
 Report Hierarchy Area:
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|Instance                                   |Module                            |logic lut |ripple  |seq     |eram    |dsp     |dram lut |shifter lut |f7mux   |f8mux   |pll     |ddr     |
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|top                                        |pll_test                          |1         |26      |26      |0       |0       |0        |0           |0       |0       |1       |0       |
-|  pll_inst                                 |pll                               |0         |0       |0       |0       |0       |0        |0           |0       |0       |1       |0       |
-|    ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst |ph1p_phy_pll_wrapper_6ba8d3e44c24 |0         |0       |0       |0       |0       |0        |0           |0       |0       |1       |0       |
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|Instance                                        |Module                                |logic lut |ripple  |seq     |eram    |dsp     |dram lut |shifter lut |f7mux   |f8mux   |pll     |ddr     |
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|top                                             |csi2_tx_top                           |4177      |569     |3161    |15      |6       |1904     |16          |201     |100     |1       |0       |
+|  u_ae_set                                      |ae_set                                |38        |17      |43      |0       |0       |0        |0           |0       |0       |0       |0       |
+|  u_cam_cfg                                     |uicfgcs500                            |149       |0       |81      |1       |0       |0        |0           |0       |0       |0       |0       |
+|    uii2c_inst                                  |uii2c                                 |38        |0       |33      |0       |0       |0        |0           |0       |0       |0       |0       |
+|    gain_tbl                                    |SC500GainTbl                          |0         |0       |0       |1       |0       |0        |0           |0       |0       |0       |0       |
+|  u_cnn_detector                                |cnn_frame_digit_detector              |2631      |325     |1782    |14      |6       |112      |0           |1       |0       |0       |0       |
+|    u_infer                                     |cnn_digit_infer                       |917       |172     |358     |10      |2       |8        |0           |0       |0       |0       |0       |
+|      u_bank0                                   |cnn_digit_activation_ram              |312       |0       |2       |4       |0       |0        |0           |0       |0       |0       |0       |
+|      u_bank1                                   |cnn_digit_activation_ram              |49        |0       |2       |4       |0       |0        |0           |0       |0       |0       |0       |
+|      u_params                                  |cnn_digit_params                      |3         |0       |0       |0       |0       |0        |0           |0       |0       |0       |0       |
+|      u_weights                                 |cnn_digit_weight_rom                  |30        |0       |1       |2       |0       |0        |0           |0       |0       |0       |0       |
+|  u_cnn_resize_bin                              |cnn_raw10_resize_bin                  |63        |0       |35      |0       |0       |0        |0           |0       |0       |0       |0       |
+|  u_cnn_result_uart                             |cnn_result_uart                       |136       |0       |73      |0       |0       |0        |0           |0       |0       |0       |0       |
+|  u_dphy_rx                                     |mipi_dphy_rx_ph1p_mipiio_wrapper      |155       |0       |230     |0       |0       |0        |0           |0       |0       |0       |0       |
+|    u_byte_aligner_wrapper                      |byte_aligner_wrapper                  |115       |0       |116     |0       |0       |0        |0           |0       |0       |0       |0       |
+|      BYTE_ALIGNER_GEN[0]$u_byte_aligner        |byte_aligner                          |61        |0       |60      |0       |0       |0        |0           |0       |0       |0       |0       |
+|      BYTE_ALIGNER_GEN[1]$u_byte_aligner        |byte_aligner                          |54        |0       |56      |0       |0       |0        |0           |0       |0       |0       |0       |
+|    u_ph1p_mipiio_rx_wrapper                    |ph1p_mipiio_rx_wrapper                |10        |0       |35      |0       |0       |0        |0           |0       |0       |0       |0       |
+|      u_lane0_hs_detect                         |hs_detect                             |5         |0       |12      |0       |0       |0        |0           |0       |0       |0       |0       |
+|    u_channel_aligner_wrapper                   |channel_aligner_wrapper               |30        |0       |79      |0       |0       |0        |0           |0       |0       |0       |0       |
+|      ALIGNER_CHANNEL_GEN[0]$u_channel_aligner  |channel_aligner                       |15        |0       |35      |0       |0       |0        |0           |0       |0       |0       |0       |
+|      ALIGNER_CHANNEL_GEN[1]$u_channel_aligner  |channel_aligner                       |15        |0       |44      |0       |0       |0        |0           |0       |0       |0       |0       |
+|  u_dphy_tx                                     |mipi_dphy_tx_over_ph1p_mipiio_wrapper |72        |49      |275     |0       |0       |0        |16          |0       |0       |0       |0       |
+|    u_hs_tx_wrapper                             |hs_tx_wrapper                         |63        |49      |197     |0       |0       |0        |16          |0       |0       |0       |0       |
+|      MIPI_DATA_LANE_GEN[0]$u_data_lane_wrapper |data_lane_wrapper                     |39        |49      |139     |0       |0       |0        |0           |0       |0       |0       |0       |
+|        u_data_hs_generate                      |data_hs_generate                      |33        |49      |112     |0       |0       |0        |0           |0       |0       |0       |0       |
+|          u_dphy_tx_fifo                        |dphy_tx_fifo                          |1         |0       |31      |0       |0       |0        |0           |0       |0       |0       |0       |
+|        u_data_lp_generate                      |data_lp_generate                      |3         |0       |7       |0       |0       |0        |0           |0       |0       |0       |0       |
+|      u_hs_tx_controler                         |hs_tx_controler                       |16        |0       |13      |0       |0       |0        |0           |0       |0       |0       |0       |
+|      MIPI_DATA_LANE_GEN[1]$u_data_lane_wrapper |data_lane_wrapper                     |4         |0       |36      |0       |0       |0        |0           |0       |0       |0       |0       |
+|        u_data_hs_generate                      |data_hs_generate                      |4         |0       |36      |0       |0       |0        |0           |0       |0       |0       |0       |
+|          u_dphy_tx_fifo                        |dphy_tx_fifo                          |1         |0       |18      |0       |0       |0        |0           |0       |0       |0       |0       |
+|    u_ph1p_mipiio_tx_wrapper                    |ph1p_mipiio_tx_wrapper                |8         |0       |78      |0       |0       |0        |0           |0       |0       |0       |0       |
+|  u_pll                                         |pll                                   |1         |0       |0       |0       |0       |0        |0           |0       |0       |1       |0       |
+|    ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst      |ph1p_phy_pll_wrapper_6ba8d3e44c24     |1         |0       |0       |0       |0       |0        |0           |0       |0       |1       |0       |
+|  u_rx_parse                                    |csi2_rx_parse                         |62        |48      |85      |0       |0       |0        |0           |0       |0       |0       |0       |
+|  u_tk_fifo                                     |csi2_ptr_fifo                         |190       |24      |201     |0       |0       |768      |0           |72      |36      |0       |0       |
+|  u_tx_packet                                   |csi2_tx_packet                        |597       |91      |199     |0       |0       |1024     |0           |128     |64      |0       |0       |
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 DataNet Average Fanout:
 
-   Index     Fanout    Nets  
-    #1         1        73   
-    #2         2        3    
-  Average     1.04           
+   Index     Fanout     Nets  
+    #1          1       6946  
+    #2          2       1850  
+    #3          3       422   
+    #4          4       280   
+    #5        5-10      3044  
+    #6        11-50     623   
+    #7       51-100     126   
+    #8       101-500     2    
+  Average     4.62            

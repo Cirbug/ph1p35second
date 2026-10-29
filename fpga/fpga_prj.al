@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Project Version="3" Minor="2" Path="D:/BaiduNetdiskDownload/02_F02_FC02_PH1P35/fpga_11/ph1p35second/fpga">
+<Project Version="3" Minor="2" Path="D:/2026fpga/ph1p35second/fpga">
     <Project_Created_Time></Project_Created_Time>
     <TD_Version>6.2.168116</TD_Version>
     <Name>fpga_prj</Name>
@@ -20,6 +20,7 @@
             </File>
             <File Path="uisrc/01_rtl/csi2/crc16_csi.v">
                 <FileInfo>
+                    <Attr Name="AutoExcluded" Val="true"/>
                     <Attr Name="UsedInSyn" Val="true"/>
                     <Attr Name="UsedInP&R" Val="true"/>
                     <Attr Name="BelongTo" Val="design_1"/>
@@ -28,6 +29,7 @@
             </File>
             <File Path="uisrc/01_rtl/csi2/crc16_par2.v">
                 <FileInfo>
+                    <Attr Name="AutoExcluded" Val="true"/>
                     <Attr Name="UsedInSyn" Val="true"/>
                     <Attr Name="UsedInP&R" Val="true"/>
                     <Attr Name="BelongTo" Val="design_1"/>
@@ -143,7 +145,7 @@
                     <Attr Name="UsedInSyn" Val="true"/>
                     <Attr Name="UsedInP&R" Val="true"/>
                     <Attr Name="BelongTo" Val="design_1"/>
-                    <Attr Name="CompileOrder" Val="18"/>
+                    <Attr Name="CompileOrder" Val="19"/>
                 </FileInfo>
             </File>
             <File Path="uisrc/01_rtl/csi2_tx_top.v">
@@ -151,7 +153,47 @@
                     <Attr Name="UsedInSyn" Val="true"/>
                     <Attr Name="UsedInP&R" Val="true"/>
                     <Attr Name="BelongTo" Val="design_1"/>
-                    <Attr Name="CompileOrder" Val="19"/>
+                    <Attr Name="CompileOrder" Val="21"/>
+                </FileInfo>
+            </File>
+            <File Path="uisrc/01_rtl/cnn/cnn_raw10_resize_bin.v">
+                <FileInfo>
+                    <Attr Name="UsedInSyn" Val="true"/>
+                    <Attr Name="UsedInP&R" Val="true"/>
+                    <Attr Name="BelongTo" Val="design_1"/>
+                    <Attr Name="CompileOrder" Val="26"/>
+                </FileInfo>
+            </File>
+            <File Path="uisrc/01_rtl/cnn/cnn_digit_params.v">
+                <FileInfo>
+                    <Attr Name="UsedInSyn" Val="true"/>
+                    <Attr Name="UsedInP&R" Val="true"/>
+                    <Attr Name="BelongTo" Val="design_1"/>
+                    <Attr Name="CompileOrder" Val="27"/>
+                </FileInfo>
+            </File>
+            <File Path="uisrc/01_rtl/cnn/cnn_digit_infer.v">
+                <FileInfo>
+                    <Attr Name="UsedInSyn" Val="true"/>
+                    <Attr Name="UsedInP&R" Val="true"/>
+                    <Attr Name="BelongTo" Val="design_1"/>
+                    <Attr Name="CompileOrder" Val="28"/>
+                </FileInfo>
+            </File>
+            <File Path="uisrc/01_rtl/cnn/cnn_frame_digit_detector.v">
+                <FileInfo>
+                    <Attr Name="UsedInSyn" Val="true"/>
+                    <Attr Name="UsedInP&R" Val="true"/>
+                    <Attr Name="BelongTo" Val="design_1"/>
+                    <Attr Name="CompileOrder" Val="29"/>
+                </FileInfo>
+            </File>
+            <File Path="uisrc/01_rtl/cnn/cnn_result_uart.v">
+                <FileInfo>
+                    <Attr Name="UsedInSyn" Val="true"/>
+                    <Attr Name="UsedInP&R" Val="true"/>
+                    <Attr Name="BelongTo" Val="design_1"/>
+                    <Attr Name="CompileOrder" Val="30"/>
                 </FileInfo>
             </File>
             <File Path="uisrc/01_rtl/dbg/dbg_uart.v">
@@ -159,7 +201,7 @@
                     <Attr Name="UsedInSyn" Val="true"/>
                     <Attr Name="UsedInP&R" Val="true"/>
                     <Attr Name="BelongTo" Val="design_1"/>
-                    <Attr Name="CompileOrder" Val="21"/>
+                    <Attr Name="CompileOrder" Val="25"/>
                 </FileInfo>
             </File>
             <File Path="uisrc/01_rtl/ae/ae_set.v">
@@ -167,7 +209,7 @@
                     <Attr Name="UsedInSyn" Val="true"/>
                     <Attr Name="UsedInP&R" Val="true"/>
                     <Attr Name="BelongTo" Val="design_1"/>
-                    <Attr Name="CompileOrder" Val="20"/>
+                    <Attr Name="CompileOrder" Val="23"/>
                 </FileInfo>
             </File>
         </Verilog>
@@ -185,7 +227,7 @@
                     <Attr Name="UsedInSyn" Val="true"/>
                     <Attr Name="UsedInP&R" Val="true"/>
                     <Attr Name="BelongTo" Val="design_1"/>
-                    <Attr Name="CompileOrder" Val="19"/>
+                    <Attr Name="CompileOrder" Val="20"/>
                 </FileInfo>
             </File>
             <File Path="uisrc/01_rtl/mipi_dphy_rx/byte_aligner_wrapper.enc.sv">
@@ -193,7 +235,7 @@
                     <Attr Name="UsedInSyn" Val="true"/>
                     <Attr Name="UsedInP&R" Val="true"/>
                     <Attr Name="BelongTo" Val="design_1"/>
-                    <Attr Name="CompileOrder" Val="20"/>
+                    <Attr Name="CompileOrder" Val="22"/>
                 </FileInfo>
             </File>
             <File Path="uisrc/01_rtl/mipi_dphy_rx/channel_aligner_wrapper.enc.sv">
@@ -201,7 +243,7 @@
                     <Attr Name="UsedInSyn" Val="true"/>
                     <Attr Name="UsedInP&R" Val="true"/>
                     <Attr Name="BelongTo" Val="design_1"/>
-                    <Attr Name="CompileOrder" Val="21"/>
+                    <Attr Name="CompileOrder" Val="24"/>
                 </FileInfo>
             </File>
         </System_Verilog>
@@ -231,7 +273,7 @@
                     <Attr Name="UsedInSyn" Val="true"/>
                     <Attr Name="UsedInP&R" Val="true"/>
                     <Attr Name="BelongTo" Val="design_1"/>
-                    <Attr Name="CompileOrder" Val="2"/>
+                    <Attr Name="CompileOrder" Val="1"/>
                 </FileInfo>
             </File>
         </IP_FILE>

@@ -1,0 +1,113 @@
+build/
+# Prerequisites
+*.d
+
+# Object files
+*.o
+*.ko
+*.obj
+*.elf
+
+# Linker output
+*.ilk
+*.map
+*.exp
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Libraries
+*.lib
+*.a
+*.la
+*.lo
+
+# Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Executables
+*.exe
+*.out
+#*.app
+*.i*86
+*.x86_64
+#*.hex
+
+# Debug files
+*.dSYM/
+*.su
+*.idb
+*.pdb
+*.log
+# Kernel Module Compile Results
+*.mod*
+*.cmd
+.tmp_versions/
+modules.order
+Module.symvers
+Mkfile.old
+dkms.conf
+
+# debug information files
+*.dwo
+
+# Tang Dynasty synthesis/place/route output (keep al_ip and design sources)
+*_Runs/
+/td_project/log/
+*.logw
+*.bit
+*_inst.bid
+*_gate.db
+*_route.db
+*.area
+*.qor
+*.timing
+*_timing.rpt
+*.timingsummary
+*.check_timing
+/algorithm_port_20261012/timing_status.txt
+
+# Local TD session state; retain .al/.hpf/.sdc/.adc/.ipc project inputs
+/td_project/.design.prj
+/td_project/.design.recent
+/td_project/.recent_user_depot.ini
+
+# MCU build directories (build/ above already covers both firmware targets)
+/FDwork/**/Debug/
+/FDwork/**/Release/
+/FDwork/**/obj/
+
+# HDL simulator outputs and waveforms
+*.vvp
+*.vcd
+*.fst
+*.wlf
+transcript
+vsim.wlf
+
+# Python test/tool bytecode caches
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# Historical copies and local previews are archived outside the repository.
+/_backup/
+/algorithm_port_20261012/
+/spi_text.zip
+/*_preview.ppm
+*.before_*
+*.ramonly_*
+*.bak
+*.bak_*
+
+# STM32 / Keil compilation products; retain the linker scatter configuration.
+/spi_text/MDK-ARM/spi_text/*
+!/spi_text/MDK-ARM/spi_text/*.sct
+/spi_text/MDK-ARM/*.lst
+td_project/.lock.f
+*.stackdump

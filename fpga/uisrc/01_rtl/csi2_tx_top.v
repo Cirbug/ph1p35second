@@ -237,6 +237,112 @@ module csi2_tx_top #(
         .O_wc_err     ( p_wc_err   )
     );
 
+    // Parallel recognition tap.  It observes the parsed RAW10 payload only;
+    // the token/FIFO path below remains the sole owner of CSI->DSI traffic.
+    wire        cnn_frame_start;
+    wire        cnn_pixel_valid;
+    wire [7:0]  cnn_pixel_data;
+    wire        cnn_frame_complete;
+    wire [9:0]  cnn_pixel_x;
+    wire [8:0]  cnn_pixel_y;
+    wire        cnn_format_error;
+
+    cnn_raw10_resize_bin #(
+        .THRESHOLD ( 8'd128 ),
+        .SRC_WIDTH ( 2592 ),
+        .SRC_HEIGHT( 1944 ),
+        .DST_WIDTH ( 320 ),
+        .DST_HEIGHT( 180 )
+    ) u_cnn_resize_bin (
+        .clk          ( rx_clk       ),
+        .rst          ( ~rst_n_rx    ),
+        .in_valid     ( p_wr_en      ),
+        .in_data      ( p_wr_data    ),
+        .in_line_end  ( p_pkt_end    ),
+        .in_frame_end ( p_frm_end    ),
+        .frame_start  ( cnn_frame_start ),
+        .pixel_valid  ( cnn_pixel_valid ),
+        .pixel_data   ( cnn_pixel_data ),
+        .frame_complete( cnn_frame_complete ),
+        .pixel_x      ( cnn_pixel_x ),
+        .pixel_y      ( cnn_pixel_y ),
+        .format_error ( cnn_format_error )
+    );
+
+    wire        cnn_digit_done;
+    wire [3:0]  cnn_digit_class;
+    wire [9:0]  cnn_digit_x;
+    wire [8:0]  cnn_digit_y;
+    wire [9:0]  cnn_digit_w;
+    wire [8:0]  cnn_digit_h;
+    wire        cnn_detector_frame_done;
+    wire [4:0]  cnn_digit_count;
+    wire        cnn_detector_busy;
+    wire        cnn_model_check_done;
+    wire [31:0] cnn_model_weight_crc32;
+    reg         cnn_result_toggle;
+    reg [9:0]   cnn_result_x, cnn_result_w;
+    reg [8:0]   cnn_result_y, cnn_result_h;
+    reg [3:0]   cnn_result_class;
+
+    always @(posedge clk_100m or negedge rst_n_100) begin
+        if (!rst_n_100) begin
+            cnn_result_toggle <= 1'b0;
+            cnn_result_x <= 10'd0; cnn_result_y <= 9'd0;
+            cnn_result_w <= 10'd0; cnn_result_h <= 9'd0;
+            cnn_result_class <= 4'd0;
+        end else if (cnn_digit_done) begin
+            cnn_result_x <= cnn_digit_x;
+            cnn_result_y <= cnn_digit_y;
+            cnn_result_w <= cnn_digit_w;
+            cnn_result_h <= cnn_digit_h;
+            cnn_result_class <= cnn_digit_class;
+            cnn_result_toggle <= ~cnn_result_toggle;
+        end
+    end
+
+    cnn_frame_digit_detector #(
+        .DARK_THRESHOLD(8'd128),
+        .MAX_BANDS(8),
+        .MAX_DIGITS(16)
+    ) u_cnn_detector (
+        .capture_clk  ( rx_clk       ),
+        .infer_clk    ( clk_100m     ),
+        .rst          ( ~sys_rst_n   ),
+        .frame_start  ( cnn_frame_start ),
+        .pixel_valid  ( cnn_pixel_valid ),
+        .pixel_data   ( cnn_pixel_data ),
+        .frame_complete( cnn_frame_complete ),
+        .digit_done   ( cnn_digit_done ),
+        .digit_class  ( cnn_digit_class ),
+        .digit_x      ( cnn_digit_x ),
+        .digit_y      ( cnn_digit_y ),
+        .digit_w      ( cnn_digit_w ),
+        .digit_h      ( cnn_digit_h ),
+        .frame_done   ( cnn_detector_frame_done ),
+        .frame_digit_count( cnn_digit_count ),
+        .busy         ( cnn_detector_busy ),
+        .model_check_done( cnn_model_check_done ),
+        .model_weight_crc32( cnn_model_weight_crc32 ),
+        .digit_patch_crc32(),
+        .digit_conv1_signature(),
+        .digit_pool1_signature(),
+        .digit_conv2_signature(),
+        .digit_pool2_signature(),
+        .digit_conv3_signature(),
+        .digit_pool3_signature(),
+        .digit_conv1_input_signature(),
+        .digit_conv1_weight_signature(),
+        .digit_conv1_product_signature(),
+        .digit_conv1_accumulator_signature(),
+        .digit_conv1_raw_signature(),
+        .digit_conv1_channel_signatures(),
+        .digit_pool1_channel_signatures(),
+        .digit_conv1_first_weight(),
+        .digit_conv1_first_activation(),
+        .digit_conv1_first_product()
+    );
+
     //==================================================================
     // 5. 令牌打包（RX 域） -> 异步 FIFO
     //    令牌：{type[1:0], data[15:0]}
@@ -710,25 +816,45 @@ module csi2_tx_top #(
         dbg_h1    <= h1_r;
     end
 
+    reg result_toggle_meta, result_toggle_sync, result_toggle_seen;
+    reg result_start;
+    always @(posedge clk_24m or negedge rst_n_24) begin
+        if (!rst_n_24) begin
+            result_toggle_meta <= 1'b0;
+            result_toggle_sync <= 1'b0;
+            result_toggle_seen <= 1'b0;
+            result_start <= 1'b0;
+        end else begin
+            result_toggle_meta <= cnn_result_toggle;
+            result_toggle_sync <= result_toggle_meta;
+            result_start <= 1'b0;
+            if (result_toggle_sync != result_toggle_seen) begin
+                result_toggle_seen <= result_toggle_sync;
+                result_start <= 1'b1;
+            end
+        end
+    end
+
+    wire result_uart_busy;
+    wire result_uart_tx;
+    wire dbg_uart_tx;
+    assign O_uart_tx = result_uart_tx;
+    cnn_result_uart #(
+        .CLK_HZ(24000000), .BAUD(115200)
+    ) u_cnn_result_uart (
+        .clk(clk_24m), .rst_n(rst_n_24), .start(result_start),
+        .x(cnn_result_x), .y(cnn_result_y), .w(cnn_result_w), .h(cnn_result_h),
+        .class_id(cnn_result_class), .busy(result_uart_busy), .uart_tx(result_uart_tx)
+    );
+
     dbg_uart #(
-        .CLK_HZ ( 24000000 ),
-        .BAUD   ( 115200   ),
-        .GAP_MS ( 100      )
+        .CLK_HZ(24000000), .BAUD(115200), .GAP_MS(100)
     ) u_dbg_uart (
-        .I_clk      ( clk_24m      ),
-        .I_rst_n    ( rst_n_24     ),
-        .I_st_cfg   ( cam_cfg_done ),
-        .I_st_wc    ( dbg_wc       ),
-        .I_st_dt    ( dbg_dt       ),
-        .I_st_burst ( dbg_burst    ),
-        .I_st_h0    ( dbg_h0       ),
-        .I_st_h1    ( dbg_h1       ),
-        .I_st_frame ( dbg_frame    ),
-        .I_st_rxval ( dbg_rxval    ),
-        .I_st_werr  ( dbg_werr     ),
-        .I_st_gapmax( dbg_fs       ),
-        .I_st_pktcnt( dbg_fe       ),
-        .O_uart_tx  ( O_uart_tx    )
+        .I_clk(clk_24m), .I_rst_n(rst_n_24),
+        .I_st_cfg(cam_cfg_done), .I_st_wc(dbg_wc), .I_st_dt(dbg_dt),
+        .I_st_burst(dbg_burst), .I_st_h0(dbg_h0), .I_st_h1(dbg_h1),
+        .I_st_frame(dbg_frame), .I_st_rxval(dbg_rxval), .I_st_werr(dbg_werr),
+        .I_st_gapmax(dbg_fs), .I_st_pktcnt(dbg_fe), .O_uart_tx(dbg_uart_tx)
     );
 
 endmodule
