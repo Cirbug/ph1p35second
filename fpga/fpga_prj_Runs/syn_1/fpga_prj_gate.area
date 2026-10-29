@@ -1,43 +1,43 @@
 standard
-***Report Model: pll_test Device: PH1P35MDG324***
+***Report Model: csi2_tx_top Device: PH1P35MDG324***
 
 Design Statistics
-#IO                         3   out of    160    1.88%
-  #input                    1
-  #output                   2
-  #inout                    0
-#lut                       27
-  #lut1                     1
-  #lut2                     0
-  #lut3                     0
-  #lut4                     0
-  #lut5                     0
-  #lut6                    26
-#reg                       26
-  #slice reg               26   out of  42432    0.06%
+#IO                        12   out of    160    7.50%
+  #input                    4
+  #output                   7
+  #inout                    1
+#lut                     3968
+  #lut1                    13
+  #lut2                   360
+  #lut3                   184
+  #lut4                   256
+  #lut5                   245
+  #lut6                  2910
+#reg                     1489
+  #slice reg             1489   out of  42432    3.51%
   #pad reg                  0
 
 Utilization Statistics
-#slice*                    29   out of  21216    0.14%
-  #used ram                 0
-    #dram lut               0
-    #shifter lut            0
-  #used logic              29
-    #with luts*             1
-    #with adder            26
-    #reg only*              2
-#f7mux                      0   out of  10608    0.00%
-#f8mux                      0   out of   5304    0.00%
-#eram                       0   out of    108    0.00%
-  #eram20k                  0
+#slice*                  3650   out of  21216   17.20%
+  #used ram              1808
+    #dram lut            1792
+    #shifter lut           16
+  #used logic            1842
+    #with luts*          1364
+    #with adder           330
+    #reg only*            148
+#f7mux                    200   out of  10608    1.89%
+#f8mux                    100   out of   5304    1.89%
+#eram                       1   out of    108    0.93%
+  #eram20k                  1
   #fifo20k                  0
 #dsp                        0   out of     40    0.00%
 #ddr_byte                   0   out of     12    0.00%
-#mipi_tx                    0   out of      2    0.00%
-#mipi_rx                    0   out of      2    0.00%
-#pad                        3   out of    160    1.88%
+#mipi_tx                    1   out of      2   50.00%
+#mipi_rx                    1   out of      2   50.00%
+#pad                       12   out of    160    7.50%
 #pll                        1   out of      6   16.67%
-#gclk                       1   out of     32    3.12%
+#gclk                       4   out of     32   12.50%
 #lclk                       0   out of     12    0.00%
 #sclk                       0   out of     48    0.00%
 #mlclk                      0   out of      6    0.00%
@@ -46,10 +46,38 @@ Utilization Statistics
 * Note! The LUT and Slice count after Optimize-Gate is not the final value, Run Optimize-place for a more realistic count.
 
 Report Hierarchy Area:
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|Instance                                   |Module                            |logic lut |ripple  |seq     |eram    |dsp     |dram lut |shifter lut |f7mux   |f8mux   |pll     |ddr     |
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|top                                        |pll_test                          |1         |26      |26      |0       |0       |0        |0           |0       |0       |1       |0       |
-|  pll_inst                                 |pll                               |0         |0       |0       |0       |0       |0        |0           |0       |0       |1       |0       |
-|    ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst |ph1p_phy_pll_wrapper_6ba8d3e44c24 |0         |0       |0       |0       |0       |0        |0           |0       |0       |1       |0       |
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|Instance                                        |Module                                |logic lut |ripple  |seq     |eram    |dsp     |dram lut |shifter lut |f7mux   |f8mux   |pll     |ddr     |
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|top                                             |csi2_tx_top                           |1364      |330     |1489    |1       |0       |1792     |16          |200     |100     |1       |0       |
+|  u_ae_set                                      |ae_set                                |36        |17      |43      |0       |0       |0        |0           |0       |0       |0       |0       |
+|  u_cam_cfg                                     |uicfgcs500                            |123       |0       |81      |1       |0       |0        |0           |0       |0       |0       |0       |
+|    gain_tbl                                    |SC500GainTbl                          |0         |0       |0       |1       |0       |0        |0           |0       |0       |0       |0       |
+|    uii2c_inst                                  |uii2c                                 |34        |0       |33      |0       |0       |0        |0           |0       |0       |0       |0       |
+|  u_dbg_uart                                    |dbg_uart                              |205       |22      |55      |0       |0       |0        |0           |0       |0       |0       |0       |
+|  u_dphy_rx                                     |mipi_dphy_rx_ph1p_mipiio_wrapper      |159       |0       |342     |0       |0       |0        |0           |0       |0       |0       |0       |
+|    u_byte_aligner_wrapper                      |byte_aligner_wrapper                  |92        |0       |114     |0       |0       |0        |0           |0       |0       |0       |0       |
+|      BYTE_ALIGNER_GEN[0]$u_byte_aligner        |byte_aligner                          |46        |0       |58      |0       |0       |0        |0           |0       |0       |0       |0       |
+|      BYTE_ALIGNER_GEN[1]$u_byte_aligner        |byte_aligner                          |46        |0       |56      |0       |0       |0        |0           |0       |0       |0       |0       |
+|    u_channel_aligner_wrapper                   |channel_aligner_wrapper               |24        |0       |81      |0       |0       |0        |0           |0       |0       |0       |0       |
+|      ALIGNER_CHANNEL_GEN[0]$u_channel_aligner  |channel_aligner                       |12        |0       |41      |0       |0       |0        |0           |0       |0       |0       |0       |
+|      ALIGNER_CHANNEL_GEN[1]$u_channel_aligner  |channel_aligner                       |12        |0       |40      |0       |0       |0        |0           |0       |0       |0       |0       |
+|    u_ph1p_mipiio_rx_wrapper                    |ph1p_mipiio_rx_wrapper                |43        |0       |147     |0       |0       |0        |0           |0       |0       |0       |0       |
+|      u_lane0_hs_detect                         |hs_detect                             |4         |0       |12      |0       |0       |0        |0           |0       |0       |0       |0       |
+|  u_dphy_tx                                     |mipi_dphy_tx_over_ph1p_mipiio_wrapper |53        |49      |275     |0       |0       |0        |16          |0       |0       |0       |0       |
+|    u_hs_tx_wrapper                             |hs_tx_wrapper                         |51        |49      |194     |0       |0       |0        |16          |0       |0       |0       |0       |
+|      MIPI_DATA_LANE_GEN[0]$u_data_lane_wrapper |data_lane_wrapper                     |28        |49      |132     |0       |0       |0        |0           |0       |0       |0       |0       |
+|        u_data_hs_generate                      |data_hs_generate                      |26        |49      |112     |0       |0       |0        |0           |0       |0       |0       |0       |
+|          u_dphy_tx_fifo                        |dphy_tx_fifo                          |0         |0       |30      |0       |0       |0        |0           |0       |0       |0       |0       |
+|        u_data_lp_generate                      |data_lp_generate                      |1         |0       |4       |0       |0       |0        |0           |0       |0       |0       |0       |
+|      MIPI_DATA_LANE_GEN[1]$u_data_lane_wrapper |data_lane_wrapper                     |7         |0       |40      |0       |0       |0        |0           |0       |0       |0       |0       |
+|        u_data_hs_generate                      |data_hs_generate                      |7         |0       |40      |0       |0       |0        |0           |0       |0       |0       |0       |
+|          u_dphy_tx_fifo                        |dphy_tx_fifo                          |0         |0       |16      |0       |0       |0        |0           |0       |0       |0       |0       |
+|      u_hs_tx_controler                         |hs_tx_controler                       |15        |0       |13      |0       |0       |0        |0           |0       |0       |0       |0       |
+|    u_ph1p_mipiio_tx_wrapper                    |ph1p_mipiio_tx_wrapper                |2         |0       |81      |0       |0       |0        |0           |0       |0       |0       |0       |
+|  u_pll                                         |pll                                   |1         |0       |0       |0       |0       |0        |0           |0       |0       |1       |0       |
+|    ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst      |ph1p_phy_pll_wrapper_6ba8d3e44c24     |1         |0       |0       |0       |0       |0        |0           |0       |0       |1       |0       |
+|  u_rx_parse                                    |csi2_rx_parse                         |45        |48      |87      |0       |0       |0        |0           |0       |0       |0       |0       |
+|  u_tk_fifo                                     |csi2_ptr_fifo                         |185       |24      |96      |0       |0       |768      |0           |72      |36      |0       |0       |
+|  u_tx_packet                                   |csi2_tx_packet                        |487       |91      |156     |0       |0       |1024     |0           |128     |64      |0       |0       |
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+

@@ -1,4 +1,4 @@
-Location         : D:\BaiduNetdiskDownload\02_F02_FC02_PH1P35\fpga_11\ph1p35second\fpga
+Location         : C:\Users\21397\Desktop\ph1p35second\fpga
 Running with     : Tang Dynasty v6.2.168116
                    Copyright (c) 2012-2025 Anlogic Inc.
 Top Model        : csi2_tx_top
@@ -6,21 +6,21 @@ Device           : PH1P35MDG324
 Speed            : 3
 
 Timing Mode      : final
-Setup            : WNS  2992ps  TNS        0ps  NUM_FEPS     0
-Hold             : WNS    38ps  TNS        0ps  NUM_FEPS     0
+Setup            : WNS  3074ps  TNS        0ps  NUM_FEPS     0
+Hold             : WNS    22ps  TNS        0ps  NUM_FEPS     0
 
 Flow Statistics  :
 --------------------------------------------------------------------------------------------------
      command     |  #calls  |  wall time  |  cpu time(s)  |  used memory(mb)  |  peak memory(mb)  
 --------------------------------------------------------------------------------------------------
-      place      |    1     |  35s(50%)   |    97(64%)    |        598        |        598        
-      route      |    1     |  24s(34%)   |    43(28%)    |       1034        |       1034        
-  optimize_gate  |    1     |   6s(8%)    |     6(3%)     |        472        |        472        
-  optimize_rtl   |    1     |   3s(4%)    |     3(1%)     |        380        |        397        
-    fix_hold     |    1     |   1s(1%)    |     1(0%)     |       1034        |       1034        
+      place      |    1     |  23s(44%)   |    63(62%)    |        616        |        617        
+      route      |    1     |  19s(36%)   |    30(29%)    |       1067        |       1067        
+  optimize_gate  |    1     |   5s(9%)    |     4(3%)     |        471        |        471        
+  optimize_rtl   |    1     |   3s(5%)    |     2(1%)     |        380        |        397        
+    fix_hold     |    1     |   1s(1%)    |     1(0%)     |       1067        |       1067        
   import_device  |    1     |   1s(1%)    |     1(0%)     |        323        |        323        
-    read_adc     |    1     |   0s(0%)    |     0(0%)     |        337        |        337        
-    read_sdc     |    1     |   0s(0%)    |     0(0%)     |        337        |        337        
+    read_adc     |    1     |   0s(0%)    |     0(0%)     |        338        |        338        
+    read_sdc     |    1     |   0s(0%)    |     0(0%)     |        338        |        338        
 --------------------------------------------------------------------------------------------------
-      total      |    8     |    1m10s    |      151      |       1034        |       1034        
+      total      |    8     |     52s     |      101      |       1067        |       1067        
 --------------------------------------------------------------------------------------------------

@@ -56,7 +56,7 @@ begin
 		8:	REG_DATA = {16'h36fa, 8'h3b}; 
 		9:	REG_DATA = {16'h36fb, 8'ha6}; 
 		10:	REG_DATA = {16'h36fc, 8'h10}; 
-		11:	REG_DATA = {16'h36fd, 8'h24}; 
+		11:	REG_DATA = {16'h36fd, 8'h14}; 
 		12:	REG_DATA = {16'h36e9, 8'h04}; 
 		13:	REG_DATA = {16'h36f9, 8'h04}; 
 		14:	REG_DATA = {16'h301f, 8'h50}; 

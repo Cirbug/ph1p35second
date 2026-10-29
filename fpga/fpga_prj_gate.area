@@ -6,24 +6,24 @@ Design Statistics
   #input                    4
   #output                   7
   #inout                    1
-#lut                     3995
-  #lut1                    12
-  #lut2                   377
-  #lut3                   198
-  #lut4                   257
-  #lut5                   268
-  #lut6                  2883
+#lut                     3968
+  #lut1                    13
+  #lut2                   360
+  #lut3                   184
+  #lut4                   256
+  #lut5                   245
+  #lut6                  2910
 #reg                     1489
   #slice reg             1489   out of  42432    3.51%
   #pad reg                  0
 
 Utilization Statistics
-#slice*                  3656   out of  21216   17.23%
+#slice*                  3650   out of  21216   17.20%
   #used ram              1808
     #dram lut            1792
     #shifter lut           16
-  #used logic            1848
-    #with luts*          1370
+  #used logic            1842
+    #with luts*          1364
     #with adder           330
     #reg only*            148
 #f7mux                    200   out of  10608    1.89%
@@ -49,16 +49,16 @@ Report Hierarchy Area:
 +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |Instance                                        |Module                                |logic lut |ripple  |seq     |eram    |dsp     |dram lut |shifter lut |f7mux   |f8mux   |pll     |ddr     |
 +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|top                                             |csi2_tx_top                           |1370      |330     |1489    |1       |0       |1792     |16          |200     |100     |1       |0       |
+|top                                             |csi2_tx_top                           |1364      |330     |1489    |1       |0       |1792     |16          |200     |100     |1       |0       |
 |  u_ae_set                                      |ae_set                                |36        |17      |43      |0       |0       |0        |0           |0       |0       |0       |0       |
-|  u_cam_cfg                                     |uicfgcs500                            |130       |0       |81      |1       |0       |0        |0           |0       |0       |0       |0       |
+|  u_cam_cfg                                     |uicfgcs500                            |123       |0       |81      |1       |0       |0        |0           |0       |0       |0       |0       |
 |    gain_tbl                                    |SC500GainTbl                          |0         |0       |0       |1       |0       |0        |0           |0       |0       |0       |0       |
 |    uii2c_inst                                  |uii2c                                 |34        |0       |33      |0       |0       |0        |0           |0       |0       |0       |0       |
-|  u_dbg_uart                                    |dbg_uart                              |206       |22      |55      |0       |0       |0        |0           |0       |0       |0       |0       |
-|  u_dphy_rx                                     |mipi_dphy_rx_ph1p_mipiio_wrapper      |160       |0       |342     |0       |0       |0        |0           |0       |0       |0       |0       |
-|    u_byte_aligner_wrapper                      |byte_aligner_wrapper                  |93        |0       |114     |0       |0       |0        |0           |0       |0       |0       |0       |
+|  u_dbg_uart                                    |dbg_uart                              |205       |22      |55      |0       |0       |0        |0           |0       |0       |0       |0       |
+|  u_dphy_rx                                     |mipi_dphy_rx_ph1p_mipiio_wrapper      |159       |0       |342     |0       |0       |0        |0           |0       |0       |0       |0       |
+|    u_byte_aligner_wrapper                      |byte_aligner_wrapper                  |92        |0       |114     |0       |0       |0        |0           |0       |0       |0       |0       |
 |      BYTE_ALIGNER_GEN[0]$u_byte_aligner        |byte_aligner                          |46        |0       |58      |0       |0       |0        |0           |0       |0       |0       |0       |
-|      BYTE_ALIGNER_GEN[1]$u_byte_aligner        |byte_aligner                          |47        |0       |56      |0       |0       |0        |0           |0       |0       |0       |0       |
+|      BYTE_ALIGNER_GEN[1]$u_byte_aligner        |byte_aligner                          |46        |0       |56      |0       |0       |0        |0           |0       |0       |0       |0       |
 |    u_channel_aligner_wrapper                   |channel_aligner_wrapper               |24        |0       |81      |0       |0       |0        |0           |0       |0       |0       |0       |
 |      ALIGNER_CHANNEL_GEN[0]$u_channel_aligner  |channel_aligner                       |12        |0       |41      |0       |0       |0        |0           |0       |0       |0       |0       |
 |      ALIGNER_CHANNEL_GEN[1]$u_channel_aligner  |channel_aligner                       |12        |0       |40      |0       |0       |0        |0           |0       |0       |0       |0       |
@@ -79,5 +79,5 @@ Report Hierarchy Area:
 |    ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst      |ph1p_phy_pll_wrapper_6ba8d3e44c24     |1         |0       |0       |0       |0       |0        |0           |0       |0       |1       |0       |
 |  u_rx_parse                                    |csi2_rx_parse                         |45        |48      |87      |0       |0       |0        |0           |0       |0       |0       |0       |
 |  u_tk_fifo                                     |csi2_ptr_fifo                         |185       |24      |96      |0       |0       |768      |0           |72      |36      |0       |0       |
-|  u_tx_packet                                   |csi2_tx_packet                        |484       |91      |156     |0       |0       |1024     |0           |128     |64      |0       |0       |
+|  u_tx_packet                                   |csi2_tx_packet                        |487       |91      |156     |0       |0       |1024     |0           |128     |64      |0       |0       |
 +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+

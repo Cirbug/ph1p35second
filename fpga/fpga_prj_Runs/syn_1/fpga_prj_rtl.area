@@ -1,35 +1,68 @@
 standard
-***Report Model: pll_test Device: PH1P35MDG324***
+***Report Model: csi2_tx_top Device: PH1P35MDG324***
 
 IO Statistics
-#IO                         3
-  #input                    1
-  #output                   2
-  #inout                    0
+#IO                        32
+  #input                    4
+  #output                   7
+  #inout                   21
 
 Gate Statistics
-#Basic gates               27
-  #and                      0
+#Basic gates             3024
+  #and                    101
   #nand                     0
-  #or                       0
+  #or                      51
   #nor                      0
-  #xor                      0
+  #xor                     84
   #xnor                     0
   #buf                      0
-  #not                      1
-  #bufif1                   0
-  #MX21                     0
+  #not                    306
+  #bufif1                   1
+  #MX21                   358
   #FADD                     0
-  #DFF                     26
+  #DFF                   2123
   #LATCH                    0
-#MACRO_ADD                  1
-#MACRO_OTHERS               1
+#MACRO_ADD                117
+#MACRO_EQ                  69
+#MACRO_MUX               1270
+#MACRO_OTHERS               4
 
 Report Hierarchy Area:
-+------------------------------------------------------------------------------------------------------+
-|Instance                                   |Module                            |gates  |seq    |macros |
-+------------------------------------------------------------------------------------------------------+
-|top                                        |pll_test                          |1      |26     |2      |
-|  pll_inst                                 |pll                               |0      |0      |1      |
-|    ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst |ph1p_phy_pll_wrapper_6ba8d3e44c24 |0      |0      |0      |
-+------------------------------------------------------------------------------------------------------+
++---------------------------------------------------------------------------------------------------------------+
+|Instance                                        |Module                                |gates  |seq    |macros |
++---------------------------------------------------------------------------------------------------------------+
+|top                                             |csi2_tx_top                           |901    |2123   |190    |
+|  u_ae_set                                      |ae_set                                |10     |43     |8      |
+|  u_cam_cfg                                     |uicfgcs500                            |269    |91     |16     |
+|    gain_tbl                                    |SC500GainTbl                          |0      |10     |0      |
+|    uics500regAE_inst                           |uics500regAE                          |14     |0      |0      |
+|    uics500reg_inst                             |uics500reg                            |125    |0      |0      |
+|    uii2c_inst                                  |uii2c                                 |53     |33     |13     |
+|  u_dbg_uart                                    |dbg_uart                              |117    |55     |72     |
+|  u_dphy_rx                                     |mipi_dphy_rx_ph1p_mipiio_wrapper      |115    |342    |33     |
+|    u_byte_aligner_wrapper                      |byte_aligner_wrapper                  |87     |114    |18     |
+|      BYTE_ALIGNER_GEN[0]$u_byte_aligner        |byte_aligner                          |45     |58     |9      |
+|      BYTE_ALIGNER_GEN[1]$u_byte_aligner        |byte_aligner                          |42     |56     |9      |
+|    u_channel_aligner_wrapper                   |channel_aligner_wrapper               |17     |81     |0      |
+|      ALIGNER_CHANNEL_GEN[0]$u_channel_aligner  |channel_aligner                       |9      |41     |0      |
+|      ALIGNER_CHANNEL_GEN[1]$u_channel_aligner  |channel_aligner                       |7      |40     |0      |
+|    u_ph1p_mipiio_rx_wrapper                    |ph1p_mipiio_rx_wrapper                |10     |147    |15     |
+|      u_lane0_hs_detect                         |hs_detect                             |4      |12     |3      |
+|  u_dphy_tx                                     |mipi_dphy_tx_over_ph1p_mipiio_wrapper |48     |899    |21     |
+|    u_hs_tx_wrapper                             |hs_tx_wrapper                         |47     |818    |20     |
+|      MIPI_DATA_LANE_GEN[0]$u_data_lane_wrapper |data_lane_wrapper                     |14     |444    |15     |
+|        u_data_hs_generate                      |data_hs_generate                      |8      |410    |7      |
+|          u_dphy_tx_fifo                        |dphy_tx_fifo                          |0      |328    |0      |
+|        u_data_lp_generate                      |data_lp_generate                      |6      |4      |8      |
+|      MIPI_DATA_LANE_GEN[1]$u_data_lane_wrapper |data_lane_wrapper                     |0      |352    |0      |
+|        u_data_hs_generate                      |data_hs_generate                      |0      |352    |0      |
+|          u_dphy_tx_fifo                        |dphy_tx_fifo                          |0      |328    |0      |
+|      u_hs_tx_controler                         |hs_tx_controler                       |33     |13     |5      |
+|    u_ph1p_mipiio_tx_wrapper                    |ph1p_mipiio_tx_wrapper                |1      |81     |1      |
+|  u_pll                                         |pll                                   |0      |0      |2      |
+|    ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst      |ph1p_phy_pll_wrapper_6ba8d3e44c24     |0      |0      |0      |
+|  u_rx_parse                                    |csi2_rx_parse                         |55     |87     |7      |
+|  u_tk_fifo                                     |csi2_ptr_fifo                         |25     |96     |4      |
+|  u_tx_packet                                   |csi2_tx_packet                        |182    |156    |16     |
+|    u_ecc                                       |csi2_ecc                              |46     |0      |0      |
++---------------------------------------------------------------------------------------------------------------+

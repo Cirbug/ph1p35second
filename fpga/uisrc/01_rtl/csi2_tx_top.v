@@ -12,7 +12,7 @@
 //   时钟：
 //     I_sys_clk 25MHz -> PLL -> clk0=100MHz（逻辑/DPLL 参考）、clk1=24MHz（摄像头 XCLK）
 //     RX 字节时钟由摄像头 MIPI 时钟恢复（O_hs_rx_clk）
-//     TX 字节时钟由 DPHY1 内部 DPLL 产生（O_hs_tx_clk，本设计约 75MHz）
+//     TX 字节时钟由 DPHY1 内部 DPLL 产生（O_hs_tx_clk，本设计 68.75MHz → 550Mbps/lane）
 //
 //   ⚠ 依赖：pll IP 必须重新生成为 25MHz 输入、clk0=100MHz、clk1=24MHz
 //   ⚠ 刻意不驱动 O_screen_pwm(R11)：不约束即高阻，避免与 A 板第 29 脚冲突
@@ -506,10 +506,13 @@ module csi2_tx_top #(
         .L1_OUTPUT_DELAY       ( 0          ),
         .L2_OUTPUT_DELAY       ( 0          ),
         .L3_OUTPUT_DELAY       ( 0          ),
-        // VCO = 100MHz * (6+1) = 700MHz -> linerate 350Mbps -> byte clk 43.75MHz
-        // 摄像头用 A 板的 2592x1944@30fps 配置：约 756Mbps/lane，RX 字节时钟约 97MHz，
-        // 所以发 800Mbps（100MHz）留一点余量。
-        .DPLL_MULTI_RATIO      ( 6  ),
+        // 字节钟 = 100MHz * (multi+1) / 16，line rate = 8 * 字节钟
+        //   6 -> 43.75MHz -> 350Mbps（2 lane 合 87.5MB/s）
+        //  10 -> 68.75MHz -> 550Mbps（2 lane 合 137.5MB/s）
+        // 1080p30 需要 77.8MB/s 平均，但行有效期内瞬时需要 120.6MB/s，
+        // 6 只够 72%，每行都靠消隐期补债，稍微一抖就丢行；A 板丢一行即丢整帧。
+        // 10 让瞬时也有 114% 余量，FIFO 不再需要靠消隐期排空。
+        .DPLL_MULTI_RATIO      ( 10 ),
         .DPLL_DIV_RATIO        ( 1  ),
         .T_DATA_LPX            ( 10 ),
         .T_DATA_HS_PREPARE     ( 10 ),
