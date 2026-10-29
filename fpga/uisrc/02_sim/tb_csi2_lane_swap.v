@@ -98,11 +98,11 @@ module tb_csi2_lane_swap;
         @(posedge clk); #1 frm_start = 1'b0;
 
         // 预先算好 ECC
-        ref_hdr = 24'h2B_0004; #1;
+        ref_hdr = { 8'h00, 8'h04, 8'h2B }; #1;   // {WC_MSB, WC_LSB, DI}
         ecc_l = ref_ecc;
-        ref_hdr = 24'h00_0000; #1;
+        ref_hdr = { 8'h00, 8'h00, 8'h00 }; #1;
         ecc_fs = ref_ecc;
-        ref_hdr = 24'h01_0000; #1;
+        ref_hdr = { 8'h00, 8'h00, 8'h01 }; #1;
         ecc_fe = ref_ecc;
 
         wr_en = 1'b1;
@@ -131,8 +131,8 @@ module tb_csi2_lane_swap;
         // 期望（LANE_SWAP=1）：包序 FS(2拍) + 长包(5拍) + FE(2拍) = 9 拍
         check_beat(0, { 8'h00,  8'h00              }, "FS   beat0");
         check_beat(1, { 8'h00,  ecc_fs             }, "FS   beat1");
-        check_beat(2, { 8'h00,  8'h2B              }, "long beat0");
-        check_beat(3, { ecc_l,  8'h04              }, "long beat1");
+        check_beat(2, { 8'h04,  8'h2B              }, "long beat0");   // {WC_LSB, DI} 交换后
+        check_beat(3, { ecc_l,  8'h00              }, "long beat1");   // {ECC, WC_MSB} 交换后
         check_beat(4, { 8'hBB,  8'hAA              }, "pay  beat0");
         check_beat(5, { 8'hDD,  8'hCC              }, "pay  beat1");
         check_beat(6, { crc_ref[7:0], crc_ref[15:8]}, "CRC  beat");

@@ -23,7 +23,7 @@ module tb_csi2_tx_top;
     wire        O_led_beat;
     wire        O_led_err;
 
-    csi2_tx_top dut (
+    csi2_tx_top #( .LANE_SWAP ( 0 ) ) dut (
         .I_sys_clk          ( sysclk     ),
         .I_rst_n            ( rst_n      ),
         .I_button           ( 2'b11      ),
@@ -150,8 +150,8 @@ module tb_csi2_tx_top;
                      pend_i[0], pend_i[1]-pend_i[0],
                      (npkt>2) ? pend_i[2]-pend_i[1] : 0);
 
-            if (npkt !== 3) begin
-                $display("FAIL: expect 3 packets, got %0d", npkt);
+            if (npkt !== 4) begin
+                $display("FAIL: expect 4 packets (FS/LONG/FE/FS), got %0d", npkt);
                 errs = errs + 1;
             end
 

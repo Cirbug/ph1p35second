@@ -18,7 +18,10 @@
 //   ⚠ 刻意不驱动 O_screen_pwm(R11)：不约束即高阻，避免与 A 板第 29 脚冲突
 //==========================================================================
 module csi2_tx_top #(
-    parameter DBG_MODE = 0            // 1 = 三颗灯改为显示 I2C 内部状态
+    parameter DBG_MODE = 0,           // 1 = 三颗灯改为显示 I2C 内部状态
+    // 两块 14→40 转接板的 D0/D1 顺序相反，实机必须为 1。
+    // 提成参数是为了让 testbench 能传 0 来按自然字节序校验。
+    parameter LANE_SWAP = 1
 )(
     input  wire        I_sys_clk,          // 25MHz 单端，C4
 
@@ -348,9 +351,13 @@ module csi2_tx_top #(
     wire tx_ready;
     wire tx_dpll_locked;
 
+    // TX 复位必须等 DPHY1 的 DPLL 锁定：未锁定时 tx_clk 可能不稳，
+    // 此时若让状态机跑起来会发出乱码。
+    wire tx_rst_src_n = sys_rst_n & tx_dpll_locked;
+
     reg [1:0] rsync_txq;
-    always @(posedge tx_clk or negedge sys_rst_n)
-        if (!sys_rst_n) rsync_txq <= 2'b00; else rsync_txq <= { rsync_txq[0], 1'b1 };
+    always @(posedge tx_clk or negedge tx_rst_src_n)
+        if (!tx_rst_src_n) rsync_txq <= 2'b00; else rsync_txq <= { rsync_txq[0], 1'b1 };
     wire rst_n_tx = rsync_txq[1];
 
     // 令牌解包后送给 tx_packet 写侧
@@ -423,7 +430,7 @@ module csi2_tx_top #(
         .LANE_NUM ( LANES  ),
         .VC       ( 2'b00  ),
         .DT       ( 8'h2B  ),
-        .LANE_SWAP( 1       ),   // 两块转接板的 D0/D1 顺序相反，需交换
+        .LANE_SWAP( LANE_SWAP ),
         .BUF_AW   ( 11     )
     ) u_tx_packet (
         .I_clk        ( tx_clk      ),
@@ -484,7 +491,7 @@ module csi2_tx_top #(
 
     assign O_led_cfg  = cam_cfg_done;
     assign O_led_beat = DBG_MODE ? busy_stuck       : frame_cnt[4];
-    assign O_led_err  = DBG_MODE ? err_lat          : (tx_ovf | tx_wcerr);
+    assign O_led_err  = DBG_MODE ? err_lat          : (tx_ovf | tx_wcerr | ~tx_dpll_locked);
 
     mipi_dphy_tx_over_ph1p_mipiio_wrapper #(
         .DPHY_TX_LOCATION      ( "DPHY1"    ),
@@ -599,6 +606,22 @@ module csi2_tx_top #(
 
     reg [15:0] dbg_fs, dbg_fe;
 
+    // 每帧行数测量：统计相邻两个 DT=01 帧标记之间的行包数。
+    // 这是摄像头的真实高度，用来核对 A 板的 SENSOR_HEIGHT。
+    reg [15:0] lcnt_lpf, lpf_lat;
+    always @(posedge rx_clk or negedge rst_n_rx) begin
+        if (!rst_n_rx) begin
+            lcnt_lpf <= 16'd0;
+            lpf_lat  <= 16'd0;
+        end else begin
+            if (p_pkt_end)               lcnt_lpf <= lcnt_lpf + 16'd1;
+            if (fe_det) begin
+                lpf_lat  <= lcnt_lpf;
+                lcnt_lpf <= 16'd0;
+            end
+        end
+    end
+
     // 统计每个 HS 突发的拍数（valid 连续为高的长度），用于判断包尾结构
     reg [15:0] burst_cnt;
     reg [15:0] burst_last;
@@ -681,7 +704,7 @@ module csi2_tx_top #(
         dbg_rxfe  <= rxfe_cnt;
         dbg_txcnt <= txclk_cnt;
         dbg_burst <= burst_last;
-        dbg_fs    <= fs_cnt;
+        dbg_fs    <= lpf_lat;   // A 字段改为每帧行数
         dbg_fe    <= txbeat_cnt;
         dbg_h0    <= h0_r;
         dbg_h1    <= h1_r;

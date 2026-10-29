@@ -8,30 +8,30 @@ IO Statistics
   #inout                   21
 
 Gate Statistics
-#Basic gates             3072
-  #and                    112
+#Basic gates             3091
+  #and                    111
   #nand                     0
-  #or                      47
+  #or                      48
   #nor                      0
   #xor                     84
   #xnor                     0
   #buf                      0
-  #not                    305
+  #not                    308
   #bufif1                   1
-  #MX21                   417
+  #MX21                   416
   #FADD                     0
-  #DFF                   2106
+  #DFF                   2123
   #LATCH                    0
 #MACRO_ADD                117
-#MACRO_EQ                  70
-#MACRO_MUX               1213
+#MACRO_EQ                  69
+#MACRO_MUX               1233
 #MACRO_OTHERS               4
 
 Report Hierarchy Area:
 +---------------------------------------------------------------------------------------------------------------+
 |Instance                                        |Module                                |gates  |seq    |macros |
 +---------------------------------------------------------------------------------------------------------------+
-|top                                             |csi2_tx_top                           |966    |2106   |191    |
+|top                                             |csi2_tx_top                           |968    |2123   |190    |
 |  u_ae_set                                      |ae_set                                |10     |43     |8      |
 |  u_cam_cfg                                     |uicfgcs500                            |337    |91     |16     |
 |    gain_tbl                                    |SC500GainTbl                          |0      |10     |0      |
@@ -61,8 +61,8 @@ Report Hierarchy Area:
 |    u_ph1p_mipiio_tx_wrapper                    |ph1p_mipiio_tx_wrapper                |1      |81     |1      |
 |  u_pll                                         |pll                                   |0      |0      |2      |
 |    ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst      |ph1p_phy_pll_wrapper_6ba8d3e44c24     |0      |0      |0      |
-|  u_rx_parse                                    |csi2_rx_parse                         |54     |87     |6      |
+|  u_rx_parse                                    |csi2_rx_parse                         |55     |87     |7      |
 |  u_tk_fifo                                     |csi2_ptr_fifo                         |25     |96     |4      |
-|  u_tx_packet                                   |csi2_tx_packet                        |181    |155    |16     |
+|  u_tx_packet                                   |csi2_tx_packet                        |182    |156    |16     |
 |    u_ecc                                       |csi2_ecc                              |46     |0      |0      |
 +---------------------------------------------------------------------------------------------------------------+

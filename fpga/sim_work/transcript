@@ -1,5 +1,5 @@
-# vsim -c -quiet -do "run -all; quit -f" tb_csi2_full_line 
-# Start time: 04:02:57 on Oct 29,2026
+# vsim -c -quiet -do "run -all; quit -f" tb_cam_cfg_i2c 
+# Start time: 09:42:23 on Oct 29,2026
 # ** Note: (vsim-3812) Design is being optimized...
 # ** Warning: ..\uisrc\01_rtl\uics500_cfg\uicfgcs500.v(168): (vopt-2241) Connection width does not match width of port 'REG_DATA'. The port definition is at: ..\uisrc\01_rtl\uics500_cfg\uics500regAE.v(2).
 # ** Warning: ..\uisrc\01_rtl\uics500_cfg\uicfgcs500.v(166): (vopt-2241) Connection width does not match width of port 'I'. The port definition is at: ..\uisrc\01_rtl\uics500_cfg\SC500GainTbl.v(9).
@@ -8,9 +8,12 @@
 # ** Warning: ..\uisrc\01_rtl\uics500_cfg\uicfgcs500.v(139): (vopt-2718) [TFMPC] - Missing connection for port 'IO_iic_sda_dg'.
 # ** Warning: ..\uisrc\01_rtl\uics500_cfg\uicfgcs500.v(168): (vopt-2685) [TFMPC] - Too few port connections for 'uics500regAE_inst'.  Expected 6, found 5.
 # ** Warning: ..\uisrc\01_rtl\uics500_cfg\uicfgcs500.v(168): (vopt-2718) [TFMPC] - Missing connection for port 'I_VTS'.
-# ** Warning: ..\uisrc\02_sim\tb_csi2_full_line.v(27): (vopt-2685) [TFMPC] - Too few port connections for 'dut'.  Expected 19, found 18.
-# ** Warning: ..\uisrc\02_sim\tb_csi2_full_line.v(27): (vopt-2718) [TFMPC] - Missing connection for port 'O_uart_tx'.
-# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=9.
+# ** Warning: ..\uisrc\02_sim\tb_cam_cfg_i2c.v(38): (vopt-2685) [TFMPC] - Too few port connections for 'dut'.  Expected 13, found 9.
+# ** Warning: ..\uisrc\02_sim\tb_cam_cfg_i2c.v(38): (vopt-2718) [TFMPC] - Missing connection for port 'O_dbg_ack'.
+# ** Warning: ..\uisrc\02_sim\tb_cam_cfg_i2c.v(38): (vopt-2718) [TFMPC] - Missing connection for port 'O_dbg_regidx'.
+# ** Warning: ..\uisrc\02_sim\tb_cam_cfg_i2c.v(38): (vopt-2718) [TFMPC] - Missing connection for port 'O_dbg_err'.
+# ** Warning: ..\uisrc\02_sim\tb_cam_cfg_i2c.v(38): (vopt-2718) [TFMPC] - Missing connection for port 'O_dbg_busy'.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=12.
 # //  ModelSim SE-64 2020.4 Oct 13 2020
 # //
 # //  Copyright 1991-2020 Mentor Graphics Corporation
@@ -26,21 +29,14 @@
 # //
 # run -all
 # --------------------------------------------------
-# WC=2410  NW=1205  captured packets=3  length=2416/4/4
-# FAIL: long packet length 4, expect 2416
-# FAIL: DT=40
-# FAIL: WC hdr=16656
-# FAIL: ECC=11
-# FAIL: payload[0].hi=42 exp 10
-# FAIL: payload[1].lo=12 exp 40
-# FAIL: payload[2].hi=43 exp 11
-# FAIL: payload[3].lo=13 exp 41
-# FAIL: CRC=0000 exp c656
-# FAIL: FE wrong
+# sim cycles = 1092343   bytes on bus = 444   reg writes = 111
+# cfg_done = 1   ae_done = 0
+# PASS: 首条 = 器件 6C, 寄存器 0103 <- 01（软件复位）
+# 前 3 组：6c 01 03 01 | 6c 01 00 00 | 6c 36 e9 80
 # --------------------------------------------------
-# RESULT: FAIL (2416 items)
+# RESULT: PASS  (I2C 配置链路正常)
 # --------------------------------------------------
-# ** Note: $finish    : ../uisrc/02_sim/tb_csi2_full_line.v(214)
-#    Time: 284502 ns  Iteration: 0  Instance: /tb_csi2_full_line
-# End time: 04:02:58 on Oct 29,2026, Elapsed time: 0:00:01
-# Errors: 0, Warnings: 9
+# ** Note: $finish    : ../uisrc/02_sim/tb_cam_cfg_i2c.v(174)
+#    Time: 21849250 ns  Iteration: 0  Instance: /tb_cam_cfg_i2c
+# End time: 09:42:24 on Oct 29,2026, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 12

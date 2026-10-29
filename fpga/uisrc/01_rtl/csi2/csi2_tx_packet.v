@@ -53,6 +53,7 @@ module csi2_tx_packet #(
     reg [BUF_AW-1:0] wptr;
     reg [15:0]       line_wc;
     reg              fs_pend, fe_pend;
+    reg              fs_ever;      // 至少发过一个 FS 之后才允许发行包
 
     reg [2:0]        st;
     reg [15:0]       byte_cnt;
@@ -128,6 +129,7 @@ module csi2_tx_packet #(
             line_wc    <= 16'd0;
             fs_pend    <= 1'b0;
             fe_pend    <= 1'b0;
+            fs_ever    <= 1'b0;
             st         <= S_IDLE;
             byte_cnt   <= 16'd0;
             pkt_bytes  <= 16'd0;
@@ -147,13 +149,11 @@ module csi2_tx_packet #(
                 O_hs_en   <= 1'b0;
                 O_hs_last <= 1'b0;
                 if (I_hs_ready) begin
-                    if (fs_pend) begin
-                        hdr_data  <= { VC, 6'h00, 16'h0000 };
-                        pkt_bytes <= 16'd4;
-                        byte_cnt  <= 16'd0;
-                        fs_pend   <= 1'b0;
-                        st        <= S_FS;
-                    end else if (line_ready) begin
+                    // 优先级：行包 -> FE -> FS
+                    //   · 行包先发：帧尾总在一帧所有行之后到达
+                    //   · FE 在 FS 之前：帧结束 -> 下一帧开始
+                    //   · 上电时还没有 FE，FS 会立刻发出去
+                    if (line_ready && fs_ever) begin
                         hdr_data  <= { VC, DT[5:0], line_wc[7:0], line_wc[15:8] };
                         wc_lat    <= line_wc;
                         pkt_bytes <= 16'd4 + line_wc + 16'd2;
@@ -168,6 +168,13 @@ module csi2_tx_packet #(
                         byte_cnt  <= 16'd0;
                         fe_pend   <= 1'b0;
                         st        <= S_FE;
+                    end else if (fs_pend) begin
+                        hdr_data  <= { VC, 6'h00, 16'h0000 };
+                        pkt_bytes <= 16'd4;
+                        byte_cnt  <= 16'd0;
+                        fs_pend   <= 1'b0;
+                        fs_ever   <= 1'b1;
+                        st        <= S_FS;
                     end
                 end
             end
