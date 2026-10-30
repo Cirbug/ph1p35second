@@ -1,7 +1,7 @@
 Copyright (c) 2012-2025 Anlogic Inc., All Rights Reserved.
 ----------------------------------------------------------------------------
 | Tool Version : Tang Dynasty v6.2.168116 Jul 10 2025 19:20:51              
-| Date         : Fri Oct 30 06:27:53 2026                                   
+| Date         : Fri Oct 30 09:20:09 2026                                   
 | Command      : report_clock_utilization -file place_clock_utilization.txt 
 | Design       : csi2_tx_top                                                
 | Device       : ph1_35p-PH1P35MDG324                                       
@@ -35,11 +35,11 @@ C. IP Stat.
 +------------+------------+---------------+-------------------------------------------------------------+------------+------+-----------+-------------------+-------------+-------------+----------------+-----------------------------------------------------------------------------------------------+------------------------------------------------------------+
 | Global Idx | Source Idx | Global Type   | Inst.Pin                                                    | Constraint | site | Location  | Load Clock Region | Clock Loads | Total Loads | Clock Period   | Clock                                                                                         | Net                                                        |
 +------------+------------+---------------+-------------------------------------------------------------+------------+------+-----------+-------------------+-------------+-------------+----------------+-----------------------------------------------------------------------------------------------+------------------------------------------------------------+
-| gclk_0     | src_0      | PH1P_PHY_GCLK | u_dphy_tx/u_ph1p_mipiio_tx_wrapper/U_PH1P_LOGIC_BUFG.clkout | None       | B    | x23y39z0  |                 4 |         613 |         613 |         10.000 | MIPI_TX_BYTE_CLK                                                                              | tx_clk                                                     |
-| gclk_1     | src_1      | PH1P_PHY_GCLK | u_dphy_rx/u_ph1p_mipiio_rx_wrapper/bufg_feedback.clkout     | None       | B    | x23y39z1  |                 4 |         446 |         446 |          8.888 | MIPI_RX_BYTE_CLK                                                                              | rx_clk                                                     |
-| gclk_2     | src_2      | PH1P_PHY_GCLK | u_pll/bufg_clk1.clkout                                      | None       | T    | x23y39z16 |                 4 |         186 |         187 |         41.668 | pll_clk_24m                                                                                   | O_cam_24m_dup_1                                            |
+| gclk_0     | src_0      | PH1P_PHY_GCLK | u_dphy_tx/u_ph1p_mipiio_tx_wrapper/U_PH1P_LOGIC_BUFG.clkout | None       | B    | x23y39z0  |                 4 |         603 |         603 |         14.544 | MIPI_TX_BYTE_CLK                                                                              | tx_clk                                                     |
+| gclk_1     | src_1      | PH1P_PHY_GCLK | u_dphy_rx/u_ph1p_mipiio_rx_wrapper/bufg_feedback.clkout     | None       | B    | x23y39z1  |                 3 |         434 |         434 |          8.888 | MIPI_RX_BYTE_CLK                                                                              | rx_clk                                                     |
+| gclk_2     | src_2      | PH1P_PHY_GCLK | u_pll/bufg_clk1.clkout                                      | None       | T    | x23y39z16 |                 4 |         185 |         186 |         41.668 | pll_clk_24m                                                                                   | O_cam_24m_dup_1                                            |
 | gclk_3     | src_3      | PH1P_PHY_GCLK | u_cam_cfg/uii2c_inst/scl_clk_created_gclkinst.clkout        | None       | B    | x23y39z2  |                 1 |          17 |          17 |                |                                                                                               | u_cam_cfg/uii2c_inst/scl_clk_syn_9                         |
-| gclk_4     | src_4      | PH1P_PHY_GCLK | u_pll/bufg_feedback.clkout                                  | None       | T    | x23y39z17 |                 2 |          14 |          14 | 10.000, 10.000 | pll_clk_100m, u_dphy_tx/u_ph1p_mipiio_tx_wrapper/u_PH1P_LOGIC_DPHY_MIPI_TX.i_phy_dpll_ref_clk | u_dphy_rx/u_ph1p_mipiio_rx_wrapper/u_lane0_hs_detect/I_clk |
+| gclk_4     | src_4      | PH1P_PHY_GCLK | u_pll/bufg_feedback.clkout                                  | None       | T    | x23y39z17 |                 3 |          16 |          16 | 10.000, 10.000 | pll_clk_100m, u_dphy_tx/u_ph1p_mipiio_tx_wrapper/u_PH1P_LOGIC_DPHY_MIPI_TX.i_phy_dpll_ref_clk | u_dphy_rx/u_ph1p_mipiio_rx_wrapper/u_lane0_hs_detect/I_clk |
 +------------+------------+---------------+-------------------------------------------------------------+------------+------+-----------+-------------------+-------------+-------------+----------------+-----------------------------------------------------------------------------------------------+------------------------------------------------------------+
 
 
@@ -47,10 +47,10 @@ C. IP Stat.
 +------------+------------+--------------------+----------------------------------------------------------------------------------+------------+------+----------+-------------+-----------------+---------------------+------------------+-------------------------------------------------------+
 | Source Idx | Global Idx | Source Type        | Inst.Pin                                                                         | Constraint | Site | Location | Clock Loads | Non Clock Loads | Source Clock Period | Source Clock     | Net                                                   |
 +------------+------------+--------------------+----------------------------------------------------------------------------------+------------+------+----------+-------------+-----------------+---------------------+------------------+-------------------------------------------------------+
-| src_0      | gclk_0     | PH1P_PHY_MIPIIO_TX | u_dphy_tx/u_ph1p_mipiio_tx_wrapper/u_PH1P_LOGIC_DPHY_MIPI_TX.o_fabric_div4_8_clk | None       | N/A  | x47y20z0 |           1 |               0 |              10.000 | MIPI_TX_BYTE_CLK | u_dphy_tx/u_ph1p_mipiio_tx_wrapper/S_hs_tx_clk        |
+| src_0      | gclk_0     | PH1P_PHY_MIPIIO_TX | u_dphy_tx/u_ph1p_mipiio_tx_wrapper/u_PH1P_LOGIC_DPHY_MIPI_TX.o_fabric_div4_8_clk | None       | N/A  | x47y20z0 |           1 |               0 |              14.544 | MIPI_TX_BYTE_CLK | u_dphy_tx/u_ph1p_mipiio_tx_wrapper/S_hs_tx_clk        |
 | src_1      | gclk_1     | PH1P_PHY_MIPIIO_RX | u_dphy_rx/u_ph1p_mipiio_rx_wrapper/u_PH1P_LOGIC_DPHY_MIPI_RX.o_fabric_div4_8_clk | None       | N/A  | x47y0z0  |           1 |               0 |               8.888 | MIPI_RX_BYTE_CLK | u_dphy_rx/u_ph1p_mipiio_rx_wrapper/S_mipiio_hs_rx_clk |
 | src_2      | gclk_2     | PH1P_PHY_PLL_V2    | u_pll/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.clkc[1]              | None       | N/A  | x43y79z0 |           1 |               0 |              41.668 | pll_clk_24m      | u_pll/clk1_buf                                        |
-| src_3      | gclk_3     | PH1P_PHY_LSLICE    | u_cam_cfg/uii2c_inst/clkdiv_reg[0]_syn_5.oqb                                     | None       | N/A  | x14y43z7 |           1 |               2 |                     |                  | u_cam_cfg/uii2c_inst/scl_clk                          |
+| src_3      | gclk_3     | PH1P_PHY_LSLICE    | u_cam_cfg/uii2c_inst/clkdiv_reg[0]_syn_5.oqb                                     | None       | N/A  | x14y38z3 |           1 |               2 |                     |                  | u_cam_cfg/uii2c_inst/scl_clk                          |
 | src_4      | gclk_4     | PH1P_PHY_PLL_V2    | u_pll/ph1p_phy_pll_wrapper_6ba8d3e44c24_Inst/u_PH1P_PHY_PLL.clkc[0]              | None       | N/A  | x43y79z0 |           1 |               0 |              10.000 | pll_clk_100m     | u_pll/clk0_buf                                        |
 +------------+------------+--------------------+----------------------------------------------------------------------------------+------------+------+----------+-------------+-----------------+---------------------+------------------+-------------------------------------------------------+
 
@@ -87,13 +87,13 @@ C. IP Stat.
 +------------+---------------+-------------------------------------------------------------+-------------------+------------------+-------------+---------------+----------+--------+----------------------+---------------------------+---------------------+----------------------------+
 | Global Idx | Type          | Driver.Pin                                                  | Driver Region (D) | Clock            | Period (ns) | Waveform (ns) | Root (R) | Net    | FanoutGroup1         | FanoutGroup2              | FanoutGroup3        | FanoutGroup4               |
 +------------+---------------+-------------------------------------------------------------+-------------------+------------------+-------------+---------------+----------+--------+----------------------+---------------------------+---------------------+----------------------------+
-| gclk_0     | PH1P_PHY_GCLK | u_dphy_tx/u_ph1p_mipiio_tx_wrapper/U_PH1P_LOGIC_BUFG.clkout | B                 | MIPI_TX_BYTE_CLK |      10.000 | {0.000 5.000} | N/A      | tx_clk | PH1P_PHY_LSLICE(467) | PH1P_PHY_DRAMHARDCON(128) | PH1P_PHY_MSLICE(16) | PH1P_PHY_SHIFTERHARDCON(2) |
+| gclk_0     | PH1P_PHY_GCLK | u_dphy_tx/u_ph1p_mipiio_tx_wrapper/U_PH1P_LOGIC_BUFG.clkout | B                 | MIPI_TX_BYTE_CLK |      14.544 | {0.000 7.272} | N/A      | tx_clk | PH1P_PHY_LSLICE(457) | PH1P_PHY_DRAMHARDCON(128) | PH1P_PHY_MSLICE(16) | PH1P_PHY_SHIFTERHARDCON(2) |
 +------------+---------------+-------------------------------------------------------------+-------------------+------------------+-------------+---------------+----------+--------+----------------------+---------------------------+---------------------+----------------------------+
 +----+-----+-----+
 |    | X0  | X1  |
 +----+-----+-----+
-| Y1 |  89 |  35 |
-| Y0 | 298 | 191 |
+| Y1 |   1 |  47 |
+| Y0 | 312 | 243 |
 +----+-----+-----+
 
 
@@ -101,13 +101,13 @@ C. IP Stat.
 +------------+---------------+---------------------------------------------------------+-------------------+------------------+-------------+---------------+----------+--------+----------------------+--------------------------+
 | Global Idx | Type          | Driver.Pin                                              | Driver Region (D) | Clock            | Period (ns) | Waveform (ns) | Root (R) | Net    | FanoutGroup1         | FanoutGroup2             |
 +------------+---------------+---------------------------------------------------------+-------------------+------------------+-------------+---------------+----------+--------+----------------------+--------------------------+
-| gclk_1     | PH1P_PHY_GCLK | u_dphy_rx/u_ph1p_mipiio_rx_wrapper/bufg_feedback.clkout | B                 | MIPI_RX_BYTE_CLK |       8.888 | {0.000 4.444} | N/A      | rx_clk | PH1P_PHY_LSLICE(350) | PH1P_PHY_DRAMHARDCON(96) |
+| gclk_1     | PH1P_PHY_GCLK | u_dphy_rx/u_ph1p_mipiio_rx_wrapper/bufg_feedback.clkout | B                 | MIPI_RX_BYTE_CLK |       8.888 | {0.000 4.444} | N/A      | rx_clk | PH1P_PHY_LSLICE(338) | PH1P_PHY_DRAMHARDCON(96) |
 +------------+---------------+---------------------------------------------------------+-------------------+------------------+-------------+---------------+----------+--------+----------------------+--------------------------+
 +----+----+-----+
 |    | X0 | X1  |
 +----+----+-----+
-| Y1 | 35 |  59 |
-| Y0 | 39 | 313 |
+| Y1 |  0 |  51 |
+| Y0 | 45 | 338 |
 +----+----+-----+
 
 
@@ -115,13 +115,13 @@ C. IP Stat.
 +------------+---------------+------------------------+-------------------+-------------+-------------+----------------+----------+-----------------+----------------------+---------------------+--------------------+
 | Global Idx | Type          | Driver.Pin             | Driver Region (D) | Clock       | Period (ns) | Waveform (ns)  | Root (R) | Net             | FanoutGroup1         | FanoutGroup2        | FanoutGroup3       |
 +------------+---------------+------------------------+-------------------+-------------+-------------+----------------+----------+-----------------+----------------------+---------------------+--------------------+
-| gclk_2     | PH1P_PHY_GCLK | u_pll/bufg_clk1.clkout | T                 | pll_clk_24m |      41.668 | {0.000 20.834} | N/A      | O_cam_24m_dup_1 | PH1P_PHY_LSLICE(184) | PH1P_PHY_ERAM_V2(2) | PH1P_PHY_HD_PAD(1) |
+| gclk_2     | PH1P_PHY_GCLK | u_pll/bufg_clk1.clkout | T                 | pll_clk_24m |      41.668 | {0.000 20.834} | N/A      | O_cam_24m_dup_1 | PH1P_PHY_LSLICE(183) | PH1P_PHY_ERAM_V2(2) | PH1P_PHY_HD_PAD(1) |
 +------------+---------------+------------------------+-------------------+-------------+-------------+----------------+----------+-----------------+----------------------+---------------------+--------------------+
 +----+----+----+
 |    | X0 | X1 |
 +----+----+----+
-| Y1 | 52 |  2 |
-| Y0 | 71 | 62 |
+| Y1 | 45 |  9 |
+| Y0 | 62 | 70 |
 +----+----+----+
 
 
@@ -143,63 +143,63 @@ C. IP Stat.
 +------------+---------------+----------------------------+-------------------+-----------------------------------------------------------------------------------------------+----------------+------------------------------+----------+------------------------------------------------------------+---------------------+-----------------------+--------------------+
 | Global Idx | Type          | Driver.Pin                 | Driver Region (D) | Clock                                                                                         | Period (ns)    | Waveform (ns)                | Root (R) | Net                                                        | FanoutGroup1        | FanoutGroup2          | FanoutGroup3       |
 +------------+---------------+----------------------------+-------------------+-----------------------------------------------------------------------------------------------+----------------+------------------------------+----------+------------------------------------------------------------+---------------------+-----------------------+--------------------+
-| gclk_4     | PH1P_PHY_GCLK | u_pll/bufg_feedback.clkout | T                 | pll_clk_100m, u_dphy_tx/u_ph1p_mipiio_tx_wrapper/u_PH1P_LOGIC_DPHY_MIPI_TX.i_phy_dpll_ref_clk | 10.000, 10.000 | {0.000 5.000}, {0.000 5.000} | N/A      | u_dphy_rx/u_ph1p_mipiio_rx_wrapper/u_lane0_hs_detect/I_clk | PH1P_PHY_LSLICE(12) | PH1P_PHY_MIPIIO_TX(1) | PH1P_PHY_PLL_V2(1) |
+| gclk_4     | PH1P_PHY_GCLK | u_pll/bufg_feedback.clkout | T                 | pll_clk_100m, u_dphy_tx/u_ph1p_mipiio_tx_wrapper/u_PH1P_LOGIC_DPHY_MIPI_TX.i_phy_dpll_ref_clk | 10.000, 10.000 | {0.000 5.000}, {0.000 5.000} | N/A      | u_dphy_rx/u_ph1p_mipiio_rx_wrapper/u_lane0_hs_detect/I_clk | PH1P_PHY_LSLICE(14) | PH1P_PHY_MIPIIO_TX(1) | PH1P_PHY_PLL_V2(1) |
 +------------+---------------+----------------------------+-------------------+-----------------------------------------------------------------------------------------------+----------------+------------------------------+----------+------------------------------------------------------------+---------------------+-----------------------+--------------------+
 +----+----+----+
 |    | X0 | X1 |
 +----+----+----+
 | Y1 |  0 |  1 |
-| Y0 |  0 | 13 |
+| Y0 |  1 | 14 |
 +----+----+----+
 
 
 12. Region X0Y0
-+---------+-------+--------------------+------------+-------------+-------------+-------------------------------------------------------+----------------------+---------------------------+
-| Idx     | Track | Type               | Constraint | Clock Loads | Total Loads | Net                                                   | FanoutGroup1         | FanoutGroup2              |
-+---------+-------+--------------------+------------+-------------+-------------+-------------------------------------------------------+----------------------+---------------------------+
-| gclk_0  | N/A   | PH1P_PHY_GCLK      | None       |         298 |         298 | tx_clk                                                | PH1P_PHY_LSLICE(170) | PH1P_PHY_DRAMHARDCON(128) |
-| gclk_1  | N/A   | PH1P_PHY_GCLK      | None       |          39 |          39 | rx_clk                                                | PH1P_PHY_LSLICE(36)  | PH1P_PHY_DRAMHARDCON(3)   |
-| gclk_2  | N/A   | PH1P_PHY_GCLK      | None       |          71 |          71 | O_cam_24m_dup_1                                       | PH1P_PHY_LSLICE(71)  |                           |
-|         |       |                    |            |             |             |                                                       |                      |                           |
-| local_0 | N/A   | PH1P_PHY_LSLICE    | None       |           1 |           1 | u_cam_cfg/uii2c_inst/scl_clk                          | PH1P_PHY_GCLK(1)     |                           |
-| local_2 | N/A   | PH1P_PHY_MIPIIO_RX | None       |           1 |           1 | u_dphy_rx/u_ph1p_mipiio_rx_wrapper/S_mipiio_hs_rx_clk | PH1P_PHY_GCLK(1)     |                           |
-| local_3 | N/A   | PH1P_PHY_MIPIIO_TX | None       |           1 |           1 | u_dphy_tx/u_ph1p_mipiio_tx_wrapper/S_hs_tx_clk        | PH1P_PHY_GCLK(1)     |                           |
-| local_4 | N/A   | PH1P_PHY_PLL_V2    | None       |           1 |           1 | u_pll/clk0_buf                                        | PH1P_PHY_GCLK(1)     |                           |
-| local_5 | N/A   | PH1P_PHY_PLL_V2    | None       |           1 |           1 | u_pll/clk1_buf                                        | PH1P_PHY_GCLK(1)     |                           |
-+---------+-------+--------------------+------------+-------------+-------------+-------------------------------------------------------+----------------------+---------------------------+
++---------+-------+--------------------+------------+-------------+-------------+------------------------------------------------------------+----------------------+---------------------------+
+| Idx     | Track | Type               | Constraint | Clock Loads | Total Loads | Net                                                        | FanoutGroup1         | FanoutGroup2              |
++---------+-------+--------------------+------------+-------------+-------------+------------------------------------------------------------+----------------------+---------------------------+
+| gclk_0  | N/A   | PH1P_PHY_GCLK      | None       |         312 |         312 | tx_clk                                                     | PH1P_PHY_LSLICE(184) | PH1P_PHY_DRAMHARDCON(128) |
+| gclk_1  | N/A   | PH1P_PHY_GCLK      | None       |          45 |          45 | rx_clk                                                     | PH1P_PHY_LSLICE(45)  |                           |
+| gclk_2  | N/A   | PH1P_PHY_GCLK      | None       |          62 |          62 | O_cam_24m_dup_1                                            | PH1P_PHY_LSLICE(62)  |                           |
+| gclk_4  | N/A   | PH1P_PHY_GCLK      | None       |           1 |           1 | u_dphy_rx/u_ph1p_mipiio_rx_wrapper/u_lane0_hs_detect/I_clk | PH1P_PHY_LSLICE(1)   |                           |
+|         |       |                    |            |             |             |                                                            |                      |                           |
+| local_0 | N/A   | PH1P_PHY_LSLICE    | None       |           1 |           2 | u_cam_cfg/uii2c_inst/scl_clk                               | PH1P_PHY_GCLK(1)     | PH1P_PHY_LSLICE(1)        |
+| local_2 | N/A   | PH1P_PHY_MIPIIO_RX | None       |           1 |           1 | u_dphy_rx/u_ph1p_mipiio_rx_wrapper/S_mipiio_hs_rx_clk      | PH1P_PHY_GCLK(1)     |                           |
+| local_3 | N/A   | PH1P_PHY_MIPIIO_TX | None       |           1 |           1 | u_dphy_tx/u_ph1p_mipiio_tx_wrapper/S_hs_tx_clk             | PH1P_PHY_GCLK(1)     |                           |
+| local_4 | N/A   | PH1P_PHY_PLL_V2    | None       |           1 |           1 | u_pll/clk0_buf                                             | PH1P_PHY_GCLK(1)     |                           |
+| local_5 | N/A   | PH1P_PHY_PLL_V2    | None       |           1 |           1 | u_pll/clk1_buf                                             | PH1P_PHY_GCLK(1)     |                           |
++---------+-------+--------------------+------------+-------------+-------------+------------------------------------------------------------+----------------------+---------------------------+
 
 
 13. Region X1Y0
 +--------+-------+---------------+------------+-------------+-------------+------------------------------------------------------------+----------------------+--------------------------+----------------------------+
 | Idx    | Track | Type          | Constraint | Clock Loads | Total Loads | Net                                                        | FanoutGroup1         | FanoutGroup2             | FanoutGroup3               |
 +--------+-------+---------------+------------+-------------+-------------+------------------------------------------------------------+----------------------+--------------------------+----------------------------+
-| gclk_0 | N/A   | PH1P_PHY_GCLK | None       |         191 |         191 | tx_clk                                                     | PH1P_PHY_LSLICE(173) | PH1P_PHY_MSLICE(16)      | PH1P_PHY_SHIFTERHARDCON(2) |
-| gclk_1 | N/A   | PH1P_PHY_GCLK | None       |         313 |         313 | rx_clk                                                     | PH1P_PHY_LSLICE(275) | PH1P_PHY_DRAMHARDCON(38) |                            |
-| gclk_2 | N/A   | PH1P_PHY_GCLK | None       |          61 |          62 | O_cam_24m_dup_1                                            | PH1P_PHY_LSLICE(61)  | PH1P_PHY_HD_PAD(1)       |                            |
-| gclk_4 | N/A   | PH1P_PHY_GCLK | None       |          13 |          13 | u_dphy_rx/u_ph1p_mipiio_rx_wrapper/u_lane0_hs_detect/I_clk | PH1P_PHY_LSLICE(12)  | PH1P_PHY_MIPIIO_TX(1)    |                            |
+| gclk_0 | N/A   | PH1P_PHY_GCLK | None       |         243 |         243 | tx_clk                                                     | PH1P_PHY_LSLICE(225) | PH1P_PHY_MSLICE(16)      | PH1P_PHY_SHIFTERHARDCON(2) |
+| gclk_1 | N/A   | PH1P_PHY_GCLK | None       |         338 |         338 | rx_clk                                                     | PH1P_PHY_LSLICE(273) | PH1P_PHY_DRAMHARDCON(65) |                            |
+| gclk_2 | N/A   | PH1P_PHY_GCLK | None       |          69 |          70 | O_cam_24m_dup_1                                            | PH1P_PHY_LSLICE(69)  | PH1P_PHY_HD_PAD(1)       |                            |
+| gclk_4 | N/A   | PH1P_PHY_GCLK | None       |          14 |          14 | u_dphy_rx/u_ph1p_mipiio_rx_wrapper/u_lane0_hs_detect/I_clk | PH1P_PHY_LSLICE(13)  | PH1P_PHY_MIPIIO_TX(1)    |                            |
 +--------+-------+---------------+------------+-------------+-------------+------------------------------------------------------------+----------------------+--------------------------+----------------------------+
 
 
 14. Region X0Y1
-+---------+-------+-----------------+------------+-------------+-------------+------------------------------------+---------------------+--------------------------+
-| Idx     | Track | Type            | Constraint | Clock Loads | Total Loads | Net                                | FanoutGroup1        | FanoutGroup2             |
-+---------+-------+-----------------+------------+-------------+-------------+------------------------------------+---------------------+--------------------------+
-| gclk_0  | N/A   | PH1P_PHY_GCLK   | None       |          89 |          89 | tx_clk                             | PH1P_PHY_LSLICE(89) |                          |
-| gclk_1  | N/A   | PH1P_PHY_GCLK   | None       |          35 |          35 | rx_clk                             | PH1P_PHY_LSLICE(24) | PH1P_PHY_DRAMHARDCON(11) |
-| gclk_2  | N/A   | PH1P_PHY_GCLK   | None       |          52 |          52 | O_cam_24m_dup_1                    | PH1P_PHY_LSLICE(50) | PH1P_PHY_ERAM_V2(2)      |
-| gclk_3  | N/A   | PH1P_PHY_GCLK   | None       |          17 |          17 | u_cam_cfg/uii2c_inst/scl_clk_syn_9 | PH1P_PHY_LSLICE(17) |                          |
-|         |       |                 |            |             |             |                                    |                     |                          |
-| local_0 | N/A   | PH1P_PHY_LSLICE | None       |           0 |           2 | u_cam_cfg/uii2c_inst/scl_clk       | PH1P_PHY_LSLICE(2)  |                          |
-+---------+-------+-----------------+------------+-------------+-------------+------------------------------------+---------------------+--------------------------+
++---------+-------+-----------------+------------+-------------+-------------+------------------------------------+---------------------+---------------------+
+| Idx     | Track | Type            | Constraint | Clock Loads | Total Loads | Net                                | FanoutGroup1        | FanoutGroup2        |
++---------+-------+-----------------+------------+-------------+-------------+------------------------------------+---------------------+---------------------+
+| gclk_0  | N/A   | PH1P_PHY_GCLK   | None       |           1 |           1 | tx_clk                             | PH1P_PHY_LSLICE(1)  |                     |
+| gclk_2  | N/A   | PH1P_PHY_GCLK   | None       |          45 |          45 | O_cam_24m_dup_1                    | PH1P_PHY_LSLICE(43) | PH1P_PHY_ERAM_V2(2) |
+| gclk_3  | N/A   | PH1P_PHY_GCLK   | None       |          17 |          17 | u_cam_cfg/uii2c_inst/scl_clk_syn_9 | PH1P_PHY_LSLICE(17) |                     |
+|         |       |                 |            |             |             |                                    |                     |                     |
+| local_0 | N/A   | PH1P_PHY_LSLICE | None       |           0 |           1 | u_cam_cfg/uii2c_inst/scl_clk       | PH1P_PHY_LSLICE(1)  |                     |
++---------+-------+-----------------+------------+-------------+-------------+------------------------------------+---------------------+---------------------+
 
 
 15. Region X1Y1
 +---------+-------+-----------------+------------+-------------+-------------+------------------------------------------------------------+--------------------------+---------------------+
 | Idx     | Track | Type            | Constraint | Clock Loads | Total Loads | Net                                                        | FanoutGroup1             | FanoutGroup2        |
 +---------+-------+-----------------+------------+-------------+-------------+------------------------------------------------------------+--------------------------+---------------------+
-| gclk_0  | N/A   | PH1P_PHY_GCLK   | None       |          35 |          35 | tx_clk                                                     | PH1P_PHY_LSLICE(35)      |                     |
-| gclk_1  | N/A   | PH1P_PHY_GCLK   | None       |          59 |          59 | rx_clk                                                     | PH1P_PHY_DRAMHARDCON(44) | PH1P_PHY_LSLICE(15) |
-| gclk_2  | N/A   | PH1P_PHY_GCLK   | None       |           2 |           2 | O_cam_24m_dup_1                                            | PH1P_PHY_LSLICE(2)       |                     |
+| gclk_0  | N/A   | PH1P_PHY_GCLK   | None       |          47 |          47 | tx_clk                                                     | PH1P_PHY_LSLICE(47)      |                     |
+| gclk_1  | N/A   | PH1P_PHY_GCLK   | None       |          51 |          51 | rx_clk                                                     | PH1P_PHY_DRAMHARDCON(31) | PH1P_PHY_LSLICE(20) |
+| gclk_2  | N/A   | PH1P_PHY_GCLK   | None       |           9 |           9 | O_cam_24m_dup_1                                            | PH1P_PHY_LSLICE(9)       |                     |
 | gclk_4  | N/A   | PH1P_PHY_GCLK   | None       |           1 |           1 | u_dphy_rx/u_ph1p_mipiio_rx_wrapper/u_lane0_hs_detect/I_clk | PH1P_PHY_PLL_V2(1)       |                     |
 |         |       |                 |            |             |             |                                                            |                          |                     |
 | local_1 | N/A   | PH1P_PHY_HD_PAD | None       |           1 |           1 | I_sys_clk_dup_1                                            | PH1P_PHY_PLL_V2(1)       |                     |
@@ -215,11 +215,11 @@ C. IP Stat.
 +--------+---------------+-----------+--------+--------+------------------------------------------------------+
 | Index  | Type          | Location  | Sector | Fanout | Buffer                                               |
 +--------+---------------+-----------+--------+--------+------------------------------------------------------+
-| gclk_1 | PH1P_PHY_GCLK | x23y39z0  |      0 |    613 | u_dphy_tx/u_ph1p_mipiio_tx_wrapper/U_PH1P_LOGIC_BUFG |
-| gclk_2 | PH1P_PHY_GCLK | x23y39z1  |      0 |    446 | u_dphy_rx/u_ph1p_mipiio_rx_wrapper/bufg_feedback     |
-| gclk_3 | PH1P_PHY_GCLK | x23y39z16 |      0 |    187 | u_pll/bufg_clk1                                      |
+| gclk_1 | PH1P_PHY_GCLK | x23y39z0  |      0 |    603 | u_dphy_tx/u_ph1p_mipiio_tx_wrapper/U_PH1P_LOGIC_BUFG |
+| gclk_2 | PH1P_PHY_GCLK | x23y39z1  |      0 |    434 | u_dphy_rx/u_ph1p_mipiio_rx_wrapper/bufg_feedback     |
+| gclk_3 | PH1P_PHY_GCLK | x23y39z16 |      0 |    186 | u_pll/bufg_clk1                                      |
 | gclk_4 | PH1P_PHY_GCLK | x23y39z2  |      0 |     17 | u_cam_cfg/uii2c_inst/scl_clk_created_gclkinst        |
-| gclk_5 | PH1P_PHY_GCLK | x23y39z17 |      0 |     14 | u_pll/bufg_feedback                                  |
+| gclk_5 | PH1P_PHY_GCLK | x23y39z17 |      0 |     16 | u_pll/bufg_feedback                                  |
 +--------+---------------+-----------+--------+--------+------------------------------------------------------+
 
 2.Clock Buffer Driver Stat.
@@ -229,7 +229,7 @@ C. IP Stat.
 | gclk_1 | x23y39z0  | B    | PH1P_PHY_MIPIIO_TX.o_fabric_div4_8_clk | x47y20z0       | S0 R       |
 | gclk_2 | x23y39z1  | B    | PH1P_PHY_MIPIIO_RX.o_fabric_div4_8_clk | x47y0z0        | S0 R       |
 | gclk_3 | x23y39z16 | T    | PH1P_PHY_PLL_V2.clkc[1]                | x43y79z0       | S1 R       |
-| gclk_4 | x23y39z2  | B    | PH1P_PHY_LSLICE.oqb                    | x14y43z7       | S1 L       |
+| gclk_4 | x23y39z2  | B    | PH1P_PHY_LSLICE.oqb                    | x14y38z3       | S0 L       |
 | gclk_5 | x23y39z17 | T    | PH1P_PHY_PLL_V2.clkc[0]                | x43y79z0       | S1 R       |
 +--------+-----------+------+----------------------------------------+----------------+------------+
 
@@ -237,11 +237,11 @@ C. IP Stat.
 +--------+----------------------+---------------------------+---------------------+----------------------------+
 | Index  | FanoutGroup1         | FanoutGroup2              | FanoutGroup3        | FanoutGroup4               |
 +--------+----------------------+---------------------------+---------------------+----------------------------+
-| gclk_1 | PH1P_PHY_LSLICE(467) | PH1P_PHY_DRAMHARDCON(128) | PH1P_PHY_MSLICE(16) | PH1P_PHY_SHIFTERHARDCON(2) |
-| gclk_2 | PH1P_PHY_LSLICE(350) | PH1P_PHY_DRAMHARDCON(96)  |                     |                            |
-| gclk_3 | PH1P_PHY_LSLICE(184) | PH1P_PHY_ERAM_V2(2)       | PH1P_PHY_HD_PAD(1)  |                            |
+| gclk_1 | PH1P_PHY_LSLICE(457) | PH1P_PHY_DRAMHARDCON(128) | PH1P_PHY_MSLICE(16) | PH1P_PHY_SHIFTERHARDCON(2) |
+| gclk_2 | PH1P_PHY_LSLICE(338) | PH1P_PHY_DRAMHARDCON(96)  |                     |                            |
+| gclk_3 | PH1P_PHY_LSLICE(183) | PH1P_PHY_ERAM_V2(2)       | PH1P_PHY_HD_PAD(1)  |                            |
 | gclk_4 | PH1P_PHY_LSLICE(17)  |                           |                     |                            |
-| gclk_5 | PH1P_PHY_LSLICE(12)  | PH1P_PHY_MIPIIO_TX(1)     | PH1P_PHY_PLL_V2(1)  |                            |
+| gclk_5 | PH1P_PHY_LSLICE(14)  | PH1P_PHY_MIPIIO_TX(1)     | PH1P_PHY_PLL_V2(1)  |                            |
 +--------+----------------------+---------------------------+---------------------+----------------------------+
 
 

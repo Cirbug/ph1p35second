@@ -8,35 +8,35 @@ IO Statistics
   #inout                   21
 
 Gate Statistics
-#Basic gates             3077
+#Basic gates             3053
   #and                    101
   #nand                     0
-  #or                      54
+  #or                      56
   #nor                      0
   #xor                     84
   #xnor                     0
   #buf                      0
-  #not                    304
+  #not                    307
   #bufif1                   1
-  #MX21                   410
+  #MX21                   381
   #FADD                     0
   #DFF                   2123
   #LATCH                    0
 #MACRO_ADD                117
 #MACRO_EQ                  69
-#MACRO_MUX               1234
+#MACRO_MUX               1250
 #MACRO_OTHERS               4
 
 Report Hierarchy Area:
 +---------------------------------------------------------------------------------------------------------------+
 |Instance                                        |Module                                |gates  |seq    |macros |
 +---------------------------------------------------------------------------------------------------------------+
-|top                                             |csi2_tx_top                           |954    |2123   |190    |
+|top                                             |csi2_tx_top                           |930    |2123   |190    |
 |  u_ae_set                                      |ae_set                                |10     |43     |8      |
-|  u_cam_cfg                                     |uicfgcs500                            |318    |91     |16     |
+|  u_cam_cfg                                     |uicfgcs500                            |292    |91     |16     |
 |    gain_tbl                                    |SC500GainTbl                          |0      |10     |0      |
-|    uics500regAE_inst                           |uics500regAE                          |12     |0      |0      |
-|    uics500reg_inst                             |uics500reg                            |167    |0      |0      |
+|    uics500regAE_inst                           |uics500regAE                          |14     |0      |0      |
+|    uics500reg_inst                             |uics500reg                            |139    |0      |0      |
 |    uii2c_inst                                  |uii2c                                 |53     |33     |13     |
 |  u_dbg_uart                                    |dbg_uart                              |117    |55     |72     |
 |  u_dphy_rx                                     |mipi_dphy_rx_ph1p_mipiio_wrapper      |115    |342    |33     |
