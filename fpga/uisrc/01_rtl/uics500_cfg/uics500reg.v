@@ -59,8 +59,8 @@ generate if (FULL30_REFERENCE) begin : g_motorola
             9'd8: REG_DATA = 32'h0036f904;
             9'd9: REG_DATA = 32'h00301f01;
             9'd10: REG_DATA = 32'h00310601;
-            9'd11: REG_DATA = 32'h00320c09; // HTS=2400 (0x0960)：链路 65%，帧率 22.5fps
-            9'd12: REG_DATA = 32'h00320d60; // HTS low (2400)
+            9'd11: REG_DATA = 32'h00320c0f; // HTS=4000 (0x0FA0)：链路 39%，帧率 11.2fps
+            9'd12: REG_DATA = 32'h00320da0; // HTS low (4000 = 0x0FA0)
             9'd13: REG_DATA = 32'h0030183a; // explicit board 2-lane default
             9'd14: REG_DATA = 32'h0030310a; // explicit board RAW10 default
             9'd15: REG_DATA = 32'h00320000;
