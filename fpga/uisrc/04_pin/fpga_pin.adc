@@ -15,7 +15,10 @@ set_pin_assignment	{ O_led_cfg }	{ LOCATION = J18; IOSTANDARD = LVCMOS33; DRIVES
 set_pin_assignment	{ O_led_beat }	{ LOCATION = K16; IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 8; PULLTYPE = NONE; }
 set_pin_assignment	{ O_led_err }	{ LOCATION = K17; IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 8; PULLTYPE = NONE; }
 
-# 注意：
-# 1) MIPI 差分脚（IO_rx_* / IO_tx_*）是硬核专用管脚，不在此约束。
-# 2) 刻意不约束 O_screen_pwm(R11)：本设计不驱动该脚，保持高阻，
-#    避免与 A 板 J9 第 29 脚发生冲突。
+# 注意�?
+# 1) MIPI 差分脚（IO_rx_* / IO_tx_*）是硬核专用管脚，不在此约束�?
+# 2) 刻意不约�?O_screen_pwm(R11)：本设计不驱动该脚，保持高阻�?
+#    避免�?A �?J9 �?29 脚发生冲突�?
+
+set_pin_assignment	{ I_dsi_scl }	{ LOCATION = P11; IOSTANDARD = LVCMOS33; PULLTYPE = PULLUP; }
+set_pin_assignment	{ IO_dsi_sda }	{ LOCATION = R12; IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 8; PULLTYPE = PULLUP; }

@@ -2,36 +2,36 @@
 | QoR metrics               |         value               |
 -----------------------------------------------------------
 | Timing                    |                             |
-|     Setup WNS             |         2978                |
+|     Setup WNS             |         1267                |
 |     Setup TNS             |            0                |
 |     Num of violated S-EP  |            0                |
-|     Hold WNS              |          493                |
+|     Hold WNS              |          457                |
 |     Hold TNS              |            0                |
 |     Num of violated H-EP  |            0                |
 -----------------------------------------------------------
 | Utilization               |                             |
-|     #registers            |         1489                |
-|     #luts                 |         1457                |
+|     #registers            |         1507                |
+|     #luts                 |         1487                |
 |     #lut1                 |           12                |
 |     #lut1(~A)             |           12                |
-|     #slices               |         2538                |
-|     slices percentage     |       11.96%                |
+|     #slices               |         4768                |
+|     slices percentage     |       22.47%                |
 |     #RAMs                 |            1                |
 |     #DSPs                 |            0                |
-|     #f7mux                |        1.89%                |
-|     #MACROs               |          347                |
-|     #insts in MACRO       |         2864                |
+|     #f7mux                |        3.92%                |
+|     #MACROs               |          689                |
+|     #insts in MACRO       |         5435                |
 -----------------------------------------------------------
 | kept_net                  |                             |
-|     #syn_keep             |          280                |
+|     #syn_keep             |          279                |
 |     #keep_hier            |            0                |
 |     #dont_touch           |            0                |
 |     #mark_debug           |            0                |
 |     #max_fanout_keep      |            0                |
-|     #async_reg            |            0                |
+|     #async_reg            |            6                |
 -----------------------------------------------------------
-| Top 10% datanet fanout#   |       164.26                |
-| dff(single fanout)->dff   |          243                |
+| Top 10% datanet fanout#   |       214.16                |
+| dff(single fanout)->dff   |          233                |
 | dff(single fanout)->dram  |            0                |
 -----------------------------------------------------------
 | Over-quota path num*      |                             |
@@ -46,33 +46,33 @@ Note**: Rent shows the rent exponent value of the modules whose rent value excee
         Only modules under top are reported, and the threshold is defined as 0.7.
 
 Logic Level Distribution
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  Clock                                                                              |  Period             |  0     |  1     |  2    |  3    |  4    |  5   |  6   |  7   |  8   |  9   |  10  |  11  |  12  |  13
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  MIPI_RX_BYTE_CLK                                                                   |  8.888ns (112MHz)   |  651   |  906   |  159  |  177  |  43   |  0   |  16  |  18  |  0   |  0   |  0   |  0   |  0   |  0
-  MIPI_TX_BYTE_CLK                                                                   |  22.856ns (43MHz)   |  461   |  1472  |  266  |  172  |  18   |  2   |  10  |  0   |  16  |  32  |  16  |  6   |  12  |  2
-  mipi_rx_ck_pad                                                                     |  2.222ns (450MHz)   |  0     |  0     |  0    |  0    |  0    |  0   |  0   |  0   |  0   |  0   |  0   |  0   |  0   |  0
-  pll_clk_100m                                                                       |  10.000ns (100MHz)  |  12    |  4     |  2    |  0    |  0    |  0   |  0   |  0   |  0   |  0   |  0   |  0   |  0   |  0
-  pll_clk_24m                                                                        |  41.668ns (23MHz)   |  165   |  68    |  12   |  41   |  73   |  23  |  0   |  2   |  4   |  0   |  1   |  0   |  0   |  0
-  sysclk                                                                             |  40.000ns (25MHz)   |  0     |  0     |  0    |  0    |  0    |  0   |  0   |  0   |  0   |  0   |  0   |  0   |  0   |  0
-  u_dphy_rx/u_ph1p_mipiio_rx_wrapper/u_PH1P_LOGIC_DPHY_MIPI_RX.io_clk_pad_p          |  2.222ns (450MHz)   |  0     |  0     |  0    |  0    |  0    |  0   |  0   |  0   |  0   |  0   |  0   |  0   |  0   |  0
-  u_dphy_rx/u_ph1p_mipiio_rx_wrapper/u_PH1P_LOGIC_DPHY_MIPI_RX.tif_c16_in            |  8.888ns (112MHz)   |  0     |  0     |  0    |  0    |  0    |  0   |  0   |  0   |  0   |  0   |  0   |  0   |  0   |  0
-  u_dphy_tx/u_ph1p_mipiio_tx_wrapper/u_PH1P_LOGIC_DPHY_MIPI_TX.i_phy_dpll_ref_clk    |  10.000ns (100MHz)  |  0     |  0     |  0    |  0    |  0    |  0   |  0   |  0   |  0   |  0   |  0   |  0   |  0   |  0
-  u_dphy_tx/u_ph1p_mipiio_tx_wrapper/u_PH1P_LOGIC_DPHY_MIPI_TX.ln0_data_c16_sample   |  22.856ns (43MHz)   |  16    |  0     |  0    |  0    |  0    |  0   |  0   |  0   |  0   |  0   |  0   |  0   |  0   |  0
-  u_dphy_tx/u_ph1p_mipiio_tx_wrapper/u_PH1P_LOGIC_DPHY_MIPI_TX.ln1_data_c16_sample   |  22.856ns (43MHz)   |  16    |  0     |  0    |  0    |  0    |  0   |  0   |  0   |  0   |  0   |  0   |  0   |  0   |  0
-  u_dphy_tx/u_ph1p_mipiio_tx_wrapper/u_PH1P_LOGIC_DPHY_MIPI_TX.ln2_data_c16_sample   |  22.856ns (43MHz)   |  16    |  0     |  0    |  0    |  0    |  0   |  0   |  0   |  0   |  0   |  0   |  0   |  0   |  0
-  u_dphy_tx/u_ph1p_mipiio_tx_wrapper/u_PH1P_LOGIC_DPHY_MIPI_TX.ln3_data_c16_sample   |  22.856ns (43MHz)   |  16    |  0     |  0    |  0    |  0    |  0   |  0   |  0   |  0   |  0   |  0   |  0   |  0   |  0
-  u_dphy_tx/u_ph1p_mipiio_tx_wrapper/u_PH1P_LOGIC_DPHY_MIPI_TX.lnck_data_c16_sample  |  22.856ns (43MHz)   |  16    |  0     |  0    |  0    |  0    |  0   |  0   |  0   |  0   |  0   |  0   |  0   |  0   |  0
-  Total                                                                              |  NA                 |  1369  |  2450  |  439  |  390  |  134  |  25  |  26  |  20  |  20  |  32  |  17  |  6   |  12  |  2
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  Clock                                                                              |  Period             |  0     |  1     |  2    |  3    |  4    |  5   |  6   |  7   |  8
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  MIPI_RX_BYTE_CLK                                                                   |  8.888ns (112MHz)   |  669   |  1637  |  141  |  314  |  18   |  12  |  15  |  19  |  0
+  MIPI_TX_BYTE_CLK                                                                   |  8.888ns (112MHz)   |  489   |  2749  |  392  |  144  |  42   |  49  |  29  |  17  |  0
+  mipi_rx_ck_pad                                                                     |  2.222ns (450MHz)   |  0     |  0     |  0    |  0    |  0    |  0   |  0   |  0   |  0
+  pll_clk_100m                                                                       |  10.000ns (100MHz)  |  12    |  4     |  2    |  0    |  0    |  0   |  0   |  0   |  0
+  pll_clk_24m                                                                        |  41.668ns (23MHz)   |  244   |  102   |  30   |  71   |  82   |  6   |  3   |  3   |  2
+  sysclk                                                                             |  40.000ns (25MHz)   |  0     |  0     |  0    |  0    |  0    |  0   |  0   |  0   |  0
+  u_dphy_rx/u_ph1p_mipiio_rx_wrapper/u_PH1P_LOGIC_DPHY_MIPI_RX.io_clk_pad_p          |  2.222ns (450MHz)   |  0     |  0     |  0    |  0    |  0    |  0   |  0   |  0   |  0
+  u_dphy_rx/u_ph1p_mipiio_rx_wrapper/u_PH1P_LOGIC_DPHY_MIPI_RX.tif_c16_in            |  8.888ns (112MHz)   |  0     |  0     |  0    |  0    |  0    |  0   |  0   |  0   |  0
+  u_dphy_tx/u_ph1p_mipiio_tx_wrapper/u_PH1P_LOGIC_DPHY_MIPI_TX.i_phy_dpll_ref_clk    |  10.000ns (100MHz)  |  0     |  0     |  0    |  0    |  0    |  0   |  0   |  0   |  0
+  u_dphy_tx/u_ph1p_mipiio_tx_wrapper/u_PH1P_LOGIC_DPHY_MIPI_TX.ln0_data_c16_sample   |  8.888ns (112MHz)   |  16    |  0     |  0    |  0    |  0    |  0   |  0   |  0   |  0
+  u_dphy_tx/u_ph1p_mipiio_tx_wrapper/u_PH1P_LOGIC_DPHY_MIPI_TX.ln1_data_c16_sample   |  8.888ns (112MHz)   |  16    |  0     |  0    |  0    |  0    |  0   |  0   |  0   |  0
+  u_dphy_tx/u_ph1p_mipiio_tx_wrapper/u_PH1P_LOGIC_DPHY_MIPI_TX.ln2_data_c16_sample   |  8.888ns (112MHz)   |  16    |  0     |  0    |  0    |  0    |  0   |  0   |  0   |  0
+  u_dphy_tx/u_ph1p_mipiio_tx_wrapper/u_PH1P_LOGIC_DPHY_MIPI_TX.ln3_data_c16_sample   |  8.888ns (112MHz)   |  16    |  0     |  0    |  0    |  0    |  0   |  0   |  0   |  0
+  u_dphy_tx/u_ph1p_mipiio_tx_wrapper/u_PH1P_LOGIC_DPHY_MIPI_TX.lnck_data_c16_sample  |  8.888ns (112MHz)   |  16    |  0     |  0    |  0    |  0    |  0   |  0   |  0   |  0
+  Total                                                                              |  NA                 |  1494  |  4492  |  565  |  529  |  142  |  67  |  47  |  39  |  2
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Hierarchical Rent Exponent Report
-+-----------------------------------------------------------------------+
-|Inst          |Model            |Rent     |Cell     |Pin     |Term     |
-+-----------------------------------------------------------------------+
-|top           |csi2_tx_top      |0.09     |6386     |54991   |19       |
-|  u_tk_fifo   |csi2_ptr_fifo_8  |0.21     |1234     |17277   |62       |
-|  u_tx_packet |csi2_tx_packet_9 |0.20     |2073     |25909   |59       |
-+-----------------------------------------------------------------------+
++------------------------------------------------------------------------+
+|Inst          |Model             |Rent     |Cell     |Pin     |Term     |
++------------------------------------------------------------------------+
+|top           |csi2_tx_top       |0.07     |9017     |96050   |21       |
+|  u_tx_packet |csi2_tx_packet_10 |0.18     |3628     |49941   |60       |
+|  u_tk_fifo   |csi2_ptr_fifo_9   |0.14     |2342     |34213   |43       |
++------------------------------------------------------------------------+
 Note: Cell represents total number of cells inside module; Pin represents total number of pins
       which have net connection inside module; Term represents total number of PIs and POs of module.
       Rent represents the relationship between number of terms and number of cells in module.

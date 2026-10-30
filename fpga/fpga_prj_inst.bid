@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- HMAC is: 74bd2440c4b2df4499b727e4c278a4e8897473653b52f499b0f0f6c3c0164cd7 -->
+<!-- HMAC is: 417103933d507d230798a0309e8fb6a4041a774de5a1f15014e2f9a1bdfea665 -->
 <All_Bram_Infos>
-    <Ucode>00101101</Ucode>
+    <Ucode>11101011</Ucode>
     <AL_PHY_ERAM>
         <INST_1>
-            <rid>0X00000224</rid>
-            <wid>0X00000224</wid>
+            <rid>0X00000013</rid>
+            <wid>0X00000013</wid>
             <is_debuggable>n</is_debuggable>
             <is_initialize>y</is_initialize>
             <model_type>AL_PHY_ERAM</model_type>
-            <name>u_cam_cfg/gain_tbl/mux0_syn_15</name>
+            <name>u_cam_cfg/gain_tbl/mux0_syn_17</name>
             <width_a>10</width_a>
             <width_b>10</width_b>
-            <logic_name>u_cam_cfg/gain_tbl/mux0_syn_14</logic_name>
+            <logic_name>u_cam_cfg/gain_tbl/mux0_syn_16</logic_name>
             <logic_width>10</logic_width>
             <logic_depth>128</logic_depth>
             <sub_bid_info>

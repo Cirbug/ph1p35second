@@ -13,7 +13,8 @@ module csi2_tx_packet #(
     parameter LANE_NUM  = 2,
     parameter VC        = 2'b00,
     parameter DT        = 8'h2B,
-    parameter BUF_AW    = 10,
+    // 一行 2592 像素 = 1620 个 16bit 字，1024 装不下 -> 每行后 36% 错
+    parameter BUF_AW    = 12,
     parameter LANE_SWAP = 0
 )(
     input  wire                   I_clk,
@@ -60,6 +61,7 @@ module csi2_tx_packet #(
     reg [15:0]       pkt_bytes;
     reg [15:0]       crc_r;
     reg [15:0]       gap;
+    reg              long_gap;      // FS 之后要留长间隙，等 A 板的 valid 落下来
     reg [15:0]       wc_lat;
     reg [23:0]       hdr_data;
 
@@ -135,6 +137,7 @@ module csi2_tx_packet #(
             pkt_bytes  <= 16'd0;
             crc_r      <= 16'hFFFF;
             gap        <= 16'd0;
+            long_gap   <= 1'b0;
             wc_lat     <= 16'd0;
             hdr_data   <= 24'd0;
             O_hs_en    <= 1'b0;
@@ -210,7 +213,12 @@ module csi2_tx_packet #(
             S_GAP: begin
                 O_hs_en   <= 1'b0;
                 O_hs_last <= 1'b0;
-                if (gap >= 16'd8) st <= S_IDLE;
+                // 包间间隙必须接近摄像头的行消隐（约 3.8us），否则 A 板的
+                // csi_unpacket_2lane 看不到包边界，会把所有行包连成一整条，
+                // 结果 last_words=0 / last_lines=0（A 串口实测）-> 一帧都不成。
+                // 200 拍 @112.5MHz = 1.8us，配合 13.2us 载荷正好落在 17.1us 行周期内；
+                // FS 之后留 400 拍（3.6us），保证 A 帧起始那一拍数据线是空的。
+                if (gap >= (long_gap ? 16'd400 : 16'd200)) st <= S_IDLE;
                 else                gap <= gap + 16'd1;
             end
 

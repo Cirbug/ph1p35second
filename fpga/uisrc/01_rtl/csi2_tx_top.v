@@ -21,7 +21,8 @@ module csi2_tx_top #(
     parameter DBG_MODE = 0,           // 1 = 三颗灯改为显示 I2C 内部状态
     // 两块 14→40 转接板的 D0/D1 顺序相反，实机必须为 1。
     // 提成参数是为了让 testbench 能传 0 来按自然字节序校验。
-    parameter LANE_SWAP = 1
+    parameter LANE_SWAP = 1,
+    parameter CROP_EN   = 0            // 0 = 不裁剪，原样转发 2592x1944
 )(
     input  wire        I_sys_clk,          // 25MHz 单端，C4
 
@@ -35,6 +36,10 @@ module csi2_tx_top #(
     inout  wire        IO_cam_sda,         // U9
     output wire        O_cam_24m,          // V9
     output wire        O_cam_rst,          // V8
+
+    // DSI 座 I2C（接 A 板，40P 第 3/6 脚）—— A 板用它控制摄像头
+    input  wire        I_dsi_scl,          // P11
+    inout  wire        IO_dsi_sda,         // R12
 
     // MIPI DPHY1 TX -> DSI 座
     inout  wire        IO_tx_clk_pad_p,
@@ -97,45 +102,71 @@ module csi2_tx_top #(
     assign O_cam_24m = clk_24m;
     assign O_cam_rst = 1'b1;
 
-    wire cam_cfg_done;
-    wire cam_ae_done;
-    wire iic_busy_raw;
-    wire iic_ack_raw;
-    wire iic_err_raw;
-
     //------------------------------------------------------------------
-    // 曝光/增益设定
-    //   ae_set 的默认值是 ae=3000 / ag=60，且只有"按键改变数值"时才拉高
-    //   O_ae_req（初始 r_ae == r_ae_set，条件不成立）。所以：
-    //     - 不按键时行为与"完全不接 AE"完全一致（不写 AE 寄存器）
-    //     - 按键即可手动调曝光，方便现场调亮度
+    // 摄像头配置：B 板自己做初始化 + A 板控制曝光
+    //   · 初始化表 = B 板的 F02 1920x1080 表（HTS=2852, VTS=1127, 20fps）
+    //     —— B 自己配，保证模式和帧率稳定
+    //   · A 板通过 40P 第 3/6 脚发来的 AE 写，只提取曝光/增益数值，
+    //     喂给 B 自己的 AE 表（5 条，不写 VTS），不破坏已配好的模式
     //------------------------------------------------------------------
-    wire        ae_req;
-    wire [15:0] ae_val;
-    wire [15:0] ag_val;
+    wire        cam_cfg_done;
+    wire        cam_ae_done;
+    wire        iic_busy_raw;
+    wire        iic_ack_raw;
+    wire        iic_err_raw;
+    wire [8:0]  dbg_regidx;
+    wire [15:0] bridge_ok_cnt  = 16'd0;   // 调试字段占位
+    wire [15:0] bridge_vts_drop= 16'd0;
+    wire        vts_seen       = 1'b0;
+    wire [7:0]  sn_301f = 8'hA5, sn_320c = 8'hA5, sn_320d = 8'hA5;
+    wire [15:0] first_reg  = 16'hA5A5;
+    wire [7:0]  first_data = 8'hA5;
 
-    ae_set u_ae_set (
-        .I_clk         ( clk_24m      ),
-        .I_rst         ( ~rst_n_24    ),
-        .I_btn         ( { I_button, 2'b11 } ),
-        .I_ae_cfg_done ( cam_ae_done  ),
-        .I_cam_cfg_done( cam_cfg_done ),
-        .O_ae_req      ( ae_req       ),
-        .O_ae          ( ae_val       ),
-        .O_ag          ( ag_val       )
+    // ---- DSI 侧从机：收 A 板的寄存器写 ----
+    wire [15:0] dsi_reg;
+    wire [7:0]  dsi_data;
+    wire        dsi_valid;
+    wire        dsi_seen;
+
+    i2c_slave #( .DEV_ID ( 8'h6C ) ) u_dsi_slave (
+        .clk       ( clk_24m    ),
+        .rstn      ( rst_n_24   ),
+        .scl_i     ( I_dsi_scl  ),
+        .sda_io    ( IO_dsi_sda ),
+        .o_reg     ( dsi_reg    ),
+        .o_data    ( dsi_data   ),
+        .o_valid   ( dsi_valid  ),
+        .o_seen    ( dsi_seen   ),
+        .dbg_start (            ),
+        .dbg_stop  (            )
     );
 
-    wire [8:0] dbg_regidx;     // 摄像头配置进度（仅调试用）
+    // ---- 从 A 的写里提取曝光/增益 ----
+    wire [15:0] ae_from_a;
+    wire [15:0] ag_from_a;
+    wire        ae_req_from_a;
+
+    ae_from_dsi u_ae_from_dsi (
+        .I_clk      ( clk_24m        ),
+        .I_rstn     ( rst_n_24       ),
+        .I_reg      ( dsi_reg        ),
+        .I_data     ( dsi_data       ),
+        .I_valid    ( dsi_valid      ),
+        .I_cfg_done ( cam_cfg_done   ),
+        .O_ae       ( ae_from_a      ),
+        .O_ag       ( ag_from_a      ),
+        .O_req      ( ae_req_from_a  )
+    );
 
     uicfgcs500 #(
-        .CLK_DIV ( 24000000 / 100000 - 1 )      // 24MHz -> 100kHz I2C
+        .CLK_DIV ( 24000000 / 100000 - 1 )      // 24MHz -> 100kHz
     ) u_cam_cfg (
-        .I_clk        ( clk_24m      ),
-        .I_rst_n      ( rst_n_24     ),
-        .I_ae_req     ( ae_req       ),
-        .I_ae         ( ae_val       ),
-        .I_ag         ( ag_val       ),
-        .O_cam_scl    ( O_cam_scl    ),
+        .I_clk        ( clk_24m        ),
+        .I_rst_n      ( rst_n_24       ),
+        .I_ae_req     ( ae_req_from_a  ),       // A 板触发
+        .I_ae         ( ae_from_a      ),       // A 板给的曝光
+        .I_ag         ( ag_from_a      ),       // A 板给的增益
+        .O_cam_scl    ( O_cam_scl      ),
         .IO_cam_sda   ( IO_cam_sda   ),
         .O_cfg_done   ( cam_cfg_done ),
         .O_ae_cfg_done( cam_ae_done  ),
@@ -260,27 +291,57 @@ module csi2_tx_top #(
     // 不受解析器当前状态影响（否则处于收载荷时会把帧尾包整个漏掉）
     reg        v_d2;
     reg        fe_det;
+    reg        fs_det;
     reg [19:0] fe_hold;
 
-    // 去抖：真正的帧间隔约 50ms，而同一次帧尾突发内的误触发间隔 <1us，
-    // 用 ~356us 的屏蔽窗足以滤掉重复触发。
+    // ★ 真帧边界是一个"只有 2 拍"的短包。只看首字节会把杂散突发误判成
+    //   帧起/帧尾（2592 模式下行包被误判后 cam_fs_seen 被永久置 1，
+    //   按行数合成的逻辑就被关掉 -> A 永远收不到帧边界 -> 黑屏）。
+    //   这里同时记录突发长度，只有长度正好 2 拍才认。
+    reg [15:0] bst_len;      // 当前突发已收到的拍数
+    reg [7:0]  bst_hi;       // 当前突发的第一个字节（高字节）
+    reg        bst_act;      // 当前是否在一个突发里
+
+    // 去抖：真正的帧间隔约 33ms，同一次突发内误触发间隔 <1us
     localparam FE_DEB = 20'd20000;
 
     always @(posedge rx_clk or negedge rst_n_rx) begin
         if (!rst_n_rx) begin
             v_d2    <= 1'b0;
             fe_det  <= 1'b0;
+            fs_det  <= 1'b0;
             fe_hold <= 20'd0;
+            bst_len <= 16'd0;
+            bst_hi  <= 8'd0;
+            bst_act <= 1'b0;
         end else begin
-            v_d2 <= rx_valid;
+            v_d2   <= rx_valid;
             fe_det <= 1'b0;
+            fs_det <= 1'b0;
 
-            if (fe_hold != 20'd0) begin
-                fe_hold <= fe_hold - 20'd1;
-            end else if (!v_d2 && rx_valid && (rx_data[15:8] == 8'h01)) begin
-                fe_det  <= 1'b1;
-                fe_hold <= FE_DEB;
+            //---- 突发计数：有效期间累加，结束后判决 ----
+            if (rx_valid) begin
+                if (!bst_act) begin
+                    bst_hi  <= rx_data[15:8];   // 记下突发首字节
+                    bst_len <= 16'd1;
+                    bst_act <= 1'b1;
+                end else if (bst_len != 16'hFFFF) begin
+                    bst_len <= bst_len + 16'd1;
+                end
+            end else if (bst_act) begin
+                // 突发刚结束：长度 2 拍 + 首字节是 00/01 才算真短包
+                bst_act <= 1'b0;
+                if (bst_len == 16'd2) begin
+                    if (bst_hi == 8'h01 && fe_hold == 20'd0) begin
+                        fe_det  <= 1'b1;
+                        fe_hold <= FE_DEB;
+                    end else if (bst_hi == 8'h00) begin
+                        fs_det  <= 1'b1;
+                    end
+                end
             end
+
+            if (fe_hold != 20'd0) fe_hold <= fe_hold - 20'd1;
         end
     end
 
@@ -290,27 +351,65 @@ module csi2_tx_top #(
     reg        gen_fs;
     reg        gen_fe;
 
+    //------------------------------------------------------------------
+    // 帧边界合成
+    //   SC500CS 在 2592x1944 模式下不发 FS/FE 短包（1920 模式下会发）。
+    //   A 板靠 FS/FE 划分帧，收不到就判每帧行数错 -> 黑屏。
+    //   所以 B 按行数自己补：开帧后数满 FRAME_LINES 行就发一次 FE+FS。
+    //------------------------------------------------------------------
+    // 注意：这是 B 每帧实际转发的行数，必须等于裁剪后的 CROP_LINES（1080）。
+    // 不能写成摄像头的 1944 —— 那样两帧之间会夹 1.8 个源帧，
+    // A 板数到的行数永远对不上，每帧都判坏（LED3 亮、LED1 灭、黑屏）。
+    // 全画幅 2592x1944：每帧 1944 行，必须和 A 的 SENSOR_HEIGHT 一致。
+    // （之前是 1080，因为那时 CROP_EN=1 输出 1920x1080；改成不裁剪后忘了改回来，
+    //   导致 B 每 1080 行就发一次 FE/FS，A 判 lines_now != 1944 -> 每帧判坏 -> LED3 亮）
+    localparam integer FRAME_LINES = 1944;
+
+    reg [11:0] frm_line;
+    reg        cam_fs_seen;   // 摄像头发过 FS 就交给它；超时没再发就改自己补
+    reg [21:0] fs_timeout;    // 约 37ms（112.5MHz 下 4.19M 拍）≈ 一帧
+
     always @(posedge rx_clk or negedge rst_n_rx) begin
         if (!rst_n_rx) begin
-            frm_on <= 1'b0;
-            fe_rq  <= 1'b0;
-            fs_rq  <= 1'b0;
-            gen_fs <= 1'b0;
-            gen_fe <= 1'b0;
+            frm_on   <= 1'b0;
+            fe_rq    <= 1'b0;
+            fs_rq    <= 1'b0;
+            gen_fs   <= 1'b0;
+            gen_fe   <= 1'b0;
+            frm_line <= 12'd0;
+            cam_fs_seen <= 1'b0;
+            fs_timeout  <= 22'd0;
         end else begin
             gen_fs <= 1'b0;
             gen_fe <= 1'b0;
 
-            // 上电后第一行 -> 立刻开帧
-            if (p_pkt_end && !frm_on) begin
-                gen_fs <= 1'b1;
-                frm_on <= 1'b1;
+            // 帧边界完全由 B 按行数生成，不使用摄像头的 FS/FE。
+            // 原因：RX 的 rx_valid 会在突发中间短暂断开，
+            // 导致子突发被误数成 2 拍、fs_det/fe_det 频繁误触发
+            // （实测产生 1002 帧/秒，而正确值是 33.7），
+            // A 每帧收到 65 行就被判坏 -> 黑屏。
+            cam_fs_seen <= 1'b0;
+            fs_timeout  <= 22'd0;
+
+            // 摄像头不发 FS 时，靠行数开帧/闭帧
+            // ★ 关键：帧边界标记必须排队到"下一拍"再发，绝不能和 p_pkt_end 同拍。
+            //   令牌打包的优先级是 p_wr_en > gen_fs > p_pkt_end > gen_fe，
+            //   同拍时 gen_fe 会被 p_pkt_end 挤掉、gen_fs 会把该行的行结束挤掉，
+            //   结果 A 板收不到帧起/帧尾 -> 永远凑不满一帧 -> 黑屏。
+            if (p_pkt_end) begin
+                if (!frm_on) begin
+                    fs_rq    <= 1'b1;      // 下一拍补帧起
+                    frm_on   <= 1'b1;
+                    frm_line <= 12'd0;
+                end else if (frm_line >= FRAME_LINES - 1) begin
+                    fe_rq    <= 1'b1;      // 下一拍发帧尾，再下一拍发帧起
+                    frm_line <= 12'd0;
+                end else begin
+                    frm_line <= frm_line + 12'd1;
+                end
             end
 
-            // 收到帧尾包 -> 排队 FE + FS
-            if (fe_det) begin
-                fe_rq <= 1'b1;
-            end
+            // 不使用摄像头的 FE（同上，避免误触发）
 
             if (fe_rq) begin
                 gen_fe <= 1'b1;
@@ -319,30 +418,92 @@ module csi2_tx_top #(
             end else if (fs_rq) begin
                 gen_fs <= 1'b1;
                 fs_rq  <= 1'b0;
+                frm_line <= 12'd0;
             end
         end
     end
-    always @(posedge rx_clk or negedge rst_n_rx) begin
-        if (!rst_n_rx) begin
-            tk_we    <= 1'b0;
-            tk_wdata <= 18'd0;
-        end else if (!tk_full) begin
-            tk_we <= 1'b1;
-            // 00=载荷  01=帧起  10=行结束(带WC)  11=帧尾
-            if (p_wr_en)
-                tk_wdata <= { 2'b00, p_wr_data };
-            else if (gen_fs)
-                tk_wdata <= { 2'b01, 16'h0000 };
-            else if (p_pkt_end)
-                tk_wdata <= { 2'b10, p_pkt_wc };
-            else if (gen_fe)
-                tk_wdata <= { 2'b11, 16'h0000 };
-            else
+    //------------------------------------------------------------------
+    // 令牌打包
+    //   CROP_EN=0 : 原样转发（仿真用，行为和裁剪前完全一致）
+    //   CROP_EN=1 : 只转发 1920x1080 窗口（裁掉右侧 672 列、下方 864 行）
+    //     摄像头 2592x1944@30fps 载荷 750Mbps/lane，链路利用率 83%，
+    //     重打包开销挤不进去；裁到 1920x1080 后只有 311Mbps/lane，
+    //     利用率 35%，余量充足。A 板回到已验证的 1920x1080 配置。
+    //------------------------------------------------------------------
+    localparam integer CROP_W     = 1920;                 // 保留列数
+    localparam integer CROP_WWD   = CROP_W * 10 / 16;     // 每行 16bit 字数 = 1200
+    localparam integer CROP_WC    = CROP_W * 10 / 8;      // 每行字节数   = 2400
+    localparam integer CROP_LINES = 1080;                 // 保留行数
+    localparam integer SRC_LINES  = 1944;                 // 摄像头每帧行数
+
+    genvar gi;
+    generate
+    if (!CROP_EN) begin : g_nocrop
+        //================= 原样转发（原代码，未改动）=================
+        always @(posedge rx_clk or negedge rst_n_rx) begin
+            if (!rst_n_rx) begin
+                tk_we    <= 1'b0;
+                tk_wdata <= 18'd0;
+            end else if (!tk_full) begin
+                tk_we <= 1'b1;
+                // 00=载荷  01=帧起  10=行结束(带WC)  11=帧尾
+                if (p_wr_en)
+                    tk_wdata <= { 2'b00, p_wr_data };
+                else if (gen_fs)
+                    tk_wdata <= { 2'b01, 16'h0000 };
+                else if (p_pkt_end)
+                    tk_wdata <= { 2'b10, p_pkt_wc };
+                else if (gen_fe)
+                    tk_wdata <= { 2'b11, 16'h0000 };
+                else
+                    tk_we <= 1'b0;
+            end else begin
                 tk_we <= 1'b0;
-        end else begin
-            tk_we <= 1'b0;
+            end
+        end
+    end else begin : g_crop
+        //================= 裁剪到 1920x1080 =================
+        reg [11:0] col_w;        // 当前行已处理到的字数
+        reg [11:0] row_idx;      // 当前帧已处理到的行号
+        wire       row_keep = (row_idx < CROP_LINES);
+
+        always @(posedge rx_clk or negedge rst_n_rx) begin
+            if (!rst_n_rx) begin
+                tk_we    <= 1'b0;
+                tk_wdata <= 18'd0;
+                col_w    <= 12'd0;
+                row_idx  <= 12'd0;
+            end else if (!tk_full) begin
+                tk_we <= 1'b1;
+                if (p_wr_en) begin
+                    if (row_keep && (col_w < CROP_WWD))
+                        tk_wdata <= { 2'b00, p_wr_data };    // 窗口内：转发
+                    else
+                        tk_we <= 1'b0;                        // 窗口外：丢弃
+                    if (col_w != 12'hFFF) col_w <= col_w + 12'd1;
+                end else if (gen_fs) begin
+                    tk_wdata <= { 2'b01, 16'h0000 };
+                    col_w    <= 12'd0;
+                    row_idx  <= 12'd0;
+                end else if (p_pkt_end) begin
+                    col_w <= 12'd0;
+                    if (row_keep)
+                        tk_wdata <= { 2'b10, CROP_WC[15:0] }; // WC 改写为 2400
+                    else
+                        tk_we <= 1'b0;
+                    if (row_idx == SRC_LINES - 1) row_idx <= 12'd0;
+                    else                          row_idx <= row_idx + 12'd1;
+                end else if (gen_fe) begin
+                    tk_wdata <= { 2'b11, 16'h0000 };
+                end else begin
+                    tk_we <= 1'b0;
+                end
+            end else begin
+                tk_we <= 1'b0;
+            end
         end
     end
+    endgenerate
 
     //==================================================================
     // 6. DPHY1 发送
@@ -408,7 +569,7 @@ module csi2_tx_top #(
 
     csi2_ptr_fifo #(
         .DW ( 18 ),
-        .AW ( 11 )          // 2048 token，需覆盖一行 1205 word + 控制令牌
+        .AW ( 12 )          // 4096 token：2592 宽的行约 1640 word，双缓冲需 ~3300
     ) u_tk_fifo (
         .I_wclk   ( rx_clk     ),
         .I_wrstn  ( rst_n_rx   ),
@@ -431,7 +592,7 @@ module csi2_tx_top #(
         .VC       ( 2'b00  ),
         .DT       ( 8'h2B  ),
         .LANE_SWAP( LANE_SWAP ),
-        .BUF_AW   ( 11     )
+        .BUF_AW   ( 12     )
     ) u_tx_packet (
         .I_clk        ( tx_clk      ),
         .I_rst        ( ~rst_n_tx   ),
@@ -497,19 +658,23 @@ module csi2_tx_top #(
         .DPHY_TX_LOCATION      ( "DPHY1"    ),
         .BYTE_NUM              ( 1          ),
         .LANE_NUM              ( LANES      ),
-        .CLK_LANE_MODE         ( "CONTINUE" ),
-        .HS_OUTPUT_VOD         ( "200mV"    ),
+        .CLK_LANE_MODE         ( "INTERRUPT" ),  // 非连续时钟：消隐期停时钟，和摄像头一致。A 的 RX 可能靠 LP→HS 跳变重新同步。
+        .HS_OUTPUT_VOD         ( "250mV"    ),   // 900Mbps 下取最大值（合法上限 250mV）
         .HS_OUTPUT_IMPEDANCE   ( "50ohm"    ),
-        .HS_OUTPUT_DE_EMPHASIS ( "0dB"      ),
+        .HS_OUTPUT_DE_EMPHASIS ( "3dB"      ),   // 预加重补偿线缆损耗
         .CK_OUTPUT_DELAY       ( 0          ),
         .L0_OUTPUT_DELAY       ( 0          ),
         .L1_OUTPUT_DELAY       ( 0          ),
         .L2_OUTPUT_DELAY       ( 0          ),
         .L3_OUTPUT_DELAY       ( 0          ),
-        // VCO = 100MHz * (6+1) = 700MHz -> linerate 350Mbps -> byte clk 43.75MHz
-        // 摄像头用 A 板的 2592x1944@30fps 配置：约 756Mbps/lane，RX 字节时钟约 97MHz，
-        // 所以发 800Mbps（100MHz）留一点余量。
-        .DPLL_MULTI_RATIO      ( 6  ),
+        // VCO = 100MHz * (17+1) = 1800MHz -> linerate 900Mbps -> byte clk 112.5MHz
+        // 与 A 板 SDC 的 2.222ns(450MHz) 匹配。1050Mbps 会让 A 板时序失败（WNS -926ps）。
+        // 与厂家 DSI 例程同值。2592x1944@30fps 载荷 750Mbps/lane，
+        // 利用率 71%，比 900Mbps 的 84% 多出足够余量做重打包。
+        // 匹配 A 板 DPHY0 RX 的实测字节时钟 112MHz（时序报告）：
+        //   摄像头载荷 2592*1944*29.76*10bit/2lane/8 = 750Mbps/lane，
+        //   发 900Mbps 留 20% 余量，字节时钟 112.5MHz 与 A 板一致。
+        .DPLL_MULTI_RATIO      ( 17 ),
         .DPLL_DIV_RATIO        ( 1  ),
         .T_DATA_LPX            ( 10 ),
         .T_DATA_HS_PREPARE     ( 10 ),
@@ -602,6 +767,44 @@ module csi2_tx_top #(
     always @(posedge tx_clk or negedge rst_n_tx) begin
         if (!rst_n_tx) txbeat_cnt <= 16'd0;
         else if (tx_hs_en && txbeat_cnt != 16'hFFFF) txbeat_cnt <= txbeat_cnt + 16'd1;
+    end
+
+    //------------------------------------------------------------------
+    // 收发行的实时计数（不依赖 FS，模态 65536 自动回绕）
+    //   tx_line_cnt : TX 实际打包发出的行数  —— 涨说明数据真的在往 A 发
+    //   rx_line_cnt : RX 解析出来的行包数     —— 涨说明摄像头数据在进来
+    // 这两个都是自由计数，不会饱和，最适合判断链路活没活。
+    //------------------------------------------------------------------
+    reg [15:0] tx_line_cnt;
+    always @(posedge tx_clk or negedge rst_n_tx) begin
+        if (!rst_n_tx)             tx_line_cnt <= 16'd0;
+        else if (tx_pkt_end)       tx_line_cnt <= tx_line_cnt + 16'd1;
+    end
+
+    reg [15:0] rx_line_cnt;
+    always @(posedge rx_clk or negedge rst_n_rx) begin
+        if (!rst_n_rx)             rx_line_cnt <= 16'd0;
+        else if (p_pkt_end)        rx_line_cnt <= rx_line_cnt + 16'd1;
+    end
+
+    //------------------------------------------------------------------
+    // 行周期测量（单位：rx_clk 拍）
+    //   摄像头 29.76fps x 1944 行 => 每行约 1945 拍（rx_clk 112.5MHz）
+    //   读数远大于 1945 => 摄像头本身就慢；
+    //   接近 1945      => 摄像头是 30fps，是 B 在丢行。
+    //------------------------------------------------------------------
+    reg [15:0] line_ticks;
+    reg [15:0] line_period;
+    always @(posedge rx_clk or negedge rst_n_rx) begin
+        if (!rst_n_rx) begin
+            line_ticks  <= 16'd0;
+            line_period <= 16'd0;
+        end else if (p_pkt_end) begin
+            line_ticks  <= 16'd0;
+            line_period <= line_ticks;
+        end else if (line_ticks != 16'hFFFF) begin
+            line_ticks  <= line_ticks + 16'd1;
+        end
     end
 
     reg [15:0] dbg_fs, dbg_fe;
@@ -724,10 +927,10 @@ module csi2_tx_top #(
         .I_st_h0    ( dbg_h0       ),
         .I_st_h1    ( dbg_h1       ),
         .I_st_frame ( dbg_frame    ),
-        .I_st_rxval ( dbg_rxval    ),
+        .I_st_rxval ( line_period   ),   // V = 行周期（rx_clk 拍，正常约 1945）
         .I_st_werr  ( dbg_werr     ),
-        .I_st_gapmax( dbg_fs       ),
-        .I_st_pktcnt( dbg_fe       ),
+        .I_st_gapmax( rx_line_cnt   ),   // A = RX 已解析的行数
+        .I_st_pktcnt( tx_line_cnt   ),   // T = TX 已发出的行数
         .O_uart_tx  ( O_uart_tx    )
     );
 

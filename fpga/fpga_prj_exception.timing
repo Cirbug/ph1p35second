@@ -1,11 +1,11 @@
 Created by          : Tang Dynasty v6.2.168116
                     : Copyright (c) 2012-2025 Anlogic Inc.
-Generated           : Thu Oct 29 13:26:31 2026
+Generated           : Fri Oct 30 21:36:56 2026
 
 Top Model           : csi2_tx_top
 Device              : PH1P35MDG324
 Speed               : 3
-STA coverage        : 99.36%
+STA coverage        : 99.62%
 Constraint File     : D:/BaiduNetdiskDownload/02_F02_FC02_PH1P35/fpga_11/ph1p35second/fpga/uisrc/04_pin/timing.sdc;
 Confidence          : Routed
 Check Corner        : Both (Slow and Fast)

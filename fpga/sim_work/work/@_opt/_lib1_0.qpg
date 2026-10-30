@@ -10,56 +10,102 @@ z2
 cModel Technology
 Z0 dD:/BaiduNetdiskDownload/02_F02_FC02_PH1P35/fpga_11/ph1p35second/fpga/sim_work
 T_opt
-!s110 1793238140
-V_<4RWXfMDZM[jnL@QHzO>3
-04 19 4 work tb_csi2_bank_switch fast 0
-=1-78465c4e0bf3-6ae2a47c-11f-8038
+!s110 1793282473
+VD[VVkR3YG;b[0z_8JJKG`3
+04 12 4 work tb_i2c_slave fast 0
+=1-78465c4e0bf3-6ae351a8-3dd-65a4
 Z1 o-quiet -auto_acc_if_foreign -work work
 Z2 tCvgOpt 0
 n@_opt
 Z3 OL;O;2020.4;71
 T_opt1
-!s110 1793238136
-VcEHZHP6MTzRZ:`JWO;>Je0
-04 14 4 work tb_csi2_tx_top fast 0
-=1-78465c4e0bf3-6ae2a478-227-af3c
+!s110 1793282471
+VFj:;ael0Pd:6<b9VU[O=B3
+04 17 4 work tb_csi2_lane_swap fast 0
+=1-78465c4e0bf3-6ae351a6-3e1-8640
 R1
 R2
 n@_opt1
 R3
 R0
 T_opt2
-!s110 1793238138
-Vg9S>RA^045ZVo6K^RJ1CA0
-04 17 4 work tb_csi2_full_line fast 0
-=1-78465c4e0bf3-6ae2a47a-1b7-3ef8
+!s110 1793282469
+VVhC@_U^BllDUILo7]gE_c3
+04 19 4 work tb_csi2_bank_switch fast 0
+=1-78465c4e0bf3-6ae351a4-39f-8008
 R1
 R2
 n@_opt2
 R3
 R0
-vae_set
-Z4 !s110 1793238124
+vae_from_dsi
+Z4 !s110 1793282450
 !i10b 1
-!s100 PQMCbhAM0@DbKhX4Lf?5?2
+!s100 0KWdQeOV`^j=gL2=bmLVn2
 Z5 !s11b Dg1SIo80bB@j0V0VzS_@n1
-IO9Vi_cBIA5lFCn2dS=>6T1
+IhYOIjZbMNGdf`G3LGYChG0
 R0
-w1739152390
-8..\uisrc\01_rtl\ae\ae_set.v
-F..\uisrc\01_rtl\ae\ae_set.v
-!i122 46
-L0 33 89
+w1793266536
+8..\uisrc\01_rtl\i2c\ae_from_dsi.v
+F..\uisrc\01_rtl\i2c\ae_from_dsi.v
+!i122 102
+L0 26 47
 Z6 VDg1SIo80bB@j0V0VzS_@n1
 Z7 OL;L;2020.4;71
 r1
 !s85 0
 31
-Z8 !s108 1793238124.000000
-Z9 !s107 ..\uisrc\02_sim\tb_cam_cfg_i2c.v|..\uisrc\02_sim\tb_csi2_lane_swap.v|..\uisrc\02_sim\tb_csi2_bank_switch.v|..\uisrc\02_sim\tb_csi2_full_line.v|..\uisrc\02_sim\tb_csi2_tx_top.v|..\uisrc\02_sim\tb_csi2_ptr_fifo.v|..\uisrc\02_sim\tb_csi2_pipeline.v|..\uisrc\02_sim\tb_csi2_rx_parse.v|..\uisrc\02_sim\tb_csi2_tx_packet.v|..\uisrc\02_sim\tb_crc_par2.v|..\uisrc\02_sim\tb_csi2_ecc_crc.v|..\uisrc\01_rtl\ae\ae_set.v|..\uisrc\01_rtl\csi2_tx_top.v|..\uisrc\01_rtl\uics500_cfg\uicfgcs500.v|..\uisrc\01_rtl\uics500_cfg\uics500regAE.v|..\uisrc\01_rtl\uics500_cfg\uics500reg.v|..\uisrc\01_rtl\uics500_cfg\SC500GainTbl.v|..\uisrc\01_rtl\uics500_cfg\uii2c.v|..\uisrc\01_rtl\csi2\csi2_ptr_fifo.v|..\uisrc\01_rtl\csi2\csi2_rx_parse.v|..\uisrc\01_rtl\csi2\csi2_tx_packet.v|..\uisrc\01_rtl\csi2\crc16_par2.v|..\uisrc\01_rtl\csi2\crc16_csi.v|..\uisrc\01_rtl\csi2\csi2_ecc.v|..\uisrc\02_sim\stub_top_deps.v|
-Z10 !s90 -quiet|..\uisrc\02_sim\stub_top_deps.v|..\uisrc\01_rtl\csi2\csi2_ecc.v|..\uisrc\01_rtl\csi2\crc16_csi.v|..\uisrc\01_rtl\csi2\crc16_par2.v|..\uisrc\01_rtl\csi2\csi2_tx_packet.v|..\uisrc\01_rtl\csi2\csi2_rx_parse.v|..\uisrc\01_rtl\csi2\csi2_ptr_fifo.v|..\uisrc\01_rtl\uics500_cfg\uii2c.v|..\uisrc\01_rtl\uics500_cfg\SC500GainTbl.v|..\uisrc\01_rtl\uics500_cfg\uics500reg.v|..\uisrc\01_rtl\uics500_cfg\uics500regAE.v|..\uisrc\01_rtl\uics500_cfg\uicfgcs500.v|..\uisrc\01_rtl\csi2_tx_top.v|..\uisrc\01_rtl\ae\ae_set.v|..\uisrc\02_sim\tb_csi2_ecc_crc.v|..\uisrc\02_sim\tb_crc_par2.v|..\uisrc\02_sim\tb_csi2_tx_packet.v|..\uisrc\02_sim\tb_csi2_rx_parse.v|..\uisrc\02_sim\tb_csi2_pipeline.v|..\uisrc\02_sim\tb_csi2_ptr_fifo.v|..\uisrc\02_sim\tb_csi2_tx_top.v|..\uisrc\02_sim\tb_csi2_full_line.v|..\uisrc\02_sim\tb_csi2_bank_switch.v|..\uisrc\02_sim\tb_csi2_lane_swap.v|..\uisrc\02_sim\tb_cam_cfg_i2c.v|
+Z8 !s108 1793282450.000000
+Z9 !s107 ..\uisrc\02_sim\tb_cam_cfg_i2c.v|..\uisrc\02_sim\tb_i2c_bridge.v|..\uisrc\02_sim\tb_i2c_slave.v|..\uisrc\02_sim\tb_csi2_lane_swap.v|..\uisrc\02_sim\tb_csi2_bank_switch.v|..\uisrc\02_sim\tb_csi2_full_line.v|..\uisrc\02_sim\tb_csi2_tx_top.v|..\uisrc\02_sim\tb_csi2_ptr_fifo.v|..\uisrc\02_sim\tb_csi2_pipeline.v|..\uisrc\02_sim\tb_csi2_rx_parse.v|..\uisrc\02_sim\tb_csi2_tx_packet.v|..\uisrc\02_sim\tb_crc_par2.v|..\uisrc\02_sim\tb_csi2_ecc_crc.v|..\uisrc\01_rtl\ae\ae_set.v|..\uisrc\01_rtl\csi2_tx_top.v|..\uisrc\01_rtl\uics500_cfg\uicfgcs500.v|..\uisrc\01_rtl\uics500_cfg\uics500regAE.v|..\uisrc\01_rtl\uics500_cfg\uics500reg.v|..\uisrc\01_rtl\uics500_cfg\SC500GainTbl.v|..\uisrc\01_rtl\uics500_cfg\uii2c.v|..\uisrc\01_rtl\i2c\ae_from_dsi.v|..\uisrc\01_rtl\i2c\cam_i2c_bridge.v|..\uisrc\01_rtl\i2c\i2c_slave.v|..\uisrc\01_rtl\csi2\csi2_ptr_fifo.v|..\uisrc\01_rtl\csi2\csi2_rx_parse.v|..\uisrc\01_rtl\csi2\csi2_tx_packet.v|..\uisrc\01_rtl\csi2\crc16_par2.v|..\uisrc\01_rtl\csi2\crc16_csi.v|..\uisrc\01_rtl\csi2\csi2_ecc.v|..\uisrc\02_sim\stub_top_deps.v|
+Z10 !s90 -quiet|..\uisrc\02_sim\stub_top_deps.v|..\uisrc\01_rtl\csi2\csi2_ecc.v|..\uisrc\01_rtl\csi2\crc16_csi.v|..\uisrc\01_rtl\csi2\crc16_par2.v|..\uisrc\01_rtl\csi2\csi2_tx_packet.v|..\uisrc\01_rtl\csi2\csi2_rx_parse.v|..\uisrc\01_rtl\csi2\csi2_ptr_fifo.v|..\uisrc\01_rtl\i2c\i2c_slave.v|..\uisrc\01_rtl\i2c\cam_i2c_bridge.v|..\uisrc\01_rtl\i2c\ae_from_dsi.v|..\uisrc\01_rtl\uics500_cfg\uii2c.v|..\uisrc\01_rtl\uics500_cfg\SC500GainTbl.v|..\uisrc\01_rtl\uics500_cfg\uics500reg.v|..\uisrc\01_rtl\uics500_cfg\uics500regAE.v|..\uisrc\01_rtl\uics500_cfg\uicfgcs500.v|..\uisrc\01_rtl\csi2_tx_top.v|..\uisrc\01_rtl\ae\ae_set.v|..\uisrc\02_sim\tb_csi2_ecc_crc.v|..\uisrc\02_sim\tb_crc_par2.v|..\uisrc\02_sim\tb_csi2_tx_packet.v|..\uisrc\02_sim\tb_csi2_rx_parse.v|..\uisrc\02_sim\tb_csi2_pipeline.v|..\uisrc\02_sim\tb_csi2_ptr_fifo.v|..\uisrc\02_sim\tb_csi2_tx_top.v|..\uisrc\02_sim\tb_csi2_full_line.v|..\uisrc\02_sim\tb_csi2_bank_switch.v|..\uisrc\02_sim\tb_csi2_lane_swap.v|..\uisrc\02_sim\tb_i2c_slave.v|..\uisrc\02_sim\tb_i2c_bridge.v|..\uisrc\02_sim\tb_cam_cfg_i2c.v|
 !i113 0
 Z11 o-quiet -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R2
+vae_set
+R4
+!i10b 1
+!s100 PQMCbhAM0@DbKhX4Lf?5?2
+R5
+IO9Vi_cBIA5lFCn2dS=>6T1
+R0
+w1739152390
+8..\uisrc\01_rtl\ae\ae_set.v
+F..\uisrc\01_rtl\ae\ae_set.v
+!i122 102
+L0 33 89
+R6
+R7
+r1
+!s85 0
+31
+R8
+R9
+R10
+!i113 0
+R11
+R2
+vcam_i2c_bridge
+R4
+!i10b 1
+!s100 ?9NfJ:[DlDnHgC>FPaEU?1
+R5
+I1GFY_k:nLzPR^OVz43lI20
+R0
+Z12 w1793258018
+8..\uisrc\01_rtl\i2c\cam_i2c_bridge.v
+F..\uisrc\01_rtl\i2c\cam_i2c_bridge.v
+!i122 102
+L0 18 232
+R6
+R7
+r1
+!s85 0
+31
+R8
+R9
+R10
+!i113 0
+R11
 R2
 vcrc16_csi
 R4
@@ -71,7 +117,7 @@ R0
 w1793194045
 8..\uisrc\01_rtl\csi2\crc16_csi.v
 F..\uisrc\01_rtl\csi2\crc16_csi.v
-!i122 46
+!i122 102
 L0 11 31
 R6
 R7
@@ -94,7 +140,7 @@ R0
 w1793194663
 8..\uisrc\01_rtl\csi2\crc16_par2.v
 F..\uisrc\01_rtl\csi2\crc16_par2.v
-!i122 46
+!i122 102
 L0 10 26
 R6
 R7
@@ -117,7 +163,7 @@ R0
 w1793213130
 8..\uisrc\01_rtl\csi2\csi2_ecc.v
 F..\uisrc\01_rtl\csi2\csi2_ecc.v
-!i122 46
+!i122 102
 L0 13 14
 R6
 R7
@@ -140,7 +186,7 @@ R0
 w1793195630
 8..\uisrc\01_rtl\csi2\csi2_ptr_fifo.v
 F..\uisrc\01_rtl\csi2\csi2_ptr_fifo.v
-!i122 46
+!i122 102
 L0 18 95
 R6
 R7
@@ -160,10 +206,10 @@ R4
 R5
 IHGYR8_JCUBFIKZfYf93^H1
 R0
-w1793215624
+w1793264903
 8..\uisrc\01_rtl\csi2\csi2_rx_parse.v
 F..\uisrc\01_rtl\csi2\csi2_rx_parse.v
-!i122 46
+!i122 102
 L0 16 115
 R6
 R7
@@ -183,10 +229,10 @@ R4
 R5
 ICS?_U]R[HPD^b[]M`Q2MM2
 R0
-w1793237941
+Z13 w1793282450
 8..\uisrc\01_rtl\csi2\csi2_tx_packet.v
 F..\uisrc\01_rtl\csi2\csi2_tx_packet.v
-!i122 46
+!i122 102
 L0 12 231
 R6
 R7
@@ -202,15 +248,15 @@ R2
 vcsi2_tx_top
 R4
 !i10b 1
-!s100 ``KekP=^73RlWT3FK9>ZW0
+!s100 IPoN:6N]FI?OVHD[T6z>51
 R5
-I23]hSiU<k`Oo1PAZP]gmY3
+IA2hXkQ6fUEnz::Nj:5id]2
 R0
-w1793238121
+w1793279532
 8..\uisrc\01_rtl\csi2_tx_top.v
 F..\uisrc\01_rtl\csi2_tx_top.v
-!i122 46
-L0 20 699
+!i122 102
+L0 20 915
 R6
 R7
 r1
@@ -245,6 +291,29 @@ r1
 !i113 0
 R11
 R2
+vi2c_slave
+R4
+!i10b 1
+!s100 o93``09O6c<>VXZZIZCA61
+R5
+I@Wb5`KhZzI7@Kfm?=I2Vo1
+R0
+Z14 w1793255583
+8..\uisrc\01_rtl\i2c\i2c_slave.v
+F..\uisrc\01_rtl\i2c\i2c_slave.v
+!i122 102
+L0 20 198
+R6
+R7
+r1
+!s85 0
+31
+R8
+R9
+R10
+!i113 0
+R11
+R2
 vmipi_dphy_rx_ph1p_mipiio_wrapper
 R4
 !i10b 1
@@ -252,10 +321,10 @@ R4
 R5
 Id?zREVBe:QcCOf9MLz27@1
 R0
-Z12 w1793195478
-Z13 8..\uisrc\02_sim\stub_top_deps.v
-Z14 F..\uisrc\02_sim\stub_top_deps.v
-!i122 46
+Z15 w1793195478
+Z16 8..\uisrc\02_sim\stub_top_deps.v
+Z17 F..\uisrc\02_sim\stub_top_deps.v
+!i122 102
 L0 29 46
 R6
 R7
@@ -275,10 +344,10 @@ R4
 R5
 I@I=U4;RBF5Ud^:Ie2D9ml0
 R0
-R12
-R13
-R14
-!i122 46
+R15
+R16
+R17
+!i122 102
 L0 77 51
 R6
 R7
@@ -298,10 +367,10 @@ R4
 R5
 IU@L:2gQGQWoWbo9::8hhS2
 R0
-R12
-R13
-R14
-!i122 46
+R15
+R16
+R17
+!i122 102
 L0 16 11
 R6
 R7
@@ -324,7 +393,7 @@ R0
 w1688526678
 8..\uisrc\01_rtl\uics500_cfg\SC500GainTbl.v
 F..\uisrc\01_rtl\uics500_cfg\SC500GainTbl.v
-!i122 46
+!i122 102
 L0 6 19
 R6
 R7
@@ -339,7 +408,7 @@ R11
 R2
 n@s@c500@gain@tbl
 vtb_cam_cfg_i2c
-R4
+Z18 !s110 1793282451
 !i10b 1
 !s100 6zc8?m8Ea@V1DEFi28cCF1
 R5
@@ -348,7 +417,7 @@ R0
 w1793197273
 8..\uisrc\02_sim\tb_cam_cfg_i2c.v
 F..\uisrc\02_sim\tb_cam_cfg_i2c.v
-!i122 46
+!i122 102
 L0 16 162
 R6
 R7
@@ -369,111 +438,4 @@ R5
 I0Ek5?LToY<8z?Snk7mMhR3
 R0
 w1793194624
-8..\uisrc\02_sim\tb_crc_par2.v
-F..\uisrc\02_sim\tb_crc_par2.v
-!i122 46
-L0 9 100
-R6
-R7
-r1
-!s85 0
-31
-R8
-R9
-R10
-!i113 0
-R11
-R2
-vtb_csi2_bank_switch
-R4
-!i10b 1
-!s100 bU4>QXDQ[GAD[69nhkFaD0
-R5
-IOBU1ESM4cUSM;>0b8WUhE2
-R0
-w1793196805
-8..\uisrc\02_sim\tb_csi2_bank_switch.v
-F..\uisrc\02_sim\tb_csi2_bank_switch.v
-!i122 46
-L0 15 176
-R6
-R7
-r1
-!s85 0
-31
-R8
-R9
-R10
-!i113 0
-R11
-R2
-vtb_csi2_ecc_crc
-R4
-!i10b 1
-!s100 J^nSRBlz>>;EJ@M9R6bR:3
-R5
-In@ZdDNPdEbNXSCZX@SNl:2
-R0
-w1793194053
-8..\uisrc\02_sim\tb_csi2_ecc_crc.v
-F..\uisrc\02_sim\tb_csi2_ecc_crc.v
-!i122 46
-L0 9 110
-R6
-R7
-r1
-!s85 0
-31
-R8
-R9
-R10
-!i113 0
-R11
-R2
-vtb_csi2_full_line
-R4
-!i10b 1
-!s100 =[Yn0HMWMFzHoclM[Q<JO0
-R5
-IbV1fLPzzYZl>6=mb`TPl;1
-R0
-Z15 w1793237922
-8..\uisrc\02_sim\tb_csi2_full_line.v
-F..\uisrc\02_sim\tb_csi2_full_line.v
-!i122 46
-L0 15 203
-R6
-R7
-r1
-!s85 0
-31
-R8
-R9
-R10
-!i113 0
-R11
-R2
-vtb_csi2_lane_swap
-R4
-!i10b 1
-!s100 hoH0jPH7a9hLMQMI531]c2
-R5
-I;^0BG4ZkB0M`J3cBBfOe02
-R0
-w1793237972
-8..\uisrc\02_sim\tb_csi2_lane_swap.v
-F..\uisrc\02_sim\tb_csi2_lane_swap.v
-!i122 46
-L0 12 152
-R6
-R7
-r1
-!s85 0
-31
-R8
-R9
-R10
-!i113 0
-R11
-R2
-vtb
+8..\uisrc\02_sim\tb_

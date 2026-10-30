@@ -170,6 +170,30 @@
                     <Attr Name="CompileOrder" Val="20"/>
                 </FileInfo>
             </File>
+            <File Path="uisrc/01_rtl/i2c/i2c_slave.v">
+                <FileInfo>
+                    <Attr Name="UsedInSyn" Val="true"/>
+                    <Attr Name="UsedInP&R" Val="true"/>
+                    <Attr Name="BelongTo" Val="design_1"/>
+                    <Attr Name="CompileOrder" Val="90"/>
+                </FileInfo>
+            </File>
+            <File Path="uisrc/01_rtl/i2c/cam_i2c_bridge.v">
+                <FileInfo>
+                    <Attr Name="UsedInSyn" Val="true"/>
+                    <Attr Name="UsedInP&R" Val="true"/>
+                    <Attr Name="BelongTo" Val="design_1"/>
+                    <Attr Name="CompileOrder" Val="91"/>
+                </FileInfo>
+            </File>
+            <File Path="uisrc/01_rtl/i2c/ae_from_dsi.v">
+                <FileInfo>
+                    <Attr Name="UsedInSyn" Val="true"/>
+                    <Attr Name="UsedInP&R" Val="true"/>
+                    <Attr Name="BelongTo" Val="design_1"/>
+                    <Attr Name="CompileOrder" Val="92"/>
+                </FileInfo>
+            </File>
         </Verilog>
         <System_Verilog>
             <File Path="uisrc/01_rtl/mipi_dphy_rx/ph1p_mipiio_rx_wrapper.v">

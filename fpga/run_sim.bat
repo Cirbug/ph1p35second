@@ -13,13 +13,13 @@ cd sim_work
 
 vlib work >nul 2>&1
 
-vlog -quiet ..\uisrc\02_sim\stub_top_deps.v ..\uisrc\01_rtl\csi2\csi2_ecc.v ..\uisrc\01_rtl\csi2\crc16_csi.v ..\uisrc\01_rtl\csi2\crc16_par2.v ..\uisrc\01_rtl\csi2\csi2_tx_packet.v ..\uisrc\01_rtl\csi2\csi2_rx_parse.v ..\uisrc\01_rtl\csi2\csi2_ptr_fifo.v ..\uisrc\01_rtl\uics500_cfg\uii2c.v ..\uisrc\01_rtl\uics500_cfg\SC500GainTbl.v ..\uisrc\01_rtl\uics500_cfg\uics500reg.v ..\uisrc\01_rtl\uics500_cfg\uics500regAE.v ..\uisrc\01_rtl\uics500_cfg\uicfgcs500.v ..\uisrc\01_rtl\csi2_tx_top.v ..\uisrc\01_rtl\ae\ae_set.v ..\uisrc\02_sim\tb_csi2_ecc_crc.v ..\uisrc\02_sim\tb_crc_par2.v ..\uisrc\02_sim\tb_csi2_tx_packet.v ..\uisrc\02_sim\tb_csi2_rx_parse.v ..\uisrc\02_sim\tb_csi2_pipeline.v ..\uisrc\02_sim\tb_csi2_ptr_fifo.v ..\uisrc\02_sim\tb_csi2_tx_top.v ..\uisrc\02_sim\tb_csi2_full_line.v ..\uisrc\02_sim\tb_csi2_bank_switch.v ..\uisrc\02_sim\tb_csi2_lane_swap.v ..\uisrc\02_sim\tb_cam_cfg_i2c.v
+vlog -quiet ..\uisrc\02_sim\stub_top_deps.v ..\uisrc\01_rtl\csi2\csi2_ecc.v ..\uisrc\01_rtl\csi2\crc16_csi.v ..\uisrc\01_rtl\csi2\crc16_par2.v ..\uisrc\01_rtl\csi2\csi2_tx_packet.v ..\uisrc\01_rtl\csi2\csi2_rx_parse.v ..\uisrc\01_rtl\csi2\csi2_ptr_fifo.v ..\uisrc\01_rtl\i2c\i2c_slave.v ..\uisrc\01_rtl\i2c\cam_i2c_bridge.v ..\uisrc\01_rtl\i2c\ae_from_dsi.v ..\uisrc\01_rtl\uics500_cfg\uii2c.v ..\uisrc\01_rtl\uics500_cfg\SC500GainTbl.v ..\uisrc\01_rtl\uics500_cfg\uics500reg.v ..\uisrc\01_rtl\uics500_cfg\uics500regAE.v ..\uisrc\01_rtl\uics500_cfg\uicfgcs500.v ..\uisrc\01_rtl\csi2_tx_top.v ..\uisrc\01_rtl\ae\ae_set.v ..\uisrc\02_sim\tb_csi2_ecc_crc.v ..\uisrc\02_sim\tb_crc_par2.v ..\uisrc\02_sim\tb_csi2_tx_packet.v ..\uisrc\02_sim\tb_csi2_rx_parse.v ..\uisrc\02_sim\tb_csi2_pipeline.v ..\uisrc\02_sim\tb_csi2_ptr_fifo.v ..\uisrc\02_sim\tb_csi2_tx_top.v ..\uisrc\02_sim\tb_csi2_full_line.v ..\uisrc\02_sim\tb_csi2_bank_switch.v ..\uisrc\02_sim\tb_csi2_lane_swap.v ..\uisrc\02_sim\tb_i2c_slave.v ..\uisrc\02_sim\tb_i2c_bridge.v ..\uisrc\02_sim\tb_cam_cfg_i2c.v
 if errorlevel 1 (
   echo [SIM] compile failed
   goto :eof
 )
 
-for %%T in (tb_csi2_ecc_crc tb_crc_par2 tb_csi2_tx_packet tb_csi2_rx_parse tb_csi2_pipeline tb_csi2_ptr_fifo tb_csi2_tx_top tb_csi2_full_line tb_csi2_bank_switch tb_csi2_lane_swap tb_cam_cfg_i2c) do (
+for %%T in (tb_csi2_ecc_crc tb_crc_par2 tb_csi2_tx_packet tb_csi2_rx_parse tb_csi2_pipeline tb_csi2_ptr_fifo tb_csi2_tx_top tb_csi2_full_line tb_csi2_bank_switch tb_csi2_lane_swap tb_i2c_slave tb_i2c_bridge tb_cam_cfg_i2c) do (
   echo.
   echo ==== %%T ====
   vsim -c -quiet -do "run -all; quit -f" %%T | findstr /C:"RESULT" /C:"FAIL" /C:"CRC-PAR2"
