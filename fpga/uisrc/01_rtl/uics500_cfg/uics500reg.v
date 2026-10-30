@@ -59,8 +59,8 @@ generate if (FULL30_REFERENCE) begin : g_motorola
             9'd8: REG_DATA = 32'h0036f904;
             9'd9: REG_DATA = 32'h00301f01;
             9'd10: REG_DATA = 32'h00310601;
-            9'd11: REG_DATA = 32'h00320c0c; // HTS=3200：链路 94%->49%
-            9'd12: REG_DATA = 32'h00320d80; // HTS low (3200)
+            9'd11: REG_DATA = 32'h00320c09; // HTS=2400 (0x0960)：链路 65%，帧率 22.5fps
+            9'd12: REG_DATA = 32'h00320d60; // HTS low (2400)
             9'd13: REG_DATA = 32'h0030183a; // explicit board 2-lane default
             9'd14: REG_DATA = 32'h0030310a; // explicit board RAW10 default
             9'd15: REG_DATA = 32'h00320000;
@@ -75,8 +75,8 @@ generate if (FULL30_REFERENCE) begin : g_motorola
             9'd24: REG_DATA = 32'h00320920;
             9'd25: REG_DATA = 32'h00320a07;
             9'd26: REG_DATA = 32'h00320b98;
-            9'd27: REG_DATA = 32'h00320e09; // VTS=2400 -> 约 24.8fps，给 A 的 DDR 留 22% 余量
-            9'd28: REG_DATA = 32'h00320f60; // VTS=2400
+            9'd27: REG_DATA = 32'h00320e07; // VTS=2000 -> 22.5fps（配合 HTS 2400）
+            9'd28: REG_DATA = 32'h00320fd0; // VTS=2000
             9'd29: REG_DATA = 32'h00321000;
             9'd30: REG_DATA = 32'h00321108;
             9'd31: REG_DATA = 32'h00321200;
