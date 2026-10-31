@@ -111,3 +111,18 @@ __pycache__/
 /spi_text/MDK-ARM/*.lst
 td_project/.lock.f
 *.stackdump
+# ---- 2026-10-31 AI ??:TD ????(?? A ??)----
+# AI_CLEANUP_20261031
+fpga/.*.f
+fpga/*.db
+fpga/*.ts
+fpga/*.bid
+fpga/*.logw
+fpga/td_*.log
+fpga/_HISTORY/
+fpga/_BACKUP*/
+fpga/_build/
+fpga/_BITS_ASCII/
+fpga/.design.prj
+fpga/.design.recent
+fpga/.recent_user_depot.ini
