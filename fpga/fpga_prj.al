@@ -153,7 +153,11 @@
                     <Attr Name="UsedInSyn" Val="true"/>
                     <Attr Name="UsedInP&R" Val="true"/>
                     <Attr Name="BelongTo" Val="design_1"/>
+<<<<<<< Updated upstream
                     <Attr Name="CompileOrder" Val="28"/>
+=======
+                    <Attr Name="CompileOrder" Val="23"/>
+>>>>>>> Stashed changes
                 </FileInfo>
             </File>
             <File Path="uisrc/01_rtl/cnn/cnn_raw10_resize_bin.v">
@@ -161,7 +165,67 @@
                     <Attr Name="UsedInSyn" Val="true"/>
                     <Attr Name="UsedInP&R" Val="true"/>
                     <Attr Name="BelongTo" Val="design_1"/>
+<<<<<<< Updated upstream
                     <Attr Name="CompileOrder" Val="33"/>
+=======
+                    <Attr Name="CompileOrder" Val="28"/>
+                </FileInfo>
+            </File>
+            <File Path="uisrc/01_rtl/cnn/cnn_digit_params.v">
+                <FileInfo>
+                    <Attr Name="UsedInSyn" Val="true"/>
+                    <Attr Name="UsedInP&R" Val="true"/>
+                    <Attr Name="BelongTo" Val="design_1"/>
+                    <Attr Name="CompileOrder" Val="29"/>
+                </FileInfo>
+            </File>
+            <File Path="uisrc/01_rtl/cnn/cnn_digit_infer.v">
+                <FileInfo>
+                    <Attr Name="UsedInSyn" Val="true"/>
+                    <Attr Name="UsedInP&R" Val="true"/>
+                    <Attr Name="BelongTo" Val="design_1"/>
+                    <Attr Name="CompileOrder" Val="30"/>
+                </FileInfo>
+            </File>
+            <File Path="uisrc/01_rtl/cnn/cnn_frame_digit_detector.v">
+                <FileInfo>
+                    <Attr Name="UsedInSyn" Val="true"/>
+                    <Attr Name="UsedInP&R" Val="true"/>
+                    <Attr Name="BelongTo" Val="design_1"/>
+                    <Attr Name="CompileOrder" Val="31"/>
+                </FileInfo>
+            </File>
+            <File Path="uisrc/01_rtl/cnn/cnn_result_uart.v">
+                <FileInfo>
+                    <Attr Name="UsedInSyn" Val="true"/>
+                    <Attr Name="UsedInP&R" Val="true"/>
+                    <Attr Name="BelongTo" Val="design_1"/>
+                    <Attr Name="CompileOrder" Val="32"/>
+                </FileInfo>
+            </File>
+            <File Path="uisrc/01_rtl/ddr/ddr_frame_cache.v">
+                <FileInfo>
+                    <Attr Name="UsedInSyn" Val="true"/>
+                    <Attr Name="UsedInP&R" Val="true"/>
+                    <Attr Name="BelongTo" Val="design_1"/>
+                    <Attr Name="CompileOrder" Val="33"/>
+                </FileInfo>
+            </File>
+            <File Path="uisrc/01_rtl/ddr/mc_to_user_interface.v">
+                <FileInfo>
+                    <Attr Name="UsedInSyn" Val="true"/>
+                    <Attr Name="UsedInP&R" Val="true"/>
+                    <Attr Name="BelongTo" Val="design_1"/>
+                    <Attr Name="CompileOrder" Val="34"/>
+                </FileInfo>
+            </File>
+            <File Path="uisrc/01_rtl/ddr/ph1p35_324_ddr_wrapper.v">
+                <FileInfo>
+                    <Attr Name="UsedInSyn" Val="true"/>
+                    <Attr Name="UsedInP&R" Val="true"/>
+                    <Attr Name="BelongTo" Val="design_1"/>
+                    <Attr Name="CompileOrder" Val="35"/>
+>>>>>>> Stashed changes
                 </FileInfo>
             </File>
             <File Path="uisrc/01_rtl/csi2/csi2_center_crop_raw10.v">
@@ -185,7 +249,7 @@
                     <Attr Name="UsedInSyn" Val="true"/>
                     <Attr Name="UsedInP&R" Val="true"/>
                     <Attr Name="BelongTo" Val="design_1"/>
-                    <Attr Name="CompileOrder" Val="25"/>
+                    <Attr Name="CompileOrder" Val="27"/>
                 </FileInfo>
             </File>
             <File Path="uisrc/01_rtl/ddr/mc_to_user_interface.v">
@@ -249,6 +313,7 @@
                     <Attr Name="UsedInSyn" Val="true"/>
                     <Attr Name="UsedInP&R" Val="true"/>
                     <Attr Name="BelongTo" Val="design_1"/>
+<<<<<<< Updated upstream
                     <Attr Name="CompileOrder" Val="30"/>
                 </FileInfo>
             </File>
@@ -258,6 +323,9 @@
                     <Attr Name="UsedInP&R" Val="true"/>
                     <Attr Name="BelongTo" Val="design_1"/>
                     <Attr Name="CompileOrder" Val="38"/>
+=======
+                    <Attr Name="CompileOrder" Val="25"/>
+>>>>>>> Stashed changes
                 </FileInfo>
             </File>
         </Verilog>
@@ -283,7 +351,11 @@
                     <Attr Name="UsedInSyn" Val="true"/>
                     <Attr Name="UsedInP&R" Val="true"/>
                     <Attr Name="BelongTo" Val="design_1"/>
+<<<<<<< Updated upstream
                     <Attr Name="CompileOrder" Val="29"/>
+=======
+                    <Attr Name="CompileOrder" Val="24"/>
+>>>>>>> Stashed changes
                 </FileInfo>
             </File>
             <File Path="uisrc/01_rtl/mipi_dphy_rx/channel_aligner_wrapper.enc.sv">
@@ -291,7 +363,11 @@
                     <Attr Name="UsedInSyn" Val="true"/>
                     <Attr Name="UsedInP&R" Val="true"/>
                     <Attr Name="BelongTo" Val="design_1"/>
+<<<<<<< Updated upstream
                     <Attr Name="CompileOrder" Val="31"/>
+=======
+                    <Attr Name="CompileOrder" Val="26"/>
+>>>>>>> Stashed changes
                 </FileInfo>
             </File>
         </System_Verilog>
