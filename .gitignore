@@ -111,3 +111,54 @@ __pycache__/
 /spi_text/MDK-ARM/*.lst
 td_project/.lock.f
 *.stackdump
+
+# 本地存档目录（位流备份 + 源码快照，不进 git）
+/fpga/_FINAL_*/
+/fpga/_ARCHIVE_*/
+/fpga/_EXP_*/
+/fpga/_BACKUP_*/
+
+# ===== TD（Tang Dynasty）构建产物 =====
+# 这些每次编译都会重新生成，不应入库
+fpga/_build/
+fpga/fpga_prj_Runs/
+fpga/*.db
+fpga/*.area
+fpga/*.timing
+fpga/*.ts
+fpga/*.qor
+fpga/*.rpt
+fpga/*.bid
+fpga/flow.status
+fpga/*_flow.status
+fpga/*_clock_utilization.txt
+fpga/.*.begin.f
+fpga/.*.end.f
+fpga/.*.error.f
+fpga/.bitgen_param.f
+fpga/.recent_user_depot.ini
+fpga/fpga_prj.bit
+fpga/fpga_prj_exception.timing
+
+# ===== 编译日志 =====
+fpga/_logs/
+fpga/td_*.log
+fpga/td_*.logw
+fpga/td_flow.log
+fpga/_loop_run_*.log
+fpga/_multiseed_loop.log
+fpga/_probe.log
+
+# ===== 历史备份 / 实验位流 =====
+fpga/_HISTORY/
+
+# ===== 仿真工作区 =====
+fpga/sim_work/
+
+# ===== 存档目录（路径含中文，内容已由 _BITS_ASCII 与文档覆盖）=====
+fpga/_VERIFIED_*/
+
+# ===== 系统垃圾 =====
+*.dmp
+Thumbs.db
+desktop.ini
