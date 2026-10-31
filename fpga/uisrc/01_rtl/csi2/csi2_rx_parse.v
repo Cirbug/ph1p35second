@@ -1,130 +1,108 @@
-//==========================================================================
-// csi2_rx_parse.v
-//   CSI-2 包解析：抓包头、搬载荷、产出帧/行边界。
-//
-//   要点：
-//     1) 只在 I_hs_valid 的【上升沿】抓包头第 1 拍；
-//     2) 状态只在 valid 为高的拍推进，不因 valid 气泡复位；
-//     3) 先看类型字节：DT=0x00/0x01 直接判帧边界，不碰其载荷
-//        （本传感器发的帧尾包宽度字段非零，若按长包处理会吞掉后续行包）；
-//     4) 长包尾部的 CRC16（2 字节 = 1 拍）显式消耗。
-//
-//   包头字节序（CSI-2 标准，实测与摄像头一致）：DI, WC_LSB, WC_MSB, ECC
-//     第 1 拍 = {DI, WC_LSB}
-//     第 2 拍 = {WC_MSB, ECC}
-//==========================================================================
+// Two-lane CSI-2 parser. Wire byte order is {earlier byte, later byte}.
+// Packets can share one HS interval: advance by WC and consume the CRC beat.
+// Header ECC detects/rejects errors; payload CRC is consumed, not checked.
+// SC500 HS trail may be valid 00/FF fill. Do not scan through this fill or
+// accept FS after another packet in the same burst (zero fill aliases FS=0).
 module csi2_rx_parse #(
     parameter LANE_NUM = 2
 )(
-    input  wire                   I_clk,
-    input  wire                   I_rst,
-
-    input  wire                   I_hs_valid,
-    input  wire [LANE_NUM*8-1:0]  I_hs_data,
-
-    output reg                    O_wr_en,
-    output reg  [LANE_NUM*8-1:0]  O_wr_data,
-    output reg                    O_pkt_end,
-    output reg  [15:0]            O_pkt_wc,
-    output reg  [7:0]             O_pkt_dt,
-    output reg                    O_frame_start,
-    output reg                    O_frame_end,
-    output reg                    O_wc_err
+    input wire I_clk,I_rst,I_hs_valid,
+    input wire [LANE_NUM*8-1:0] I_hs_data,
+    output reg O_wr_en,
+    output reg [LANE_NUM*8-1:0] O_wr_data,
+    output reg O_pkt_end,
+    output reg [15:0] O_pkt_wc,
+    output reg [7:0] O_pkt_dt,
+    output reg O_frame_start,O_frame_end,O_wc_err
 );
-
-    localparam S_IDLE = 2'd0;
-    localparam S_HDR  = 2'd1;
-    localparam S_PAY  = 2'd2;
-    localparam S_TAIL = 2'd3;
-
-    reg [1:0]  st;
-    reg        v_d;
-    reg [7:0]  wc_lsb;            // 包头第 1 拍低字节 = WC 低字节
-    reg [15:0] pay_cnt;
-    reg [15:0] pay_beats;
-    reg        end_pend;
-
-    wire [15:0] wc_new = { I_hs_data[15:8], wc_lsb };   // {WC_MSB, WC_LSB}
-    wire [15:0] pb_new = (wc_new + 16'd1) >> 1;         // ceil(wc/2)
+    localparam HEADER0=3'd0,HEADER1=3'd1,PAYLOAD=3'd2,FOOTER=3'd3,DROP=3'd4;
+    reg [2:0] state;
+    reg [15:0] header0,remaining;
+    reg first_header,raw_packet;
+    wire [23:0] header_bits={I_hs_data[15:8],header0[7:0],header0[15:8]};
+    wire [15:0] byte_count={I_hs_data[15:8],header0[7:0]};
+    wire vc0=header0[15:14]==0;
+    wire is_raw=vc0 && header0[13:8]==6'h2b;
+    wire [7:0] ecc;
+    csi2_ecc u_header_ecc(.I_hdr(header_bits),.O_ecc(ecc));
+    wire ecc_ok=I_hs_data[7:0]==ecc;
+    wire tail_fill=(I_hs_data[15:8]==0 || I_hs_data[15:8]==8'hff) &&
+                   (I_hs_data[7:0]==0 || I_hs_data[7:0]==8'hff);
 
     always @(posedge I_clk or posedge I_rst) begin
-        if (I_rst) begin
-            st            <= S_IDLE;
-            v_d           <= 1'b0;
-            wc_lsb        <= 8'd0;
-            pay_cnt       <= 16'd0;
-            pay_beats     <= 16'd0;
-            end_pend      <= 1'b0;
-            O_wr_en       <= 1'b0;
-            O_wr_data     <= {LANE_NUM*8{1'b0}};
-            O_pkt_end     <= 1'b0;
-            O_pkt_wc      <= 16'd0;
-            O_pkt_dt      <= 8'd0;
-            O_frame_start <= 1'b0;
-            O_frame_end   <= 1'b0;
-            O_wc_err      <= 1'b0;
+        if(I_rst) begin
+            state<=HEADER0;header0<=0;remaining<=0;first_header<=1;raw_packet<=0;
+            O_wr_en<=0;O_wr_data<=0;O_pkt_end<=0;O_pkt_wc<=0;O_pkt_dt<=0;
+            O_frame_start<=0;O_frame_end<=0;O_wc_err<=0;
         end else begin
-            O_wr_en       <= 1'b0;
-            O_pkt_end     <= end_pend;
-            end_pend      <= 1'b0;
-            O_frame_start <= 1'b0;
-            O_frame_end   <= 1'b0;
-
-            v_d <= I_hs_valid;
-
-            if (I_hs_valid) begin
-                case (st)
-                //---------------- 包头第 1 拍：{DI, WC_LSB} ----------------
-                S_IDLE: begin
-                    if (!v_d) begin
-                        O_pkt_dt <= I_hs_data[15:8];
-                        wc_lsb   <= I_hs_data[7:0];
-                        st       <= S_HDR;
+            O_wr_en<=0;O_pkt_end<=0;O_frame_start<=0;O_frame_end<=0;
+            if(!I_hs_valid) begin
+                // LP aborts an incomplete header/payload/CRC. The next burst
+                // starts clean; do not resume a truncated packet as pixels.
+                if(state==HEADER1 || state==PAYLOAD || state==FOOTER)
+                    O_wc_err<=1;
+                if(raw_packet && (state==PAYLOAD || state==FOOTER))
+                    O_pkt_end<=1; // let the cropper detect/reset a short line
+                state<=HEADER0;first_header<=1;raw_packet<=0;remaining<=0;
+            end else case(state)
+                HEADER0: begin
+                    if(!first_header && (tail_fill || I_hs_data[15:8]==0))
+                        state<=DROP;
+                    else begin header0<=I_hs_data;state<=HEADER1;end
+                end
+                HEADER1: begin
+                    first_header<=0;raw_packet<=0;
+                    if(!ecc_ok) begin O_wc_err<=1;state<=DROP;end
+                    else begin
+                        O_pkt_dt<=header0[15:8];O_pkt_wc<=byte_count;
+                        if(header0[13:8]<6'h10) begin
+                            O_frame_start<=first_header && vc0 && header0[13:8]==0;
+                            O_frame_end<=vc0 && header0[13:8]==1;
+                            state<=(vc0 && header0[13:8]==1) ? DROP:HEADER0;
+                        end else if(byte_count[0] || (is_raw && byte_count==0)) begin
+                            O_wc_err<=1;state<=DROP;
+                        end else begin
+                            raw_packet<=is_raw;remaining<=byte_count>>1;
+                            state<=byte_count==0 ? FOOTER:PAYLOAD;
+                        end
                     end
                 end
-
-                //---------------- 包头第 2 拍：{WC_MSB, ECC} --------------
-                S_HDR: begin
-                    O_pkt_wc  <= wc_new;
-                    pay_beats <= pb_new;
-                    pay_cnt   <= 16'd0;
-
-                    if (O_pkt_dt[5:0] == 6'h00) begin
-                        O_frame_start <= 1'b1;
-                        st <= S_IDLE;
-                    end else if (O_pkt_dt[5:0] == 6'h01) begin
-                        O_frame_end   <= 1'b1;
-                        st <= S_IDLE;
-                    end else if (wc_new == 16'd0) begin
-                        st <= S_IDLE;
-                    end else begin
-                        if (wc_new[0]) O_wc_err <= 1'b1;
-                        st <= S_PAY;
-                    end
+                PAYLOAD: begin
+                    if(raw_packet) begin O_wr_en<=1;O_wr_data<=I_hs_data;end
+                    remaining<=remaining-1'b1;
+                    if(remaining==1) state<=FOOTER;
                 end
-
-                //---------------- 载荷 ----------------
-                S_PAY: begin
-                    O_wr_en   <= 1'b1;
-                    O_wr_data <= I_hs_data;
-
-                    if (pay_cnt == (pay_beats - 16'd1)) begin
-                        end_pend <= 1'b1;
-                        st       <= S_TAIL;
-                    end else begin
-                        pay_cnt  <= pay_cnt + 16'd1;
-                    end
+                FOOTER: begin
+                    O_pkt_end<=raw_packet;raw_packet<=0;state<=HEADER0;
                 end
-
-                //---------------- 吃掉 CRC 那一拍 ----------------
-                S_TAIL: begin
-                    st <= S_IDLE;
-                end
-
-                default: st <= S_IDLE;
-                endcase
-            end
+                default: state<=DROP;
+            endcase
         end
     end
+endmodule
 
+// Source frame boundary for the cropper. An actual FS always resets its row
+// phase, including after interrupted reception. Close an old partial crop
+// before accepting the next source frame. Keep height fallback for SC500
+// streams lacking FE, but never let that fallback override a genuine FS.
+module csi2_raw_frame_sync #(
+    parameter integer FRAME_LINES=1944
+)(
+    input wire clk,rst_n,frame_start,frame_end,word_valid,line_end,
+    output wire frame_boundary
+);
+    localparam integer CW=(FRAME_LINES>1) ? $clog2(FRAME_LINES):1;
+    reg active;
+    reg [CW-1:0] rows;
+    wire inferred_end=active && line_end && rows==FRAME_LINES-1;
+    assign frame_boundary=frame_start || frame_end || inferred_end;
+    always @(posedge clk or negedge rst_n) begin
+        if(!rst_n) begin active<=0;rows<=0;end
+        else if(frame_start) begin active<=1;rows<=0;end
+        else if(frame_end || inferred_end) begin active<=0;rows<=0;end
+        else begin
+            if(!active && word_valid) begin active<=1;rows<=0;end
+            if(active && line_end) rows<=rows+1'b1;
+        end
+    end
 endmodule

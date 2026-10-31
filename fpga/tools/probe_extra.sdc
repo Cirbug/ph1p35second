@@ -1,0 +1,1 @@
+puts "PROBE_EXTRA rx=[llength [get_clocks -nowarn {MIPI_RX_BYTE_CLK}]] tx=[llength [get_clocks -nowarn {MIPI_TX_BYTE_CLK}]] ddr=[llength [get_clocks -nowarn {*u_ph1p35_324_ddr_wrapper/u_ddr2/usr_clk}]] regs=[llength [get_regs -nowarn {u_ddr_triple_frame_cache/u_frame_pack_fifo/wgray[*]}]]"

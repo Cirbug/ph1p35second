@@ -30,12 +30,16 @@ module tb_csi2_tx_packet;
     wire           hs_last;
     wire           overflow;
     wire           wc_err;
+    wire           dbg_pkt_done;
+    wire [7:0]     dbg_pkt_dt;
+    wire [15:0]    dbg_pkt_wc;
 
     csi2_tx_packet #(
         .LANE_NUM ( L ),
         .VC       ( 2'b00 ),
         .DT       ( 8'h2B ),
-        .BUF_AW   ( 10 )
+        .BUF_AW   ( 10 ),
+        .USE_ERAM_BUFFER(1)
     ) dut (
         .I_clk        ( clk       ),
         .I_rst        ( rst       ),
@@ -50,7 +54,10 @@ module tb_csi2_tx_packet;
         .O_hs_last    ( hs_last   ),
         .I_hs_ready   ( hs_ready  ),
         .O_overflow   ( overflow  ),
-        .O_wc_err     ( wc_err    )
+        .O_wc_err     ( wc_err    ),
+        .O_dbg_pkt_done( dbg_pkt_done ),
+        .O_dbg_pkt_dt  ( dbg_pkt_dt   ),
+        .O_dbg_pkt_wc  ( dbg_pkt_wc   )
     );
 
     //---------------- 抓取输出字节流 ----------------
@@ -58,6 +65,9 @@ module tb_csi2_tx_packet;
     integer   gi;
     integer   npkt;
     integer   pkt_end_i [0:7];
+    integer   dbg_pkt_count;
+    reg [7:0] dbg_pkt_dts [0:7];
+    reg [15:0] dbg_pkt_wcs [0:7];
 
     always @(posedge clk) begin
         if (!rst && hs_en) begin
@@ -68,6 +78,11 @@ module tb_csi2_tx_packet;
                 pkt_end_i[npkt] = gi;
                 npkt = npkt + 1;
             end
+        end
+        if (!rst && dbg_pkt_done) begin
+            dbg_pkt_dts[dbg_pkt_count] = dbg_pkt_dt;
+            dbg_pkt_wcs[dbg_pkt_count] = dbg_pkt_wc;
+            dbg_pkt_count = dbg_pkt_count + 1;
         end
     end
 
@@ -107,7 +122,7 @@ module tb_csi2_tx_packet;
     reg [7:0]  di_long;
 
     initial begin
-        errs = 0; gi = 0; npkt = 0;
+        errs = 0; gi = 0; npkt = 0; dbg_pkt_count = 0;
         wr_en = 0; wr_data = 0; pkt_end = 0; pkt_wc = 0;
         frm_start = 0; frm_end = 0; hs_ready = 1;
         for (i = 0; i < 8; i = i + 1) pkt_end_i[i] = 0;
@@ -149,6 +164,17 @@ module tb_csi2_tx_packet;
         if (npkt !== 3) begin
             $display("FAIL: 期望 3 个包，实际 %0d", npkt);
             errs = errs + 1;
+        end
+        if (dbg_pkt_count !== 3 || dbg_pkt_dts[0] !== 8'h00 ||
+            dbg_pkt_dts[1] !== 8'h2B || dbg_pkt_dts[2] !== 8'h01 ||
+            dbg_pkt_wcs[0] !== 16'd0 || dbg_pkt_wcs[1] !== WC ||
+            dbg_pkt_wcs[2] !== 16'd0) begin
+            $display("FAIL: packet trace count=%0d DT=%02h/%02h/%02h WC=%0d/%0d/%0d",
+                     dbg_pkt_count, dbg_pkt_dts[0], dbg_pkt_dts[1], dbg_pkt_dts[2],
+                     dbg_pkt_wcs[0], dbg_pkt_wcs[1], dbg_pkt_wcs[2]);
+            errs = errs + 1;
+        end else begin
+            $display("PASS: packet trace FS(00,0) RAW10(2B,%0d) FE(01,0)", WC);
         end
         $display("捕获 %0d 个包，字节数分别为 %0d / %0d / %0d",
                  npkt, pkt_end_i[0], pkt_end_i[1] - pkt_end_i[0],

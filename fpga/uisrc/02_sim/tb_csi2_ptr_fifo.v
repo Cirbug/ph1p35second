@@ -8,8 +8,15 @@
 module tb_csi2_ptr_fifo;
 
     localparam DW = 18;
+`ifdef TEST_ERAM_FIFO
+    localparam AW = 12;
+    localparam N  = 9000;
+    localparam USE_ERAM = 1;
+`else
     localparam AW = 10;
     localparam N  = 3000;
+    localparam USE_ERAM = 0;
+`endif
 
     // 两个不同频率的时钟，制造真实跨时钟域
     reg wclk = 1'b0;
@@ -27,7 +34,7 @@ module tb_csi2_ptr_fifo;
     wire [DW-1:0] rdata;
     wire          empty;
 
-    csi2_ptr_fifo #( .DW ( DW ), .AW ( AW ) ) dut (
+    csi2_ptr_fifo #( .DW ( DW ), .AW ( AW ), .USE_ERAM(USE_ERAM) ) dut (
         .I_wclk   ( wclk   ),
         .I_wrstn  ( wrstn  ),
         .I_we     ( we     ),
@@ -73,6 +80,7 @@ module tb_csi2_ptr_fifo;
         full_seen = 0;
         repeat (5) @(posedge rclk);
         rrstn = 1'b1;
+        wait (full === 1'b1);
 
         while (nr < N) begin
             @(negedge rclk);
@@ -97,9 +105,13 @@ module tb_csi2_ptr_fifo;
         $display("--------------------------------------------------");
         $display("写入 %0d 字，读出 %0d 字，full 反压次数 %0d", nw, nr, full_seen);
         if (errs == 0)
-            $display("PASS: 跨时钟域 3000 字顺序与数值全部正确");
+            $display("PASS: 跨时钟域 %0d 字顺序与数值全部正确", N);
         else
             $display("FAIL: %0d 个错误", errs);
+        if (full_seen == 0) begin
+            $display("FAIL: 测试没有触发 FIFO full");
+            errs = errs + 1;
+        end
         if (empty !== 1'b1) begin
             $display("FAIL: 读完后 FIFO 未空"); errs = errs + 1;
         end

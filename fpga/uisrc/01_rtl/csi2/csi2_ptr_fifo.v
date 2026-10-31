@@ -17,7 +17,8 @@
 //==========================================================================
 module csi2_ptr_fifo #(
     parameter DW = 18,
-    parameter AW = 10
+    parameter AW = 10,
+    parameter USE_ERAM = 0
 )(
     // 写侧
     input  wire          I_wclk,
@@ -33,27 +34,86 @@ module csi2_ptr_fifo #(
     output reg           O_rempty
 );
 
-    reg [DW-1:0] mem [0:(1<<AW)-1];
-
     reg [AW:0] wbin, wgray;
     reg [AW:0] rbin, rgray;
 
     reg [AW:0] wq1_rgray, wq2_rgray;   // 读指针同步到写域
     reg [AW:0] rq1_wgray, rq2_wgray;   // 写指针同步到读域
 
+    wire [AW:0] wbin_next  = wbin + { {AW{1'b0}}, (I_we & ~O_wfull) };
+    wire [AW:0] wgray_next = (wbin_next >> 1) ^ wbin_next;
+    wire        wfull_val  = (wgray_next == { ~wq2_rgray[AW:AW-1], wq2_rgray[AW-2:0] });
+    wire [AW:0] rbin_next  = rbin + { {AW{1'b0}}, (I_re & ~O_rempty) };
+    wire [AW:0] rgray_next = (rbin_next >> 1) ^ rbin_next;
+    wire        rempty_val = (rgray_next == rq2_wgray);
+
+    generate
+        if (USE_ERAM && (DW == 18) && (AW == 12)) begin : g_eram_fifo
+`ifdef CNN_SIM
+            reg [DW-1:0] sim_mem [0:(1<<AW)-1];
+            reg [DW-1:0] sim_rdata;
+
+            always @(posedge I_wclk)
+                if (I_we && !O_wfull)
+                    sim_mem[wbin[AW-1:0]] <= I_wdata;
+
+            always @(posedge I_rclk)
+                sim_rdata <= sim_mem[rbin_next[AW-1:0]];
+
+            assign O_rdata = sim_rdata;
+`else
+            wire [DW-1:0] bank_rdata [0:3];
+            reg [1:0] read_bank_q;
+            genvar bank;
+
+            always @(posedge I_rclk or negedge I_rrstn) begin
+                if (!I_rrstn)
+                    read_bank_q <= 2'd0;
+                else
+                    read_bank_q <= rbin_next[11:10];
+            end
+
+            for (bank = 0; bank < 4; bank = bank + 1) begin : g_bank
+                wire write_select = I_we && !O_wfull &&
+                                    (wbin[11:10] == bank[1:0]);
+                wire read_select = (rbin_next[11:10] == bank[1:0]);
+
+                PH1P_LOGIC_ERAM #(
+                    .DATA_WIDTH_A(DW), .ADDR_WIDTH_A(10), .DATA_DEPTH_A(1024),
+                    .DATA_WIDTH_B(DW), .ADDR_WIDTH_B(10), .DATA_DEPTH_B(1024),
+                    .MODE("PDPW"), .REGMODE_A("NOREG"), .REGMODE_B("NOREG"),
+                    .IMPLEMENT("20K"), .DEBUGGABLE("NO"), .PACKABLE("NO"),
+                    .INIT_FILE("NONE"), .FILL_ALL("NONE")
+                ) u_fifo_ram (
+                    .dia(I_wdata), .dib({DW{1'b0}}),
+                    .addra(wbin[9:0]), .addrb(rbin_next[9:0]),
+                    .cea(write_select), .ceb(read_select),
+                    .ocea(1'b0), .oceb(1'b0),
+                    .clka(I_wclk), .clkb(I_rclk),
+                    .wea(write_select), .web(1'b0),
+                    .bea({DW{1'b1}}), .beb({DW{1'b0}}),
+                    .rsta(1'b0), .rstb(1'b0),
+                    .doa(), .dob(bank_rdata[bank])
+                );
+            end
+
+            assign O_rdata = bank_rdata[read_bank_q];
+`endif
+        end else begin : g_lut_fifo
+            reg [DW-1:0] mem [0:(1<<AW)-1];
+
+            always @(posedge I_wclk)
+                if (I_we && !O_wfull)
+                    mem[wbin[AW-1:0]] <= I_wdata;
+
+            assign O_rdata = mem[rbin[AW-1:0]];
+        end
+    endgenerate
+
     //------------------------------------------------------------------
     // 写侧
     //------------------------------------------------------------------
-    wire [AW:0] wbin_next  = wbin + { {AW{1'b0}}, (I_we & ~O_wfull) };
-    wire [AW:0] wgray_next = (wbin_next >> 1) ^ wbin_next;
-
     // 与经典的 Cummings 实现一致：用"下一个"写指针判断满
-    wire        wfull_val  = (wgray_next == { ~wq2_rgray[AW:AW-1], wq2_rgray[AW-2:0] });
-
-    always @(posedge I_wclk) begin
-        if (I_we && !O_wfull)
-            mem[wbin[AW-1:0]] <= I_wdata;
-    end
 
     always @(posedge I_wclk or negedge I_wrstn) begin
         if (!I_wrstn) begin
@@ -80,11 +140,6 @@ module csi2_ptr_fifo #(
     //------------------------------------------------------------------
     // 读侧
     //------------------------------------------------------------------
-    wire [AW:0] rbin_next  = rbin + { {AW{1'b0}}, (I_re & ~O_rempty) };
-    wire [AW:0] rgray_next = (rbin_next >> 1) ^ rbin_next;
-
-    wire        rempty_val = (rgray_next == rq2_wgray);
-
     always @(posedge I_rclk or negedge I_rrstn) begin
         if (!I_rrstn) begin
             rbin    <= {(AW+1){1'b0}};
@@ -106,7 +161,4 @@ module csi2_ptr_fifo #(
             rq2_wgray <= rq1_wgray;
         end
     end
-
-    assign O_rdata = mem[rbin[AW-1:0]];
-
 endmodule

@@ -5,14 +5,16 @@
 //   数据流：
 //     SC500CS 摄像头 --2lane RAW10--> [CSI 座] DPHY0 RX
 //        -> csi2_rx_parse（RX 时钟域）
-//        -> 令牌打包 -> 异步 FIFO（跨时钟域）
+//        -> RX 域裁剪/缩放为 1920x1080 RAW10 -> DDR 三帧缓存
+//        -> DDR 读侧并行给 A 板 relay 和 CNN（CNN 再缩放到 320x180）
+//        -> 1920x1080 relay -> 异步 FIFO -> CSI-2 发送包化
 //        -> 令牌解包（TX 时钟域）
 //        -> csi2_tx_packet -> DPHY1 TX -> [DSI 座] ==> A 板 J9
 //
 //   时钟：
 //     I_sys_clk 25MHz -> PLL -> clk0=100MHz（逻辑/DPLL 参考）、clk1=24MHz（摄像头 XCLK）
 //     RX 字节时钟由摄像头 MIPI 时钟恢复（O_hs_rx_clk）
-//     TX 字节时钟由 DPHY1 内部 DPLL 产生（O_hs_tx_clk，本设计约 75MHz）
+//     TX 字节时钟由 DPHY1 内部 DPLL 产生（当前参数目标 75MHz byte clock）
 //
 //   ⚠ 依赖：pll IP 必须重新生成为 25MHz 输入、clk0=100MHz、clk1=24MHz
 //   ⚠ 刻意不驱动 O_screen_pwm(R11)：不约束即高阻，避免与 A 板第 29 脚冲突
@@ -52,7 +54,23 @@ module csi2_tx_top #(
     output wire        O_led_cfg,      // J18：摄像头 I2C 配置完成
     output wire        O_led_beat,     // K16：帧活动心跳，约 1Hz 闪烁
     output wire        O_led_err,      // K17：overflow 或 wc_err
-    output wire        O_uart_tx       // J3：调试串口 115200 8N1
+    output wire        O_uart_tx,      // J3：调试串口 115200 8N1
+
+    // PH1P35 内置 DDR2，复用既有 16-bit 控制器与板级约束。
+    output wire [12:0] ddr_addr,
+    output wire [1:0]  ddr_ba,
+    output wire [0:0]  ddr_cke,
+    output wire [0:0]  ddr_odt,
+    output wire [0:0]  ddr_cs_n,
+    output wire        ddr_ras_n,
+    output wire        ddr_cas_n,
+    output wire        ddr_we_n,
+    output wire [0:0]  ddr_ck_p,
+    output wire [0:0]  ddr_ck_n,
+    inout  wire [1:0]  ddr_dm,
+    inout  wire [15:0] ddr_dq,
+    inout  wire [1:0]  ddr_dqs_p,
+    inout  wire [1:0]  ddr_dqs_n
 );
 
     localparam LANES = 2;
@@ -237,8 +255,66 @@ module csi2_tx_top #(
         .O_wc_err     ( p_wc_err   )
     );
 
-    // Parallel recognition tap.  It observes the parsed RAW10 payload only;
-    // the token/FIFO path below remains the sole owner of CSI->DSI traffic.
+    // Crop/scale once before DDR so both consumers use the same 1920x1080 frame.
+    localparam integer SENSOR_WIDTH = 2592;
+    localparam integer SENSOR_HEIGHT = 1944;
+    localparam integer CACHE_WIDTH = 1920;
+    localparam integer CACHE_HEIGHT = 1080;
+    localparam integer CACHE_LINE_WORDS16 = CACHE_WIDTH * 10 / 16;
+    localparam integer CACHE_FRAME_WORDS16 = CACHE_LINE_WORDS16 * CACHE_HEIGHT;
+    localparam [15:0] A_LINE_WC = CACHE_WIDTH * 10 / 8;
+    wire ddr_clk;
+    wire ddr_init_done;
+    wire raw_line_end = p_pkt_end && (p_pkt_dt[5:0] == 6'h2B);
+    wire raw_capture_frame_end;
+    csi2_raw_frame_sync #(.FRAME_LINES(SENSOR_HEIGHT)) u_source_frame_sync (
+        .clk(rx_clk), .rst_n(rst_n_rx),
+        .frame_start(p_frm_start), .frame_end(p_frm_end),
+        .word_valid(p_wr_en), .line_end(raw_line_end),
+        .frame_boundary(raw_capture_frame_end)
+    );
+
+    wire        crop_wr_en;
+    wire [15:0] crop_wr_data;
+    wire        crop_frame_start;
+    wire        crop_line_end;
+    wire [15:0] crop_word_count;
+    wire        crop_frame_end;
+    wire        crop_format_error;
+
+    csi2_raw10_scale_crop #(
+        .SRC_WIDTH    ( 2592 ),
+        .SRC_HEIGHT   ( 1944 ),
+        .SRC_CROP_X   ( 8    ),
+        .SCALE_WIDTH  ( 1920 ),
+        .SCALE_HEIGHT ( 1440 ),
+        .OUT_HEIGHT   ( 1080 ),
+        .CROP_Y       ( 180  )
+    ) u_crop_before_ddr (
+        .clk            ( rx_clk ),
+        .rst            ( ~rst_n_rx ),
+        .in_valid       ( p_wr_en ),
+        .in_data        ( p_wr_data ),
+        .in_line_end    ( raw_line_end ),
+        .in_word_count  ( p_pkt_wc ),
+        .in_data_type   ( 8'h2B ),
+        .in_frame_end   ( raw_capture_frame_end ),
+        .out_valid       ( crop_wr_en ),
+        .out_data        ( crop_wr_data ),
+        .out_frame_start ( crop_frame_start ),
+        .out_line_end    ( crop_line_end ),
+        .out_word_count  ( crop_word_count ),
+        .out_frame_end   ( crop_frame_end ),
+        .format_error    ( crop_format_error )
+    );
+
+    wire        ddr_cached_frame_start;
+    wire        ddr_cached_word_valid;
+    wire [15:0] ddr_cached_word_data;
+    wire        ddr_cached_line_end;
+    wire        ddr_cached_frame_end;
+
+    // Both the A-board relay and CNN consume this processed DDR read stream.
     wire        cnn_frame_start;
     wire        cnn_pixel_valid;
     wire [7:0]  cnn_pixel_data;
@@ -249,17 +325,17 @@ module csi2_tx_top #(
 
     cnn_raw10_resize_bin #(
         .THRESHOLD ( 8'd128 ),
-        .SRC_WIDTH ( 2592 ),
-        .SRC_HEIGHT( 1944 ),
+        .SRC_WIDTH ( CACHE_WIDTH ),
+        .SRC_HEIGHT( CACHE_HEIGHT ),
         .DST_WIDTH ( 320 ),
         .DST_HEIGHT( 180 )
     ) u_cnn_resize_bin (
-        .clk          ( rx_clk       ),
-        .rst          ( ~rst_n_rx    ),
-        .in_valid     ( p_wr_en      ),
-        .in_data      ( p_wr_data    ),
-        .in_line_end  ( p_pkt_end    ),
-        .in_frame_end ( p_frm_end    ),
+        .clk          ( ddr_clk              ),
+        .rst          ( ~sys_rst_n           ),
+        .in_valid     ( ddr_cached_word_valid ),
+        .in_data      ( ddr_cached_word_data ),
+        .in_line_end  ( ddr_cached_line_end  ),
+        .in_frame_end ( ddr_cached_frame_end ),
         .frame_start  ( cnn_frame_start ),
         .pixel_valid  ( cnn_pixel_valid ),
         .pixel_data   ( cnn_pixel_data ),
@@ -306,7 +382,7 @@ module csi2_tx_top #(
         .MAX_BANDS(8),
         .MAX_DIGITS(16)
     ) u_cnn_detector (
-        .capture_clk  ( rx_clk       ),
+        .capture_clk  ( ddr_clk      ),
         .infer_clk    ( clk_100m     ),
         .rst          ( ~sys_rst_n   ),
         .frame_start  ( cnn_frame_start ),
@@ -343,14 +419,7 @@ module csi2_tx_top #(
         .digit_conv1_first_product()
     );
 
-    //==================================================================
-    // 5. 令牌打包（RX 域） -> 异步 FIFO
-    //    令牌：{type[1:0], data[15:0]}
-    //      0=载荷  1=frame_start  2=pkt_end(带WC)  3=frame_end
-    //==================================================================
-    reg         tk_we;
-    reg  [17:0] tk_wdata;
-    wire        tk_full;
+    // The resized relay stream crosses to the DPHY TX clock after DDR playback.
     wire        tk_empty;
     wire [17:0] tk_rdata;
     wire        tk_re;
@@ -390,81 +459,180 @@ module csi2_tx_top #(
         end
     end
 
-    reg        frm_on;
-    reg        fe_rq;
-    reg        fs_rq;
-    reg        gen_fs;
-    reg        gen_fe;
-
-    always @(posedge rx_clk or negedge rst_n_rx) begin
-        if (!rst_n_rx) begin
-            frm_on <= 1'b0;
-            fe_rq  <= 1'b0;
-            fs_rq  <= 1'b0;
-            gen_fs <= 1'b0;
-            gen_fe <= 1'b0;
-        end else begin
-            gen_fs <= 1'b0;
-            gen_fe <= 1'b0;
-
-            // 上电后第一行 -> 立刻开帧
-            if (p_pkt_end && !frm_on) begin
-                gen_fs <= 1'b1;
-                frm_on <= 1'b1;
-            end
-
-            // 收到帧尾包 -> 排队 FE + FS
-            if (fe_det) begin
-                fe_rq <= 1'b1;
-            end
-
-            if (fe_rq) begin
-                gen_fe <= 1'b1;
-                fe_rq  <= 1'b0;
-                fs_rq  <= 1'b1;
-            end else if (fs_rq) begin
-                gen_fs <= 1'b1;
-                fs_rq  <= 1'b0;
-            end
-        end
-    end
-    always @(posedge rx_clk or negedge rst_n_rx) begin
-        if (!rst_n_rx) begin
-            tk_we    <= 1'b0;
-            tk_wdata <= 18'd0;
-        end else if (!tk_full) begin
-            tk_we <= 1'b1;
-            // 00=载荷  01=帧起  10=行结束(带WC)  11=帧尾
-            if (p_wr_en)
-                tk_wdata <= { 2'b00, p_wr_data };
-            else if (gen_fs)
-                tk_wdata <= { 2'b01, 16'h0000 };
-            else if (p_pkt_end)
-                tk_wdata <= { 2'b10, p_pkt_wc };
-            else if (gen_fe)
-                tk_wdata <= { 2'b11, 16'h0000 };
-            else
-                tk_we <= 1'b0;
-        end else begin
-            tk_we <= 1'b0;
-        end
-    end
-
     //==================================================================
     // 6. DPHY1 发送
     //==================================================================
     wire tx_clk;
     wire tx_ready;
     wire tx_dpll_locked;
-
-    // TX 复位必须等 DPHY1 的 DPLL 锁定：未锁定时 tx_clk 可能不稳，
-    // 此时若让状态机跑起来会发出乱码。
     wire tx_rst_src_n = sys_rst_n & tx_dpll_locked;
 
     reg [1:0] rsync_txq;
     always @(posedge tx_clk or negedge tx_rst_src_n)
         if (!tx_rst_src_n) rsync_txq <= 2'b00; else rsync_txq <= { rsync_txq[0], 1'b1 };
     wire rst_n_tx = rsync_txq[1];
+
+    wire        ddr_user_wr_en;
+    wire [24:0] ddr_user_wr_addr;
+    wire [127:0] ddr_user_wr_data;
+    wire        ddr_user_rd_en;
+    wire [24:0] ddr_user_rd_addr;
+    wire        ddr_user_ready;
+    wire        ddr_user_rd_valid;
+    wire [127:0] ddr_user_rd_data;
+    wire        mc_app_en;
+    wire [24:0] mc_app_addr;
+    wire [2:0]  mc_app_cmd;
+    wire [127:0] mc_app_wdf_data;
+    wire [15:0]  mc_app_wdf_mask;
+    wire        mc_app_wdf_wren;
+    wire        mc_app_wdf_end;
+    wire        mc_app_rdy;
+    wire        mc_app_wdf_rdy;
+    wire [127:0] mc_app_rd_data;
+    wire        mc_app_rd_data_end;
+    wire        mc_app_rd_data_valid;
+    wire        tx_token_empty;
+    wire [17:0] tx_token_data;
+    wire        tx_token_re;
+    wire        ddr_frame_busy;
+    wire        ddr_frame_error;
+    wire [15:0] ddr_dropped_frames;
+    wire [15:0] ddr_committed_frames;
+    wire [1:0]  ddr_ready_count;
+    wire        relay_token_full;
+
+    ddr_triple_frame_cache #(
+        .FRAME_WORDS16   ( CACHE_FRAME_WORDS16 ),
+        .LINE_WORDS16    ( CACHE_LINE_WORDS16 ),
+        .FRAME_LINES     ( CACHE_HEIGHT ),
+        .FRAME_PACK_WORDS( CACHE_FRAME_WORDS16 / 8 ),
+        .FRAME_ADDR_SPAN ( CACHE_FRAME_WORDS16 )
+    ) u_ddr_triple_frame_cache (
+        .rx_clk             ( rx_clk              ),
+        .rx_rst_n           ( rst_n_rx            ),
+        .rx_frame_start     ( crop_frame_start    ),
+        .rx_word_valid      ( crop_wr_en          ),
+        .rx_word_data       ( crop_wr_data        ),
+        .rx_line_end        ( crop_line_end       ),
+        .rx_frame_end       ( crop_frame_end      ),
+        .ddr_clk            ( ddr_clk             ),
+        .ddr_rst_n          ( sys_rst_n           ),
+        .ddr_init_done      ( ddr_init_done       ),
+        .ddr_user_wr_en     ( ddr_user_wr_en      ),
+        .ddr_user_wr_addr   ( ddr_user_wr_addr    ),
+        .ddr_user_wr_data   ( ddr_user_wr_data    ),
+        .ddr_user_rd_en     ( ddr_user_rd_en      ),
+        .ddr_user_rd_addr   ( ddr_user_rd_addr    ),
+        .ddr_user_ready     ( ddr_user_ready      ),
+        .ddr_user_rd_valid  ( ddr_user_rd_valid   ),
+        .ddr_user_rd_data   ( ddr_user_rd_data    ),
+        .out_ready          ( !relay_token_full   ),
+        .out_frame_start    ( ddr_cached_frame_start ),
+        .out_word_valid     ( ddr_cached_word_valid  ),
+        .out_word_data      ( ddr_cached_word_data   ),
+        .out_line_end       ( ddr_cached_line_end    ),
+        .out_frame_end      ( ddr_cached_frame_end   ),
+        .frame_busy         ( ddr_frame_busy      ),
+        .frame_error        ( ddr_frame_error     ),
+        .dropped_frames     ( ddr_dropped_frames  ),
+        .committed_frames   ( ddr_committed_frames),
+        .ready_count        ( ddr_ready_count     )
+    );
+
+    wire relay_token_event = ddr_cached_word_valid || ddr_cached_frame_start ||
+                             ddr_cached_line_end || ddr_cached_frame_end;
+    reg relay_token_overflow;
+    reg [17:0] relay_token_data;
+    always @* begin
+        if (ddr_cached_word_valid)
+            relay_token_data = {2'b00, ddr_cached_word_data};
+        else if (ddr_cached_frame_start)
+            relay_token_data = {2'b01, 16'd0};
+        else if (ddr_cached_line_end)
+            relay_token_data = {2'b10, A_LINE_WC};
+        else
+            relay_token_data = {2'b11, 16'd0};
+    end
+    always @(posedge ddr_clk or negedge sys_rst_n) begin
+        if (!sys_rst_n)
+            relay_token_overflow <= 1'b0;
+        else if (relay_token_event && relay_token_full)
+            relay_token_overflow <= 1'b1;
+    end
+    csi2_ptr_fifo #(
+        .DW(18),
+        .AW(12),
+        .USE_ERAM(1)
+    ) u_relay_tx_token_fifo (
+        .I_wclk(ddr_clk),
+        .I_wrstn(sys_rst_n),
+        .I_we(relay_token_event && !relay_token_full),
+        .I_wdata(relay_token_data),
+        .O_wfull(relay_token_full),
+        .I_rclk(tx_clk),
+        .I_rrstn(rst_n_tx),
+        .I_re(tx_token_re),
+        .O_rdata(tx_token_data),
+        .O_rempty(tx_token_empty)
+    );
+
+    mc_to_user_interface u_mc_to_user_interface (
+        .I_clk                   ( ddr_clk              ),
+        .I_rst_n                 ( sys_rst_n            ),
+        .I_ddr_user_wr_en        ( ddr_user_wr_en       ),
+        .I_ddr_user_rd_en        ( ddr_user_rd_en       ),
+        .I_ddr_user_addr         ( ddr_user_wr_en ? ddr_user_wr_addr : ddr_user_rd_addr ),
+        .I_ddr_user_wr_data      ( ddr_user_wr_data     ),
+        .O_ddr_user_ready        ( ddr_user_ready       ),
+        .O_ddr_user_rd_valid     ( ddr_user_rd_valid    ),
+        .O_ddr_user_rd_data      ( ddr_user_rd_data     ),
+        .O_mc_app_en             ( mc_app_en            ),
+        .O_mc_app_addr           ( mc_app_addr          ),
+        .O_mc_app_cmd            ( mc_app_cmd           ),
+        .I_mc_app_rdy            ( mc_app_rdy           ),
+        .O_mc_app_wdf_wren       ( mc_app_wdf_wren      ),
+        .O_mc_app_wdf_data       ( mc_app_wdf_data      ),
+        .O_mc_app_wdf_end        ( mc_app_wdf_end       ),
+        .O_mc_app_wdf_mask       ( mc_app_wdf_mask      ),
+        .I_mc_app_wdf_rdy        ( mc_app_wdf_rdy       ),
+        .I_mc_app_rd_data        ( mc_app_rd_data       ),
+        .I_mc_app_rd_data_end    ( mc_app_rd_data_end   ),
+        .I_mc_app_rd_data_valid  ( mc_app_rd_data_valid )
+    );
+
+    ph1p35_324_ddr_wrapper u_ph1p35_324_ddr_wrapper (
+        .I_sys_clk              ( clk_100m             ),
+        .I_sys_rst_n            ( sys_rst_n            ),
+        .O_ddr_clk              ( ddr_clk              ),
+        .O_init_calib_complete  ( ddr_init_done        ),
+        .I_mc_app_addr          ( mc_app_addr          ),
+        .I_mc_app_cmd           ( mc_app_cmd           ),
+        .I_mc_app_en            ( mc_app_en            ),
+        .I_mc_app_wdf_data      ( mc_app_wdf_data      ),
+        .I_mc_app_wdf_end       ( mc_app_wdf_end       ),
+        .I_mc_app_wdf_mask      ( mc_app_wdf_mask      ),
+        .I_mc_app_wdf_wren      ( mc_app_wdf_wren      ),
+        .O_mc_app_rd_data       ( mc_app_rd_data       ),
+        .O_mc_app_rd_data_end   ( mc_app_rd_data_end   ),
+        .O_mc_app_rd_data_valid ( mc_app_rd_data_valid ),
+        .O_mc_app_rdy           ( mc_app_rdy           ),
+        .O_mc_app_wdf_rdy       ( mc_app_wdf_rdy       ),
+        .ddr_addr               ( ddr_addr              ),
+        .ddr_ba                 ( ddr_ba                ),
+        .ddr_cke                ( ddr_cke               ),
+        .ddr_odt                ( ddr_odt               ),
+        .ddr_cs_n               ( ddr_cs_n              ),
+        .ddr_ras_n              ( ddr_ras_n             ),
+        .ddr_cas_n              ( ddr_cas_n             ),
+        .ddr_we_n               ( ddr_we_n              ),
+        .ddr_ck_p               ( ddr_ck_p              ),
+        .ddr_ck_n               ( ddr_ck_n              ),
+        .ddr_dm                 ( ddr_dm                ),
+        .ddr_dq                 ( ddr_dq                ),
+        .ddr_dqs_p              ( ddr_dqs_p             ),
+        .ddr_dqs_n              ( ddr_dqs_n             )
+    );
 
     // 令牌解包后送给 tx_packet 写侧
     reg         tx_wr_en;
@@ -477,9 +645,19 @@ module csi2_tx_top #(
     wire        tx_hs_en;
     wire [15:0] tx_hs_data;
     wire        tx_hs_last;
+    wire        tx_pkt_dbg_done;
+    wire [7:0]  tx_pkt_dbg_dt;
+    wire [15:0] tx_pkt_dbg_wc;
+    wire        tx_packet_data_ready;
+    wire        tx_packet_pkt_ready;
 
-    // 令牌 FIFO 读侧：一直取
-    assign tk_re = ~tk_empty;
+    // DDR cache returns {type[1:0], data[15:0]} tokens to the packetizer.
+    assign tk_empty = tx_token_empty;
+    assign tk_rdata = tx_token_data;
+    assign tk_re = !tk_empty &&
+                   ((tk_rdata[17:16] == 2'b00) ? tx_packet_data_ready :
+                    (tk_rdata[17:16] == 2'b10) ? tx_packet_pkt_ready : 1'b1);
+    assign tx_token_re = tk_re;
 
     always @(posedge tx_clk or negedge rst_n_tx) begin
         if (!rst_n_tx) begin
@@ -495,7 +673,7 @@ module csi2_tx_top #(
             tx_frm_start <= 1'b0;
             tx_frm_end   <= 1'b0;
 
-            if (!tk_empty) begin
+            if (tx_token_re) begin
                 case (tk_rdata[17:16])
                 2'b00: begin
                     tx_wr_en   <= 1'b1;
@@ -512,22 +690,6 @@ module csi2_tx_top #(
         end
     end
 
-    csi2_ptr_fifo #(
-        .DW ( 18 ),
-        .AW ( 11 )          // 2048 token，需覆盖一行 1205 word + 控制令牌
-    ) u_tk_fifo (
-        .I_wclk   ( rx_clk     ),
-        .I_wrstn  ( rst_n_rx   ),
-        .I_we     ( tk_we      ),
-        .I_wdata  ( tk_wdata   ),
-        .O_wfull  ( tk_full    ),
-        .I_rclk   ( tx_clk     ),
-        .I_rrstn  ( rst_n_tx   ),
-        .I_re     ( tk_re      ),
-        .O_rdata  ( tk_rdata   ),
-        .O_rempty ( tk_empty   )
-    );
-
     wire tx_ovf;
     wire tx_wcerr;
 
@@ -537,7 +699,8 @@ module csi2_tx_top #(
         .VC       ( 2'b00  ),
         .DT       ( 8'h2B  ),
         .LANE_SWAP( LANE_SWAP ),
-        .BUF_AW   ( 11     )
+        .BUF_AW   ( 11     ),
+        .USE_ERAM_BUFFER(1)
     ) u_tx_packet (
         .I_clk        ( tx_clk      ),
         .I_rst        ( ~rst_n_tx   ),
@@ -552,8 +715,66 @@ module csi2_tx_top #(
         .O_hs_last    ( tx_hs_last  ),
         .I_hs_ready   ( tx_ready    ),
         .O_overflow   ( tx_ovf      ),
-        .O_wc_err     ( tx_wcerr    )
+        .O_wc_err     ( tx_wcerr    ),
+        .O_data_ready ( tx_packet_data_ready ),
+        .O_pkt_ready  ( tx_packet_pkt_ready ),
+        .O_dbg_pkt_done( tx_pkt_dbg_done ),
+        .O_dbg_pkt_dt  ( tx_pkt_dbg_dt   ),
+        .O_dbg_pkt_wc  ( tx_pkt_dbg_wc   )
     );
+
+    reg [15:0] tx_packets_run, tx_lines_run, tx_wc_run;
+    reg [31:0] tx_bytes_run;
+    reg [15:0] tx_packets_frame, tx_lines_frame, tx_wc_frame;
+    reg [31:0] tx_bytes_frame;
+    reg        tx_error_frame, tx_stats_toggle;
+    always @(posedge tx_clk or negedge rst_n_tx) begin
+        if (!rst_n_tx) begin
+            tx_packets_run <= 16'd0;
+            tx_lines_run <= 16'd0;
+            tx_wc_run <= 16'd0;
+            tx_bytes_run <= 32'd0;
+            tx_packets_frame <= 16'd0;
+            tx_lines_frame <= 16'd0;
+            tx_wc_frame <= 16'd0;
+            tx_bytes_frame <= 32'd0;
+            tx_error_frame <= 1'b0;
+            tx_stats_toggle <= 1'b0;
+        end else if (tx_pkt_dbg_done) begin
+            case (tx_pkt_dbg_dt[5:0])
+            6'h00: begin
+                tx_packets_run <= 16'd1;
+                tx_lines_run <= 16'd0;
+                tx_wc_run <= 16'd0;
+                tx_bytes_run <= 32'd4;
+            end
+            6'h2B: begin
+                if (tx_packets_run != 16'hFFFF)
+                    tx_packets_run <= tx_packets_run + 16'd1;
+                if (tx_lines_run != 16'hFFFF)
+                    tx_lines_run <= tx_lines_run + 16'd1;
+                tx_wc_run <= tx_pkt_dbg_wc;
+                tx_bytes_run <= tx_bytes_run + 32'd6 + {16'd0, tx_pkt_dbg_wc};
+            end
+            6'h01: begin
+                tx_packets_frame <= tx_packets_run + 16'd1;
+                tx_lines_frame <= tx_lines_run;
+                tx_wc_frame <= tx_wc_run;
+                tx_bytes_frame <= tx_bytes_run + 32'd4;
+                tx_error_frame <= tx_ovf | tx_wcerr;
+                tx_stats_toggle <= ~tx_stats_toggle;
+                tx_packets_run <= 16'd0;
+                tx_lines_run <= 16'd0;
+                tx_wc_run <= 16'd0;
+                tx_bytes_run <= 32'd0;
+            end
+            default: begin
+                if (tx_packets_run != 16'hFFFF)
+                    tx_packets_run <= tx_packets_run + 16'd1;
+            end
+            endcase
+        end
+    end
 
     //==================================================================
     // 7. 诊断指示灯
@@ -597,7 +818,10 @@ module csi2_tx_top #(
 
     assign O_led_cfg  = cam_cfg_done;
     assign O_led_beat = DBG_MODE ? busy_stuck       : frame_cnt[4];
-    assign O_led_err  = DBG_MODE ? err_lat          : (tx_ovf | tx_wcerr | ~tx_dpll_locked);
+    assign O_led_err  = DBG_MODE ? err_lat          :
+                        (tx_ovf | tx_wcerr | crop_format_error |
+                         relay_token_overflow | ddr_frame_error |
+                         ~ddr_init_done | ~tx_dpll_locked);
 
     mipi_dphy_tx_over_ph1p_mipiio_wrapper #(
         .DPHY_TX_LOCATION      ( "DPHY1"    ),
@@ -612,10 +836,9 @@ module csi2_tx_top #(
         .L1_OUTPUT_DELAY       ( 0          ),
         .L2_OUTPUT_DELAY       ( 0          ),
         .L3_OUTPUT_DELAY       ( 0          ),
-        // VCO = 100MHz * (6+1) = 700MHz -> linerate 350Mbps -> byte clk 43.75MHz
-        // 摄像头用 A 板的 2592x1944@30fps 配置：约 756Mbps/lane，RX 字节时钟约 97MHz，
-        // 所以发 800Mbps（100MHz）留一点余量。
-        .DPLL_MULTI_RATIO      ( 6  ),
+        // Match the previously working B-to-A link: 100MHz * (11+1) / 16
+        // = 75MHz byte clock, or 600Mbps per lane.
+        .DPLL_MULTI_RATIO      ( 11 ),
         .DPLL_DIV_RATIO        ( 1  ),
         .T_DATA_LPX            ( 10 ),
         .T_DATA_HS_PREPARE     ( 10 ),
@@ -687,19 +910,92 @@ module csi2_tx_top #(
     reg [15:0] dbg_h0;
     reg [15:0] dbg_h1;
 
-    // 解析器识别到的帧起/帧尾包计数（用于判断传感器的 FS/FE 是否可用）
+    // 解析器识别到的帧起/帧尾计数。短包不会产生 p_pkt_end，需统计边界脉冲。
     reg [15:0] fs_cnt, fe_cnt;
     always @(posedge rx_clk or negedge rst_n_rx) begin
         if (!rst_n_rx) begin
             fs_cnt <= 16'd0;
             fe_cnt <= 16'd0;
         end else begin
-            // 注意：改成统计"任意 WC 但 DT 匹配"的包，
-            // 用来确认那些 20 拍突发是否就是帧标记
-            if (p_pkt_end && p_pkt_dt[5:0] == 6'h00 && fs_cnt != 16'hFFFF)
+            if (p_frm_start && fs_cnt != 16'hFFFF)
                 fs_cnt <= fs_cnt + 16'd1;
-            if (p_pkt_end && p_pkt_dt[5:0] == 6'h01 && fe_cnt != 16'hFFFF)
+            if (p_frm_end && fe_cnt != 16'hFFFF)
                 fe_cnt <= fe_cnt + 16'd1;
+        end
+    end
+
+    reg [15:0] raw_fe_cnt;
+    always @(posedge rx_clk or negedge rst_n_rx) begin
+        if (!rst_n_rx) raw_fe_cnt <= 16'd0;
+        else if (fe_det && raw_fe_cnt != 16'hFFFF)
+            raw_fe_cnt <= raw_fe_cnt + 16'd1;
+    end
+
+    // Per-frame CSI RX and scaler summaries. These are published only at FE.
+    reg [15:0] rx_rows_run, rx_bad_rows_run, rx_wc_run;
+    reg [15:0] rx_rows_frame, rx_bad_rows_frame, rx_wc_frame;
+    reg        rx_parse_err_frame, rx_stats_toggle;
+    always @(posedge rx_clk or negedge rst_n_rx) begin
+        if (!rst_n_rx) begin
+            rx_rows_run <= 16'd0;
+            rx_bad_rows_run <= 16'd0;
+            rx_wc_run <= 16'd0;
+            rx_rows_frame <= 16'd0;
+            rx_bad_rows_frame <= 16'd0;
+            rx_wc_frame <= 16'd0;
+            rx_parse_err_frame <= 1'b0;
+            rx_stats_toggle <= 1'b0;
+        end else begin
+            if (p_pkt_end && p_pkt_dt[5:0] == 6'h2B) begin
+                if (rx_rows_run != 16'hFFFF) rx_rows_run <= rx_rows_run + 16'd1;
+                rx_wc_run <= p_pkt_wc;
+                if (p_pkt_wc != 16'd3240 && rx_bad_rows_run != 16'hFFFF)
+                    rx_bad_rows_run <= rx_bad_rows_run + 16'd1;
+            end
+            if (p_frm_end) begin
+                rx_rows_frame <= rx_rows_run;
+                rx_bad_rows_frame <= rx_bad_rows_run;
+                rx_wc_frame <= rx_wc_run;
+                rx_parse_err_frame <= p_wc_err;
+                rx_stats_toggle <= ~rx_stats_toggle;
+                rx_rows_run <= 16'd0;
+                rx_bad_rows_run <= 16'd0;
+                rx_wc_run <= 16'd0;
+            end
+        end
+    end
+
+    reg [15:0] scale_rows_run, scale_bad_wc_run, scale_wc_run;
+    reg [15:0] scale_rows_frame, scale_wc_frame;
+    reg        scale_error_frame, scale_stats_toggle;
+    always @(posedge rx_clk or negedge rst_n_rx) begin
+        if (!rst_n_rx) begin
+            scale_rows_run <= 16'd0;
+            scale_bad_wc_run <= 16'd0;
+            scale_wc_run <= 16'd0;
+            scale_rows_frame <= 16'd0;
+            scale_wc_frame <= 16'd0;
+            scale_error_frame <= 1'b0;
+            scale_stats_toggle <= 1'b0;
+        end else begin
+            if (crop_line_end) begin
+                if (scale_rows_run != 16'hFFFF)
+                    scale_rows_run <= scale_rows_run + 16'd1;
+                scale_wc_run <= crop_word_count;
+                if (crop_word_count != A_LINE_WC && scale_bad_wc_run != 16'hFFFF)
+                    scale_bad_wc_run <= scale_bad_wc_run + 16'd1;
+            end
+            if (crop_frame_end) begin
+                scale_rows_frame <= scale_rows_run;
+                scale_wc_frame <= scale_wc_run;
+                scale_error_frame <= crop_format_error ||
+                                     (scale_bad_wc_run != 16'd0) ||
+                                     (scale_rows_run != CACHE_HEIGHT);
+                scale_stats_toggle <= ~scale_stats_toggle;
+                scale_rows_run <= 16'd0;
+                scale_bad_wc_run <= 16'd0;
+                scale_wc_run <= 16'd0;
+            end
         end
     end
 
@@ -708,6 +1004,58 @@ module csi2_tx_top #(
     always @(posedge tx_clk or negedge rst_n_tx) begin
         if (!rst_n_tx) txbeat_cnt <= 16'd0;
         else if (tx_hs_en && txbeat_cnt != 16'hFFFF) txbeat_cnt <= txbeat_cnt + 16'd1;
+    end
+
+    // Saturating counters expose progress from the DDR cache through TX.
+    reg [15:0] diag_rd_req_count, diag_rd_rsp_count, diag_cache_word_count;
+    reg [15:0] diag_cache_line_count, diag_cache_frame_count;
+    reg [15:0] diag_relay_write_count;
+    reg        diag_relay_full;
+    always @(posedge ddr_clk or negedge sys_rst_n) begin
+        if (!sys_rst_n) begin
+            diag_rd_req_count <= 16'd0;
+            diag_rd_rsp_count <= 16'd0;
+            diag_cache_word_count <= 16'd0;
+            diag_cache_line_count <= 16'd0;
+            diag_cache_frame_count <= 16'd0;
+            diag_relay_write_count <= 16'd0;
+            diag_relay_full <= 1'b0;
+        end else begin
+            if (ddr_user_rd_en && diag_rd_req_count != 16'hFFFF)
+                diag_rd_req_count <= diag_rd_req_count + 16'd1;
+            if (ddr_user_rd_valid && diag_rd_rsp_count != 16'hFFFF)
+                diag_rd_rsp_count <= diag_rd_rsp_count + 16'd1;
+            if (ddr_cached_word_valid && diag_cache_word_count != 16'hFFFF)
+                diag_cache_word_count <= diag_cache_word_count + 16'd1;
+            if (ddr_cached_line_end && diag_cache_line_count != 16'hFFFF)
+                diag_cache_line_count <= diag_cache_line_count + 16'd1;
+            if (ddr_cached_frame_end && diag_cache_frame_count != 16'hFFFF)
+                diag_cache_frame_count <= diag_cache_frame_count + 16'd1;
+            if (relay_token_event && !relay_token_full &&
+                diag_relay_write_count != 16'hFFFF)
+                diag_relay_write_count <= diag_relay_write_count + 16'd1;
+            if (relay_token_full) diag_relay_full <= 1'b1;
+        end
+    end
+
+    reg [15:0] diag_relay_read_count, diag_tx_word_count, diag_tx_line_count;
+    reg        diag_tx_error;
+    always @(posedge tx_clk or negedge rst_n_tx) begin
+        if (!rst_n_tx) begin
+            diag_relay_read_count <= 16'd0;
+            diag_tx_word_count <= 16'd0;
+            diag_tx_line_count <= 16'd0;
+            diag_tx_error <= 1'b0;
+        end else begin
+            if (tx_token_re && diag_relay_read_count != 16'hFFFF)
+                diag_relay_read_count <= diag_relay_read_count + 16'd1;
+            if (tx_wr_en && diag_tx_word_count != 16'hFFFF)
+                diag_tx_word_count <= diag_tx_word_count + 16'd1;
+            if (tx_pkt_dbg_done && tx_pkt_dbg_dt[5:0] == 6'h2B &&
+                diag_tx_line_count != 16'hFFFF)
+                diag_tx_line_count <= diag_tx_line_count + 16'd1;
+            if (tx_ovf || tx_wcerr) diag_tx_error <= 1'b1;
+        end
     end
 
     reg [15:0] dbg_fs, dbg_fe;
@@ -760,7 +1108,186 @@ module csi2_tx_top #(
     end
 
     reg [15:0] dbg_rxfe;
+    reg [15:0] dbg_rxfs;
+    reg [15:0] dbg_rawfe;
     reg [15:0] dbg_txcnt;
+    reg [15:0] dbg_rx_rows, dbg_rx_wc, dbg_rx_bad_rows;
+    reg        dbg_rx_parse_err;
+    reg [15:0] dbg_scale_rows, dbg_scale_wc;
+    reg        dbg_scale_err;
+    reg [15:0] dbg_tx_packets, dbg_tx_lines, dbg_tx_wc;
+    reg [31:0] dbg_tx_bytes;
+    reg        dbg_tx_err;
+
+    (* ASYNC_REG = "TRUE" *) reg diag_init_meta, diag_init_sync;
+    (* ASYNC_REG = "TRUE" *) reg diag_busy_meta, diag_busy_sync;
+    (* ASYNC_REG = "TRUE" *) reg diag_error_meta, diag_error_sync;
+    (* ASYNC_REG = "TRUE" *) reg diag_full_meta, diag_full_sync;
+    (* ASYNC_REG = "TRUE" *) reg diag_dpll_meta, diag_dpll_sync;
+    (* ASYNC_REG = "TRUE" *) reg diag_ready_meta, diag_ready_sync;
+    (* ASYNC_REG = "TRUE" *) reg diag_txerr_meta, diag_txerr_sync;
+    (* ASYNC_REG = "TRUE" *) reg [1:0] diag_ready_count_meta, diag_ready_count_sync;
+    (* ASYNC_REG = "TRUE" *) reg [15:0] diag_commit_meta, diag_commit_sync;
+    (* ASYNC_REG = "TRUE" *) reg [15:0] diag_drop_meta, diag_drop_sync;
+    (* ASYNC_REG = "TRUE" *) reg [15:0] diag_rd_req_meta, diag_rd_req_sync;
+    (* ASYNC_REG = "TRUE" *) reg [15:0] diag_rd_rsp_meta, diag_rd_rsp_sync;
+    (* ASYNC_REG = "TRUE" *) reg [15:0] diag_cache_word_meta, diag_cache_word_sync;
+    (* ASYNC_REG = "TRUE" *) reg [15:0] diag_cache_line_meta, diag_cache_line_sync;
+    (* ASYNC_REG = "TRUE" *) reg [15:0] diag_cache_frame_meta, diag_cache_frame_sync;
+    (* ASYNC_REG = "TRUE" *) reg [15:0] diag_relay_write_meta, diag_relay_write_sync;
+    (* ASYNC_REG = "TRUE" *) reg [15:0] diag_relay_read_meta, diag_relay_read_sync;
+    (* ASYNC_REG = "TRUE" *) reg [15:0] diag_tx_word_meta, diag_tx_word_sync;
+    (* ASYNC_REG = "TRUE" *) reg [15:0] diag_tx_line_meta, diag_tx_line_sync;
+
+    always @(posedge clk_24m or negedge rst_n_24) begin
+        if (!rst_n_24) begin
+            diag_init_meta <= 1'b0;
+            diag_init_sync <= 1'b0;
+            diag_busy_meta <= 1'b0;
+            diag_busy_sync <= 1'b0;
+            diag_error_meta <= 1'b0;
+            diag_error_sync <= 1'b0;
+            diag_full_meta <= 1'b0;
+            diag_full_sync <= 1'b0;
+            diag_dpll_meta <= 1'b0;
+            diag_dpll_sync <= 1'b0;
+            diag_ready_meta <= 1'b0;
+            diag_ready_sync <= 1'b0;
+            diag_txerr_meta <= 1'b0;
+            diag_txerr_sync <= 1'b0;
+            diag_ready_count_meta <= 2'b00;
+            diag_ready_count_sync <= 2'b00;
+            diag_commit_meta <= 16'd0;
+            diag_commit_sync <= 16'd0;
+            diag_drop_meta <= 16'd0;
+            diag_drop_sync <= 16'd0;
+            diag_rd_req_meta <= 16'd0;
+            diag_rd_req_sync <= 16'd0;
+            diag_rd_rsp_meta <= 16'd0;
+            diag_rd_rsp_sync <= 16'd0;
+            diag_cache_word_meta <= 16'd0;
+            diag_cache_word_sync <= 16'd0;
+            diag_cache_line_meta <= 16'd0;
+            diag_cache_line_sync <= 16'd0;
+            diag_cache_frame_meta <= 16'd0;
+            diag_cache_frame_sync <= 16'd0;
+            diag_relay_write_meta <= 16'd0;
+            diag_relay_write_sync <= 16'd0;
+            diag_relay_read_meta <= 16'd0;
+            diag_relay_read_sync <= 16'd0;
+            diag_tx_word_meta <= 16'd0;
+            diag_tx_word_sync <= 16'd0;
+            diag_tx_line_meta <= 16'd0;
+            diag_tx_line_sync <= 16'd0;
+        end else begin
+            diag_init_meta <= ddr_init_done;
+            diag_init_sync <= diag_init_meta;
+            diag_busy_meta <= ddr_frame_busy;
+            diag_busy_sync <= diag_busy_meta;
+            diag_error_meta <= ddr_frame_error;
+            diag_error_sync <= diag_error_meta;
+            diag_full_meta <= diag_relay_full;
+            diag_full_sync <= diag_full_meta;
+            diag_dpll_meta <= tx_dpll_locked;
+            diag_dpll_sync <= diag_dpll_meta;
+            diag_ready_meta <= tx_ready;
+            diag_ready_sync <= diag_ready_meta;
+            diag_txerr_meta <= diag_tx_error;
+            diag_txerr_sync <= diag_txerr_meta;
+            diag_ready_count_meta <= ddr_ready_count;
+            diag_ready_count_sync <= diag_ready_count_meta;
+            diag_commit_meta <= ddr_committed_frames;
+            diag_commit_sync <= diag_commit_meta;
+            diag_drop_meta <= ddr_dropped_frames;
+            diag_drop_sync <= diag_drop_meta;
+            diag_rd_req_meta <= diag_rd_req_count;
+            diag_rd_req_sync <= diag_rd_req_meta;
+            diag_rd_rsp_meta <= diag_rd_rsp_count;
+            diag_rd_rsp_sync <= diag_rd_rsp_meta;
+            diag_cache_word_meta <= diag_cache_word_count;
+            diag_cache_word_sync <= diag_cache_word_meta;
+            diag_cache_line_meta <= diag_cache_line_count;
+            diag_cache_line_sync <= diag_cache_line_meta;
+            diag_cache_frame_meta <= diag_cache_frame_count;
+            diag_cache_frame_sync <= diag_cache_frame_meta;
+            diag_relay_write_meta <= diag_relay_write_count;
+            diag_relay_write_sync <= diag_relay_write_meta;
+            diag_relay_read_meta <= diag_relay_read_count;
+            diag_relay_read_sync <= diag_relay_read_meta;
+            diag_tx_word_meta <= diag_tx_word_count;
+            diag_tx_word_sync <= diag_tx_word_meta;
+            diag_tx_line_meta <= diag_tx_line_count;
+            diag_tx_line_sync <= diag_tx_line_meta;
+        end
+    end
+
+    wire diag_init = diag_init_sync;
+    wire diag_busy = diag_busy_sync;
+    wire diag_error = diag_error_sync;
+    wire diag_full = diag_full_sync;
+    wire diag_dpll = diag_dpll_sync;
+    wire diag_ready = diag_ready_sync;
+    wire diag_txerr = diag_txerr_sync;
+    wire [1:0] diag_ready_count = diag_ready_count_sync;
+
+    reg rx_toggle_meta, rx_toggle_sync, rx_toggle_seen;
+    reg scale_toggle_meta, scale_toggle_sync, scale_toggle_seen;
+    reg tx_toggle_meta, tx_toggle_sync, tx_toggle_seen;
+    always @(posedge clk_24m or negedge rst_n_24) begin
+        if (!rst_n_24) begin
+            rx_toggle_meta <= 1'b0;
+            rx_toggle_sync <= 1'b0;
+            rx_toggle_seen <= 1'b0;
+            scale_toggle_meta <= 1'b0;
+            scale_toggle_sync <= 1'b0;
+            scale_toggle_seen <= 1'b0;
+            tx_toggle_meta <= 1'b0;
+            tx_toggle_sync <= 1'b0;
+            tx_toggle_seen <= 1'b0;
+            dbg_rx_rows <= 16'd0;
+            dbg_rx_wc <= 16'd0;
+            dbg_rx_bad_rows <= 16'd0;
+            dbg_rx_parse_err <= 1'b0;
+            dbg_scale_rows <= 16'd0;
+            dbg_scale_wc <= 16'd0;
+            dbg_scale_err <= 1'b0;
+            dbg_tx_packets <= 16'd0;
+            dbg_tx_lines <= 16'd0;
+            dbg_tx_wc <= 16'd0;
+            dbg_tx_bytes <= 32'd0;
+            dbg_tx_err <= 1'b0;
+        end else begin
+            rx_toggle_meta <= rx_stats_toggle;
+            rx_toggle_sync <= rx_toggle_meta;
+            if (rx_toggle_sync != rx_toggle_seen) begin
+                rx_toggle_seen <= rx_toggle_sync;
+                dbg_rx_rows <= rx_rows_frame;
+                dbg_rx_wc <= rx_wc_frame;
+                dbg_rx_bad_rows <= rx_bad_rows_frame;
+                dbg_rx_parse_err <= rx_parse_err_frame;
+            end
+
+            scale_toggle_meta <= scale_stats_toggle;
+            scale_toggle_sync <= scale_toggle_meta;
+            if (scale_toggle_sync != scale_toggle_seen) begin
+                scale_toggle_seen <= scale_toggle_sync;
+                dbg_scale_rows <= scale_rows_frame;
+                dbg_scale_wc <= scale_wc_frame;
+                dbg_scale_err <= scale_error_frame;
+            end
+
+            tx_toggle_meta <= tx_stats_toggle;
+            tx_toggle_sync <= tx_toggle_meta;
+            if (tx_toggle_sync != tx_toggle_seen) begin
+                tx_toggle_seen <= tx_toggle_sync;
+                dbg_tx_packets <= tx_packets_frame;
+                dbg_tx_lines <= tx_lines_frame;
+                dbg_tx_wc <= tx_wc_frame;
+                dbg_tx_bytes <= tx_bytes_frame;
+                dbg_tx_err <= tx_error_frame;
+            end
+        end
+    end
 
     // RX 时钟域计数：K 涨说明摄像头在发 MIPI，V 涨说明真的收到有效字节
     reg [15:0] rxclk_cnt;
@@ -807,7 +1334,9 @@ module csi2_tx_top #(
         dbg_werr  <= tx_wcerr;
         dbg_rxclk <= rxclk_cnt;
         dbg_rxval <= rxvalid_cnt;
-        dbg_rxfe  <= rxfe_cnt;
+        dbg_rxfe  <= fe_cnt;
+        dbg_rxfs  <= fs_cnt;
+        dbg_rawfe <= raw_fe_cnt;
         dbg_txcnt <= txclk_cnt;
         dbg_burst <= burst_last;
         dbg_fs    <= lpf_lat;   // A 字段改为每帧行数
@@ -838,7 +1367,7 @@ module csi2_tx_top #(
     wire result_uart_busy;
     wire result_uart_tx;
     wire dbg_uart_tx;
-    assign O_uart_tx = result_uart_tx;
+    assign O_uart_tx = dbg_uart_tx;
     cnn_result_uart #(
         .CLK_HZ(24000000), .BAUD(115200)
     ) u_cnn_result_uart (
@@ -854,7 +1383,26 @@ module csi2_tx_top #(
         .I_st_cfg(cam_cfg_done), .I_st_wc(dbg_wc), .I_st_dt(dbg_dt),
         .I_st_burst(dbg_burst), .I_st_h0(dbg_h0), .I_st_h1(dbg_h1),
         .I_st_frame(dbg_frame), .I_st_rxval(dbg_rxval), .I_st_werr(dbg_werr),
-        .I_st_gapmax(dbg_fs), .I_st_pktcnt(dbg_fe), .O_uart_tx(dbg_uart_tx)
+        .I_st_gapmax(dbg_fs), .I_st_pktcnt(dbg_fe),
+        .I_st_rx_fs(dbg_rxfs), .I_st_rx_fe(dbg_rxfe), .I_st_raw_fe(dbg_rawfe),
+        .I_st_rx_rows(dbg_rx_rows), .I_st_rx_wc(dbg_rx_wc),
+        .I_st_rx_bad_rows(dbg_rx_bad_rows), .I_st_rx_parse_err(dbg_rx_parse_err),
+        .I_st_scale_rows(dbg_scale_rows), .I_st_scale_wc(dbg_scale_wc),
+        .I_st_scale_err(dbg_scale_err),
+        .I_st_tx_packets(dbg_tx_packets), .I_st_tx_lines(dbg_tx_lines),
+        .I_st_tx_bytes(dbg_tx_bytes), .I_st_tx_wc(dbg_tx_wc),
+        .I_st_tx_err(dbg_tx_err),
+        .I_st_ddr_init(diag_init), .I_st_ddr_commit(diag_commit_sync),
+        .I_st_ddr_drop(diag_drop_sync), .I_st_ddr_ready_count(diag_ready_count),
+        .I_st_ddr_rd_req(diag_rd_req_sync), .I_st_ddr_rd_rsp(diag_rd_rsp_sync),
+        .I_st_cache_words(diag_cache_word_sync), .I_st_cache_lines(diag_cache_line_sync),
+        .I_st_cache_frames(diag_cache_frame_sync),
+        .I_st_relay_writes(diag_relay_write_sync), .I_st_relay_reads(diag_relay_read_sync),
+        .I_st_relay_full(diag_full), .I_st_tx_words(diag_tx_word_sync),
+        .I_st_tx_long_lines(diag_tx_line_sync), .I_st_tx_dpll_locked(diag_dpll),
+        .I_st_tx_ready(diag_ready), .I_st_ddr_busy(diag_busy),
+        .I_st_ddr_error(diag_error), .I_st_tx_error_live(diag_txerr),
+        .O_uart_tx(dbg_uart_tx)
     );
 
 endmodule

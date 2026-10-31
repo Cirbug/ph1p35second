@@ -14,6 +14,7 @@ module csi2_tx_packet #(
     parameter VC        = 2'b00,
     parameter DT        = 8'h2B,
     parameter BUF_AW    = 10,
+    parameter USE_ERAM_BUFFER = 0,
     parameter LANE_SWAP = 0
 )(
     input  wire                   I_clk,
@@ -33,7 +34,13 @@ module csi2_tx_packet #(
     input  wire                   I_hs_ready,
 
     output reg                    O_overflow,
-    output reg                    O_wc_err
+    output reg                    O_wc_err,
+    output wire                   O_data_ready,
+    output wire                   O_pkt_ready,
+
+    output reg                    O_dbg_pkt_done,
+    output reg  [7:0]             O_dbg_pkt_dt,
+    output reg  [15:0]            O_dbg_pkt_wc
 );
 
     localparam L      = LANE_NUM;
@@ -45,8 +52,6 @@ module csi2_tx_packet #(
     localparam S_LONG = 3'd2;
     localparam S_FE   = 3'd3;
     localparam S_GAP  = 3'd4;
-
-    reg [15:0] mem [0:2*BANK_W-1];
 
     reg              wr_bank, rdy_bank, cur_bank;
     reg              line_ready;
@@ -93,8 +98,114 @@ module csi2_tx_packet #(
 
     reg [7:0] byte_a, byte_b;
 
-    wire [BUF_AW-1:0] pay_idx  = (byte_cnt - 16'd4) >> 1;
-    wire [15:0]       pay_word = mem[{cur_bank, pay_idx}];
+    wire [BUF_AW-1:0] pay_idx = (byte_cnt - 16'd4) >> 1;
+    wire packet_start_prefetch = (st == S_IDLE) && I_hs_ready &&
+                                 line_ready && fs_ever;
+    wire packet_start_now = (st == S_IDLE) && I_hs_ready &&
+                            line_ready && fs_ever;
+    // Permit one line to be written while the other bank is transmitting.
+    // Once the ping-pong write bank would alias the read bank, hold the input
+    // token in the upstream FIFO until the current packet starts/finishes.
+    assign O_data_ready = (wptr != BANK_W - 1) &&
+                          !(line_ready && (wr_bank == cur_bank) &&
+                            !packet_start_now);
+    assign O_pkt_ready  = !line_ready || packet_start_now;
+    wire [15:0] prefetch_byte_cnt = byte_cnt + 16'd2;
+    wire [BUF_AW-1:0] prefetch_idx = packet_start_prefetch ? {BUF_AW{1'b0}} :
+        ((st == S_LONG) && (prefetch_byte_cnt >= 16'd4) &&
+         (prefetch_byte_cnt < (16'd4 + wc_lat)) ?
+         ((prefetch_byte_cnt - 16'd4) >> 1) : {BUF_AW{1'b0}});
+    wire prefetch_bank = packet_start_prefetch ? rdy_bank : cur_bank;
+    wire prefetch_en = packet_start_prefetch || (st == S_LONG);
+    wire [15:0] pay_word;
+
+    generate
+        if (USE_ERAM_BUFFER) begin : g_packet_buffer
+`ifdef CNN_SIM
+            reg [15:0] sim_mem [0:2*BANK_W-1];
+            reg [15:0] sim_pay_word;
+
+            always @(posedge I_clk) begin
+                if (I_wr_en)
+                    sim_mem[{wr_bank, wptr}] <= I_wr_data;
+                if (prefetch_en)
+                    sim_pay_word <= sim_mem[{prefetch_bank, prefetch_idx}];
+            end
+
+            assign pay_word = sim_pay_word;
+`else
+            if (BUF_AW == 11) begin : g_ph1p_eram
+                wire [7:0] low_data [0:1];
+                wire [7:0] high_data [0:1];
+                reg read_bank_q;
+                genvar bank;
+
+                always @(posedge I_clk or posedge I_rst) begin
+                    if (I_rst)
+                        read_bank_q <= 1'b0;
+                    else if (prefetch_en)
+                        read_bank_q <= prefetch_bank;
+                end
+
+                for (bank = 0; bank < 2; bank = bank + 1) begin : g_line_bank
+                    localparam BANK_INDEX = bank;
+                    wire write_select = I_wr_en && (wr_bank == BANK_INDEX);
+                    wire read_select = prefetch_en && (prefetch_bank == BANK_INDEX);
+
+                    PH1P_LOGIC_ERAM #(
+                        .DATA_WIDTH_A(8), .ADDR_WIDTH_A(BUF_AW), .DATA_DEPTH_A(BANK_W),
+                        .DATA_WIDTH_B(8), .ADDR_WIDTH_B(BUF_AW), .DATA_DEPTH_B(BANK_W),
+                        .MODE("PDPW"), .REGMODE_A("NOREG"), .REGMODE_B("NOREG"),
+                        .IMPLEMENT("20K"), .DEBUGGABLE("NO"), .PACKABLE("NO"),
+                        .INIT_FILE("NONE"), .FILL_ALL("NONE")
+                    ) u_low_ram (
+                        .dia(I_wr_data[7:0]), .dib(8'd0),
+                        .addra(wptr), .addrb(prefetch_idx),
+                        .cea(write_select), .ceb(read_select),
+                        .ocea(1'b0), .oceb(1'b0),
+                        .clka(I_clk), .clkb(I_clk),
+                        .wea(write_select), .web(1'b0),
+                        .bea(8'hFF), .beb(8'h00),
+                        .rsta(1'b0), .rstb(1'b0),
+                        .doa(), .dob(low_data[bank])
+                    );
+
+                    PH1P_LOGIC_ERAM #(
+                        .DATA_WIDTH_A(8), .ADDR_WIDTH_A(BUF_AW), .DATA_DEPTH_A(BANK_W),
+                        .DATA_WIDTH_B(8), .ADDR_WIDTH_B(BUF_AW), .DATA_DEPTH_B(BANK_W),
+                        .MODE("PDPW"), .REGMODE_A("NOREG"), .REGMODE_B("NOREG"),
+                        .IMPLEMENT("20K"), .DEBUGGABLE("NO"), .PACKABLE("NO"),
+                        .INIT_FILE("NONE"), .FILL_ALL("NONE")
+                    ) u_high_ram (
+                        .dia(I_wr_data[15:8]), .dib(8'd0),
+                        .addra(wptr), .addrb(prefetch_idx),
+                        .cea(write_select), .ceb(read_select),
+                        .ocea(1'b0), .oceb(1'b0),
+                        .clka(I_clk), .clkb(I_clk),
+                        .wea(write_select), .web(1'b0),
+                        .bea(8'hFF), .beb(8'h00),
+                        .rsta(1'b0), .rstb(1'b0),
+                        .doa(), .dob(high_data[bank])
+                    );
+                end
+
+                assign pay_word = {high_data[read_bank_q], low_data[read_bank_q]};
+            end else begin : g_fallback_buffer
+                reg [15:0] fallback_mem [0:2*BANK_W-1];
+                always @(posedge I_clk)
+                    if (I_wr_en)
+                        fallback_mem[{wr_bank, wptr}] <= I_wr_data;
+                assign pay_word = fallback_mem[{cur_bank, pay_idx}];
+            end
+`endif
+        end else begin : g_lut_packet_buffer
+            reg [15:0] mem [0:2*BANK_W-1];
+            always @(posedge I_clk)
+                if (I_wr_en)
+                    mem[{wr_bank, wptr}] <= I_wr_data;
+            assign pay_word = mem[{cur_bank, pay_idx}];
+        end
+    endgenerate
 
     always @(*) begin
         if (byte_cnt[15:1] == 15'd0) begin byte_a = hdr_b0; byte_b = hdr_b1; end
@@ -142,7 +253,12 @@ module csi2_tx_packet #(
             O_hs_last  <= 1'b0;
             O_overflow <= 1'b0;
             O_wc_err   <= 1'b0;
+            O_dbg_pkt_done <= 1'b0;
+            O_dbg_pkt_dt   <= 8'd0;
+            O_dbg_pkt_wc   <= 16'd0;
         end else begin
+            O_dbg_pkt_done <= 1'b0;
+
             //======================= 读侧 FSM =======================
             case (st)
             S_IDLE: begin
@@ -184,6 +300,9 @@ module csi2_tx_packet #(
                 O_hs_data <= { beat_hi, beat_lo };
                 O_hs_last <= (byte_cnt >= pkt_bytes - 16'd2);   // 只有最后一拍
                 if (byte_cnt >= pkt_bytes - 16'd2) begin
+                    O_dbg_pkt_done <= 1'b1;
+                    O_dbg_pkt_dt   <= (st == S_FS) ? { VC, 6'h00 } : { VC, 6'h01 };
+                    O_dbg_pkt_wc   <= 16'd0;
                     gap <= 16'd0;
                     st  <= S_GAP;          // 本拍仍输出，GAP 才拉低 hs_en
                 end else begin
@@ -200,6 +319,9 @@ module csi2_tx_packet #(
                     crc_r <= crc_byte(crc_byte(crc_r, byte_a), byte_b);
 
                 if (byte_cnt >= pkt_bytes - 16'd2) begin
+                    O_dbg_pkt_done <= 1'b1;
+                    O_dbg_pkt_dt   <= { VC, DT[5:0] };
+                    O_dbg_pkt_wc   <= wc_lat;
                     gap <= 16'd0;
                     st  <= S_GAP;          // 本拍仍输出
                 end else begin
@@ -222,13 +344,12 @@ module csi2_tx_packet #(
             if (I_frame_end)   fe_pend <= 1'b1;
 
             if (I_wr_en) begin
-                mem[{wr_bank, wptr}] <= I_wr_data;
                 if (wptr == BANK_W - 1) O_overflow <= 1'b1;
                 else                    wptr <= wptr + 1'b1;
             end
 
             if (I_pkt_end) begin
-                if (line_ready) O_overflow <= 1'b1;
+                if (line_ready && !packet_start_now) O_overflow <= 1'b1;
                 rdy_bank   <= wr_bank;
                 line_wc    <= I_pkt_wc;
                 line_ready <= 1'b1;
