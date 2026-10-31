@@ -5,5 +5,5 @@ rem Copyright (c) 2012-2025 Anlogic Inc.
 
 set HD_SDIR=%~dp0
 cd /d "%HD_SDIR%"
-F:/AnlogicFpga/TD_6.2.1_Engineer_6.2.168.116/bin/td_commands_prompt.exe F:\AnlogicFpga\TD_6.2.1_Engineer_6.2.168.116\arch/../doc/scripts/DefaultFlow.tcl
+D:/TD/bin/td_commands_prompt.exe D:\TD\arch/../doc/scripts/DefaultFlow.tcl
 pause

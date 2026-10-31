@@ -1,12 +1,12 @@
 ============================================================
    Tang Dynasty, V6.2.168116
    Copyright (c) 2012-2025 Anlogic Inc.
-   Executable = F:/AnlogicFpga/TD_6.2.1_Engineer_6.2.168.116/bin/run.exe
+   Executable = D:/TD/bin/run.exe
    Built at =   16:32:07 Jun 12 2025
-   Run by =     pc
-   Run Date =   Thu Oct 29 21:11:54 2026
+   Run by =     XIAOXIAO
+   Run Date =   Sat Oct 31 21:09:23 2026
 
-   Run on =     CIRBUG
+   Run on =     LAPTOP-T95VR7F4
 ============================================================
 RUN-1002 : start command "import_device ph1_35p.db -package PH1P35MDG324 -speed 3"
 ARC-1001 : Device Initialization.
@@ -16,9 +16,9 @@ ARC-1001 : ----------------------------------------------------------------
 ARC-1001 :   non_jtag_persist(none)  |        35 IOs         |    gpio    
 ARC-1001 :            jtag           |  P13/P15/L14/R13/T13  |  dedicate  
 ARC-1001 : ----------------------------------------------------------------
-RUN-1003 : finish command "import_device ph1_35p.db -package PH1P35MDG324 -speed 3" in  2.358422s wall, 2.093750s user + 0.093750s system = 2.187500s CPU (92.8%)
+RUN-1003 : finish command "import_device ph1_35p.db -package PH1P35MDG324 -speed 3" in  1.333818s wall, 0.984375s user + 0.093750s system = 1.078125s CPU (80.8%)
 
-RUN-1004 : used memory is 324 MB, reserved memory is 321 MB, peak memory is 324 MB
+RUN-1004 : used memory is 334 MB, reserved memory is 321 MB, peak memory is 334 MB
 RUN-1002 : start command "open_project fpga_prj.prj"
 RUN-1002 : start command "commit_param -step design"
 RUN-1001 : Print Global Property
@@ -40,20 +40,69 @@ RUN-1001 : ----------------------------------------------------------------
 RUN-1001 :   default_reg_initial  |    auto    |       auto       |        
 RUN-1001 :    hdl_warning_level   |   normal   |      normal      |        
 RUN-1001 : ----------------------------------------------------------------
-HDL-1007 : analyze verilog file ../../uisrc/03_ip/pll/RTL/ph1p_phy_pll_wrapper_6ba8d3e44c24.v
-HDL-1007 : analyze verilog file ../../uisrc/03_ip/pll/pll.v
-HDL-1007 : analyze verilog file ../../uisrc/01_rtl/csi2/csi2_ecc.v
-HDL-1007 : analyze verilog file ../../uisrc/01_rtl/csi2/csi2_tx_packet.v
-HDL-1007 : analyze verilog file ../../uisrc/01_rtl/csi2/csi2_rx_parse.v
-HDL-1007 : analyze verilog file ../../uisrc/01_rtl/mipi_dphy_tx/mipi_dphy_tx_over_ph1p_mipiio_wrapper.v
-HDL-1007 : analyze verilog file ../../uisrc/01_rtl/mipi_dphy_tx/ph1p_mipiio_tx_wrapper.v
-HDL-1007 : analyze verilog file ../../uisrc/01_rtl/mipi_dphy_tx/hs_tx_wrapper_merge.enc.v
+HDL-1007 : analyze verilog file ../../uisrc/03_ip/ddr2/ph1p_ddrmc_wrapper_63f4ac254419.v
+HDL-1007 : analyze included file ../../uisrc/03_ip/ddr2/./src/rtl/include/ph1p_mis_define.vh in ../../uisrc/03_ip/ddr2/ph1p_ddrmc_wrapper_63f4ac254419.v(11)
+HDL-1007 : back to file '../../uisrc/03_ip/ddr2/ph1p_ddrmc_wrapper_63f4ac254419.v' in ../../uisrc/03_ip/ddr2/ph1p_ddrmc_wrapper_63f4ac254419.v(11)
 Copyright (c) 1998-2019 The OpenSSL Project.  All rights reserved.
 This product includes software developed by the OpenSSL Project
 for use in the OpenSSL Toolkit (http://www.openssl.org/)
 Copyright (C) 1995-1998 Eric Young (eay@cryptsoft.com)
 All rights reserved.
 This product includes cryptographic software written by Eric Young (eay@cryptsoft.com)
+HDL-1007 : back to file '../../uisrc/03_ip/ddr2/ph1p_ddrmc_wrapper_63f4ac254419.v' in ../../uisrc/03_ip/ddr2/ph1p_ddrmc_wrapper_63f4ac254419.v(417)
+HDL-1007 : analyze verilog file ../../uisrc/03_ip/ddr2/ddr2.v
+HDL-1007 : analyze verilog file ../../uisrc/03_ip/ddr2/src/rtl/clk/ph1p_ddrphy_clk_top.v
+HDL-1007 : analyze verilog file ../../uisrc/03_ip/ddr2/src/rtl/clk/ph1p_ddrphy_pll0.v
+HDL-1007 : analyze verilog file ../../uisrc/03_ip/ddr2/src/rtl/clk/ph1p_ddrphy_pll1.v
+HDL-1007 : analyze verilog file ../../uisrc/03_ip/ddr2/src/rtl/init/ph1p_ddrphy_dram_init_ddr2.v
+HDL-1007 : analyze verilog file ../../uisrc/03_ip/ddr2/src/rtl/mc/alc_phy2mc_fifo_ctrl.v
+HDL-1007 : analyze verilog file ../../uisrc/03_ip/ddr2/src/rtl/misc/ph1p_ddr_fifo_dram_sync.v
+HDL-1007 : analyze verilog file ../../uisrc/03_ip/ddr2/src/rtl/misc/ph1p_ddrphy_sync_rst_gen.v
+HDL-1007 : analyze verilog file ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy.v
+HDL-1007 : analyze included file ../../uisrc/03_ip/ddr2/src/rtl/phy/./include/ph1p_ddrphy_pad_type.vh in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy.v(105)
+HDL-1007 : back to file '../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy.v' in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy.v(105)
+HDL-1007 : analyze included file ../../uisrc/03_ip/ddr2/src/rtl/phy/./include/ph1p_ddrphy_bus_matrix.vh in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy.v(507)
+HDL-1007 : back to file '../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy.v' in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy.v(507)
+HDL-1007 : analyze verilog file ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_apb_bridge.v
+HDL-1007 : analyze verilog file ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_bankref_cfg.v
+HDL-1007 : analyze verilog file ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_byte_wrapper.v
+HDL-1007 : analyze verilog file ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_cmd_decode.v
+HDL-1007 : analyze verilog file ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_cmd_execution.v
+HDL-1007 : analyze verilog file ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_cmd_wrapper.v
+HDL-1007 : analyze verilog file ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_dcu.v
+HDL-1007 : analyze verilog file ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_dcu_wrapper.v
+HDL-1007 : analyze verilog file ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_fast_init.v
+HDL-1007 : analyze verilog file ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_fast_init_wrapper.v
+HDL-1007 : analyze included file ../../uisrc/03_ip/ddr2/src/rtl/phy/./include/ph1p_ddrphy_board_delay.vh in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_fast_init_wrapper.v(71)
+HDL-1007 : back to file '../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_fast_init_wrapper.v' in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_fast_init_wrapper.v(71)
+HDL-1007 : analyze verilog file ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_init.v
+HDL-1007 : analyze verilog file ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_mdl_cal.v
+HDL-1007 : analyze verilog file ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_mdl_cal_wrapper.v
+HDL-1007 : analyze verilog file ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_rphase_ctl.v
+HDL-1007 : analyze verilog file ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_top.v
+HDL-1007 : analyze included file ../../uisrc/03_ip/ddr2/src/rtl/phy/./include/ph1p_ddrphy_ddrio.vh in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_top.v(736)
+HDL-1007 : back to file '../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_top.v' in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_top.v(736)
+HDL-1007 : analyze verilog file ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_wphase_ctl.v
+HDL-1007 : analyze verilog file ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_wrapper.v
+HDL-1007 : analyze verilog file ../../uisrc/03_ip/ddr2/src/rtl/top/ph1p_ddrmc_top.v
+HDL-1007 : analyze verilog file ../../uisrc/03_ip/ddr2/src/rtl/mc/alc_mc_top_all.enc.sv
+HDL-1007 : analyze included file ../../uisrc/03_ip/ddr2/src/rtl/mc/../include/ph1p_mis_define.vh in ../../uisrc/03_ip/ddr2/src/rtl/mc/alc_mc_top_all.enc.sv(4)
+HDL-1007 : back to file '../../uisrc/03_ip/ddr2/src/rtl/mc/alc_mc_top_all.enc.sv' in ../../uisrc/03_ip/ddr2/src/rtl/mc/alc_mc_top_all.enc.sv(4)
+HDL-1007 : analyze included file ../../uisrc/03_ip/ddr2/src/rtl/mc/../timing/ddr2/ddr2_parameter.vh in ../../uisrc/03_ip/ddr2/src/rtl/mc/alc_mc_top_all.enc.sv(106)
+HDL-1007 : analyze included file ../../uisrc/03_ip/ddr2/src/rtl/mc/../timing/ddr2/ddr2_1066.vh in ../../uisrc/03_ip/ddr2/src/rtl/mc/../timing/ddr2/ddr2_parameter.vh(118)
+HDL-1007 : back to file '../../uisrc/03_ip/ddr2/src/rtl/mc/../timing/ddr2/ddr2_parameter.vh' in ../../uisrc/03_ip/ddr2/src/rtl/mc/../timing/ddr2/ddr2_parameter.vh(118)
+HDL-1007 : back to file '../../uisrc/03_ip/ddr2/src/rtl/mc/alc_mc_top_all.enc.sv' in ../../uisrc/03_ip/ddr2/src/rtl/mc/alc_mc_top_all.enc.sv(106)
+HDL-1007 : back to file '../../uisrc/03_ip/ddr2/src/rtl/mc/alc_mc_top_all.enc.sv' in ../../uisrc/03_ip/ddr2/src/rtl/mc/alc_mc_top_all.enc.sv(121)
+HDL-1007 : analyze verilog file ../../uisrc/03_ip/pll/RTL/ph1p_phy_pll_wrapper_6ba8d3e44c24.v
+HDL-1007 : analyze verilog file ../../uisrc/03_ip/pll/pll.v
+HDL-1007 : analyze verilog file ../../uisrc/03_ip/w155_d512_fifo/soft_fifo_al_f58e8b3e1f3d.v
+HDL-1007 : analyze verilog file ../../uisrc/03_ip/w155_d512_fifo/w155_d512_fifo.v
+HDL-1007 : analyze verilog file ../../uisrc/01_rtl/csi2/csi2_ecc.v
+HDL-1007 : analyze verilog file ../../uisrc/01_rtl/csi2/csi2_tx_packet.v
+HDL-1007 : analyze verilog file ../../uisrc/01_rtl/csi2/csi2_rx_parse.v
+HDL-1007 : analyze verilog file ../../uisrc/01_rtl/mipi_dphy_tx/mipi_dphy_tx_over_ph1p_mipiio_wrapper.v
+HDL-1007 : analyze verilog file ../../uisrc/01_rtl/mipi_dphy_tx/ph1p_mipiio_tx_wrapper.v
+HDL-1007 : analyze verilog file ../../uisrc/01_rtl/mipi_dphy_tx/hs_tx_wrapper_merge.enc.v
 HDL-5007 WARNING: block identifier is required on this block in ../../uisrc/01_rtl/mipi_dphy_tx/hs_tx_wrapper_merge.enc.v(895)
 HDL-1007 : back to file '../../uisrc/01_rtl/mipi_dphy_tx/hs_tx_wrapper_merge.enc.v' in ../../uisrc/01_rtl/mipi_dphy_tx/hs_tx_wrapper_merge.enc.v(49)
 HDL-1007 : analyze verilog file ../../uisrc/01_rtl/mipi_dphy_rx/hs_detect.enc.v
@@ -70,6 +119,10 @@ HDL-1007 : analyze verilog file ../../uisrc/01_rtl/uics500_cfg/uicfgcs500.v
 HDL-1007 : analyze verilog file ../../uisrc/01_rtl/mipi_dphy_rx/ph1p_mipiio_rx_wrapper.v
 HDL-1007 : analyze verilog file ../../uisrc/01_rtl/csi2/csi2_ptr_fifo.v
 HDL-1007 : analyze verilog file ../../uisrc/01_rtl/mipi_dphy_rx/mipi_dphy_rx_ph1p_mipiio_wrapper.sv
+HDL-1007 : analyze verilog file ../../uisrc/01_rtl/csi2/csi2_raw10_scale_crop.v
+HDL-1007 : analyze verilog file ../../uisrc/01_rtl/ddr/ddr_triple_frame_cache.v
+HDL-1007 : analyze verilog file ../../uisrc/01_rtl/ddr/mc_to_user_interface.v
+HDL-1007 : analyze verilog file ../../uisrc/01_rtl/ddr/ph1p35_324_ddr_wrapper.v
 HDL-1007 : analyze verilog file ../../uisrc/01_rtl/csi2_tx_top.v
 HDL-1007 : analyze verilog file ../../uisrc/01_rtl/mipi_dphy_rx/byte_aligner_wrapper.enc.sv
 HDL-1007 : back to file '../../uisrc/01_rtl/mipi_dphy_rx/byte_aligner_wrapper.enc.sv' in ../../uisrc/01_rtl/mipi_dphy_rx/byte_aligner_wrapper.enc.sv(20)
@@ -82,7 +135,8 @@ HDL-1007 : analyze verilog file ../../uisrc/01_rtl/cnn/cnn_digit_params.v
 HDL-1007 : analyze verilog file ../../uisrc/01_rtl/cnn/cnn_digit_infer.v
 HDL-1007 : analyze verilog file ../../uisrc/01_rtl/cnn/cnn_frame_digit_detector.v
 HDL-1007 : analyze verilog file ../../uisrc/01_rtl/cnn/cnn_result_uart.v
-PRJ-1401 : Successfully analyzed 29 source files.
+HDL-1007 : analyze verilog file ../../uisrc/01_rtl/ae/ae_i2c_control.v
+PRJ-1401 : Successfully analyzed 65 source files.
 RUN-1002 : start command "commit_param -step design"
 RUN-1001 : Print Global Property
 RUN-1001 : -------------------------------------------------------------
@@ -104,23 +158,22 @@ RUN-1001 :   default_reg_initial  |    auto    |       auto       |
 RUN-1001 :    hdl_warning_level   |   normal   |      normal      |        
 RUN-1001 : ----------------------------------------------------------------
 RUN-1002 : start command "elaborate -top csi2_tx_top"
-HDL-1007 : elaborate module csi2_tx_top in ../../uisrc/01_rtl/csi2_tx_top.v(20)
+HDL-1007 : elaborate module csi2_tx_top in ../../uisrc/01_rtl/csi2_tx_top.v(22)
 HDL-1007 : elaborate module pll in ../../uisrc/03_ip/pll/pll.v(27)
-HDL-1007 : elaborate module PH1P_LOGIC_BUFG in F:\AnlogicFpga\TD_6.2.1_Engineer_6.2.168.116\arch/ph1p_macro.v(8085)
+HDL-1007 : elaborate module PH1P_LOGIC_BUFG in D:\TD\arch/ph1p_macro.v(8085)
 HDL-1007 : elaborate module ph1p_phy_pll_wrapper_6ba8d3e44c24(FBKCLK_INT="CLKC0_EXT",FIN="25.000000000",FBCLK_DIV=4,CLKC0_ENABLE="ENABLE",CLKC0_DIV=12,CLKC0_CPHASE=11,CLKC0_DUTY_INT=6,CLKC1_ENABLE="ENABLE",CLKC1_DIV=50,CLKC1_CPHASE=49,CLKC1_DUTY_INT=25,PLL_FEED_TYPE="EXTERNAL",LPF_CAP=0,ICP_CUR=0) in ../../uisrc/03_ip/pll/RTL/ph1p_phy_pll_wrapper_6ba8d3e44c24.v(2)
-HDL-1007 : elaborate module PH1P_PHY_PLL_V2(FBKCLK_INT="CLKC0_EXT",FIN="25.000000000",FBCLK_DIV=4,CLKC0_CPHASE=11,CLKC1_CPHASE=49,CLKC0_DIV=12,CLKC1_DIV=50,CLKC0_DUTY_INT=6,CLKC1_DUTY_INT=25,CLKC0_ENABLE="ENABLE",CLKC1_ENABLE="ENABLE",PLL_FEED_TYPE="EXTERNAL",LPF_CAP=0,ICP_CUR=0) in F:\AnlogicFpga\TD_6.2.1_Engineer_6.2.168.116\arch/ph1p_macro.v(1091)
+HDL-1007 : elaborate module PH1P_PHY_PLL_V2(FBKCLK_INT="CLKC0_EXT",FIN="25.000000000",FBCLK_DIV=4,CLKC0_CPHASE=11,CLKC1_CPHASE=49,CLKC0_DIV=12,CLKC1_DIV=50,CLKC0_DUTY_INT=6,CLKC1_DUTY_INT=25,CLKC0_ENABLE="ENABLE",CLKC1_ENABLE="ENABLE",PLL_FEED_TYPE="EXTERNAL",LPF_CAP=0,ICP_CUR=0) in D:\TD\arch/ph1p_macro.v(1091)
 HDL-1007 : elaborate module ae_set in ../../uisrc/01_rtl/ae/ae_set.v(33)
-HDL-1007 : port 'IO_iic_sda_dg' remains unconnected for this instance in ../../uisrc/01_rtl/uics500_cfg/uicfgcs500.v(133)
-HDL-1007 : port 'I_VTS' remains unconnected for this instance in ../../uisrc/01_rtl/uics500_cfg/uicfgcs500.v(168)
+HDL-1007 : elaborate module ae_i2c_control in ../../uisrc/01_rtl/ae/ae_i2c_control.v(3)
+HDL-1007 : port 'IO_iic_sda_dg' remains unconnected for this instance in ../../uisrc/01_rtl/uics500_cfg/uicfgcs500.v(135)
 HDL-1007 : elaborate module uicfgcs500(CLK_DIV=239) in ../../uisrc/01_rtl/uics500_cfg/uicfgcs500.v(37)
 HDL-1007 : elaborate module uii2c(WMEN_LEN=4,RMEN_LEN=1,CLK_DIV=239) in ../../uisrc/01_rtl/uics500_cfg/uii2c.v(41)
 HDL-1007 : elaborate module uics500reg in ../../uisrc/01_rtl/uics500_cfg/uics500reg.v(40)
-HDL-5007 WARNING: actual bit length 24 differs from formal bit length 32 for port 'REG_DATA' in ../../uisrc/01_rtl/uics500_cfg/uicfgcs500.v(162)
+HDL-5007 WARNING: actual bit length 24 differs from formal bit length 32 for port 'REG_DATA' in ../../uisrc/01_rtl/uics500_cfg/uicfgcs500.v(164)
 HDL-1007 : elaborate module SC500GainTbl in ../../uisrc/01_rtl/uics500_cfg/SC500GainTbl.v(6)
-HDL-5007 WARNING: actual bit length 32 differs from formal bit length 7 for port 'I' in ../../uisrc/01_rtl/uics500_cfg/uicfgcs500.v(166)
-HDL-1007 : elaborate module uics500regAE in ../../uisrc/01_rtl/uics500_cfg/uics500regAE.v(2)
-HDL-5007 WARNING: actual bit length 24 differs from formal bit length 32 for port 'REG_DATA' in ../../uisrc/01_rtl/uics500_cfg/uicfgcs500.v(172)
-HDL-5323 WARNING: input port 'I_VTS[15]' remains unconnected for this instance in ../../uisrc/01_rtl/uics500_cfg/uicfgcs500.v(168)
+HDL-5007 WARNING: actual bit length 32 differs from formal bit length 7 for port 'I' in ../../uisrc/01_rtl/uics500_cfg/uicfgcs500.v(168)
+HDL-1007 : elaborate module uics500regAE in ../../uisrc/01_rtl/uics500_cfg/uics500regAE.v(1)
+HDL-5007 WARNING: actual bit length 24 differs from formal bit length 32 for port 'REG_DATA' in ../../uisrc/01_rtl/uics500_cfg/uicfgcs500.v(174)
 HDL-1007 : elaborate module mipi_dphy_rx_ph1p_mipiio_wrapper(HS_VGA_GAIN="8dB",LANE_NUM=2) in ../../uisrc/01_rtl/mipi_dphy_rx/mipi_dphy_rx_ph1p_mipiio_wrapper.sv(4)
 HDL-1007 : elaborate module channel_aligner_wrapper(CH_NUM=2) in ../../uisrc/01_rtl/mipi_dphy_rx/channel_aligner_wrapper.enc.sv(3)
 HDL-1007 : elaborate module channel_aligner in ../../uisrc/01_rtl/mipi_dphy_rx/channel_aligner.enc.v(3)
@@ -128,9 +181,14 @@ HDL-1007 : elaborate module byte_aligner_wrapper(LANE_NUM=2) in ../../uisrc/01_r
 HDL-1007 : elaborate module byte_aligner in ../../uisrc/01_rtl/mipi_dphy_rx/byte_aligner.enc.v(3)
 HDL-1007 : elaborate module ph1p_mipiio_rx_wrapper(HS_VGA_GAIN="8dB",LANE_NUM=2) in ../../uisrc/01_rtl/mipi_dphy_rx/ph1p_mipiio_rx_wrapper.v(4)
 HDL-1007 : elaborate module hs_detect in ../../uisrc/01_rtl/mipi_dphy_rx/hs_detect.enc.v(3)
-HDL-1007 : elaborate module PH1P_LOGIC_DPHY_MIPI_RX(CK_HS_VGA_GAIN="8dB",L0_HS_SLAVE_DESER_CLK_OFFSET="0ps",L0_HS_VGA_GAIN="8dB",L1_HS_SLAVE_DESER_CLK_OFFSET="0ps",L1_HS_VGA_GAIN="8dB",L2_HS_SLAVE_DESER_CLK_OFFSET="0ps",L2_HS_VGA_GAIN="8dB",L3_HS_SLAVE_DESER_CLK_OFFSET="0ps",L3_HS_VGA_GAIN="8dB") in F:\AnlogicFpga\TD_6.2.1_Engineer_6.2.168.116\arch/ph1p_macro.v(2017)
-HDL-1007 : elaborate module csi2_rx_parse in ../../uisrc/01_rtl/csi2/csi2_rx_parse.v(16)
-HDL-1007 : elaborate module cnn_raw10_resize_bin in ../../uisrc/01_rtl/cnn/cnn_raw10_resize_bin.v(7)
+HDL-1007 : elaborate module PH1P_LOGIC_DPHY_MIPI_RX(CK_HS_VGA_GAIN="8dB",L0_HS_SLAVE_DESER_CLK_OFFSET="0ps",L0_HS_VGA_GAIN="8dB",L1_HS_SLAVE_DESER_CLK_OFFSET="0ps",L1_HS_VGA_GAIN="8dB",L2_HS_SLAVE_DESER_CLK_OFFSET="0ps",L2_HS_VGA_GAIN="8dB",L3_HS_SLAVE_DESER_CLK_OFFSET="0ps",L3_HS_VGA_GAIN="8dB") in D:\TD\arch/ph1p_macro.v(2017)
+HDL-1007 : elaborate module csi2_rx_parse in ../../uisrc/01_rtl/csi2/csi2_rx_parse.v(6)
+HDL-1007 : elaborate module csi2_ecc in ../../uisrc/01_rtl/csi2/csi2_ecc.v(13)
+HDL-1007 : elaborate module csi2_raw_frame_sync in ../../uisrc/01_rtl/csi2/csi2_rx_parse.v(88)
+HDL-1007 : elaborate module csi2_raw10_scale_crop in ../../uisrc/01_rtl/csi2/csi2_raw10_scale_crop.v(10)
+HDL-1007 : extracting RAM for identifier 'token_q' in ../../uisrc/01_rtl/csi2/csi2_raw10_scale_crop.v(72)
+HDL-1007 : extracting RAM for identifier 'token_tmp' in ../../uisrc/01_rtl/csi2/csi2_raw10_scale_crop.v(73)
+HDL-1007 : elaborate module cnn_raw10_resize_bin(SRC_WIDTH=1920,SRC_HEIGHT=1080) in ../../uisrc/01_rtl/cnn/cnn_raw10_resize_bin.v(7)
 HDL-1007 : elaborate module cnn_frame_digit_detector in ../../uisrc/01_rtl/cnn/cnn_frame_digit_detector.v(4)
 HDL-1007 : extracting RAM for identifier 'patch_mem' in ../../uisrc/01_rtl/cnn/cnn_frame_digit_detector.v(89)
 HDL-1007 : extracting RAM for identifier 'band_top' in ../../uisrc/01_rtl/cnn/cnn_frame_digit_detector.v(109)
@@ -141,7 +199,7 @@ HDL-1007 : extracting RAM for identifier 'candidate_x' in ../../uisrc/01_rtl/cnn
 HDL-1007 : extracting RAM for identifier 'candidate_y' in ../../uisrc/01_rtl/cnn/cnn_frame_digit_detector.v(149)
 HDL-1007 : extracting RAM for identifier 'candidate_w' in ../../uisrc/01_rtl/cnn/cnn_frame_digit_detector.v(150)
 HDL-1007 : extracting RAM for identifier 'candidate_h' in ../../uisrc/01_rtl/cnn/cnn_frame_digit_detector.v(151)
-HDL-1007 : elaborate module PH1P_LOGIC_ERAM(DATA_WIDTH_A=1,DATA_WIDTH_B=1,ADDR_WIDTH_A=14,ADDR_WIDTH_B=14,DATA_DEPTH_A=16384,DATA_DEPTH_B=16384,MODE="PDPW") in F:\AnlogicFpga\TD_6.2.1_Engineer_6.2.168.116\arch/ph1p_macro.v(22)
+HDL-1007 : elaborate module PH1P_LOGIC_ERAM(DATA_WIDTH_A=1,DATA_WIDTH_B=1,ADDR_WIDTH_A=14,ADDR_WIDTH_B=14,DATA_DEPTH_A=16384,DATA_DEPTH_B=16384,MODE="PDPW") in D:\TD\arch/ph1p_macro.v(22)
 HDL-1007 : elaborate module cnn_digit_infer in ../../uisrc/01_rtl/cnn/cnn_digit_infer.v(3)
 HDL-1007 : extracting RAM for identifier 'features' in ../../uisrc/01_rtl/cnn/cnn_digit_infer.v(93)
 HDL-1007 : elaborate module cnn_digit_params in ../../uisrc/01_rtl/cnn/cnn_digit_params.v(1)
@@ -150,16 +208,16 @@ HDL-1007 : port 'ecc_dbiterr' remains unconnected for this instance in ../../uis
 HDL-1007 : port 'ecc_sbiterr' remains unconnected for this instance in ../../uisrc/01_rtl/cnn/cnn_digit_infer.v(996)
 HDL-1007 : port 'ecc_dbiterr' remains unconnected for this instance in ../../uisrc/01_rtl/cnn/cnn_digit_infer.v(996)
 HDL-1007 : elaborate module cnn_digit_weight_rom in ../../uisrc/01_rtl/cnn/cnn_digit_infer.v(963)
-HDL-1007 : elaborate module PH1P_LOGIC_ERAM(DATA_WIDTH_A=8,DATA_WIDTH_B=8,ADDR_WIDTH_A=11,ADDR_WIDTH_B=11,DATA_DEPTH_A=2048,DATA_DEPTH_B=2048,MODE="SP",INIT_FILE="D:/2026fpga/ph1p35second/fpga/uisrc/01_rtl/cnn/weights/cnn_digit_weights_0.mif") in F:\AnlogicFpga\TD_6.2.1_Engineer_6.2.168.116\arch/ph1p_macro.v(22)
+HDL-1007 : elaborate module PH1P_LOGIC_ERAM(DATA_WIDTH_A=8,DATA_WIDTH_B=8,ADDR_WIDTH_A=11,ADDR_WIDTH_B=11,DATA_DEPTH_A=2048,DATA_DEPTH_B=2048,MODE="SP",INIT_FILE="D:/BaiduNetdiskDownload/02_F02_FC02_PH1P35/fpga_11/ph1p35second/fpga/uisrc/01_rtl/cnn/weights/cnn_digit_weights_0.mif") in D:\TD\arch/ph1p_macro.v(22)
 HDL-5007 WARNING: actual bit length 8 differs from formal bit length 1 for port 'bea' in ../../uisrc/01_rtl/cnn/cnn_digit_infer.v(993)
 HDL-5007 WARNING: actual bit length 8 differs from formal bit length 1 for port 'beb' in ../../uisrc/01_rtl/cnn/cnn_digit_infer.v(993)
-HDL-1007 : elaborate module PH1P_LOGIC_ERAM(DATA_WIDTH_A=8,DATA_WIDTH_B=8,ADDR_WIDTH_A=11,ADDR_WIDTH_B=11,DATA_DEPTH_A=2048,DATA_DEPTH_B=2048,MODE="SP",INIT_FILE="D:/2026fpga/ph1p35second/fpga/uisrc/01_rtl/cnn/weights/cnn_digit_weights_1.mif") in F:\AnlogicFpga\TD_6.2.1_Engineer_6.2.168.116\arch/ph1p_macro.v(22)
+HDL-1007 : elaborate module PH1P_LOGIC_ERAM(DATA_WIDTH_A=8,DATA_WIDTH_B=8,ADDR_WIDTH_A=11,ADDR_WIDTH_B=11,DATA_DEPTH_A=2048,DATA_DEPTH_B=2048,MODE="SP",INIT_FILE="D:/BaiduNetdiskDownload/02_F02_FC02_PH1P35/fpga_11/ph1p35second/fpga/uisrc/01_rtl/cnn/weights/cnn_digit_weights_1.mif") in D:\TD\arch/ph1p_macro.v(22)
 HDL-5007 WARNING: actual bit length 8 differs from formal bit length 1 for port 'bea' in ../../uisrc/01_rtl/cnn/cnn_digit_infer.v(1007)
 HDL-5007 WARNING: actual bit length 8 differs from formal bit length 1 for port 'beb' in ../../uisrc/01_rtl/cnn/cnn_digit_infer.v(1007)
 HDL-5317 WARNING: input port 'ecc_sbiterrinj' is not connected on this instance in ../../uisrc/01_rtl/cnn/cnn_digit_infer.v(989)
 HDL-5317 WARNING: input port 'ecc_sbiterrinj' is not connected on this instance in ../../uisrc/01_rtl/cnn/cnn_digit_infer.v(1003)
 HDL-1007 : elaborate module cnn_digit_activation_ram in ../../uisrc/01_rtl/cnn/cnn_digit_infer.v(901)
-HDL-1007 : elaborate module PH1P_LOGIC_ERAM(DATA_WIDTH_A=8,DATA_WIDTH_B=8,ADDR_WIDTH_A=11,ADDR_WIDTH_B=11,DATA_DEPTH_A=2048,DATA_DEPTH_B=2048,MODE="PDPW") in F:\AnlogicFpga\TD_6.2.1_Engineer_6.2.168.116\arch/ph1p_macro.v(22)
+HDL-1007 : elaborate module PH1P_LOGIC_ERAM(DATA_WIDTH_A=8,DATA_WIDTH_B=8,ADDR_WIDTH_A=11,ADDR_WIDTH_B=11,DATA_DEPTH_A=2048,DATA_DEPTH_B=2048,MODE="PDPW") in D:\TD\arch/ph1p_macro.v(22)
 HDL-5007 WARNING: actual bit length 8 differs from formal bit length 1 for port 'bea' in ../../uisrc/01_rtl/cnn/cnn_digit_infer.v(941)
 HDL-5007 WARNING: actual bit length 8 differs from formal bit length 1 for port 'beb' in ../../uisrc/01_rtl/cnn/cnn_digit_infer.v(941)
 HDL-5007 WARNING: actual bit length 8 differs from formal bit length 1 for port 'bea' in ../../uisrc/01_rtl/cnn/cnn_digit_infer.v(941)
@@ -170,12 +228,179 @@ HDL-5007 WARNING: actual bit length 8 differs from formal bit length 1 for port 
 HDL-5007 WARNING: actual bit length 8 differs from formal bit length 1 for port 'beb' in ../../uisrc/01_rtl/cnn/cnn_digit_infer.v(941)
 HDL-5317 WARNING: input port 'ecc_sbiterrinj' is not connected on this instance in ../../uisrc/01_rtl/cnn/cnn_digit_infer.v(936)
 HDL-5317 WARNING: input port 'ecc_sbiterrinj' is not connected on this instance in ../../uisrc/01_rtl/cnn/cnn_frame_digit_detector.v(272)
-HDL-1007 : elaborate module csi2_ptr_fifo(AW=11) in ../../uisrc/01_rtl/csi2/csi2_ptr_fifo.v(18)
-HDL-1007 : extracting RAM for identifier 'mem' in ../../uisrc/01_rtl/csi2/csi2_ptr_fifo.v(36)
-HDL-1007 : elaborate module csi2_tx_packet(BUF_AW=11,LANE_SWAP=1) in ../../uisrc/01_rtl/csi2/csi2_tx_packet.v(12)
-HDL-1007 : extracting RAM for identifier 'mem' in ../../uisrc/01_rtl/csi2/csi2_tx_packet.v(49)
-HDL-1007 : elaborate module csi2_ecc in ../../uisrc/01_rtl/csi2/csi2_ecc.v(13)
-HDL-1007 : elaborate module mipi_dphy_tx_over_ph1p_mipiio_wrapper(DPHY_TX_LOCATION="DPHY1",LANE_NUM=2,HS_OUTPUT_VOD="200mV",DPLL_MULTI_RATIO=6,T_DATA_LPX=10,T_DATA_HS_PREPARE=10,T_DATA_HS_ZERO=20,T_CLK_LPX=10,T_CLK_PREPARE=10) in ../../uisrc/01_rtl/mipi_dphy_tx/mipi_dphy_tx_over_ph1p_mipiio_wrapper.v(2)
+HDL-1007 : elaborate module ddr_triple_frame_cache(FRAME_WORDS16=1296000,LINE_WORDS16=1200,FRAME_LINES=1080,FRAME_PACK_WORDS=162000,FRAME_ADDR_SPAN=1296000) in ../../uisrc/01_rtl/ddr/ddr_triple_frame_cache.v(3)
+HDL-1007 : extracting RAM for identifier 'rd_fifo' in ../../uisrc/01_rtl/ddr/ddr_triple_frame_cache.v(308)
+HDL-1007 : elaborate module csi2_ptr_fifo(DW=132,AW=6) in ../../uisrc/01_rtl/csi2/csi2_ptr_fifo.v(18)
+HDL-1007 : extracting RAM for identifier 'mem' in ../../uisrc/01_rtl/csi2/csi2_ptr_fifo.v(103)
+HDL-1007 : elaborate module csi2_ptr_fifo(AW=12,USE_ERAM=1) in ../../uisrc/01_rtl/csi2/csi2_ptr_fifo.v(18)
+HDL-1007 : elaborate module PH1P_LOGIC_ERAM(DATA_WIDTH_A=18,DATA_WIDTH_B=18,ADDR_WIDTH_B=10,DATA_DEPTH_A=1024,DATA_DEPTH_B=1024,MODE="PDPW") in D:\TD\arch/ph1p_macro.v(22)
+HDL-5007 WARNING: actual bit length 18 differs from formal bit length 1 for port 'bea' in ../../uisrc/01_rtl/csi2/csi2_ptr_fifo.v(94)
+HDL-5007 WARNING: actual bit length 18 differs from formal bit length 1 for port 'beb' in ../../uisrc/01_rtl/csi2/csi2_ptr_fifo.v(94)
+HDL-5007 WARNING: actual bit length 18 differs from formal bit length 1 for port 'bea' in ../../uisrc/01_rtl/csi2/csi2_ptr_fifo.v(94)
+HDL-5007 WARNING: actual bit length 18 differs from formal bit length 1 for port 'beb' in ../../uisrc/01_rtl/csi2/csi2_ptr_fifo.v(94)
+HDL-5007 WARNING: actual bit length 18 differs from formal bit length 1 for port 'bea' in ../../uisrc/01_rtl/csi2/csi2_ptr_fifo.v(94)
+HDL-5007 Similar messages will be suppressed.
+HDL-5317 WARNING: input port 'ecc_sbiterrinj' is not connected on this instance in ../../uisrc/01_rtl/csi2/csi2_ptr_fifo.v(87)
+HDL-1007 : elaborate module mc_to_user_interface in ../../uisrc/01_rtl/ddr/mc_to_user_interface.v(3)
+HDL-1007 : elaborate module w155_d512_fifo in ../../uisrc/03_ip/w155_d512_fifo/w155_d512_fifo.v(2)
+HDL-1007 : port 'doa' remains unconnected for this instance in ../../uisrc/03_ip/w155_d512_fifo/soft_fifo_al_f58e8b3e1f3d.v(194)
+HDL-1007 : port 'dib' remains unconnected for this instance in ../../uisrc/03_ip/w155_d512_fifo/soft_fifo_al_f58e8b3e1f3d.v(194)
+HDL-1007 : elaborate module soft_fifo_al_f58e8b3e1f3d(DATA_WIDTH_W=155,DATA_WIDTH_R=155,ADDR_WIDTH_W=9,ADDR_WIDTH_R=9,AL_FULL_NUM=500,AL_EMPTY_NUM=2,SHOW_AHEAD_EN=1) in ../../uisrc/03_ip/w155_d512_fifo/soft_fifo_al_f58e8b3e1f3d.v(3)
+HDL-1007 : elaborate module ram_infer_f58e8b3e1f3d(DATAWIDTH_A=155,ADDRWIDTH_A=9,DATAWIDTH_B=155,ADDRWIDTH_B=9) in ../../uisrc/03_ip/w155_d512_fifo/soft_fifo_al_f58e8b3e1f3d.v(220)
+HDL-1007 : extracting RAM for identifier 'memory' in ../../uisrc/03_ip/w155_d512_fifo/soft_fifo_al_f58e8b3e1f3d.v(285)
+HDL-5317 WARNING: input port 'dib[154]' is not connected on this instance in ../../uisrc/03_ip/w155_d512_fifo/soft_fifo_al_f58e8b3e1f3d.v(201)
+HDL-1007 : port 'apb_pready' remains unconnected for this instance in ../../uisrc/01_rtl/ddr/ph1p35_324_ddr_wrapper.v(81)
+HDL-1007 : port 'apb_prdata' remains unconnected for this instance in ../../uisrc/01_rtl/ddr/ph1p35_324_ddr_wrapper.v(81)
+HDL-1007 : port 'cfg_rst_n' remains unconnected for this instance in ../../uisrc/01_rtl/ddr/ph1p35_324_ddr_wrapper.v(81)
+HDL-1007 : elaborate module ph1p35_324_ddr_wrapper in ../../uisrc/01_rtl/ddr/ph1p35_324_ddr_wrapper.v(2)
+HDL-1007 : elaborate module ddr2 in ../../uisrc/03_ip/ddr2/ddr2.v(10)
+HDL-1007 : elaborate module ph1p_ddrmc_wrapper_63f4ac254419(HOST_AC_DRV="75",HOST_DX_DRV="75",HOST_DX_ODT="75",DRAM_DRV="0",DRAM_ODT="75",CL=7,CAL_EN=0,PLL0_REFCLK_FREQ=100.0,PLL0_REFCLK_DIV=3,PLL0_FBKCLK_DIV=32,PLL0_CLK2_DIV=2,PLL0_CLK3_DIV=21,PLL1_REFCLK_FREQ=133.3,PLL1_REFCLK_DIV=4,MC_ADDR_MAP="ROW_COL_BANK",MC_REORDER="NORMAL",MC_ADDR_WIDTH=25,MC_DATA_WIDTH=128,MC_MASK_WIDTH=16,AXI_ADDR_WIDTH=26,AXI_DATA_WIDTH=128,AXI_MASK_WIDTH=16) in ../../uisrc/03_ip/ddr2/ph1p_ddrmc_wrapper_63f4ac254419.v(14)
+HDL-1007 : port 'dhi_cmd_err' remains unconnected for this instance in ../../uisrc/03_ip/ddr2/src/rtl/top/ph1p_ddrmc_top.v(163)
+HDL-1007 : elaborate module ph1p_ddrmc_top(HOST_AC_DRV="75",HOST_DX_DRV="75",HOST_DX_ODT="75",DRAM_DRV="0",DRAM_ODT="75",CL=7,CAL_EN=0,PLL0_REFCLK_FREQ=100.0,PLL0_REFCLK_DIV=3,PLL0_FBKCLK_DIV=32,PLL0_CLK2_DIV=2,PLL0_CLK3_DIV=21,PLL1_REFCLK_FREQ=133.3,PLL1_REFCLK_DIV=4,MC_ADDR_MAP="ROW_COL_BANK",MC_REORDER="NORMAL",MC_ADDR_WIDTH=25,MC_DATA_WIDTH=128,MC_MASK_WIDTH=16) in ../../uisrc/03_ip/ddr2/src/rtl/top/ph1p_ddrmc_top.v(8)
+HDL-1007 : port 'dly_cur_wdq' remains unconnected for this instance in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_wrapper.v(478)
+HDL-1007 : port 'dly_cur_rdqsp' remains unconnected for this instance in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_wrapper.v(478)
+HDL-1007 : port 'dly_cur_rdqsn' remains unconnected for this instance in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_wrapper.v(478)
+HDL-1007 : elaborate module ph1p_ddrphy_wrapper(tCK=1876,DX_NUM=2,BG_WIDTH=0,BA_WIDTH=2,ROW_WIDTH=13,ADR_WIDTH=13,HOST_AC_DRV="75",HOST_DX_DRV="75",HOST_DX_ODT="75",DRAM_DRV="0",DRAM_ODT="75",CWL=6,CL=7,WDM=1,CAL_EN=0,PLL0_REFCLK_FREQ=100.0,PLL0_REFCLK_DIV=3,PLL0_FBKCLK_DIV=32,PLL0_CLK2_DIV=2,PLL0_CLK3_DIV=21,PLL1_REFCLK_FREQ=133.3,PLL1_REFCLK_DIV=4) in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_wrapper.v(4)
+HDL-1007 : elaborate module ph1p_ddrphy_dram_init(tCK=1876,CL=7,RTT_NOM="75") in ../../uisrc/03_ip/ddr2/src/rtl/init/ph1p_ddrphy_dram_init_ddr2.v(4)
+HDL-1007 : port 'rst_sync' remains unconnected for this instance in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_top.v(337)
+HDL-1007 : port 'dhi_bg' remains unconnected for this instance in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_top.v(644)
+HDL-1007 : elaborate module ph1p_ddrphy_top(DX_NUM=2,BG_WIDTH=0,BA_WIDTH=2,ROW_WIDTH=13,ADR_WIDTH=13,AC_DRV="75",DX_DRV="75",DX_ODT="75",CWL=6,CL=7,PLL0_REFCLK_FREQ=100.0,PLL0_REFCLK_DIV=3,PLL0_FBKCLK_DIV=32,PLL0_CLK2_DIV=2,PLL0_CLK3_DIV=21,PLL1_REFCLK_FREQ=133.3,PLL1_REFCLK_DIV=4,DDRPHY_ROM_LEN=45,DDRPHY_ROM_INIT="ddrphy_cfg_rom.txt") in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_top.v(3)
+HDL-1007 : elaborate module ph1p_ddrphy_clk_top(PLL0_REFCLK_FREQ=100.0,PLL0_REFCLK_DIV=3,PLL0_FBKCLK_DIV=32,PLL0_CLK2_DIV=2,PLL0_CLK3_DIV=21,PLL1_REFCLK_FREQ=133.3,PLL1_REFCLK_DIV=4) in ../../uisrc/03_ip/ddr2/src/rtl/clk/ph1p_ddrphy_clk_top.v(4)
+HDL-1007 : port 'clkcb' remains unconnected for this instance in ../../uisrc/03_ip/ddr2/src/rtl/clk/ph1p_ddrphy_pll0.v(85)
+HDL-1007 : elaborate module ph1p_ddrphy_pll0(REFCLK_FREQ=100.0,FBKCLK_DIV=32,CLK2_DIV=2,CLK3_DIV=21) in ../../uisrc/03_ip/ddr2/src/rtl/clk/ph1p_ddrphy_pll0.v(9)
+HDL-1007 : elaborate module PH1P_PHY_PLL_V2(FBKCLK="VCO_PHASE0",FIN=100.0,REFCLK_DIV=3,FBCLK_DIV=32,CLKC0_CPHASE=7,CLKC1_CPHASE=7,CLKC2_CPHASE=1,CLKC3_CPHASE=20,CLKC0_DIV=8,CLKC1_DIV=8,CLKC2_DIV=2,CLKC3_DIV=21,CLKC0_DUTY_INT=4,CLKC1_DUTY_INT=4,CLKC3_DUTY_INT=11,CLKC0_ENABLE="ENABLE",CLKC1_ENABLE="ENABLE",CLKC2_ENABLE="ENABLE",CLKC3_ENABLE="ENABLE",LPF_CAP=0,ICP_CUR=0,FEEDBK_MODE="NOCOMP") in D:\TD\arch/ph1p_macro.v(1091)
+HDL-1007 : port 'clkcb' remains unconnected for this instance in ../../uisrc/03_ip/ddr2/src/rtl/clk/ph1p_ddrphy_pll1.v(75)
+HDL-1007 : elaborate module ph1p_ddrphy_pll1(REFCLK_FREQ=133.3,REFCLK_DIV=4) in ../../uisrc/03_ip/ddr2/src/rtl/clk/ph1p_ddrphy_pll1.v(6)
+HDL-1007 : elaborate module PH1P_PHY_PLL_V2(FBKCLK_INT="CLKC0_EXT",FIN=133.3,REFCLK_DIV=4,FBCLK_DIV=4,CLKC0_CPHASE=11,CLKC0_DIV=12,CLKC0_DUTY_INT=6,CLKC0_ENABLE="ENABLE",PLL_FEED_TYPE="EXTERNAL",PLL_FASTLOOP="ENABLE",LPF_RES=0,LPF_CAP=25,ICP_CUR=29) in D:\TD\arch/ph1p_macro.v(1091)
+HDL-1007 : elaborate module PH1P_PHY_MLCLK in D:\TD\arch/ph1p_macro.v(3220)
+HDL-1007 : elaborate module PH1P_PHY_IOCLK in D:\TD\arch/ph1p_macro.v(896)
+HDL-1007 : elaborate module ph1p_ddrphy_sync_rst_gen in ../../uisrc/03_ip/ddr2/src/rtl/misc/ph1p_ddrphy_sync_rst_gen.v(3)
+HDL-1007 : elaborate module ph1p_ddrphy_init(ROM_LEN=45,ROM_INIT="ddrphy_cfg_rom.txt") in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_init.v(4)
+HDL-1007 : extracting RAM for identifier 'rom_w52' in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_init.v(36)
+HDL-1007 : readmemh: reading from file 'ddrphy_cfg_rom.txt' in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_init.v(53)
+HDL-5314 WARNING: net 'rom_w52' does not have a driver in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_init.v(36)
+HDL-1007 : elaborate module ph1p_ddrphy_mdl_cal_wrapper in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_mdl_cal_wrapper.v(3)
+HDL-1007 : elaborate module ph1p_ddrphy_mdl_cal in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_mdl_cal.v(12)
+HDL-1007 : elaborate module ph1p_ddrphy_fast_init_wrapper in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_fast_init_wrapper.v(8)
+HDL-1007 : elaborate module ph1p_ddrphy_fast_init in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_fast_init.v(12)
+HDL-5314 WARNING: net 'usr_vld[8]' does not have a driver in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_fast_init_wrapper.v(132)
+HDL-5314 WARNING: net 'init_gate[80]' does not have a driver in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_fast_init_wrapper.v(134)
+HDL-5314 WARNING: net 'init_wdqs[80]' does not have a driver in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_fast_init_wrapper.v(135)
+HDL-5314 WARNING: net 'init_wdq[80]' does not have a driver in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_fast_init_wrapper.v(136)
+HDL-5314 WARNING: net 'init_rdqsp[80]' does not have a driver in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_fast_init_wrapper.v(137)
+HDL-5314 WARNING: net 'init_rdqsn[80]' does not have a driver in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_fast_init_wrapper.v(138)
+HDL-5314 WARNING: net 'init_wsl[35]' does not have a driver in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_fast_init_wrapper.v(139)
+HDL-5314 WARNING: net 'init_rsl[35]' does not have a driver in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_fast_init_wrapper.v(140)
+HDL-1007 : elaborate module ph1p_ddrphy_dcu_wrapper in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_dcu_wrapper.v(4)
+HDL-1007 : elaborate module ph1p_ddrphy_dcu in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_dcu.v(14)
+HDL-5314 WARNING: net 'lcdl_mdl_r[8]' does not have a driver in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_dcu.v(94)
+HDL-1007 : elaborate module ph1p_ddrphy_cmd_wrapper(ROW_WIDTH=13,ADR_WIDTH=13,BA_WIDTH=2,CWL=6,CL=7) in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_cmd_wrapper.v(3)
+HDL-1007 : elaborate module ph1p_ddrphy_cmd_execution(ADR_WIDTH=13,ROW_WIDTH=13,BA_WIDTH=2) in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_cmd_execution.v(3)
+HDL-1007 : elaborate module ph1p_ddrphy_cmd_decode(ROW_WIDTH=13,ADR_WIDTH=13,BA_WIDTH=2) in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_cmd_decode.v(3)
+HDL-1007 : elaborate module ph1p_ddrphy_wphase_ctl(CWL=6) in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_wphase_ctl.v(6)
+HDL-1007 : elaborate module ph1p_ddrphy_rphase_ctl(CL=7) in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_rphase_ctl.v(6)
+HDL-1007 : elaborate module ph1p_ddrphy(DX_NUM=2,BA_WIDTH=2,ADR_WIDTH=13,AC_DRV="75",DX_DRV="75",DX_ODT="75") in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy.v(3)
+HDL-1007 : elaborate module PH1P_PHY_DDRPHY_BANKREF(VCCIO="1V50",BYTE0_MODE="IN",BYTE1_MODE="IN",BYTE2_MODE="IN",BYTE3_MODE="IN") in D:\TD\arch/ph1p_macro.v(1659)
+HDL-1007 : port 'dx_rfifo_empty' remains unconnected for this instance in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_byte_wrapper.v(165)
+HDL-1007 : port 'phy_osc_en' remains unconnected for this instance in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_byte_wrapper.v(165)
+HDL-1007 : port 'phy_test_mode' remains unconnected for this instance in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_byte_wrapper.v(165)
+HDL-1007 : port 'phy_lb_en' remains unconnected for this instance in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_byte_wrapper.v(165)
+HDL-1007 : port 'phy_lb_ck_sel' remains unconnected for this instance in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_byte_wrapper.v(165)
+HDL-1007 : elaborate module ph1p_ddrphy_byte_wrapper(BYTE_TYPE="AC",PAD_TYPE=52'b1111000000000000000011111111111100001111111111111111) in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_byte_wrapper.v(11)
+HDL-1007 : elaborate module PH1P_PHY_DDRPHY_BYTE(BYTE_TYPE="AC",DCC_EN="ENABLE") in D:\TD\arch/ph1p_macro.v(7044)
+HDL-1007 : elaborate module PH1P_PHY_DDRPHY_PAD_V2(DISABLE_GSR="ENABLE",MODE="OUT",DRV="48",ODT="60") in D:\TD\arch/ph1p_macro.v(7464)
+HDL-5314 WARNING: net 'phy_rdata[103]' does not have a driver in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_byte_wrapper.v(152)
+HDL-5314 WARNING: net 'phy_rdqs[7]' does not have a driver in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_byte_wrapper.v(157)
+HDL-5317 WARNING: input port 'dl_in' is not connected on this instance in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_byte_wrapper.v(390)
+HDL-1007 : elaborate module ph1p_ddrphy_byte_wrapper(BYTE_TYPE="AC",PAD_TYPE=52'b1111111111110000000011111111000000001111111100000000) in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_byte_wrapper.v(11)
+HDL-5314 WARNING: net 'phy_rdata[103]' does not have a driver in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_byte_wrapper.v(152)
+HDL-5314 WARNING: net 'phy_rdqs[7]' does not have a driver in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_byte_wrapper.v(157)
+HDL-5317 WARNING: input port 'dl_in' is not connected on this instance in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_byte_wrapper.v(390)
+HDL-1007 : elaborate module ph1p_ddrphy_byte_wrapper(BYTE_TYPE="AC",PAD_TYPE=52'b1111111111110000000000000000000000001111111111111111) in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_byte_wrapper.v(11)
+HDL-5314 WARNING: net 'phy_rdata[103]' does not have a driver in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_byte_wrapper.v(152)
+HDL-5317 WARNING: input port 'dl_in' is not connected on this instance in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_byte_wrapper.v(390)
+HDL-1007 : elaborate module ph1p_ddrphy_byte_wrapper(PAD_TYPE=52'b1111011001100110011001010100011001100110011011110110,AC_DRV="75",DX_DRV="75",DX_ODT="75") in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_byte_wrapper.v(11)
+HDL-1007 : elaborate module PH1P_PHY_DDRPHY_BYTE(DCC_EN="ENABLE") in D:\TD\arch/ph1p_macro.v(7044)
+HDL-1007 : elaborate module PH1P_PHY_DDRPHY_PAD_V2(DDR_SIGNAL_TYPE="DQ",OCLK_SEL="CLK_WDQ",DISABLE_GSR="ENABLE",MODE="BI",DRV="75",ODT="75") in D:\TD\arch/ph1p_macro.v(7464)
+HDL-1007 : elaborate module PH1P_PHY_DDRPHY_PAD_V2(DDR_SIGNAL_TYPE="DQSP",OCLK_SEL="CLK_WL",DISABLE_GSR="ENABLE",MODE="BI",DRV="75",ODT="75") in D:\TD\arch/ph1p_macro.v(7464)
+HDL-1007 : elaborate module PH1P_PHY_DDRPHY_PAD_V2(DDR_SIGNAL_TYPE="DQSN",OCLK_SEL="CLK_WL",DISABLE_GSR="ENABLE",MODE="BI",DRV="75",ODT="75") in D:\TD\arch/ph1p_macro.v(7464)
+HDL-5314 WARNING: net 'phy_rdata[103]' does not have a driver in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_byte_wrapper.v(152)
+HDL-5317 WARNING: input port 'dl_in' is not connected on this instance in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_byte_wrapper.v(390)
+HDL-1007 : elaborate module ph1p_ddrphy_byte_wrapper(PAD_TYPE=52'b1111011001100110011001010100111101100110011001100110,AC_DRV="75",DX_DRV="75",DX_ODT="75") in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_byte_wrapper.v(11)
+HDL-5314 WARNING: net 'phy_rdata[103]' does not have a driver in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_byte_wrapper.v(152)
+HDL-5317 WARNING: input port 'dl_in' is not connected on this instance in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_byte_wrapper.v(390)
+HDL-5314 WARNING: net 'dx2_wdata[103]' does not have a driver in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy.v(187)
+HDL-5314 WARNING: net 'dx3_wdata[103]' does not have a driver in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy.v(188)
+HDL-5314 WARNING: net 'dx4_wdata[103]' does not have a driver in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy.v(189)
+HDL-5314 Similar messages will be suppressed.
+HDL-5317 WARNING: input port 'i_scan_clk' is not connected on this instance in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy.v(438)
+HDL-5323 WARNING: input port 'dqs_pupd_en' remains unconnected for this instance in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy.v(528)
+HDL-5317 WARNING: input port 'dly_full[1]' is not connected on this instance in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_top.v(457)
+HDL-5323 WARNING: input port 'dhi_bg[11]' remains unconnected for this instance in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_top.v(658)
+HDL-1007 : elaborate module alc_phy2mc_fifo_ctrl(DX_NUM=2) in ../../uisrc/03_ip/ddr2/src/rtl/mc/alc_phy2mc_fifo_ctrl.v(4)
+HDL-1007 : elaborate module ph1p_ddr_fifo_dram_sync(DW=64) in ../../uisrc/03_ip/ddr2/src/rtl/misc/ph1p_ddr_fifo_dram_sync.v(9)
+HDL-1007 : extracting RAM for identifier 'data' in ../../uisrc/03_ip/ddr2/src/rtl/misc/ph1p_ddr_fifo_dram_sync.v(31)
+HDL-5007 WARNING: delay control is not supported for synthesis in ../../uisrc/03_ip/ddr2/src/rtl/misc/ph1p_ddr_fifo_dram_sync.v(49)
+HDL-5007 WARNING: delay control is not supported for synthesis in ../../uisrc/03_ip/ddr2/src/rtl/misc/ph1p_ddr_fifo_dram_sync.v(51)
+HDL-5007 WARNING: delay control is not supported for synthesis in ../../uisrc/03_ip/ddr2/src/rtl/misc/ph1p_ddr_fifo_dram_sync.v(58)
+HDL-5007 WARNING: delay control is not supported for synthesis in ../../uisrc/03_ip/ddr2/src/rtl/misc/ph1p_ddr_fifo_dram_sync.v(60)
+HDL-5007 WARNING: delay control is not supported for synthesis in ../../uisrc/03_ip/ddr2/src/rtl/misc/ph1p_ddr_fifo_dram_sync.v(67)
+HDL-5007 WARNING: delay control is not supported for synthesis in ../../uisrc/03_ip/ddr2/src/rtl/misc/ph1p_ddr_fifo_dram_sync.v(74)
+HDL-5007 WARNING: delay control is not supported for synthesis in ../../uisrc/03_ip/ddr2/src/rtl/misc/ph1p_ddr_fifo_dram_sync.v(75)
+HDL-5007 WARNING: delay control is not supported for synthesis in ../../uisrc/03_ip/ddr2/src/rtl/misc/ph1p_ddr_fifo_dram_sync.v(76)
+HDL-5007 WARNING: delay control is not supported for synthesis in ../../uisrc/03_ip/ddr2/src/rtl/misc/ph1p_ddr_fifo_dram_sync.v(78)
+HDL-5007 WARNING: delay control is not supported for synthesis in ../../uisrc/03_ip/ddr2/src/rtl/misc/ph1p_ddr_fifo_dram_sync.v(79)
+HDL-5007 Similar messages will be suppressed.
+HDL-1007 : elaborate module alc_mc_top(DRAM_TYPE="DDR2",ECC="OFF",REORDER="NORMAL",CWL=6,BA_WIDTH=2) in ../../uisrc/03_ip/ddr2/src/rtl/mc/alc_mc_top_all.enc.sv(7)
+HDL-1007 : elaborate module ph1p_ddr_fifo_dram_sync(DW=4,AW=3) in ../../uisrc/03_ip/ddr2/src/rtl/misc/ph1p_ddr_fifo_dram_sync.v(9)
+HDL-1007 : extracting RAM for identifier 'data' in ../../uisrc/03_ip/ddr2/src/rtl/misc/ph1p_ddr_fifo_dram_sync.v(31)
+HDL-5007 WARNING: delay control is not supported for synthesis in ../../uisrc/03_ip/ddr2/src/rtl/misc/ph1p_ddr_fifo_dram_sync.v(49)
+HDL-5007 WARNING: delay control is not supported for synthesis in ../../uisrc/03_ip/ddr2/src/rtl/misc/ph1p_ddr_fifo_dram_sync.v(51)
+HDL-5007 WARNING: delay control is not supported for synthesis in ../../uisrc/03_ip/ddr2/src/rtl/misc/ph1p_ddr_fifo_dram_sync.v(58)
+HDL-5007 WARNING: delay control is not supported for synthesis in ../../uisrc/03_ip/ddr2/src/rtl/misc/ph1p_ddr_fifo_dram_sync.v(60)
+HDL-5007 WARNING: delay control is not supported for synthesis in ../../uisrc/03_ip/ddr2/src/rtl/misc/ph1p_ddr_fifo_dram_sync.v(67)
+HDL-5007 WARNING: delay control is not supported for synthesis in ../../uisrc/03_ip/ddr2/src/rtl/misc/ph1p_ddr_fifo_dram_sync.v(74)
+HDL-5007 WARNING: delay control is not supported for synthesis in ../../uisrc/03_ip/ddr2/src/rtl/misc/ph1p_ddr_fifo_dram_sync.v(75)
+HDL-5007 WARNING: delay control is not supported for synthesis in ../../uisrc/03_ip/ddr2/src/rtl/misc/ph1p_ddr_fifo_dram_sync.v(76)
+HDL-5007 WARNING: delay control is not supported for synthesis in ../../uisrc/03_ip/ddr2/src/rtl/misc/ph1p_ddr_fifo_dram_sync.v(78)
+HDL-5007 Similar messages will be suppressed.
+HDL-1007 : elaborate module ph1p_ddr_fifo_dram_sync(DW=5,AW=5) in ../../uisrc/03_ip/ddr2/src/rtl/misc/ph1p_ddr_fifo_dram_sync.v(9)
+HDL-1007 : extracting RAM for identifier 'data' in ../../uisrc/03_ip/ddr2/src/rtl/misc/ph1p_ddr_fifo_dram_sync.v(31)
+HDL-1007 : elaborate module ** in ../../uisrc/03_ip/ddr2/src/rtl/mc/alc_mc_top_all.enc.sv(4317)
+HDL-1007 : elaborate module ** in ../../uisrc/03_ip/ddr2/src/rtl/mc/alc_mc_top_all.enc.sv(2687)
+HDL-1007 : extracting RAM for identifier '**' in ../../uisrc/03_ip/ddr2/src/rtl/mc/alc_mc_top_all.enc.sv(2701)
+HDL-1007 : elaborate module ** in ../../uisrc/03_ip/ddr2/src/rtl/mc/alc_mc_top_all.enc.sv(2687)
+HDL-1007 : extracting RAM for identifier '**' in ../../uisrc/03_ip/ddr2/src/rtl/mc/alc_mc_top_all.enc.sv(2701)
+HDL-1007 : elaborate module ** in ../../uisrc/03_ip/ddr2/src/rtl/mc/alc_mc_top_all.enc.sv(2687)
+HDL-1007 : extracting RAM for identifier '**' in ../../uisrc/03_ip/ddr2/src/rtl/mc/alc_mc_top_all.enc.sv(2701)
+HDL-1007 : elaborate module ** in ../../uisrc/03_ip/ddr2/src/rtl/mc/alc_mc_top_all.enc.sv(3845)
+HDL-1007 : elaborate module ** in ../../uisrc/03_ip/ddr2/src/rtl/mc/alc_mc_top_all.enc.sv(2687)
+HDL-1007 : extracting RAM for identifier '**' in ../../uisrc/03_ip/ddr2/src/rtl/mc/alc_mc_top_all.enc.sv(2701)
+HDL-1007 : elaborate module ** in ../../uisrc/03_ip/ddr2/src/rtl/mc/alc_mc_top_all.enc.sv(2687)
+HDL-1007 : extracting RAM for identifier '**' in ../../uisrc/03_ip/ddr2/src/rtl/mc/alc_mc_top_all.enc.sv(2701)
+HDL-1007 : elaborate module ** in ../../uisrc/03_ip/ddr2/src/rtl/mc/alc_mc_top_all.enc.sv(2019)
+HDL-1007 : elaborate module ** in ../../uisrc/03_ip/ddr2/src/rtl/mc/alc_mc_top_all.enc.sv(2728)
+HDL-1007 : extracting RAM for identifier '**' in ../../uisrc/03_ip/ddr2/src/rtl/mc/alc_mc_top_all.enc.sv(2822)
+HDL-1007 : elaborate module ** in ../../uisrc/03_ip/ddr2/src/rtl/mc/alc_mc_top_all.enc.sv(1189)
+HDL-1007 : elaborate module ** in ../../uisrc/03_ip/ddr2/src/rtl/mc/alc_mc_top_all.enc.sv(1826)
+HDL-1007 : elaborate module ** in ../../uisrc/03_ip/ddr2/src/rtl/mc/alc_mc_top_all.enc.sv(4665)
+HDL-1007 : elaborate module ** in ../../uisrc/03_ip/ddr2/src/rtl/mc/alc_mc_top_all.enc.sv(946)
+HDL-1007 : elaborate module ** in ../../uisrc/03_ip/ddr2/src/rtl/mc/alc_mc_top_all.enc.sv(787)
+HDL-1007 : elaborate module ** in ../../uisrc/03_ip/ddr2/src/rtl/mc/alc_mc_top_all.enc.sv(1068)
+HDL-1007 : elaborate module ** in ../../uisrc/03_ip/ddr2/src/rtl/mc/alc_mc_top_all.enc.sv(1493)
+HDL-1007 : elaborate module ** in ../../uisrc/03_ip/ddr2/src/rtl/mc/alc_mc_top_all.enc.sv(1424)
+HDL-1007 : elaborate module ** in ../../uisrc/03_ip/ddr2/src/rtl/mc/alc_mc_top_all.enc.sv(1583)
+HDL-1007 : elaborate module ** in ../../uisrc/03_ip/ddr2/src/rtl/mc/alc_mc_top_all.enc.sv(1724)
+HDL-1007 : elaborate module ** in ../../uisrc/03_ip/ddr2/src/rtl/mc/alc_mc_top_all.enc.sv(2280)
+HDL-1007 : elaborate module ** in ../../uisrc/03_ip/ddr2/src/rtl/mc/alc_mc_top_all.enc.sv(2320)
+HDL-5369 WARNING: latch inferred for net '**' in ../../uisrc/03_ip/ddr2/src/rtl/mc/alc_mc_top_all.enc.sv(2464)
+HDL-1007 : elaborate module ** in ../../uisrc/03_ip/ddr2/src/rtl/mc/alc_mc_top_all.enc.sv(4116)
+HDL-1007 : elaborate module ** in ../../uisrc/03_ip/ddr2/src/rtl/mc/alc_mc_top_all.enc.sv(3500)
+HDL-5323 WARNING: input port 'apb_psel' remains unconnected for this instance in ../../uisrc/01_rtl/ddr/ph1p35_324_ddr_wrapper.v(81)
+HDL-1007 : elaborate module csi2_tx_packet(BUF_AW=11,USE_ERAM_BUFFER=1,LANE_SWAP=1) in ../../uisrc/01_rtl/csi2/csi2_tx_packet.v(12)
+HDL-5317 WARNING: input port 'ecc_sbiterrinj' is not connected on this instance in ../../uisrc/01_rtl/csi2/csi2_tx_packet.v(161)
+HDL-5317 WARNING: input port 'ecc_sbiterrinj' is not connected on this instance in ../../uisrc/01_rtl/csi2/csi2_tx_packet.v(179)
+HDL-1007 : elaborate module mipi_dphy_tx_over_ph1p_mipiio_wrapper(DPHY_TX_LOCATION="DPHY1",LANE_NUM=2,HS_OUTPUT_VOD="200mV",DPLL_MULTI_RATIO=11,T_DATA_LPX=10,T_DATA_HS_PREPARE=10,T_DATA_HS_ZERO=20,T_CLK_LPX=10,T_CLK_PREPARE=10) in ../../uisrc/01_rtl/mipi_dphy_tx/mipi_dphy_tx_over_ph1p_mipiio_wrapper.v(2)
 HDL-1007 : elaborate module hs_tx_wrapper(LANE_NUM=2,CLK_LANE_MODE="CONTINUE",T_DATA_LPX=10,T_DATA_HS_PREPARE=10,T_DATA_HS_ZERO=20,T_CLK_LPX=10,T_CLK_PREPARE=10) in ../../uisrc/01_rtl/mipi_dphy_tx/hs_tx_wrapper_merge.enc.v(1)
 HDL-1007 : elaborate module ** in ../../uisrc/01_rtl/mipi_dphy_tx/hs_tx_wrapper_merge.enc.v(117)
 HDL-1007 : elaborate module ** in ../../uisrc/01_rtl/mipi_dphy_tx/hs_tx_wrapper_merge.enc.v(269)
@@ -186,28 +411,28 @@ HDL-1007 : elaborate module ** in ../../uisrc/01_rtl/mipi_dphy_tx/hs_tx_wrapper_
 HDL-1007 : elaborate module ** in ../../uisrc/01_rtl/mipi_dphy_tx/hs_tx_wrapper_merge.enc.v(680)
 HDL-1007 : elaborate module ** in ../../uisrc/01_rtl/mipi_dphy_tx/hs_tx_wrapper_merge.enc.v(875)
 HDL-1007 : elaborate module ph1p_mipiio_tx_wrapper(LANE_NUM=2,DPHY_TX_LOCATION="DPHY1",HS_OUTPUT_VOD="200mV") in ../../uisrc/01_rtl/mipi_dphy_tx/ph1p_mipiio_tx_wrapper.v(5)
-HDL-1007 : elaborate module PH1P_LOGIC_DPHY_MIPI_TX(DPHY_TX_LOCATION="DPHY1",HS_OUTPUT_VOD="200mV",CK_LP_OUTPUT_SLEW_RATE="FAST",L0_LP_OUTPUT_SLEW_RATE="FAST",L1_LP_OUTPUT_SLEW_RATE="FAST",L2_LP_OUTPUT_SLEW_RATE="FAST",L3_LP_OUTPUT_SLEW_RATE="FAST") in F:\AnlogicFpga\TD_6.2.1_Engineer_6.2.168.116\arch/ph1p_macro.v(2173)
-HDL-5007 WARNING: actual bit length 32 differs from formal bit length 4 for port 'i_ck_hs_odelay_value' in ../../uisrc/01_rtl/mipi_dphy_tx/ph1p_mipiio_tx_wrapper.v(439)
-HDL-5007 WARNING: actual bit length 32 differs from formal bit length 4 for port 'i_l0_hs_odelay_value' in ../../uisrc/01_rtl/mipi_dphy_tx/ph1p_mipiio_tx_wrapper.v(448)
-HDL-5007 WARNING: actual bit length 32 differs from formal bit length 4 for port 'i_l1_hs_odelay_value' in ../../uisrc/01_rtl/mipi_dphy_tx/ph1p_mipiio_tx_wrapper.v(457)
-HDL-5007 WARNING: actual bit length 32 differs from formal bit length 4 for port 'i_l2_hs_odelay_value' in ../../uisrc/01_rtl/mipi_dphy_tx/ph1p_mipiio_tx_wrapper.v(466)
-HDL-5007 WARNING: actual bit length 32 differs from formal bit length 4 for port 'i_l3_hs_odelay_value' in ../../uisrc/01_rtl/mipi_dphy_tx/ph1p_mipiio_tx_wrapper.v(475)
-HDL-5007 Similar messages will be suppressed.
+HDL-1007 : elaborate module PH1P_LOGIC_DPHY_MIPI_TX(DPHY_TX_LOCATION="DPHY1",HS_OUTPUT_VOD="200mV",CK_LP_OUTPUT_SLEW_RATE="FAST",L0_LP_OUTPUT_SLEW_RATE="FAST",L1_LP_OUTPUT_SLEW_RATE="FAST",L2_LP_OUTPUT_SLEW_RATE="FAST",L3_LP_OUTPUT_SLEW_RATE="FAST") in D:\TD\arch/ph1p_macro.v(2173)
 HDL-1007 : elaborate module cnn_result_uart in ../../uisrc/01_rtl/cnn/cnn_result_uart.v(3)
-HDL-1007 : elaborate module dbg_uart in ../../uisrc/01_rtl/dbg/dbg_uart.v(12)
+HDL-1007 : elaborate module dbg_uart in ../../uisrc/01_rtl/dbg/dbg_uart.v(15)
+HDL-5001 WARNING: Contains anonymous inst(s) and/or net(s) that have not been renamed
+HDL-5001 WARNING: Contains anonymous inst(s) and/or net(s) that have not been renamed
+HDL-5001 WARNING: Contains anonymous inst(s) and/or net(s) that have not been renamed
+HDL-5001 WARNING: Contains anonymous inst(s) and/or net(s) that have not been renamed
 HDL-5001 WARNING: Contains anonymous inst(s) and/or net(s) that have not been renamed
 HDL-1200 : Current top model is csi2_tx_top
 HDL-5106 WARNING: Initial value omitted on non-DFF net "scl_r" in ../../uisrc/01_rtl/uics500_cfg/uii2c.v(129) 
 HDL-5106 WARNING: Initial value omitted on non-DFF net "sda_o" in ../../uisrc/01_rtl/uics500_cfg/uii2c.v(137) 
-HDL-1100 : Inferred 12 RAMs.
-RUN-1003 : finish command "elaborate -top csi2_tx_top" in  1.333348s wall, 1.203125s user + 0.046875s system = 1.250000s CPU (93.7%)
+HDL-1100 : Inferred 25 RAMs.
+RUN-1003 : finish command "elaborate -top csi2_tx_top" in  2.902919s wall, 2.703125s user + 0.109375s system = 2.812500s CPU (96.9%)
 
-RUN-1004 : used memory is 451 MB, reserved memory is 440 MB, peak memory is 451 MB
+RUN-1004 : used memory is 644 MB, reserved memory is 623 MB, peak memory is 644 MB
 RUN-1002 : start command "read_adc ../../uisrc/04_pin/fpga_pin.adc"
 RUN-1002 : start command "set_pin_assignment  I_sys_clk   LOCATION = C4;  IOSTANDARD = LVCMOS33; PULLTYPE = PULLUP; "
 RUN-1002 : start command "set_pin_assignment  I_rst_n   LOCATION = R10; IOSTANDARD = LVCMOS33; PULLTYPE = PULLUP; "
 RUN-1002 : start command "set_pin_assignment  I_button[0]   LOCATION = N2;  IOSTANDARD = LVCMOS33; PULLTYPE = PULLUP; "
 RUN-1002 : start command "set_pin_assignment  I_button[1]   LOCATION = J14; IOSTANDARD = LVCMOS33; PULLTYPE = PULLUP; "
+RUN-1002 : start command "set_pin_assignment  I_ctrl_i2c_scl   LOCATION = P11; IOSTANDARD = LVCMOS33; PULLTYPE = PULLUP; "
+RUN-1002 : start command "set_pin_assignment  IO_ctrl_i2c_sda   LOCATION = R12; IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 8; PULLTYPE = PULLUP; "
 RUN-1002 : start command "set_pin_assignment  O_cam_scl   LOCATION = T9; IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 8; PULLTYPE = PULLUP; "
 RUN-1002 : start command "set_pin_assignment  IO_cam_sda   LOCATION = U9; IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 8; PULLTYPE = PULLUP; "
 RUN-1002 : start command "set_pin_assignment  O_cam_24m   LOCATION = V9; IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 8; PULLTYPE = PULLUP; "
@@ -217,7 +442,77 @@ RUN-1002 : start command "set_pin_assignment  O_led_cfg   LOCATION = J18; IOSTAN
 RUN-1002 : start command "set_pin_assignment  O_led_beat   LOCATION = K16; IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 8; PULLTYPE = NONE; "
 RUN-1002 : start command "set_pin_assignment  O_led_err   LOCATION = K17; IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 8; PULLTYPE = NONE; "
 RUN-1001 : Starting of IO setups legality check.
+RUN-1003 : finish command "read_adc ../../uisrc/04_pin/fpga_pin.adc" in  1.374589s wall, 1.343750s user + 0.015625s system = 1.359375s CPU (98.9%)
+
+RUN-1004 : used memory is 643 MB, reserved memory is 622 MB, peak memory is 644 MB
+RUN-1002 : start command "read_ip_adc -ip ddr2 -file ../../uisrc/03_ip/ddr2/src/adc/ddr2.adc"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_ck_p      LOCATION = X0Y44Z2; IOSTANDARD = DIFF_SSTL15; #pl44c"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_ck_n      LOCATION = X0Y44Z3; IOSTANDARD = DIFF_SSTL15; #pl44d"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_cke[0]    LOCATION = X0Y44Z1; IOSTANDARD = SSTL15; #pl44b"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_cs_n[0]   LOCATION = X0Y53Z0; IOSTANDARD = SSTL15; #pl53a"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_odt[0]    LOCATION = X0Y47Z0; IOSTANDARD = SSTL15; #pl47a"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_we_n      LOCATION = X0Y47Z1; IOSTANDARD = SSTL15; #pl47b"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_cas_n     LOCATION = X0Y56Z0; IOSTANDARD = SSTL15; #pl56a"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_ras_n     LOCATION = X0Y44Z0; IOSTANDARD = SSTL15; #pl44a"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_ba[0]     LOCATION = X0Y50Z0; IOSTANDARD = SSTL15; #pl50a"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_ba[1]     LOCATION = X0Y61Z0; IOSTANDARD = SSTL15; #pl61a"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_addr[0]   LOCATION = X0Y64Z0; IOSTANDARD = SSTL15; #pl64a"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_addr[1]   LOCATION = X0Y73Z0; IOSTANDARD = SSTL15; #pl73a"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_addr[2]   LOCATION = X0Y67Z0; IOSTANDARD = SSTL15; #pl67a"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_addr[3]   LOCATION = X0Y50Z1; IOSTANDARD = SSTL15; #pl50b"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_addr[4]   LOCATION = X0Y76Z0; IOSTANDARD = SSTL15; #pl76a"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_addr[5]   LOCATION = X0Y53Z1; IOSTANDARD = SSTL15; #pl53b"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_addr[6]   LOCATION = X0Y76Z1; IOSTANDARD = SSTL15; #pl76b"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_addr[7]   LOCATION = X0Y56Z1; IOSTANDARD = SSTL15; #pl56b"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_addr[8]   LOCATION = X0Y76Z2; IOSTANDARD = SSTL15; #pl76c"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_addr[9]   LOCATION = X0Y61Z1; IOSTANDARD = SSTL15; #pl61b"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_addr[10]  LOCATION = X0Y67Z1; IOSTANDARD = SSTL15; #pl67b"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_addr[11]  LOCATION = X0Y76Z3; IOSTANDARD = SSTL15; #pl76d"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_addr[12]  LOCATION = X0Y64Z1; IOSTANDARD = SSTL15; #pl64b"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_dqs_p[0]    LOCATION = X0Y33Z2; IOSTANDARD = DIFF_SSTL15; #pl33c"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_dqs_n[0]    LOCATION = X0Y33Z3; IOSTANDARD = DIFF_SSTL15; #pl33d"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_dm[0]       LOCATION = X0Y30Z2; IOSTANDARD = SSTL15; #pl30c"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_dq[0]       LOCATION = X0Y33Z0; IOSTANDARD = SSTL15; #pl33a"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_dq[1]       LOCATION = X0Y30Z3; IOSTANDARD = SSTL15; #pl30d"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_dq[2]       LOCATION = X0Y36Z0; IOSTANDARD = SSTL15; #pl36a"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_dq[3]       LOCATION = X0Y36Z1; IOSTANDARD = SSTL15; #pl36b"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_dq[4]       LOCATION = X0Y36Z3; IOSTANDARD = SSTL15; #pl36d"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_dq[5]       LOCATION = X0Y36Z2; IOSTANDARD = SSTL15; #pl36c"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_dq[6]       LOCATION = X0Y30Z0; IOSTANDARD = SSTL15; #pl30a"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_dq[7]       LOCATION = X0Y33Z1; IOSTANDARD = SSTL15; #pl33b"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_dqs_p[1]    LOCATION = X0Y13Z2; IOSTANDARD = DIFF_SSTL15; #pl13c"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_dqs_n[1]    LOCATION = X0Y13Z3; IOSTANDARD = DIFF_SSTL15; #pl13d"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_dm[1]       LOCATION = X0Y16Z0; IOSTANDARD = SSTL15; #pl16a"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_dq[8]       LOCATION = X0Y16Z1; IOSTANDARD = SSTL15; #pl16b"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_dq[9]       LOCATION = X0Y16Z3; IOSTANDARD = SSTL15; #pl16d"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_dq[10]      LOCATION = X0Y10Z0; IOSTANDARD = SSTL15; #pl10a"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_dq[11]      LOCATION = X0Y10Z2; IOSTANDARD = SSTL15; #pl10c"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_dq[12]      LOCATION = X0Y10Z3; IOSTANDARD = SSTL15; #pl10d"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_dq[13]      LOCATION = X0Y10Z1; IOSTANDARD = SSTL15; #pl10b"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_dq[14]      LOCATION = X0Y16Z2; IOSTANDARD = SSTL15; #pl16c"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_dq[15]      LOCATION = X0Y13Z0; IOSTANDARD = SSTL15; #pl13a"
+RUN-1002 : start command "set_ipinst_assignment ddr2 ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_clk/u_mlclk_1  LOCATION = X0Y59Z0"
+RUN-1002 : start command "set_ipinst_assignment ddr2 ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_clk/u_mlclk_2  LOCATION = X0Y59Z1"
+RUN-1002 : start command "set_ipinst_assignment ddr2 ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_clk/u_pll0/u_pll_inst  LOCATION = X0Y40Z0"
+RUN-1002 : start command "set_ipinst_assignment ddr2 ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_clk/u_pll1/u_pll_inst  LOCATION = X0Y79Z0"
+RUN-1002 : start command "set_ipinst_assignment ddr2 ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_clk/ioclk[0]$u_ioclk_0  LOCATION = X0Y59Z0;"
+RUN-1002 : start command "set_ipinst_assignment ddr2 ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_clk/ioclk[0]$u_ioclk_1  LOCATION = X0Y59Z1;"
+RUN-1002 : start command "set_ipinst_assignment ddr2 ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_clk/ioclk[1]$u_ioclk_0  LOCATION = X0Y19Z0;"
+RUN-1002 : start command "set_ipinst_assignment ddr2 ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_clk/ioclk[1]$u_ioclk_1  LOCATION = X0Y19Z1;"
+RUN-1002 : start command "set_ipinst_assignment ddr2 ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy/ac_byte[0]$ac_byte_used$u_ddrphy_ac_byte_wrapper/u_ddrphy_byte LOCATION = X0Y70Z0"
+RUN-1002 : start command "set_ipinst_assignment ddr2 ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy/ac_byte[1]$ac_byte_used$u_ddrphy_ac_byte_wrapper/u_ddrphy_byte LOCATION = X0Y60Z0"
+RUN-1002 : start command "set_ipinst_assignment ddr2 ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy/ac_byte[2]$ac_byte_used$u_ddrphy_ac_byte_wrapper/u_ddrphy_byte LOCATION = X0Y50Z0"
+RUN-1002 : start command "set_ipinst_assignment ddr2 ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy/ac_byte[3]$ac_byte_used$u_ddrphy_ac_byte_wrapper/u_ddrphy_byte LOCATION = X0Y40Z0"
+RUN-1002 : start command "set_ipinst_assignment ddr2 ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy/dx_byte[0]$dx_byte_used$u_ddrphy_dx_byte_wrapper/u_ddrphy_byte LOCATION = X0Y30Z0"
+RUN-1002 : start command "set_ipinst_assignment ddr2 ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy/dx_byte[1]$dx_byte_used$u_ddrphy_dx_byte_wrapper/u_ddrphy_byte LOCATION = X0Y10Z0"
+RUN-1002 : start command "set_ipinst_assignment ddr2 ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy/bkref[0]$u_ddrphy_bankref  LOCATION = X0Y19Z0;"
+RUN-1002 : start command "set_ipinst_assignment ddr2 ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy/bkref[1]$u_ddrphy_bankref  LOCATION = X0Y59Z0;"
+RUN-1001 : Starting of IO setups legality check.
+RUN-1003 : finish command "read_ip_adc -ip ddr2 -file ../../uisrc/03_ip/ddr2/src/adc/ddr2.adc" in  8.065766s wall, 7.875000s user + 0.078125s system = 7.953125s CPU (98.6%)
+
+RUN-1004 : used memory is 638 MB, reserved memory is 617 MB, peak memory is 644 MB
 RUN-1002 : start command "read_sdc ../../uisrc/04_pin/timing.sdc"
+RUN-1002 : start command "read_sdc -ip ddr2 ../../uisrc/03_ip/ddr2/src/sdc/ddr2.sdc"
 RUN-1002 : start command "export_db fpga_prj_elaborate.db"
 RUN-1001 : Exported flow parameters
 RUN-1001 : Exported /
@@ -267,23 +562,30 @@ RUN-1001 :          seq_syn          |     on     |        on        |
 RUN-1001 : -------------------------------------------------------------------
 RUN-1002 : start command "insert_debugger"
 RUN-1002 : start command "optimize_rtl"
-RUN-1001 : Open license file F:/AnlogicFpga/TD_6.2.1_Engineer_6.2.168.116/license/Anlogic.lic
+RUN-1001 : Open license file D:/TD/license/Anlogic.lic
 SYN-1001 : Stage 1 | Optimize RTL
 SYN-1001 : Stage 1.1 | Check Design Sanity
-SYN-1001 : End Stage 1.1 | Check Design Sanity; Time: 0.020362s wall, 0.015625s user + 0.000000s system = 0.015625s CPU (76.7%); Memory(MB): used = 470, reserved = 577, peak = 470;
+SYN-5065 WARNING: Register "genCA$op" in ../../uisrc/03_ip/ddr2/src/rtl/mc/alc_mc_top_all.enc.sv(0) is described with both an asynchronous reset and an asynchronous set. It may have an uncertainty of the timing. Please conside rewriting code.
+SYN-1001 : End Stage 1.1 | Check Design Sanity; Time: 0.040578s wall, 0.031250s user + 0.000000s system = 0.031250s CPU (77.0%); Memory(MB): used = 661, reserved = 754, peak = 661;
 
-SYN-1079 : finish stage Check Design Sanity. Total instances: 18911, Total nets: 46175.
+SYN-1079 : finish stage Check Design Sanity. Total instances: 56444, Total nets: 144503.
 
 SYN-1001 : Stage 1.2 | Initialize Design
-SYN-1001 : End Stage 1.2 | Initialize Design; Time: 1.290012s wall, 1.250000s user + 0.015625s system = 1.265625s CPU (98.1%); Memory(MB): used = 470, reserved = 577, peak = 470;
+SYN-1001 : End Stage 1.2 | Initialize Design; Time: 3.576420s wall, 3.500000s user + 0.046875s system = 3.546875s CPU (99.2%); Memory(MB): used = 656, reserved = 754, peak = 661;
 
-SYN-1079 : finish stage Initialize Design. Total instances: 6515, Total nets: 30601.
+SYN-1079 : finish stage Initialize Design. Total instances: 18535, Total nets: 93471.
 
 SYN-1001 : Stage 1.3 | Flatten Module
 SYN-1011 : Flatten model csi2_tx_top
-SYN-1001 : End Stage 1.3 | Flatten Module; Time: 0.284700s wall, 0.265625s user + 0.015625s system = 0.281250s CPU (98.8%); Memory(MB): used = 471, reserved = 577, peak = 471;
+SYN-1050 : Instances selected by 'keep_hierarchy':
+RUN-1001 : ------------------------------------------------------------------------------------------------------------
+RUN-1001 :           instance           |  keep_hierarchy  |         down_module         |         file(line)          
+RUN-1001 : ------------------------------------------------------------------------------------------------------------
+RUN-1001 :  u_mc_to_user_interface/...  |       true       | soft_fifo_al_f58e8b3e1f...  | ../../uisrc/03_ip/w155_...  
+RUN-1001 : ------------------------------------------------------------------------------------------------------------
+SYN-1001 : End Stage 1.3 | Flatten Module; Time: 0.834979s wall, 0.765625s user + 0.000000s system = 0.765625s CPU (91.7%); Memory(MB): used = 660, reserved = 755, peak = 661;
 
-SYN-1079 : finish stage Flatten Module. Total instances: 6745, Total nets: 29172.
+SYN-1079 : finish stage Flatten Module. Total instances: 21311, Total nets: 88941.
 
 SYN-1001 : Stage 1.4 | Uniform Instance
 SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_cnn_detector/g_mask_bank[0]$u_mask" in ../../uisrc/01_rtl/cnn/cnn_frame_digit_detector.v(272) / pin "ecc_dbiterrinj"
@@ -297,33 +599,57 @@ SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_cnn_detector/g_mas
 SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_cnn_detector/u_infer/u_bank0/g_activation_bank[0]$u_ram" in ../../uisrc/01_rtl/cnn/cnn_digit_infer.v(936) / pin "ecc_dbiterrinj"
 SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_cnn_detector/u_infer/u_bank0/g_activation_bank[0]$u_ram" in ../../uisrc/01_rtl/cnn/cnn_digit_infer.v(936) / pin "ecc_sbiterrinj"
 SYN-5011 Similar messages will be suppressed.
-SYN-5013 WARNING: Undriven net: model "csi2_tx_top" / net "u_cam_cfg/uics500regAE_inst/I_VTS[15]" in ../../uisrc/01_rtl/uics500_cfg/uics500regAE.v(3)
-		the net's pin: pin "i9[7]" in ../../uisrc/01_rtl/uics500_cfg/uics500regAE.v(5)
-SYN-5013 WARNING: Undriven net: model "csi2_tx_top" / net "u_cam_cfg/uics500regAE_inst/I_VTS[14]" in ../../uisrc/01_rtl/uics500_cfg/uics500regAE.v(3)
-		the net's pin: pin "i9[6]" in ../../uisrc/01_rtl/uics500_cfg/uics500regAE.v(5)
-SYN-5013 WARNING: Undriven net: model "csi2_tx_top" / net "u_cam_cfg/uics500regAE_inst/I_VTS[13]" in ../../uisrc/01_rtl/uics500_cfg/uics500regAE.v(3)
-		the net's pin: pin "i9[5]" in ../../uisrc/01_rtl/uics500_cfg/uics500regAE.v(5)
-SYN-5013 WARNING: Undriven net: model "csi2_tx_top" / net "u_cam_cfg/uics500regAE_inst/I_VTS[12]" in ../../uisrc/01_rtl/uics500_cfg/uics500regAE.v(3)
-		the net's pin: pin "i9[4]" in ../../uisrc/01_rtl/uics500_cfg/uics500regAE.v(5)
-SYN-5013 WARNING: Undriven net: model "csi2_tx_top" / net "u_cam_cfg/uics500regAE_inst/I_VTS[11]" in ../../uisrc/01_rtl/uics500_cfg/uics500regAE.v(3)
-		the net's pin: pin "i9[3]" in ../../uisrc/01_rtl/uics500_cfg/uics500regAE.v(5)
-SYN-5013 WARNING: Undriven net: model "csi2_tx_top" / net "u_cam_cfg/uics500regAE_inst/I_VTS[10]" in ../../uisrc/01_rtl/uics500_cfg/uics500regAE.v(3)
-		the net's pin: pin "i9[2]" in ../../uisrc/01_rtl/uics500_cfg/uics500regAE.v(5)
-SYN-5013 WARNING: Undriven net: model "csi2_tx_top" / net "u_cam_cfg/uics500regAE_inst/I_VTS[9]" in ../../uisrc/01_rtl/uics500_cfg/uics500regAE.v(3)
-		the net's pin: pin "i9[1]" in ../../uisrc/01_rtl/uics500_cfg/uics500regAE.v(5)
-SYN-5013 WARNING: Undriven net: model "csi2_tx_top" / net "u_cam_cfg/uics500regAE_inst/I_VTS[8]" in ../../uisrc/01_rtl/uics500_cfg/uics500regAE.v(3)
-		the net's pin: pin "i9[0]" in ../../uisrc/01_rtl/uics500_cfg/uics500regAE.v(5)
-SYN-5013 WARNING: Undriven net: model "csi2_tx_top" / net "u_cam_cfg/uics500regAE_inst/I_VTS[7]" in ../../uisrc/01_rtl/uics500_cfg/uics500regAE.v(3)
-		the net's pin: pin "i8[7]" in ../../uisrc/01_rtl/uics500_cfg/uics500regAE.v(5)
-SYN-5013 WARNING: Undriven net: model "csi2_tx_top" / net "u_cam_cfg/uics500regAE_inst/I_VTS[6]" in ../../uisrc/01_rtl/uics500_cfg/uics500regAE.v(3)
-		the net's pin: pin "i8[6]" in ../../uisrc/01_rtl/uics500_cfg/uics500regAE.v(5)
+SYN-5013 WARNING: Undriven net: model "csi2_tx_top" / net "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/apb_paddr[15]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_wrapper.v(84)
+		the net's pin: pin "i0[3]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_wrapper.v(262)
+		the net's pin: pin "i0[3]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_wrapper.v(263)
+		the net's pin: pin "i0[3]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_wrapper.v(260)
+		the net's pin: pin "i0[3]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_wrapper.v(261)
+		the net's pin: pin "i0[3]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_top.v(416)
+		the net's pin: pin "i0[3]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_top.v(414)
+		the net's pin: pin "i0[3]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_top.v(415)
+SYN-5013 WARNING: Undriven net: model "csi2_tx_top" / net "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/apb_paddr[14]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_wrapper.v(84)
+		the net's pin: pin "i0[2]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_wrapper.v(262)
+		the net's pin: pin "i0[2]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_wrapper.v(263)
+		the net's pin: pin "i0[2]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_wrapper.v(260)
+		the net's pin: pin "i0[2]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_wrapper.v(261)
+		the net's pin: pin "i0[2]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_top.v(416)
+		the net's pin: pin "i0[2]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_top.v(414)
+		the net's pin: pin "i0[2]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_top.v(415)
+SYN-5013 WARNING: Undriven net: model "csi2_tx_top" / net "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/cal_apb_prdata[31]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_wrapper.v(241)
+		the net's pin: pin "i1[31]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_wrapper.v(273)
+SYN-5013 WARNING: Undriven net: model "csi2_tx_top" / net "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/cal_apb_prdata[30]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_wrapper.v(241)
+		the net's pin: pin "i1[30]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_wrapper.v(273)
+SYN-5013 WARNING: Undriven net: model "csi2_tx_top" / net "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/cal_apb_prdata[29]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_wrapper.v(241)
+		the net's pin: pin "i1[29]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_wrapper.v(273)
+SYN-5013 WARNING: Undriven net: model "csi2_tx_top" / net "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/cal_apb_prdata[28]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_wrapper.v(241)
+		the net's pin: pin "i1[28]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_wrapper.v(273)
+SYN-5013 WARNING: Undriven net: model "csi2_tx_top" / net "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/cal_apb_prdata[27]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_wrapper.v(241)
+		the net's pin: pin "i1[27]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_wrapper.v(273)
+SYN-5013 WARNING: Undriven net: model "csi2_tx_top" / net "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/cal_apb_prdata[26]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_wrapper.v(241)
+		the net's pin: pin "i1[26]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_wrapper.v(273)
+SYN-5013 WARNING: Undriven net: model "csi2_tx_top" / net "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/cal_apb_prdata[25]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_wrapper.v(241)
+		the net's pin: pin "i1[25]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_wrapper.v(273)
+SYN-5013 WARNING: Undriven net: model "csi2_tx_top" / net "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/cal_apb_prdata[24]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_wrapper.v(241)
+		the net's pin: pin "i1[24]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_wrapper.v(273)
 SYN-5013 Similar messages will be suppressed.
 SYN-5025 WARNING: Using 0 for all undriven pins and nets
-SYN-1001 : End Stage 1.4 | Uniform Instance; Time: 0.057645s wall, 0.062500s user + 0.000000s system = 0.062500s CPU (108.4%); Memory(MB): used = 463, reserved = 569, peak = 471;
+SYN-1001 : End Stage 1.4 | Uniform Instance; Time: 0.172830s wall, 0.171875s user + 0.000000s system = 0.171875s CPU (99.4%); Memory(MB): used = 639, reserved = 734, peak = 661;
 
-SYN-1079 : finish stage Uniform Instance. Total instances: 6681, Total nets: 29088.
+SYN-1079 : finish stage Uniform Instance. Total instances: 20707, Total nets: 87837.
 
 SYN-1001 : Stage 1.5 | Optimize Design
+SYN-1066 : Inferred FSM for state register 'u_ae_i2c_control/state_reg' in module 'csi2_tx_top'
+--------------------------------------------
+     Previous Encoding     New Encoding
+--------------------------------------------
+                   000           000001
+                   001           000010
+                   010           000100
+                   011           001000
+                   100           010000
+                   101           100000
+--------------------------------------------
+SYN-1067 : encoded FSM with state register 'u_ae_i2c_control/state_reg' using encoding 'one_hot' in model 'csi2_tx_top'
 SYN-1066 : Inferred FSM for state register 'u_cam_cfg/TS_S_reg' in module 'csi2_tx_top'
 --------------------------------------------
      Previous Encoding     New Encoding
@@ -427,6 +753,25 @@ SYN-1066 : Inferred FSM for state register 'u_cnn_result_uart/state_reg' in modu
                     11             1000
 --------------------------------------------
 SYN-1067 : encoded FSM with state register 'u_cnn_result_uart/state_reg' using encoding 'one_hot' in model 'csi2_tx_top'
+SYN-1066 : Inferred FSM for state register 'u_crop_before_ddr/pack_count_reg' in module 'csi2_tx_top'
+--------------------------------------------
+     Previous Encoding     New Encoding
+--------------------------------------------
+                   000            00001
+                   010            00010
+                   100            00100
+                   001            01000
+                   011            10000
+--------------------------------------------
+SYN-1067 : encoded FSM with state register 'u_crop_before_ddr/pack_count_reg' using encoding 'one_hot' in model 'csi2_tx_top'
+SYN-1066 : Inferred FSM for state register 'u_crop_before_ddr/pending_pixels_reg' in module 'csi2_tx_top'
+--------------------------------------------
+     Previous Encoding     New Encoding
+--------------------------------------------
+                    00               01
+                    10               10
+--------------------------------------------
+SYN-1067 : encoded FSM with state register 'u_crop_before_ddr/pending_pixels_reg' using encoding 'one_hot' in model 'csi2_tx_top'
 SYN-1066 : Inferred FSM for state register 'u_dbg_uart/s_reg' in module 'csi2_tx_top'
 --------------------------------------------
      Previous Encoding     New Encoding
@@ -448,16 +793,87 @@ SYN-1066 : Inferred FSM for state register 'u_dphy_rx/u_ph1p_mipiio_rx_wrapper/u
                    100            10000
 --------------------------------------------
 SYN-1067 : encoded FSM with state register 'u_dphy_rx/u_ph1p_mipiio_rx_wrapper/u_lane0_hs_detect/S_lp_state_reg' using encoding 'one_hot' in model 'csi2_tx_top'
-SYN-1066 : Inferred FSM for state register 'u_rx_parse/st_reg' in module 'csi2_tx_top'
+SYN-1066 : Inferred FSM for state register 'u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_alc_mc_top/page_ctrl[0]$u_page_ctrl/gr_cas_state_reg' in module 'csi2_tx_top'
 --------------------------------------------
      Previous Encoding     New Encoding
 --------------------------------------------
-                    00             0001
-                    01             0010
-                    10             0100
-                    11             1000
+                    01               01
+                    10               10
 --------------------------------------------
-SYN-1067 : encoded FSM with state register 'u_rx_parse/st_reg' using encoding 'one_hot' in model 'csi2_tx_top'
+SYN-1067 : encoded FSM with state register 'u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_alc_mc_top/page_ctrl[0]$u_page_ctrl/gr_cas_state_reg' using encoding 'one_hot' in model 'csi2_tx_top'
+SYN-1066 : Inferred FSM for state register 'u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_alc_mc_top/page_ctrl[1]$u_page_ctrl/gr_cas_state_reg' in module 'csi2_tx_top'
+--------------------------------------------
+     Previous Encoding     New Encoding
+--------------------------------------------
+                    01               01
+                    10               10
+--------------------------------------------
+SYN-1067 : encoded FSM with state register 'u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_alc_mc_top/page_ctrl[1]$u_page_ctrl/gr_cas_state_reg' using encoding 'one_hot' in model 'csi2_tx_top'
+SYN-1066 : Inferred FSM for state register 'u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_alc_mc_top/page_ctrl[2]$u_page_ctrl/gr_cas_state_reg' in module 'csi2_tx_top'
+--------------------------------------------
+     Previous Encoding     New Encoding
+--------------------------------------------
+                    01               01
+                    10               10
+--------------------------------------------
+SYN-1067 : encoded FSM with state register 'u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_alc_mc_top/page_ctrl[2]$u_page_ctrl/gr_cas_state_reg' using encoding 'one_hot' in model 'csi2_tx_top'
+SYN-1066 : Inferred FSM for state register 'u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_alc_mc_top/page_ctrl[3]$u_page_ctrl/gr_cas_state_reg' in module 'csi2_tx_top'
+--------------------------------------------
+     Previous Encoding     New Encoding
+--------------------------------------------
+                    01               01
+                    10               10
+--------------------------------------------
+SYN-1067 : encoded FSM with state register 'u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_alc_mc_top/page_ctrl[3]$u_page_ctrl/gr_cas_state_reg' using encoding 'one_hot' in model 'csi2_tx_top'
+SYN-1066 : Inferred FSM for state register 'u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_alc_mc_top/u_ref_ctrl/ref_cst_reg' in module 'csi2_tx_top'
+--------------------------------------------
+     Previous Encoding     New Encoding
+--------------------------------------------
+             000000001        000000001
+             000000010        000000010
+             000000100        000000100
+             000001000        000001000
+             000010000        000010000
+             000100000        000100000
+             001000000        001000000
+             010000000        010000000
+             100000000        100000000
+--------------------------------------------
+SYN-1067 : encoded FSM with state register 'u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_alc_mc_top/u_ref_ctrl/ref_cst_reg' using encoding 'one_hot' in model 'csi2_tx_top'
+SYN-1066 : Inferred FSM for state register 'u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_mdl_cal_wrapper/mdl_cal[0]$u_ddrphy_mdl_cal/lcdl_cal_state_reg' in module 'csi2_tx_top'
+--------------------------------------------
+     Previous Encoding     New Encoding
+--------------------------------------------
+                  0000      00000000001
+                  0001      00000000010
+                  0010      00000000100
+                  0011      00000001000
+                  0100      00000010000
+                  0101      00000100000
+                  0110      00001000000
+                  0111      00010000000
+                  1000      00100000000
+                  1010      01000000000
+                  1001      10000000000
+--------------------------------------------
+SYN-1067 : encoded FSM with state register 'u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_mdl_cal_wrapper/mdl_cal[0]$u_ddrphy_mdl_cal/lcdl_cal_state_reg' using encoding 'one_hot' in model 'csi2_tx_top'
+SYN-1066 : Inferred FSM for state register 'u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_mdl_cal_wrapper/mdl_cal[1]$u_ddrphy_mdl_cal/lcdl_cal_state_reg' in module 'csi2_tx_top'
+--------------------------------------------
+     Previous Encoding     New Encoding
+--------------------------------------------
+                  0000      00000000001
+                  0001      00000000010
+                  0010      00000000100
+                  0011      00000001000
+                  0100      00000010000
+                  0101      00000100000
+                  0110      00001000000
+                  0111      00010000000
+                  1000      00100000000
+                  1010      01000000000
+                  1001      10000000000
+--------------------------------------------
+SYN-1067 : encoded FSM with state register 'u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_mdl_cal_wrapper/mdl_cal[1]$u_ddrphy_mdl_cal/lcdl_cal_state_reg' using encoding 'one_hot' in model 'csi2_tx_top'
 SYN-1066 : Inferred FSM for state register 'u_tx_packet/st_reg' in module 'csi2_tx_top'
 --------------------------------------------
      Previous Encoding     New Encoding
@@ -469,131 +885,136 @@ SYN-1066 : Inferred FSM for state register 'u_tx_packet/st_reg' in module 'csi2_
                    011            10000
 --------------------------------------------
 SYN-1067 : encoded FSM with state register 'u_tx_packet/st_reg' using encoding 'one_hot' in model 'csi2_tx_top'
-SYN-1057 : Inferred 9 FSM(s)
-SYN-1001 : Optimize 1 less-than instances
-SYN-1032 : 18527/90 useful/useless nets, 5270/21 useful/useless insts
+SYN-1057 : Inferred 18 FSM(s)
+SYN-1001 : Optimize 2 less-than instances
+SYN-1032 : 62966/828 useful/useless nets, 16068/52 useful/useless insts
+SYN-1001 : Bypass 3 mux instances
+SYN-1021 : Optimized 27 onehot mux instances.
 SYN-1068 : Optimized 2 binary mux instances.
-SYN-1019 : Optimized 3 mux instances.
-SYN-1021 : Optimized 1 onehot mux instances.
-SYN-1021 : Optimized 1 onehot mux instances.
-SYN-1021 : Optimized 4 onehot mux instances.
-SYN-1001 : Optimize 160 less-than instances
-SYN-1016 : Merged 1386 instances.
+SYN-1019 : Optimized 9 mux instances.
+SYN-1021 : Optimized 3 onehot mux instances.
+SYN-1021 : Optimized 25 onehot mux instances.
+SYN-1016 : Merged 1145 instances.
 SYN-1035 : Inferred 1 ROM(s)
-SYN-1016 : Merged 143 instances.
-SYN-1001 : End Stage 1.5 | Optimize Design; Time: 4.240080s wall, 3.921875s user + 0.140625s system = 4.062500s CPU (95.8%); Memory(MB): used = 494, reserved = 482, peak = 494;
+SYN-1016 : Merged 661 instances.
+SYN-1001 : Optimize 1 decoder instances
+SYN-1001 : End Stage 1.5 | Optimize Design; Time: 8.208279s wall, 7.750000s user + 0.171875s system = 7.921875s CPU (96.5%); Memory(MB): used = 750, reserved = 745, peak = 750;
 
-SYN-1079 : finish stage Optimize Design. Total instances: 8973, Total nets: 10916.
+SYN-1079 : finish stage Optimize Design. Total instances: 34351, Total nets: 39713.
 
 SYN-1001 : Stage 1.6 | Optimize Iteratively
-SYN-1019 : Optimized 8 mux instances.
-SYN-1021 : Optimized 351 onehot mux instances.
+SYN-1019 : Optimized 53 mux instances.
+SYN-1021 : Optimized 452 onehot mux instances.
 SYN-1014 : Optimize round 1
-SYN-1044 : Optimized 38 inv instances.
-SYN-1017 : Remove 14 const input seq instances
-SYN-1019 : Optimized 48 mux instances.
-SYN-1020 : Optimized 311 distributor mux.
-SYN-1001 : Optimize 25 less-than instances
-SYN-1019 : Optimized 313 mux instances.
-SYN-2541 : Reading BRAM "u_cnn_detector/u_infer/u_weights/u_weight_bank0" init file "D:/2026fpga/ph1p35second/fpga/uisrc/01_rtl/cnn/weights/cnn_digit_weights_0.mif"
-SYN-2542 : Parsing MIF init file
-SYN-2541 : Reading BRAM "u_cnn_detector/u_infer/u_weights/u_weight_bank1" init file "D:/2026fpga/ph1p35second/fpga/uisrc/01_rtl/cnn/weights/cnn_digit_weights_1.mif"
-SYN-2542 : Parsing MIF init file
-SYN-1016 : Merged 5397 instances.
-SYN-1015 : Optimize round 1, 41984 better
+SYN-1044 : Optimized 98 inv instances.
+SYN-1017 : Remove 37 const input seq instances
+SYN-1018 : Transformed 6 mux instances.
+SYN-1019 : Optimized 375 mux instances.
+SYN-1020 : Optimized 1868 distributor mux.
+SYN-1001 : Optimize 201 less-than instances
+SYN-1019 : Optimized 125 mux instances.
+SYN-1016 : Merged 19147 instances.
+SYN-1015 : Optimize round 1, 35936 better
 SYN-1014 : Optimize round 2
-SYN-1044 : Optimized 8 inv instances.
-SYN-1017 : Remove 1 const input seq instances
-SYN-1019 : Optimized 75 mux instances.
-SYN-1020 : Optimized 14 distributor mux.
-SYN-1019 : Optimized 203 mux instances.
-SYN-2541 : Reading BRAM "u_cnn_detector/u_infer/u_weights/u_weight_bank0" init file "D:/2026fpga/ph1p35second/fpga/uisrc/01_rtl/cnn/weights/cnn_digit_weights_0.mif"
-SYN-2542 : Parsing MIF init file
-SYN-2541 : Reading BRAM "u_cnn_detector/u_infer/u_weights/u_weight_bank1" init file "D:/2026fpga/ph1p35second/fpga/uisrc/01_rtl/cnn/weights/cnn_digit_weights_1.mif"
-SYN-2542 : Parsing MIF init file
-SYN-1016 : Merged 72 instances.
-SYN-1015 : Optimize round 2, 586 better
+SYN-1044 : Optimized 24 inv instances.
+SYN-1017 : Remove 5 const input seq instances
+SYN-1019 : Optimized 883 mux instances.
+SYN-1020 : Optimized 114 distributor mux.
+SYN-1001 : Optimize 1 less-than instances
+SYN-1019 : Optimized 422 mux instances.
+SYN-1016 : Merged 210 instances.
+SYN-1015 : Optimize round 2, 2508 better
+SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_tx_packet/g_packet_buffer$g_ph1p_eram$g_line_bank[0]$u_high_ram" in ../../uisrc/01_rtl/csi2/csi2_tx_packet.v(179) / pin "bea[0]"
+SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_tx_packet/g_packet_buffer$g_ph1p_eram$g_line_bank[0]$u_high_ram" in ../../uisrc/01_rtl/csi2/csi2_tx_packet.v(179) / pin "beb[0]"
+SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_tx_packet/g_packet_buffer$g_ph1p_eram$g_line_bank[1]$u_high_ram" in ../../uisrc/01_rtl/csi2/csi2_tx_packet.v(179) / pin "bea[0]"
+SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_tx_packet/g_packet_buffer$g_ph1p_eram$g_line_bank[1]$u_high_ram" in ../../uisrc/01_rtl/csi2/csi2_tx_packet.v(179) / pin "beb[0]"
 SYN-5025 WARNING: Using 0 for all undriven pins and nets
-SYN-3010 : Optimized 42 DFF(s)
+SYN-3010 : Optimized 567 DFF(s)
 SYN-1014 : Optimize round 1
-SYN-1019 : Optimized 4 mux instances.
-SYN-1020 : Optimized 149 distributor mux.
-SYN-1019 : Optimized 4 mux instances.
-SYN-2541 : Reading BRAM "u_cnn_detector/u_infer/u_weights/u_weight_bank0" init file "D:/2026fpga/ph1p35second/fpga/uisrc/01_rtl/cnn/weights/cnn_digit_weights_0.mif"
-SYN-2542 : Parsing MIF init file
-SYN-2541 : Reading BRAM "u_cnn_detector/u_infer/u_weights/u_weight_bank1" init file "D:/2026fpga/ph1p35second/fpga/uisrc/01_rtl/cnn/weights/cnn_digit_weights_1.mif"
-SYN-2542 : Parsing MIF init file
-SYN-1016 : Merged 780 instances.
-SYN-1015 : Optimize round 1, 966 better
+SYN-1017 : Remove 24 const input seq instances
+SYN-1019 : Optimized 8 mux instances.
+SYN-1020 : Optimized 216 distributor mux.
+SYN-1019 : Optimized 10 mux instances.
+SYN-1016 : Merged 1101 instances.
+SYN-1015 : Optimize round 1, 1457 better
 SYN-1014 : Optimize round 2
-SYN-1044 : Optimized 1 inv instances.
-SYN-1020 : Optimized 37 distributor mux.
-SYN-2541 : Reading BRAM "u_cnn_detector/u_infer/u_weights/u_weight_bank0" init file "D:/2026fpga/ph1p35second/fpga/uisrc/01_rtl/cnn/weights/cnn_digit_weights_0.mif"
-SYN-2542 : Parsing MIF init file
-SYN-2541 : Reading BRAM "u_cnn_detector/u_infer/u_weights/u_weight_bank1" init file "D:/2026fpga/ph1p35second/fpga/uisrc/01_rtl/cnn/weights/cnn_digit_weights_1.mif"
-SYN-2542 : Parsing MIF init file
-SYN-1016 : Merged 73 instances.
-SYN-1015 : Optimize round 2, 111 better
+SYN-1044 : Optimized 5 inv instances.
+SYN-1017 : Remove 3 const input seq instances
+SYN-1019 : Optimized 1 mux instances.
+SYN-1020 : Optimized 48 distributor mux.
+SYN-1016 : Merged 126 instances.
+SYN-1015 : Optimize round 2, 190 better
 SYN-1014 : Optimize round 3
 SYN-1044 : Optimized 1 inv instances.
-SYN-2541 : Reading BRAM "u_cnn_detector/u_infer/u_weights/u_weight_bank0" init file "D:/2026fpga/ph1p35second/fpga/uisrc/01_rtl/cnn/weights/cnn_digit_weights_0.mif"
-SYN-2542 : Parsing MIF init file
-SYN-2541 : Reading BRAM "u_cnn_detector/u_infer/u_weights/u_weight_bank1" init file "D:/2026fpga/ph1p35second/fpga/uisrc/01_rtl/cnn/weights/cnn_digit_weights_1.mif"
-SYN-2542 : Parsing MIF init file
+SYN-1017 : Remove 3 const input seq instances
 SYN-1016 : Merged 1 instances.
-SYN-1015 : Optimize round 3, 2 better
+SYN-1015 : Optimize round 3, 8 better
 SYN-1014 : Optimize round 4
-SYN-2541 : Reading BRAM "u_cnn_detector/u_infer/u_weights/u_weight_bank0" init file "D:/2026fpga/ph1p35second/fpga/uisrc/01_rtl/cnn/weights/cnn_digit_weights_0.mif"
-SYN-2542 : Parsing MIF init file
-SYN-2541 : Reading BRAM "u_cnn_detector/u_infer/u_weights/u_weight_bank1" init file "D:/2026fpga/ph1p35second/fpga/uisrc/01_rtl/cnn/weights/cnn_digit_weights_1.mif"
-SYN-2542 : Parsing MIF init file
-SYN-1015 : Optimize round 4, 0 better
-SYN-1001 : End Stage 1.6 | Optimize Iteratively; Time: 11.440656s wall, 11.171875s user + 0.171875s system = 11.343750s CPU (99.2%); Memory(MB): used = 531, reserved = 525, peak = 586;
+SYN-1017 : Remove 15 const input seq instances
+SYN-1019 : Optimized 84 mux instances.
+SYN-1015 : Optimize round 4, 105 better
+SYN-1014 : Optimize round 5
+SYN-1017 : Remove 12 const input seq instances
+SYN-1019 : Optimized 15 mux instances.
+SYN-1015 : Optimize round 5, 33 better
+SYN-1014 : Optimize round 6
+SYN-1017 : Remove 12 const input seq instances
+SYN-1019 : Optimized 9 mux instances.
+SYN-1016 : Merged 2 instances.
+SYN-1015 : Optimize round 6, 26 better
+SYN-1014 : Optimize round 7
+SYN-1017 : Remove 16 const input seq instances
+SYN-1019 : Optimized 18 mux instances.
+SYN-1016 : Merged 2 instances.
+SYN-1015 : Optimize round 7, 36 better
+SYN-1014 : Optimize round 8
+SYN-1017 : Remove 1 const input seq instances
+SYN-1015 : Optimize round 8, 1 better
+SYN-1001 : End Stage 1.6 | Optimize Iteratively; Time: 29.833280s wall, 26.875000s user + 2.468750s system = 29.343750s CPU (98.4%); Memory(MB): used = 708, reserved = 730, peak = 763;
 
-SYN-1079 : finish stage Optimize Iteratively. Total instances: 19888, Total nets: 21713.
+SYN-1079 : finish stage Optimize Iteratively. Total instances: 28694, Total nets: 33454.
 
 SYN-1001 : Stage 1.7 | Check Design
-SYN-1001 : End Stage 1.7 | Check Design; Time: 0.012391s wall, 0.000000s user + 0.000000s system = 0.000000s CPU (n/a%); Memory(MB): used = 531, reserved = 525, peak = 586;
+SYN-1001 : End Stage 1.7 | Check Design; Time: 0.015441s wall, 0.015625s user + 0.000000s system = 0.015625s CPU (101.2%); Memory(MB): used = 708, reserved = 730, peak = 763;
 
-SYN-1079 : finish stage Check Design. Total instances: 19888, Total nets: 21713.
+SYN-1079 : finish stage Check Design. Total instances: 28694, Total nets: 33454.
 
-SYN-1001 : End Stage 1 | Optimize RTL; Time: 17.347633s wall, 16.687500s user + 0.343750s system = 17.031250s CPU (98.2%); Memory(MB): used = 531, reserved = 525, peak = 586;
+SYN-1001 : End Stage 1 | Optimize RTL; Time: 42.687053s wall, 39.109375s user + 2.687500s system = 41.796875s CPU (97.9%); Memory(MB): used = 708, reserved = 730, peak = 763;
 
-SYN-1079 : finish stage Optimize RTL. Total instances: 19888, Total nets: 21713.
+SYN-1079 : finish stage Optimize RTL. Total instances: 28694, Total nets: 33454.
 
-RUN-1003 : finish command "optimize_rtl" in  17.378933s wall, 16.703125s user + 0.343750s system = 17.046875s CPU (98.1%)
+RUN-1003 : finish command "optimize_rtl" in  42.699889s wall, 39.125000s user + 2.687500s system = 41.812500s CPU (97.9%)
 
-RUN-1004 : used memory is 531 MB, reserved memory is 525 MB, peak memory is 586 MB
+RUN-1004 : used memory is 708 MB, reserved memory is 730 MB, peak memory is 763 MB
 RUN-1002 : start command "report_area -file fpga_prj_rtl.area"
 RUN-1001 : standard
 ***Report Model: csi2_tx_top Device: PH1P35MDG324***
 
 IO Statistics
-#IO                        32
-  #input                    4
-  #output                   7
-  #inout                   21
+#IO                        79
+  #input                    5
+  #output                  30
+  #inout                   44
 
 Gate Statistics
-#Basic gates            17466
-  #and                   6879
+#Basic gates            17752
+  #and                   1270
   #nand                     0
-  #or                    5973
+  #or                     735
   #nor                      0
-  #xor                     86
+  #xor                    204
   #xnor                     0
   #buf                      0
-  #not                    789
-  #bufif1                   1
-  #MX21                   948
+  #not                   1320
+  #bufif1                   2
+  #MX21                  6053
   #FADD                     0
-  #DFF                   2790
+  #DFF                   8168
   #LATCH                    0
-#MACRO_ADD                305
-#MACRO_EQ                 124
-#MACRO_MULT                 7
-#MACRO_MUX               1390
-#MACRO_OTHERS              18
+#MACRO_ADD                579
+#MACRO_EQ                 351
+#MACRO_MUX               6062
+#MACRO_OTHERS              11
 
 RUN-1002 : start command "export_db fpga_prj_rtl.db"
 RUN-1001 : Exported flow parameters
@@ -639,113 +1060,118 @@ RUN-1001 :     pack_seq_in_io     |    auto    |       auto       |
 RUN-1001 :         report         |  standard  |     standard     |        
 RUN-1001 : ----------------------------------------------------------------
 RUN-1002 : start command "optimize_gate -packarea fpga_prj_gate.area"
-RUN-1001 : Open license file F:/AnlogicFpga/TD_6.2.1_Engineer_6.2.168.116/license/Anlogic.lic
+RUN-1001 : Open license file D:/TD/license/Anlogic.lic
 SYN-1001 : Stage 2 | Optimize Gate
 SYN-1001 : Stage 2.1 | Map Reg
-SYN-1001 : End Stage 2.1 | Map Reg; Time: 0.506951s wall, 0.437500s user + 0.031250s system = 0.468750s CPU (92.5%); Memory(MB): used = 547, reserved = 645, peak = 586;
+SYN-1001 : End Stage 2.1 | Map Reg; Time: 1.060370s wall, 1.046875s user + 0.015625s system = 1.062500s CPU (100.2%); Memory(MB): used = 729, reserved = 860, peak = 763;
 
-SYN-1079 : finish stage Map Reg. Total instances: 19888, Total nets: 21713.
+SYN-1079 : finish stage Map Reg. Total instances: 28694, Total nets: 33454.
 
 SYN-1001 : Stage 2.2 | Map IO
-SYN-2001 : Map 32 IOs to PADs of model 'csi2_tx_top'
-SYN-1001 : End Stage 2.2 | Map IO; Time: 0.225930s wall, 0.234375s user + 0.000000s system = 0.234375s CPU (103.7%); Memory(MB): used = 548, reserved = 646, peak = 586;
+SYN-2001 : Map 79 IOs to PADs of model 'csi2_tx_top'
+SYN-1001 : End Stage 2.2 | Map IO; Time: 0.458799s wall, 0.453125s user + 0.000000s system = 0.453125s CPU (98.8%); Memory(MB): used = 729, reserved = 861, peak = 763;
 
 SYN-1001 : Stage 2.3 | Map Macro
 RUN-1002 : start command "update_pll_param -module csi2_tx_top"
 SYN-2501 : Processed 0 LOGIC_BUF instances.
-SYN-2501 : 4 BUFG to GCLK
-SYN-2541 : Reading BRAM "u_cnn_detector/u_infer/u_weights/u_weight_bank0" init file "D:/2026fpga/ph1p35second/fpga/uisrc/01_rtl/cnn/weights/cnn_digit_weights_0.mif"
-SYN-2542 : Parsing MIF init file
-SYN-2541 : Reading BRAM "u_cnn_detector/u_infer/u_weights/u_weight_bank1" init file "D:/2026fpga/ph1p35second/fpga/uisrc/01_rtl/cnn/weights/cnn_digit_weights_1.mif"
-SYN-2542 : Parsing MIF init file
-SYN-2571 : Map 7 macro multiplier
+SYN-2501 : 5 BUFG to GCLK
+SYN-5041 WARNING: Ram Inst: u_mc_to_user_interface/U_w155_d512_fifo/soft_fifo_al_f58e8b3e1f3d_Inst/ram_inst/ramread0_syn_22 has wrong RAM_STYLE/ROM_STYLE setting, AUTO is really used in ram inference
 SYN-2571 : Optimize after map_dsp, round 1
-SYN-1016 : Merged 5590 instances.
-SYN-2571 : Optimize after map_dsp, round 1, 5590 better
-SYN-2571 : Optimize after map_dsp, round 2
-SYN-2571 : Optimize after map_dsp, round 2, 0 better
-SYN-2601 : All the used dsp number is 6
-SYN-1001 : Throwback 1210 control mux instances
-SYN-1001 : Generate 103 bigger adders
-SYN-1001 : Convert 2 adder
-SYN-1001 : Optimize 137 adders
+SYN-2571 : Optimize after map_dsp, round 1, 0 better
+SYN-1001 : Throwback 450 control mux instances
+SYN-1001 : clone 1 adder instances
+SYN-1001 : Generate 8 bigger adders
+SYN-1001 : Convert 24 adder
+SYN-1001 : Optimize 58 adders
 SYN-2501 : Optimize round 1
-SYN-1016 : Merged 255 instances.
-SYN-2501 : Optimize round 1, 1082 better
+SYN-1016 : Merged 638 instances.
+SYN-2501 : Optimize round 1, 2761 better
 SYN-2501 : Optimize round 2
 SYN-2501 : Optimize round 2, 0 better
 SYN-2501 : Optimize round 1
-SYN-2501 : Optimize round 1, 0 better
-SYN-1030 : Map 12 macro adder
-SYN-1031 : Map 1 macro less-than
-SYN-2501 : Map 254 macro adder(s)
-SYN-3009 : Map 301 FxMUX in MapMacro
-SYN-1019 : Optimized 1020 mux instances.
-SYN-1016 : Merged 13080 instances.
-SYN-1001 : End Stage 2.3 | Map Macro; Time: 10.067647s wall, 9.750000s user + 0.187500s system = 9.937500s CPU (98.7%); Memory(MB): used = 622, reserved = 697, peak = 622;
+SYN-1016 : Merged 1 instances.
+SYN-2501 : Optimize round 1, 1 better
+SYN-2501 : Optimize round 2
+SYN-2501 : Optimize round 2, 0 better
+SYN-1030 : Map 9 macro adder
+SYN-1031 : Map 6 macro less-than
+SYN-2501 : Map 553 macro adder(s)
+SYN-3009 : Map 16 FxMUX in MapMacro
+SYN-1019 : Optimized 1200 mux instances.
+SYN-1016 : Merged 1930 instances.
+SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_init/ramread0_syn_24" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_init.v(73) / pin "di[7]"
+SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_init/ramread0_syn_24" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_init.v(73) / pin "di[6]"
+SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_init/ramread0_syn_24" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_init.v(73) / pin "di[5]"
+SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_init/ramread0_syn_24" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_init.v(73) / pin "di[4]"
+SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_init/ramread0_syn_24" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_init.v(73) / pin "di[3]"
+SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_init/ramread0_syn_24" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_init.v(73) / pin "di[2]"
+SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_init/ramread0_syn_24" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_init.v(73) / pin "di[1]"
+SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_init/ramread0_syn_24" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_init.v(73) / pin "di[0]"
+SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_init/ramread0_syn_25" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_init.v(73) / pin "di[7]"
+SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_init/ramread0_syn_25" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_init.v(73) / pin "di[6]"
+SYN-5011 Similar messages will be suppressed.
+SYN-5025 WARNING: Using 0 for all undriven pins and nets
+SYN-1001 : End Stage 2.3 | Map Macro; Time: 10.204752s wall, 9.718750s user + 0.437500s system = 10.156250s CPU (99.5%); Memory(MB): used = 627, reserved = 896, peak = 763;
 
-SYN-1079 : finish stage Map Macro. Total instances: 32395, Total nets: 36160.
+SYN-1079 : finish stage Map Macro. Total instances: 35499, Total nets: 40127.
 
 SYN-1001 : Stage 2.4 | Map Gate
-SYN-3001 : Collect 3320 PI 2743 PO (46 timing unconstrained) for mapping
-SYN-2581 : Mapping with K=6, #lut = 4365 (4.41), #lev = 11 (4.21), #crit_level = 0
+SYN-3001 : Collect 7366 PI 4421 PO (114 timing unconstrained) for mapping
+SYN-2581 : Mapping with K=6, #lut = 9231 (4.07), #lev = 12 (3.32), #crit_level = 0
 SYN-2551 : Post LUT mapping optimization.
-SYN-2581 : Mapping with K=6, #lut = 4247 (4.44), #lev = 12 (4.13), #crit_level = 0
-SYN-3001 : Logic optimization opt = 3.36 sec, map = 1.06 sec, post map opt = 5.54 sec.
-SYN-1001 : End Stage 2.4 | Map Gate; Time: 15.237642s wall, 14.828125s user + 0.156250s system = 14.984375s CPU (98.3%); Memory(MB): used = 663, reserved = 697, peak = 663;
+SYN-2581 : Mapping with K=6, #lut = 8942 (3.99), #lev = 11 (3.35), #crit_level = 0
+SYN-3001 : Logic optimization opt = 4.15 sec, map = 0.88 sec, post map opt = 4.94 sec.
+SYN-1001 : End Stage 2.4 | Map Gate; Time: 16.455470s wall, 16.109375s user + 0.078125s system = 16.187500s CPU (98.4%); Memory(MB): used = 603, reserved = 896, peak = 763;
 
 SYN-1001 : Packing model "csi2_tx_top" ...
 SYN-1001 : Stage 2.5 | Pack Gate
 SYN-4010 : Pack lib has 43 rtl pack models with 26 top pack blocks
 SYN-1014 : Optimize round 1
 SYN-1015 : Optimize round 1, 0 better
-SYN-4002 : Packing 3080 DFF/LATCH to SEQ ...
-SYN-1001 : Remove 57 carry adders
+SYN-4002 : Packing 7253 DFF/LATCH to SEQ ...
+SYN-1001 : Remove 70 carry adders
 RUN-1002 : start command "start_timer"
 RUN-1002 : start command "end_timer"
-SYN-4009 : Pack 54 carry chain into lslice
-SYN-1001 : End Stage 2.5 | Pack Gate; Time: 2.673872s wall, 2.062500s user + 0.593750s system = 2.656250s CPU (99.3%); Memory(MB): used = 629, reserved = 664, peak = 663;
+SYN-4009 : Pack 68 carry chain into lslice
+SYN-1001 : End Stage 2.5 | Pack Gate; Time: 4.044722s wall, 2.843750s user + 1.187500s system = 4.031250s CPU (99.7%); Memory(MB): used = 563, reserved = 787, peak = 763;
 
 RUN-1002 : start command "report_qor -step gate -file gate.qor"
 RUN-1002 : start command "start_timer"
-RUN-1003 : finish command "start_timer" in  1.222146s wall, 1.234375s user + 0.000000s system = 1.234375s CPU (101.0%)
-
-RUN-1004 : used memory is 630 MB, reserved memory is 665 MB, peak memory is 663 MB
 -----------------------------------------------------------
 | QoR metrics               |         value               |
 -----------------------------------------------------------
 | Timing                    |                             |
-|     Setup WNS             |         2029                |
-|     Setup TNS             |            0                |
-|     Num of violated S-EP  |            0                |
-|     Hold WNS              |          198                |
+|     Setup WNS             |        -2696                |
+|     Setup TNS             |      -459507                |
+|     Num of violated S-EP  |          368                |
+|     Hold WNS              |          114                |
 |     Hold TNS              |            0                |
 |     Num of violated H-EP  |            0                |
 -----------------------------------------------------------
 | Utilization               |                             |
-|     #registers            |         3080                |
-|     #luts                 |         4526                |
-|     #lut1                 |           11                |
-|     #lut1(~A)             |           11                |
-|     #slices               |         3053                |
-|     slices percentage     |       14.39%                |
-|     #RAMs                 |           15                |
-|     #DSPs                 |            6                |
-|     #f7mux                |        1.89%                |
-|     #MACROs               |          401                |
-|     #insts in MACRO       |         3407                |
+|     #registers            |         7253                |
+|     #luts                 |         9005                |
+|     #lut1                 |          107                |
+|     #lut1(~A)             |          107                |
+|     #slices               |         1573                |
+|     slices percentage     |        7.41%                |
+|     #RAMs                 |           17                |
+|     #DSPs                 |            0                |
+|     #f7mux                |        0.15%                |
+|     #MACROs               |          140                |
+|     #insts in MACRO       |         1645                |
 -----------------------------------------------------------
 | kept_net                  |                             |
-|     #syn_keep             |          280                |
-|     #keep_hier            |            0                |
+|     #syn_keep             |         1381                |
+|     #keep_hier            |          310                |
 |     #dont_touch           |            0                |
 |     #mark_debug           |            0                |
 |     #max_fanout_keep      |            0                |
-|     #async_reg            |            0                |
+|     #async_reg            |          380                |
 -----------------------------------------------------------
-| Top 10% datanet fanout#   |       116.41                |
-| dff(single fanout)->dff   |          221                |
-| dff(single fanout)->dram  |            0                |
+| Top 10% datanet fanout#   |        49.79                |
+| dff(single fanout)->dff   |          550                |
+| dff(single fanout)->dram  |          129                |
 -----------------------------------------------------------
 | Over-quota path num*      |                             |
 |     Total                 |            0                |
@@ -759,118 +1185,137 @@ Note**: Rent shows the rent exponent value of the modules whose rent value excee
         Only modules under top are reported, and the threshold is defined as 0.7.
 
 Logic Level Distribution
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  Clock                                                                              |  Period             |  0     |  1     |  2    |  3    |  4    |  5    |  6    |  7    |  8   |  9   |  10  |  11  |  12  |  13
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  MIPI_RX_BYTE_CLK                                                                   |  8.888ns (112MHz)   |  493   |  916   |  163  |  172  |  14   |  19   |  19   |  24   |  0   |  0   |  0   |  0   |  0   |  0
-  MIPI_TX_BYTE_CLK                                                                   |  22.856ns (43MHz)   |  430   |  1470  |  247  |  171  |  4    |  2    |  9    |  0    |  32  |  32  |  4   |  4   |  8   |  4
-  mipi_rx_ck_pad                                                                     |  2.222ns (450MHz)   |  0     |  0     |  0    |  0    |  0    |  0    |  0    |  0    |  0   |  0   |  0   |  0   |  0   |  0
-  pll_clk_100m                                                                       |  10.000ns (100MHz)  |  284   |  278   |  182  |  253  |  345  |  444  |  530  |  677  |  39  |  1   |  0   |  0   |  0   |  0
-  pll_clk_24m                                                                        |  41.668ns (23MHz)   |  167   |  110   |  58   |  45   |  42   |  18   |  0    |  0    |  0   |  0   |  0   |  2   |  2   |  0
-  sysclk                                                                             |  40.000ns (25MHz)   |  0     |  0     |  0    |  0    |  0    |  0    |  0    |  0    |  0   |  0   |  0   |  0   |  0   |  0
-  u_dphy_rx/u_ph1p_mipiio_rx_wrapper/u_PH1P_LOGIC_DPHY_MIPI_RX.io_clk_pad_p          |  2.222ns (450MHz)   |  0     |  0     |  0    |  0    |  0    |  0    |  0    |  0    |  0   |  0   |  0   |  0   |  0   |  0
-  u_dphy_rx/u_ph1p_mipiio_rx_wrapper/u_PH1P_LOGIC_DPHY_MIPI_RX.tif_c16_in            |  8.888ns (112MHz)   |  0     |  0     |  0    |  0    |  0    |  0    |  0    |  0    |  0   |  0   |  0   |  0   |  0   |  0
-  u_dphy_tx/u_ph1p_mipiio_tx_wrapper/u_PH1P_LOGIC_DPHY_MIPI_TX.i_phy_dpll_ref_clk    |  10.000ns (100MHz)  |  0     |  0     |  0    |  0    |  0    |  0    |  0    |  0    |  0   |  0   |  0   |  0   |  0   |  0
-  u_dphy_tx/u_ph1p_mipiio_tx_wrapper/u_PH1P_LOGIC_DPHY_MIPI_TX.ln0_data_c16_sample   |  22.856ns (43MHz)   |  16    |  0     |  0    |  0    |  0    |  0    |  0    |  0    |  0   |  0   |  0   |  0   |  0   |  0
-  u_dphy_tx/u_ph1p_mipiio_tx_wrapper/u_PH1P_LOGIC_DPHY_MIPI_TX.ln1_data_c16_sample   |  22.856ns (43MHz)   |  16    |  0     |  0    |  0    |  0    |  0    |  0    |  0    |  0   |  0   |  0   |  0   |  0   |  0
-  u_dphy_tx/u_ph1p_mipiio_tx_wrapper/u_PH1P_LOGIC_DPHY_MIPI_TX.ln2_data_c16_sample   |  22.856ns (43MHz)   |  16    |  0     |  0    |  0    |  0    |  0    |  0    |  0    |  0   |  0   |  0   |  0   |  0   |  0
-  u_dphy_tx/u_ph1p_mipiio_tx_wrapper/u_PH1P_LOGIC_DPHY_MIPI_TX.ln3_data_c16_sample   |  22.856ns (43MHz)   |  16    |  0     |  0    |  0    |  0    |  0    |  0    |  0    |  0   |  0   |  0   |  0   |  0   |  0
-  u_dphy_tx/u_ph1p_mipiio_tx_wrapper/u_PH1P_LOGIC_DPHY_MIPI_TX.lnck_data_c16_sample  |  22.856ns (43MHz)   |  16    |  0     |  0    |  0    |  0    |  0    |  0    |  0    |  0   |  0   |  0   |  0   |  0   |  0
-  Total                                                                              |  NA                 |  1454  |  2774  |  650  |  641  |  405  |  483  |  558  |  701  |  71  |  33  |  4   |  6   |  10  |  4
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Note: The table count the worst 100000 paths, each endpoint count only one time.(7794 paths analyzed)
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  Clock                                                                              |  Period             |  0     |  1     |  2     |  3     |  4     |  5     |  6    |  7    |  8   |  9   |  10   |  11
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  MIPI_RX_BYTE_CLK                                                                   |  8.888ns (112MHz)   |  1597  |  267   |  173   |  354   |  276   |  226   |  149  |  20   |  0   |  20  |  219  |  3
+  MIPI_TX_BYTE_CLK                                                                   |  13.332ns (75MHz)   |  730   |  480   |  221   |  172   |  67    |  85    |  60   |  16   |  35  |  20  |  58   |  2
+  mipi_rx_ck_pad                                                                     |  2.222ns (450MHz)   |  0     |  0     |  0     |  0     |  0     |  0     |  0    |  0    |  0   |  0   |  0    |  0
+  pll_clk_100m                                                                       |  10.000ns (100MHz)  |  143   |  6     |  2     |  106   |  0     |  0     |  0    |  0    |  0   |  0   |  0    |  0
+  pll_clk_24m                                                                        |  41.668ns (23MHz)   |  1123  |  201   |  122   |  149   |  53    |  80    |  2    |  0    |  1   |  56  |  2    |  17
+  sysclk                                                                             |  40.000ns (25MHz)   |  0     |  0     |  0     |  0     |  0     |  0     |  0    |  0    |  0   |  0   |  0    |  0
+  u_dphy_rx/u_ph1p_mipiio_rx_wrapper/u_PH1P_LOGIC_DPHY_MIPI_RX.io_clk_pad_p          |  2.222ns (450MHz)   |  0     |  0     |  0     |  0     |  0     |  0     |  0    |  0    |  0   |  0   |  0    |  0
+  u_dphy_rx/u_ph1p_mipiio_rx_wrapper/u_PH1P_LOGIC_DPHY_MIPI_RX.tif_c16_in            |  8.888ns (112MHz)   |  0     |  0     |  0     |  0     |  0     |  0     |  0    |  0    |  0   |  0   |  0    |  0
+  u_dphy_tx/u_ph1p_mipiio_tx_wrapper/u_PH1P_LOGIC_DPHY_MIPI_TX.i_phy_dpll_ref_clk    |  10.000ns (100MHz)  |  0     |  0     |  0     |  0     |  0     |  0     |  0    |  0    |  0   |  0   |  0    |  0
+  u_dphy_tx/u_ph1p_mipiio_tx_wrapper/u_PH1P_LOGIC_DPHY_MIPI_TX.ln0_data_c16_sample   |  13.332ns (75MHz)   |  16    |  0     |  0     |  0     |  0     |  0     |  0    |  0    |  0   |  0   |  0    |  0
+  u_dphy_tx/u_ph1p_mipiio_tx_wrapper/u_PH1P_LOGIC_DPHY_MIPI_TX.ln1_data_c16_sample   |  13.332ns (75MHz)   |  16    |  0     |  0     |  0     |  0     |  0     |  0    |  0    |  0   |  0   |  0    |  0
+  u_dphy_tx/u_ph1p_mipiio_tx_wrapper/u_PH1P_LOGIC_DPHY_MIPI_TX.ln2_data_c16_sample   |  13.332ns (75MHz)   |  16    |  0     |  0     |  0     |  0     |  0     |  0    |  0    |  0   |  0   |  0    |  0
+  u_dphy_tx/u_ph1p_mipiio_tx_wrapper/u_PH1P_LOGIC_DPHY_MIPI_TX.ln3_data_c16_sample   |  13.332ns (75MHz)   |  16    |  0     |  0     |  0     |  0     |  0     |  0    |  0    |  0   |  0   |  0    |  0
+  u_dphy_tx/u_ph1p_mipiio_tx_wrapper/u_PH1P_LOGIC_DPHY_MIPI_TX.lnck_data_c16_sample  |  13.332ns (75MHz)   |  16    |  0     |  0     |  0     |  0     |  0     |  0    |  0    |  0   |  0   |  0    |  0
+  u_ph1p35_324_ddr_wrapper/u_ddr2/ctl_clk                                            |  7.500ns (133MHz)   |  0     |  0     |  0     |  0     |  0     |  0     |  0    |  0    |  0   |  0   |  0    |  0
+  u_ph1p35_324_ddr_wrapper/u_ddr2/ddr_clk                                            |  1.875ns (533MHz)   |  0     |  0     |  0     |  0     |  0     |  0     |  0    |  0    |  0   |  0   |  0    |  0
+  u_ph1p35_324_ddr_wrapper/u_ddr2/mcu_clk                                            |  19.687ns (50MHz)   |  56    |  15    |  244   |  15    |  0     |  5     |  4    |  0    |  0   |  0   |  0    |  0
+  u_ph1p35_324_ddr_wrapper/u_ddr2/ref_clk                                            |  7.500ns (133MHz)   |  0     |  0     |  0     |  0     |  0     |  0     |  0    |  0    |  0   |  0   |  0    |  0
+  u_ph1p35_324_ddr_wrapper/u_ddr2/usr_clk                                            |  7.500ns (133MHz)   |  2567  |  1465  |  991   |  1045  |  1005  |  657   |  161  |  139  |  15  |  0   |  0    |  0
+  Total                                                                              |  NA                 |  6296  |  2434  |  1753  |  1841  |  1401  |  1053  |  376  |  175  |  51  |  96  |  279  |  22
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Note: The table count the worst 100000 paths, each endpoint count only one time.(15777 paths analyzed)
 
 Hierarchical Rent Exponent Report
-+------------------------------------------------------------------------------------+
-|Inst             |Model                      |Rent     |Cell     |Pin     |Term     |
-+------------------------------------------------------------------------------------+
-|top              |csi2_tx_top                |0.10     |11597    |83363   |19       |
-|  u_cnn_detector |cnn_frame_digit_detector_3 |0.26     |5567     |29560   |52       |
-|  u_tk_fifo      |csi2_ptr_fifo_10           |0.21     |1237     |17282   |62       |
-|  u_tx_packet    |csi2_tx_packet_11          |0.20     |2063     |26028   |59       |
-+------------------------------------------------------------------------------------+
++---------------------------------------------------------------------------------------------+
+|Inst                       |Model                     |Rent     |Cell     |Pin     |Term     |
++---------------------------------------------------------------------------------------------+
+|top                        |csi2_tx_top               |0.21     |21824    |97397   |35       |
+|  u_dbg_uart               |dbg_uart_6                |0.66     |1059     |5935    |549      |
+|  u_ddr_triple_frame_cache |ddr_triple_frame_cache_7  |0.57     |1534     |9657    |411      |
+|  u_ph1p35_324_ddr_wrapper |ph1p35_324_ddr_wrapper_11 |0.47     |10320    |46550   |341      |
+|  u_crop_before_ddr        |csi2_raw10_scale_crop_5   |0.37     |2092     |9686    |81       |
++---------------------------------------------------------------------------------------------+
 Note: Cell represents total number of cells inside module; Pin represents total number of pins
       which have net connection inside module; Term represents total number of PIs and POs of module.
       Rent represents the relationship between number of terms and number of cells in module.
       A module with higher rent corresponds to highly connected logic and strong connectivity with others.
 Report gate stage QoR done.
 
-SYN-1001 : The design has 14 dangling syn_keep insts.
-RUN-1003 : finish command "report_qor -step gate -file gate.qor" in  3.201329s wall, 3.140625s user + 0.031250s system = 3.171875s CPU (99.1%)
+SYN-1001 : The design has 461 dangling syn_keep insts.
+RUN-1003 : finish command "report_qor -step gate -file gate.qor" in  3.410630s wall, 3.343750s user + 0.062500s system = 3.406250s CPU (99.9%)
 
-RUN-1004 : used memory is 651 MB, reserved memory is 685 MB, peak memory is 663 MB
+RUN-1004 : used memory is 609 MB, reserved memory is 822 MB, peak memory is 763 MB
 RUN-1002 : start command "report_area -file fpga_prj_gate.area"
-SYN-4034 : The count of slices with lut is 564.
-SYN-4035 : The count of slices with lut+ripple is 569.
+SYN-4034 : The count of slices with lut is 71.
+SYN-4035 : The count of slices with lut+ripple is 1054.
 RUN-1001 : standard
 ***Report Model: csi2_tx_top Device: PH1P35MDG324***
 
 Design Statistics
-#IO                        12   out of    160    7.50%
-  #input                    4
-  #output                   7
-  #inout                    1
-#lut                     7579
-  #lut1                    11
-  #lut2                   666
-  #lut3                   666
-  #lut4                   578
-  #lut5                  1536
-  #lut6                  4122
-#reg                     3080
-  #slice reg             3080   out of  42432    7.26%
+#IO                        59   out of    160   36.88%
+  #input                    5
+  #output                  30
+  #inout                   24
+#lut                    10578
+  #lut1                   107
+  #lut2                  1426
+  #lut3                  2141
+  #lut4                  1874
+  #lut5                  1735
+  #lut6                  3295
+#reg                     7253
+  #slice reg             7253   out of  42432   17.09%
   #pad reg                  0
 
 Utilization Statistics
-#slice*                  6406   out of  21216   30.19%
-  #used ram              1920
-    #dram lut            1904
+#slice*                  7569   out of  21216   35.68%
+  #used ram               448
+    #dram lut             432
     #shifter lut           16
-  #used logic            4486
-    #with luts*          3609
-    #with adder           569
-    #reg only*            308
-#f7mux                    201   out of  10608    1.89%
-#f8mux                    100   out of   5304    1.89%
-#eram                      15   out of    108   13.89%
-  #eram20k                 15
+  #used logic            7121
+    #with luts*          5811
+    #with adder          1054
+    #reg only*            256
+#f7mux                     16   out of  10608    0.15%
+#f8mux                      0   out of   5304    0.00%
+#eram                      17   out of    108   15.74%
+  #eram20k                 17
   #fifo20k                  0
-#dsp                        6   out of     40   15.00%
-#ddr_byte                   0   out of     12    0.00%
+#dsp                        0   out of     40    0.00%
+#ddr_byte                   6   out of     12   50.00%
 #mipi_tx                    1   out of      2   50.00%
 #mipi_rx                    1   out of      2   50.00%
-#pad                       12   out of    160    7.50%
-#pll                        1   out of      6   16.67%
-#gclk                       4   out of     32   12.50%
+#pad                       14   out of    160    8.75%
+#pll                        3   out of      6   50.00%
+#gclk                       5   out of     32   15.62%
 #lclk                       0   out of     12    0.00%
 #sclk                       0   out of     48    0.00%
-#mlclk                      0   out of      6    0.00%
-#ioclk                      0   out of     18    0.00%
+#mlclk                      2   out of      6   33.33%
+#ioclk                      4   out of     18   22.22%
 
 * Note! The LUT and Slice count after Optimize-Gate is not the final value, Run Optimize-place for a more realistic count.
 
-SYN-1001 : End Stage 2 | Optimize Gate; Time: 32.221691s wall, 30.734375s user + 1.000000s system = 31.734375s CPU (98.5%); Memory(MB): used = 651, reserved = 685, peak = 663;
+SYN-1001 : End Stage 2 | Optimize Gate; Time: 35.856201s wall, 33.750000s user + 1.781250s system = 35.531250s CPU (99.1%); Memory(MB): used = 609, reserved = 822, peak = 763;
 
-RUN-1003 : finish command "optimize_gate -packarea fpga_prj_gate.area" in  32.240392s wall, 30.750000s user + 1.000000s system = 31.750000s CPU (98.5%)
+RUN-1003 : finish command "optimize_gate -packarea fpga_prj_gate.area" in  35.870107s wall, 33.765625s user + 1.781250s system = 35.546875s CPU (99.1%)
 
-RUN-1004 : used memory is 651 MB, reserved memory is 685 MB, peak memory is 663 MB
+RUN-1004 : used memory is 609 MB, reserved memory is 822 MB, peak memory is 763 MB
 RUN-1002 : start command "legalize_phy_inst"
 SYN-1001 : Stage 3 | Legalize Phy Inst
 SYN-1011 : Flatten model csi2_tx_top
-SYN-1001 : End Stage 3 | Legalize Phy Inst; Time: 0.068010s wall, 0.078125s user + 0.000000s system = 0.078125s CPU (114.9%); Memory(MB): used = 651, reserved = 685, peak = 663;
+SYN-1001 : ADC: Instance "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy/ac_byte[0]$ac_byte_used$u_ddrphy_ac_byte_wrapper/u_ddrphy_byte" LOCATION="X0Y70Z0"
+SYN-1001 : ADC: Instance "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy/ac_byte[1]$ac_byte_used$u_ddrphy_ac_byte_wrapper/u_ddrphy_byte" LOCATION="X0Y60Z0"
+SYN-1001 : ADC: Instance "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy/ac_byte[2]$ac_byte_used$u_ddrphy_ac_byte_wrapper/u_ddrphy_byte" LOCATION="X0Y50Z0"
+SYN-1001 : ADC: Instance "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy/ac_byte[3]$ac_byte_used$u_ddrphy_ac_byte_wrapper/u_ddrphy_byte" LOCATION="X0Y40Z0"
+SYN-1001 : ADC: Instance "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy/bkref[0]$u_ddrphy_bankref" LOCATION="X0Y19Z0"
+SYN-1001 : ADC: Instance "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy/bkref[1]$u_ddrphy_bankref" LOCATION="X0Y59Z0"
+SYN-1001 : ADC: Instance "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy/dx_byte[0]$dx_byte_used$u_ddrphy_dx_byte_wrapper/u_ddrphy_byte" LOCATION="X0Y30Z0"
+SYN-1001 : ADC: Instance "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy/dx_byte[1]$dx_byte_used$u_ddrphy_dx_byte_wrapper/u_ddrphy_byte" LOCATION="X0Y10Z0"
+SYN-1001 : ADC: Instance "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_clk/ioclk[0]$u_ioclk_0" LOCATION="X0Y59Z0"
+SYN-1001 : ADC: Instance "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_clk/ioclk[0]$u_ioclk_1" LOCATION="X0Y59Z1"
+SYN-1001 : ADC: Instance "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_clk/ioclk[1]$u_ioclk_0" LOCATION="X0Y19Z0"
+SYN-1001 : ADC: Instance "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_clk/ioclk[1]$u_ioclk_1" LOCATION="X0Y19Z1"
+SYN-1001 : ADC: Instance "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_clk/u_mlclk_1" LOCATION="X0Y59Z0"
+SYN-1001 : ADC: Instance "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_clk/u_mlclk_2" LOCATION="X0Y59Z1"
+SYN-1001 : ADC: Instance "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_clk/u_pll0/u_pll_inst" LOCATION="X0Y40Z0"
+SYN-1001 : ADC: Instance "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_clk/u_pll1/u_pll_inst" LOCATION="X0Y79Z0"
+SYN-1001 : End Stage 3 | Legalize Phy Inst; Time: 0.114391s wall, 0.093750s user + 0.000000s system = 0.093750s CPU (82.0%); Memory(MB): used = 609, reserved = 822, peak = 763;
 
 RUN-1002 : start command "update_timing"
 RUN-1002 : start command "start_timer"
-RUN-1003 : finish command "start_timer" in  1.236184s wall, 1.234375s user + 0.000000s system = 1.234375s CPU (99.9%)
+RUN-1003 : finish command "update_timing" in  1.692407s wall, 1.687500s user + 0.000000s system = 1.687500s CPU (99.7%)
 
-RUN-1004 : used memory is 651 MB, reserved memory is 685 MB, peak memory is 663 MB
-RUN-1003 : finish command "update_timing" in  1.794372s wall, 1.781250s user + 0.000000s system = 1.781250s CPU (99.3%)
-
-RUN-1004 : used memory is 652 MB, reserved memory is 685 MB, peak memory is 663 MB
+RUN-1004 : used memory is 609 MB, reserved memory is 822 MB, peak memory is 763 MB
 RUN-1002 : start command "report_timing_status -file fpga_prj_gate.ts"
 RUN-1002 : start command "report_timing_summary -file fpga_prj_gate.timing"
 RUN-1002 : start command "flow_status -file flow.status"
-Location         : D:\2026fpga\ph1p35second\fpga\fpga_prj_Runs\syn_1
+Location         : D:\BaiduNetdiskDownload\02_F02_FC02_PH1P35\fpga_11\ph1p35second\fpga\fpga_prj_Runs\syn_1
 Running with     : Tang Dynasty v6.2.168116
                    Copyright (c) 2012-2025 Anlogic Inc.
 Top Model        : csi2_tx_top
@@ -878,21 +1323,21 @@ Device           : PH1P35MDG324
 Speed            : 3
 
 Timing Mode      : basic
-Setup            : WNS  2029ps  TNS        0ps  NUM_FEPS     0
-Hold             : WNS   198ps  TNS        0ps  NUM_FEPS     0
+Setup            : WNS -2696ps  TNS  -443895ps  NUM_FEPS   314
+Hold             : WNS   114ps  TNS        0ps  NUM_FEPS     0
 
 Flow Statistics  :
 RUN-1001 : Flow Statistics:
 RUN-1001 : --------------------------------------------------------------------------------------------------
 RUN-1001 :      command     |  #calls  |  wall time  |  cpu time(s)  |  used memory(mb)  |  peak memory(mb)  
 RUN-1001 : --------------------------------------------------------------------------------------------------
-RUN-1001 :   optimize_gate  |    1     |  32s(62%)   |    31(63%)    |        651        |        663        
-RUN-1001 :   optimize_rtl   |    1     |  17s(33%)   |    16(32%)    |        531        |        586        
-RUN-1001 :   import_device  |    1     |   2s(3%)    |     2(4%)     |        324        |        324        
-RUN-1001 :     read_adc     |    1     |   0s(0%)    |     0(0%)     |        451        |        451        
-RUN-1001 :     read_sdc     |    1     |   0s(0%)    |     0(0%)     |        451        |        451        
+RUN-1001 :   optimize_rtl   |    1     |  42s(53%)   |    41(53%)    |        708        |        763        
+RUN-1001 :   optimize_gate  |    1     |  35s(44%)   |    34(44%)    |        609        |        763        
+RUN-1001 :   import_device  |    1     |   1s(1%)    |     0(0%)     |        334        |        334        
+RUN-1001 :     read_adc     |    1     |   1s(1%)    |     1(1%)     |        643        |        644        
+RUN-1001 :     read_sdc     |    2     |   0s(0%)    |     0(0%)     |        638        |        644        
 RUN-1001 : --------------------------------------------------------------------------------------------------
-RUN-1001 :       total      |    5     |     51s     |      49       |        651        |        663        
+RUN-1001 :       total      |    6     |    1m19s    |      76       |        708        |        763        
 RUN-1001 : --------------------------------------------------------------------------------------------------
 RUN-1002 : start command "export_db fpga_prj_gate.db"
 RUN-1001 : Exported flow parameters
@@ -916,7 +1361,7 @@ RUN-1001 : Exported ChipWatcher
 RUN-1002 : start command "export_flow_status -s read_design -e opt_gate"
 RUN-1002 : start command "flow_status"
 
-Location         : D:\2026fpga\ph1p35second\fpga\fpga_prj_Runs\syn_1
+Location         : D:\BaiduNetdiskDownload\02_F02_FC02_PH1P35\fpga_11\ph1p35second\fpga\fpga_prj_Runs\syn_1
 Running with     : Tang Dynasty v6.2.168116
                    Copyright (c) 2012-2025 Anlogic Inc.
 Top Model        : csi2_tx_top
@@ -924,18 +1369,18 @@ Device           : PH1P35MDG324
 Speed            : 3
 
 Timing Mode      : basic
-Setup            : WNS  2029ps  TNS        0ps  NUM_FEPS     0
-Hold             : WNS   198ps  TNS        0ps  NUM_FEPS     0
+Setup            : WNS -2696ps  TNS  -443895ps  NUM_FEPS   314
+Hold             : WNS   114ps  TNS        0ps  NUM_FEPS     0
 
 RUN-1001 : Flow Statistics:
 RUN-1001 : --------------------------------------------------------------------------------------------------
 RUN-1001 :      command     |  #calls  |  wall time  |  cpu time(s)  |  used memory(mb)  |  peak memory(mb)  
 RUN-1001 : --------------------------------------------------------------------------------------------------
-RUN-1001 :   optimize_gate  |    1     |  32s(62%)   |    31(63%)    |        651        |        663        
-RUN-1001 :   optimize_rtl   |    1     |  17s(33%)   |    16(32%)    |        531        |        586        
-RUN-1001 :   import_device  |    1     |   2s(3%)    |     2(4%)     |        324        |        324        
-RUN-1001 :     read_adc     |    1     |   0s(0%)    |     0(0%)     |        451        |        451        
-RUN-1001 :     read_sdc     |    1     |   0s(0%)    |     0(0%)     |        451        |        451        
+RUN-1001 :   optimize_rtl   |    1     |  42s(53%)   |    41(53%)    |        708        |        763        
+RUN-1001 :   optimize_gate  |    1     |  35s(44%)   |    34(44%)    |        609        |        763        
+RUN-1001 :   import_device  |    1     |   1s(1%)    |     0(0%)     |        334        |        334        
+RUN-1001 :     read_adc     |    1     |   1s(1%)    |     1(1%)     |        643        |        644        
+RUN-1001 :     read_sdc     |    2     |   0s(0%)    |     0(0%)     |        638        |        644        
 RUN-1001 : --------------------------------------------------------------------------------------------------
-RUN-1001 :       total      |    5     |     51s     |      49       |        651        |        663        
+RUN-1001 :       total      |    6     |    1m19s    |      76       |        708        |        763        
 RUN-1001 : --------------------------------------------------------------------------------------------------

@@ -984,7 +984,7 @@ module cnn_digit_weight_rom (
         .DATA_WIDTH_B(8), .ADDR_WIDTH_B(11), .DATA_DEPTH_B(2048),
         .MODE("SP"), .REGMODE_A("NOREG"),
         .IMPLEMENT("20K"), .DEBUGGABLE("NO"), .PACKABLE("NO"),
-        .INIT_FILE("D:/2026fpga/ph1p35second/fpga/uisrc/01_rtl/cnn/weights/cnn_digit_weights_0.mif"),
+        .INIT_FILE("D:/BaiduNetdiskDownload/02_F02_FC02_PH1P35/fpga_11/ph1p35second/fpga/uisrc/01_rtl/cnn/weights/cnn_digit_weights_0.mif"),
         .FILL_ALL("NONE")
     ) u_weight_bank0 (
         .dia(8'd0), .dib(8'd0), .addra(address[10:0]), .addrb(11'd0),
@@ -998,7 +998,7 @@ module cnn_digit_weight_rom (
         .DATA_WIDTH_B(8), .ADDR_WIDTH_B(11), .DATA_DEPTH_B(2048),
         .MODE("SP"), .REGMODE_A("NOREG"),
         .IMPLEMENT("20K"), .DEBUGGABLE("NO"), .PACKABLE("NO"),
-        .INIT_FILE("D:/2026fpga/ph1p35second/fpga/uisrc/01_rtl/cnn/weights/cnn_digit_weights_1.mif"),
+        .INIT_FILE("D:/BaiduNetdiskDownload/02_F02_FC02_PH1P35/fpga_11/ph1p35second/fpga/uisrc/01_rtl/cnn/weights/cnn_digit_weights_1.mif"),
         .FILL_ALL("NONE")
     ) u_weight_bank1 (
         .dia(8'd0), .dib(8'd0), .addra(address[10:0]), .addrb(11'd0),
@@ -1025,7 +1025,7 @@ module cnn_digit_weight_rom (
         .IMPLEMENT("32K"),
         .DEBUGGABLE("NO"),
         .PACKABLE("NO"),
-        .INIT_FILE("D:/2026fpga/EG4D20/cnn/exports/eg4d20_digit_int8_20261026_v2/cnn_digit_weights.mif"),
+        .INIT_FILE("D:/BaiduNetdiskDownload/02_F02_FC02_PH1P35/fpga_11/ph1p35second/fpga/uisrc/01_rtl/cnn/weights/cnn_digit_weights.mif"),
         .FILL_ALL("NONE")
     ) u_weight_bram (
         .dia(8'd0),
