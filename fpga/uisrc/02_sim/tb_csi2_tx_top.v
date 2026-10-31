@@ -17,6 +17,8 @@ module tb_csi2_tx_top;
 
     wire        O_cam_scl;
     wire        IO_cam_sda;
+    tri1        ctrl_i2c_scl;
+    tri1        ctrl_i2c_sda;
     wire        O_cam_24m;
     wire        O_cam_rst;
     wire        O_led_cfg;
@@ -27,6 +29,8 @@ module tb_csi2_tx_top;
         .I_sys_clk          ( sysclk     ),
         .I_rst_n            ( rst_n      ),
         .I_button           ( 2'b11      ),
+        .I_ctrl_i2c_scl     ( ctrl_i2c_scl ),
+        .IO_ctrl_i2c_sda    ( ctrl_i2c_sda ),
         .O_cam_scl          ( O_cam_scl  ),
         .IO_cam_sda         ( IO_cam_sda ),
         .O_cam_24m          ( O_cam_24m  ),

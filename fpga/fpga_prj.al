@@ -252,6 +252,14 @@
                     <Attr Name="CompileOrder" Val="30"/>
                 </FileInfo>
             </File>
+            <File Path="uisrc/01_rtl/ae/ae_i2c_control.v">
+                <FileInfo>
+                    <Attr Name="UsedInSyn" Val="true"/>
+                    <Attr Name="UsedInP&R" Val="true"/>
+                    <Attr Name="BelongTo" Val="design_1"/>
+                    <Attr Name="CompileOrder" Val="38"/>
+                </FileInfo>
+            </File>
         </Verilog>
         <System_Verilog>
             <File Path="uisrc/01_rtl/mipi_dphy_rx/ph1p_mipiio_rx_wrapper.v">

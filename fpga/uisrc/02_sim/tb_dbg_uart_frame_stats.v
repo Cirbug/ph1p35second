@@ -35,6 +35,8 @@ module tb_dbg_uart_frame_stats;
         .I_st_tx_dpll_locked(1'b1), .I_st_tx_ready(1'b0),
         .I_st_ddr_busy(1'b1), .I_st_ddr_error(1'b1),
         .I_st_tx_error_live(1'b0),
+        .I_st_ae_packets(16'h0012), .I_st_ae_errors(16'h0003),
+        .I_st_ae_remote(1'b1),
         .O_uart_tx(uart_tx)
     );
 
@@ -69,11 +71,11 @@ module tb_dbg_uart_frame_stats;
     initial begin
         repeat (4) @(negedge clk);
         rst_n = 1'b1;
-        for (i = 0; i < 50000 && received_count < 320; i = i + 1)
+        for (i = 0; i < 50000 && received_count < 341; i = i + 1)
             @(posedge clk);
 
-        if (received_count != 320) begin
-            $display("FAIL UART byte count=%0d expected=320", received_count);
+        if (received_count != 341) begin
+            $display("FAIL UART byte count=%0d expected=341", received_count);
             $fatal(1);
         end
         check_byte(98, 8'h30); check_byte(99, 8'h37);
@@ -113,7 +115,15 @@ module tb_dbg_uart_frame_stats;
         check_byte(295, 8'h31); check_byte(301, 8'h30);
         check_byte(306, 8'h31); check_byte(311, 8'h31);
         check_byte(317, 8'h30);
-        check_byte(318, 8'h0D); check_byte(319, 8'h0A);
+        check_byte(319, 8'h41); check_byte(320, 8'h50);
+        check_byte(322, 8'h30); check_byte(323, 8'h30);
+        check_byte(324, 8'h31); check_byte(325, 8'h32);
+        check_byte(327, 8'h45); check_byte(328, 8'h52);
+        check_byte(330, 8'h30); check_byte(331, 8'h30);
+        check_byte(332, 8'h30); check_byte(333, 8'h33);
+        check_byte(335, 8'h52); check_byte(336, 8'h41);
+        check_byte(338, 8'h31);
+        check_byte(339, 8'h0D); check_byte(340, 8'h0A);
         $display("PASS UART frame and DDR/TX trace fields");
         $finish;
     end

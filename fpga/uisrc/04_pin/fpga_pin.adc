@@ -4,6 +4,8 @@ set_pin_assignment	{ I_rst_n }		{ LOCATION = R10; IOSTANDARD = LVCMOS33; PULLTYP
 # 按键：低有效，[0] 减小曝光，[1] 增大曝光
 set_pin_assignment	{ I_button[0] }	{ LOCATION = N2;  IOSTANDARD = LVCMOS33; PULLTYPE = PULLUP; }
 set_pin_assignment	{ I_button[1] }	{ LOCATION = J14; IOSTANDARD = LVCMOS33; PULLTYPE = PULLUP; }
+set_pin_assignment { I_ctrl_i2c_scl } { LOCATION = P11; IOSTANDARD = LVCMOS33; PULLTYPE = PULLUP; }
+set_pin_assignment { IO_ctrl_i2c_sda } { LOCATION = R12; IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 8; PULLTYPE = PULLUP; }
 
 set_pin_assignment	{ O_cam_scl }	{ LOCATION = T9; IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 8; PULLTYPE = PULLUP; }
 set_pin_assignment	{ IO_cam_sda }	{ LOCATION = U9; IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 8; PULLTYPE = PULLUP; }

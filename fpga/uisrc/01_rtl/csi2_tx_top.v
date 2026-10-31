@@ -31,6 +31,9 @@ module csi2_tx_top #(
 
     // 按键：I_button[0] 减小曝光，I_button[1] 增大曝光（低有效）
     input  wire [1:0]  I_button,
+    // A 板 CSI-I2C sideband -> B 板 DSI-I2C sideband.
+    input  wire        I_ctrl_i2c_scl,     // P11
+    inout  wire        IO_ctrl_i2c_sda,    // R12
 
     // 摄像头边带
     output wire        O_cam_scl,          // T9
@@ -131,16 +134,46 @@ module csi2_tx_top #(
     wire        ae_req;
     wire [15:0] ae_val;
     wire [15:0] ag_val;
+    wire        ae_cfg_req;
+    wire [15:0] ae_cfg_val;
+    wire [15:0] ag_cfg_val;
+    wire [15:0] vts_cfg_val;
+    wire        ae_remote_active;
+    wire [15:0] ae_packet_count;
+    wire [15:0] ae_error_count;
 
     ae_set u_ae_set (
         .I_clk         ( clk_24m      ),
         .I_rst         ( ~rst_n_24    ),
-        .I_btn         ( { I_button, 2'b11 } ),
+        // ae_set uses I_btn[0:1] for exposure and [2:3] for gain.
+        // Keep the two physical keys on the exposure controls; tie gain keys idle.
+        .I_btn         ( { 2'b11, I_button } ),
         .I_ae_cfg_done ( cam_ae_done  ),
         .I_cam_cfg_done( cam_cfg_done ),
         .O_ae_req      ( ae_req       ),
         .O_ae          ( ae_val       ),
         .O_ag          ( ag_val       )
+    );
+
+    ae_i2c_control #(
+        .SLAVE_ADDRESS(7'h2A), .DEFAULT_VTS(16'd2000)
+    ) u_ae_i2c_control (
+        .clk            ( clk_24m          ),
+        .rst_n          ( rst_n_24         ),
+        .scl            ( I_ctrl_i2c_scl   ),
+        .sda            ( IO_ctrl_i2c_sda  ),
+        .local_req      ( ae_req           ),
+        .local_ae       ( ae_val           ),
+        .local_ag       ( ag_val           ),
+        .cam_cfg_done   ( cam_cfg_done     ),
+        .ae_cfg_done    ( cam_ae_done      ),
+        .cfg_req        ( ae_cfg_req       ),
+        .cfg_ae         ( ae_cfg_val       ),
+        .cfg_ag         ( ag_cfg_val       ),
+        .cfg_vts        ( vts_cfg_val      ),
+        .remote_active  ( ae_remote_active ),
+        .packet_count   ( ae_packet_count  ),
+        .error_count    ( ae_error_count   )
     );
 
     wire [8:0] dbg_regidx;     // 摄像头配置进度（仅调试用）
@@ -150,9 +183,10 @@ module csi2_tx_top #(
     ) u_cam_cfg (
         .I_clk        ( clk_24m      ),
         .I_rst_n      ( rst_n_24     ),
-        .I_ae_req     ( ae_req       ),
-        .I_ae         ( ae_val       ),
-        .I_ag         ( ag_val       ),
+        .I_ae_req     ( ae_cfg_req   ),
+        .I_ae         ( ae_cfg_val   ),
+        .I_ag         ( ag_cfg_val   ),
+        .I_vts        ( vts_cfg_val  ),
         .O_cam_scl    ( O_cam_scl    ),
         .IO_cam_sda   ( IO_cam_sda   ),
         .O_cfg_done   ( cam_cfg_done ),
@@ -1402,6 +1436,8 @@ module csi2_tx_top #(
         .I_st_tx_long_lines(diag_tx_line_sync), .I_st_tx_dpll_locked(diag_dpll),
         .I_st_tx_ready(diag_ready), .I_st_ddr_busy(diag_busy),
         .I_st_ddr_error(diag_error), .I_st_tx_error_live(diag_txerr),
+        .I_st_ae_packets(ae_packet_count), .I_st_ae_errors(ae_error_count),
+        .I_st_ae_remote(ae_remote_active),
         .O_uart_tx(dbg_uart_tx)
     );
 

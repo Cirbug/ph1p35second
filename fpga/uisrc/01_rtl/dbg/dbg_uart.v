@@ -65,6 +65,9 @@ module dbg_uart #(
     input  wire        I_st_ddr_busy,
     input  wire        I_st_ddr_error,
     input  wire        I_st_tx_error_live,
+    input  wire [15:0] I_st_ae_packets,
+    input  wire [15:0] I_st_ae_errors,
+    input  wire        I_st_ae_remote,
 
     output reg         O_uart_tx
 );
@@ -72,7 +75,7 @@ module dbg_uart #(
     localparam DIV     = CLK_HZ / BAUD;
     localparam MS_CNT  = CLK_HZ / 1000;
     localparam GAP_CNT = MS_CNT * GAP_MS;
-    localparam NBYTE   = 320;
+    localparam NBYTE   = 341;
 
     function [7:0] hx;
         input [3:0] n;
@@ -404,8 +407,29 @@ module dbg_uart #(
         9'd315: msg_byte = 8'h45;
         9'd316: msg_byte = 8'h3D;
         9'd317: msg_byte = 8'd48 + {7'd0, I_st_tx_error_live};
-        9'd318: msg_byte = 8'h0D;
-        9'd319: msg_byte = 8'h0A;
+        9'd318: msg_byte = 8'h20;
+        9'd319: msg_byte = 8'h41;
+        9'd320: msg_byte = 8'h50;
+        9'd321: msg_byte = 8'h3D;
+        9'd322: msg_byte = hx(I_st_ae_packets[15:12]);
+        9'd323: msg_byte = hx(I_st_ae_packets[11:8]);
+        9'd324: msg_byte = hx(I_st_ae_packets[7:4]);
+        9'd325: msg_byte = hx(I_st_ae_packets[3:0]);
+        9'd326: msg_byte = 8'h20;
+        9'd327: msg_byte = 8'h45;
+        9'd328: msg_byte = 8'h52;
+        9'd329: msg_byte = 8'h3D;
+        9'd330: msg_byte = hx(I_st_ae_errors[15:12]);
+        9'd331: msg_byte = hx(I_st_ae_errors[11:8]);
+        9'd332: msg_byte = hx(I_st_ae_errors[7:4]);
+        9'd333: msg_byte = hx(I_st_ae_errors[3:0]);
+        9'd334: msg_byte = 8'h20;
+        9'd335: msg_byte = 8'h52;
+        9'd336: msg_byte = 8'h41;
+        9'd337: msg_byte = 8'h3D;
+        9'd338: msg_byte = 8'd48 + {7'd0, I_st_ae_remote};
+        9'd339: msg_byte = 8'h0D;
+        9'd340: msg_byte = 8'h0A;
         default: msg_byte = 8'h20;
         endcase
     end

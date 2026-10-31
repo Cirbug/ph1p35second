@@ -44,6 +44,7 @@ input  wire             I_rst_n,  //系统复位输入
 input  wire             I_ae_req,//摄像头AE控制
 input  wire	 [15:0] 	I_ae,
 input  wire	 [15:0] 	I_ag,
+input  wire	 [15:0] 	I_vts,
 output wire             O_cam_scl, //I2C总线，SCL时钟
 inout  wire             IO_cam_sda, //I2C总线，SDA数据
 output reg              O_cfg_done, //配置完成
@@ -90,6 +91,7 @@ always@(posedge I_clk ) begin
         case(TS_S)
         0:if(reg_index == REG_SIZE && O_cfg_done == 1'b0) begin//如果配置完成
             O_cfg_done <= 1'b1;       //设置 cfg_done标准
+            reg_index  <= 9'd0;
         end 
         else if(reg_index == REG_SIZE && O_ae_cfg_done == 1'b0) begin//如果配置完成
             O_ae_cfg_done <= 1'b1;       //设置 cfg_done标准
@@ -171,7 +173,8 @@ uics500regAE uics500regAE_inst
 .REG_INDEX(reg_index),//寄存索引
 .REG_DATA(REG_DATA_AE),   //寄存器数据
 .I_AG(w_gain_val),
-.I_AE(I_ae)
+.I_AE(I_ae),
+.I_VTS(I_vts)
 );  
 
 

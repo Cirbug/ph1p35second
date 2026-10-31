@@ -1,5 +1,9 @@
 create_clock -name {sysclk} -period 40.000 -waveform {0.000 20.000} [get_ports {I_sys_clk}]
 
+# A-board I2C sideband is asynchronous to the B-board 24 MHz domain. The
+# slave synchronizes both lines before edge detection and byte sampling.
+set_false_path -from [get_ports {I_ctrl_i2c_scl IO_ctrl_i2c_sda}]
+
 # MIPI RX 时钟来自摄像头，从 pad 进入后经 PHY 内部 PLL 产生字节时钟。
 # 静态工具无法自己推导，这里在 pad 上显式建时钟，再由 derive_clocks 传递。
 # 450MHz 为约束上限（与厂家例程一致），实际速率取决于摄像头模式。
