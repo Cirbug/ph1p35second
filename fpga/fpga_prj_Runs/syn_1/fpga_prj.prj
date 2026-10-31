@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Project Version="3" Minor="2" RunTime="2026-11-01T01:06:26">
+<Project Version="3" Minor="2" RunTime="2026-11-01T01:11:42">
     <Project_Created_Time></Project_Created_Time>
     <TD_Version>6.2.168116</TD_Version>
     <Name>fpga_prj</Name>
@@ -140,6 +140,14 @@
                     <Attr Name="CompileOrder" Val="18"/>
                 </FileInfo>
             </File>
+            <File Path="../../uisrc/01_rtl/csi2/csi2_raw10_scale_crop.v">
+                <FileInfo>
+                    <Attr Name="UsedInSyn" Val="true"/>
+                    <Attr Name="UsedInP&R" Val="true"/>
+                    <Attr Name="BelongTo" Val="design_1"/>
+                    <Attr Name="CompileOrder" Val="20"/>
+                </FileInfo>
+            </File>
             <File Path="../../uisrc/01_rtl/csi2/csi2_ptr_fifo.v">
                 <FileInfo>
                     <Attr Name="UsedInSyn" Val="true"/>
@@ -196,7 +204,7 @@
                     <Attr Name="CompileOrder" Val="32"/>
                 </FileInfo>
             </File>
-            <File Path="../../uisrc/01_rtl/ddr/ddr_frame_cache.v">
+            <File Path="../../uisrc/01_rtl/ddr/mc_to_user_interface.v">
                 <FileInfo>
                     <Attr Name="UsedInSyn" Val="true"/>
                     <Attr Name="UsedInP&R" Val="true"/>
@@ -204,7 +212,7 @@
                     <Attr Name="CompileOrder" Val="33"/>
                 </FileInfo>
             </File>
-            <File Path="../../uisrc/01_rtl/ddr/mc_to_user_interface.v">
+            <File Path="../../uisrc/01_rtl/ddr/ph1p35_324_ddr_wrapper.v">
                 <FileInfo>
                     <Attr Name="UsedInSyn" Val="true"/>
                     <Attr Name="UsedInP&R" Val="true"/>
@@ -212,7 +220,7 @@
                     <Attr Name="CompileOrder" Val="34"/>
                 </FileInfo>
             </File>
-            <File Path="../../uisrc/01_rtl/ddr/ph1p35_324_ddr_wrapper.v">
+            <File Path="../../uisrc/01_rtl/ddr/ddr_triple_frame_cache.v">
                 <FileInfo>
                     <Attr Name="UsedInSyn" Val="true"/>
                     <Attr Name="UsedInP&R" Val="true"/>
@@ -222,6 +230,7 @@
             </File>
             <File Path="../../uisrc/01_rtl/dbg/dbg_uart.v">
                 <FileInfo>
+                    <Attr Name="AutoExcluded" Val="true"/>
                     <Attr Name="UsedInSyn" Val="true"/>
                     <Attr Name="UsedInP&R" Val="true"/>
                     <Attr Name="BelongTo" Val="design_1"/>
@@ -234,6 +243,14 @@
                     <Attr Name="UsedInP&R" Val="true"/>
                     <Attr Name="BelongTo" Val="design_1"/>
                     <Attr Name="CompileOrder" Val="25"/>
+                </FileInfo>
+            </File>
+            <File Path="../../uisrc/01_rtl/ae/ae_i2c_control.v">
+                <FileInfo>
+                    <Attr Name="UsedInSyn" Val="true"/>
+                    <Attr Name="UsedInP&R" Val="true"/>
+                    <Attr Name="BelongTo" Val="design_1"/>
+                    <Attr Name="CompileOrder" Val="36"/>
                 </FileInfo>
             </File>
         </Verilog>
