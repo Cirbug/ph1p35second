@@ -23,7 +23,8 @@ module csi2_tx_top #(
     parameter DBG_MODE = 0,           // 1 = 三颗灯改为显示 I2C 内部状态
     // 两块 14→40 转接板的 D0/D1 顺序相反，实机必须为 1。
     // 提成参数是为了让 testbench 能传 0 来按自然字节序校验。
-    parameter LANE_SWAP = 1
+    parameter LANE_SWAP = 1,
+    parameter CNN_VOFA_IMAGE_DUMP = 1
 )(
     input  wire        I_sys_clk,          // 25MHz 单端，C4
 
@@ -57,7 +58,7 @@ module csi2_tx_top #(
     output wire        O_led_cfg,      // J18：摄像头 I2C 配置完成
     output wire        O_led_beat,     // K16：帧活动心跳，约 1Hz 闪烁
     output wire        O_led_err,      // K17：overflow 或 wc_err
-    output wire        O_uart_tx,      // J3：调试串口 115200 8N1
+    output wire        O_uart_tx,      // J3：VOFA FireWater 图像/识别结果 115200 8N1
 
     // PH1P35 内置 DDR2，复用既有 16-bit 控制器与板级约束。
     output wire [12:0] ddr_addr,
@@ -387,30 +388,17 @@ module csi2_tx_top #(
     wire [8:0]  cnn_digit_h;
     wire        cnn_detector_frame_done;
     wire [4:0]  cnn_digit_count;
+    wire [15:0] cnn_frame_ink_pixels;
+    wire [8:0]  cnn_frame_active_rows;
+    wire [3:0]  cnn_frame_band_count;
+    wire [11:0] cnn_frame_column_segments;
     wire        cnn_detector_busy;
     wire        cnn_model_check_done;
     wire [31:0] cnn_model_weight_crc32;
-    reg         cnn_result_toggle;
-    reg [9:0]   cnn_result_x, cnn_result_w;
-    reg [8:0]   cnn_result_y, cnn_result_h;
-    reg [3:0]   cnn_result_class;
-
-    always @(posedge clk_100m or negedge rst_n_100) begin
-        if (!rst_n_100) begin
-            cnn_result_toggle <= 1'b0;
-            cnn_result_x <= 10'd0; cnn_result_y <= 9'd0;
-            cnn_result_w <= 10'd0; cnn_result_h <= 9'd0;
-            cnn_result_class <= 4'd0;
-        end else if (cnn_digit_done) begin
-            cnn_result_x <= cnn_digit_x;
-            cnn_result_y <= cnn_digit_y;
-            cnn_result_w <= cnn_digit_w;
-            cnn_result_h <= cnn_digit_h;
-            cnn_result_class <= cnn_digit_class;
-            cnn_result_toggle <= ~cnn_result_toggle;
-        end
-    end
-
+    wire        cnn_dump_active;
+    wire        cnn_dump_read_enable;
+    wire [15:0] cnn_dump_read_address;
+    wire        cnn_dump_read_data;
     cnn_frame_digit_detector #(
         .DARK_THRESHOLD(8'd128),
         .MAX_BANDS(8),
@@ -423,6 +411,10 @@ module csi2_tx_top #(
         .pixel_valid  ( cnn_pixel_valid ),
         .pixel_data   ( cnn_pixel_data ),
         .frame_complete( cnn_frame_complete ),
+        .image_dump_active(cnn_dump_active),
+        .image_dump_read_enable(cnn_dump_read_enable),
+        .image_dump_read_address(cnn_dump_read_address),
+        .image_dump_read_data(cnn_dump_read_data),
         .digit_done   ( cnn_digit_done ),
         .digit_class  ( cnn_digit_class ),
         .digit_x      ( cnn_digit_x ),
@@ -431,6 +423,10 @@ module csi2_tx_top #(
         .digit_h      ( cnn_digit_h ),
         .frame_done   ( cnn_detector_frame_done ),
         .frame_digit_count( cnn_digit_count ),
+        .frame_ink_pixels( cnn_frame_ink_pixels ),
+        .frame_active_rows( cnn_frame_active_rows ),
+        .frame_band_count( cnn_frame_band_count ),
+        .frame_column_segments( cnn_frame_column_segments ),
         .busy         ( cnn_detector_busy ),
         .model_check_done( cnn_model_check_done ),
         .model_weight_crc32( cnn_model_weight_crc32 ),
@@ -1379,66 +1375,35 @@ module csi2_tx_top #(
         dbg_h1    <= h1_r;
     end
 
-    reg result_toggle_meta, result_toggle_sync, result_toggle_seen;
-    reg result_start;
-    always @(posedge clk_24m or negedge rst_n_24) begin
-        if (!rst_n_24) begin
-            result_toggle_meta <= 1'b0;
-            result_toggle_sync <= 1'b0;
-            result_toggle_seen <= 1'b0;
-            result_start <= 1'b0;
-        end else begin
-            result_toggle_meta <= cnn_result_toggle;
-            result_toggle_sync <= result_toggle_meta;
-            result_start <= 1'b0;
-            if (result_toggle_sync != result_toggle_seen) begin
-                result_toggle_seen <= result_toggle_sync;
-                result_start <= 1'b1;
-            end
-        end
-    end
-
-    wire result_uart_busy;
-    wire result_uart_tx;
-    wire dbg_uart_tx;
-    assign O_uart_tx = dbg_uart_tx;
-    cnn_result_uart #(
-        .CLK_HZ(24000000), .BAUD(115200)
-    ) u_cnn_result_uart (
-        .clk(clk_24m), .rst_n(rst_n_24), .start(result_start),
-        .x(cnn_result_x), .y(cnn_result_y), .w(cnn_result_w), .h(cnn_result_h),
-        .class_id(cnn_result_class), .busy(result_uart_busy), .uart_tx(result_uart_tx)
+    wire cnn_uart_overflow;
+    wire cnn_result_uart_tx;
+    cnn_result_uart_path #(
+        .CLK_HZ(24000000), .BAUD(115200), .FIFO_ADDR_WIDTH(5)
+    ) u_cnn_result_uart_path (
+        .wr_clk(clk_100m), .wr_rst_n(rst_n_100), .wr_en(cnn_digit_done),
+        .frame_done(cnn_detector_frame_done), .frame_digit_count(cnn_digit_count),
+        .frame_ink_pixels(cnn_frame_ink_pixels),
+        .frame_active_rows(cnn_frame_active_rows),
+        .frame_band_count(cnn_frame_band_count),
+        .frame_column_segments(cnn_frame_column_segments),
+        .x(cnn_digit_x), .y(cnn_digit_y), .w(cnn_digit_w), .h(cnn_digit_h),
+        .class_id(cnn_digit_class),
+        .clk(clk_24m), .rst_n(rst_n_24),
+        .uart_tx(cnn_result_uart_tx), .overflow(cnn_uart_overflow)
     );
 
-    dbg_uart #(
-        .CLK_HZ(24000000), .BAUD(115200), .GAP_MS(100)
-    ) u_dbg_uart (
-        .I_clk(clk_24m), .I_rst_n(rst_n_24),
-        .I_st_cfg(cam_cfg_done), .I_st_wc(dbg_wc), .I_st_dt(dbg_dt),
-        .I_st_burst(dbg_burst), .I_st_h0(dbg_h0), .I_st_h1(dbg_h1),
-        .I_st_frame(dbg_frame), .I_st_rxval(dbg_rxval), .I_st_werr(dbg_werr),
-        .I_st_gapmax(dbg_fs), .I_st_pktcnt(dbg_fe),
-        .I_st_rx_fs(dbg_rxfs), .I_st_rx_fe(dbg_rxfe), .I_st_raw_fe(dbg_rawfe),
-        .I_st_rx_rows(dbg_rx_rows), .I_st_rx_wc(dbg_rx_wc),
-        .I_st_rx_bad_rows(dbg_rx_bad_rows), .I_st_rx_parse_err(dbg_rx_parse_err),
-        .I_st_scale_rows(dbg_scale_rows), .I_st_scale_wc(dbg_scale_wc),
-        .I_st_scale_err(dbg_scale_err),
-        .I_st_tx_packets(dbg_tx_packets), .I_st_tx_lines(dbg_tx_lines),
-        .I_st_tx_bytes(dbg_tx_bytes), .I_st_tx_wc(dbg_tx_wc),
-        .I_st_tx_err(dbg_tx_err),
-        .I_st_ddr_init(diag_init), .I_st_ddr_commit(diag_commit_sync),
-        .I_st_ddr_drop(diag_drop_sync), .I_st_ddr_ready_count(diag_ready_count),
-        .I_st_ddr_rd_req(diag_rd_req_sync), .I_st_ddr_rd_rsp(diag_rd_rsp_sync),
-        .I_st_cache_words(diag_cache_word_sync), .I_st_cache_lines(diag_cache_line_sync),
-        .I_st_cache_frames(diag_cache_frame_sync),
-        .I_st_relay_writes(diag_relay_write_sync), .I_st_relay_reads(diag_relay_read_sync),
-        .I_st_relay_full(diag_full), .I_st_tx_words(diag_tx_word_sync),
-        .I_st_tx_long_lines(diag_tx_line_sync), .I_st_tx_dpll_locked(diag_dpll),
-        .I_st_tx_ready(diag_ready), .I_st_ddr_busy(diag_busy),
-        .I_st_ddr_error(diag_error), .I_st_tx_error_live(diag_txerr),
-        .I_st_ae_packets(ae_packet_count), .I_st_ae_errors(ae_error_count),
-        .I_st_ae_remote(ae_remote_active),
-        .O_uart_tx(dbg_uart_tx)
+    wire cnn_vofa_uart_tx;
+    cnn_vofa_image_uart #(
+        .CLK_HZ(100000000), .BAUD(115200), .WIDTH(320), .HEIGHT(180)
+    ) u_cnn_vofa_image_uart (
+        .clk(clk_100m), .rst_n(rst_n_100),
+        .frame_done(CNN_VOFA_IMAGE_DUMP ? cnn_detector_frame_done : 1'b0),
+        .mask_data(cnn_dump_read_data),
+        .mask_read_enable(cnn_dump_read_enable),
+        .mask_read_address(cnn_dump_read_address),
+        .dump_active(cnn_dump_active), .uart_tx(cnn_vofa_uart_tx)
     );
+
+    assign O_uart_tx = CNN_VOFA_IMAGE_DUMP ? cnn_vofa_uart_tx : cnn_result_uart_tx;
 
 endmodule

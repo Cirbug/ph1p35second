@@ -235,3 +235,173 @@ module cnn_raw10_resize_bin #(
         end
     end
 endmodule
+
+module cnn_binary_mipi_preview #(
+    parameter integer SRC_WIDTH = 320,
+    parameter integer SRC_HEIGHT = 180,
+    parameter integer SCALE = 6
+)(
+    input  wire        clk,
+    input  wire        rst,
+    input  wire        pixel_valid,
+    input  wire [7:0]  pixel_data,
+    input  wire [9:0]  pixel_x,
+    input  wire [8:0]  pixel_y,
+    input  wire        out_ready,
+    output reg         out_valid,
+    output reg  [17:0] out_token,
+    output reg         input_overrun
+);
+    localparam integer OUT_WIDTH = SRC_WIDTH * SCALE;
+    localparam integer OUT_LINE_WC = OUT_WIDTH * 10 / 8;
+    localparam integer OUT_WORDS = OUT_LINE_WC / 2;
+    localparam integer WORD_WIDTH = (OUT_WORDS <= 2) ? 1 : $clog2(OUT_WORDS);
+
+    localparam [2:0] ST_CAPTURE = 3'd0;
+    localparam [2:0] ST_FRAME_START = 3'd1;
+    localparam [2:0] ST_DATA = 3'd2;
+    localparam [2:0] ST_LINE_END = 3'd3;
+    localparam [2:0] ST_FRAME_END = 3'd4;
+
+    reg [SRC_WIDTH-1:0] line_buffer0;
+    reg [SRC_WIDTH-1:0] line_buffer1;
+    reg [2:0] state;
+    reg capture_bank;
+    reg output_bank;
+    reg pending_valid;
+    reg pending_bank;
+    reg [8:0] pending_y;
+    reg [8:0] source_y_latched;
+    reg [2:0] repeat_index;
+    reg [WORD_WIDTH-1:0] word_index;
+
+    function [7:0] packed_raw10_byte;
+        input integer byte_index;
+        integer group_index;
+        integer byte_in_group;
+        integer expanded_x;
+        integer source_x;
+        integer k;
+        begin
+            group_index = byte_index / 5;
+            byte_in_group = byte_index - group_index * 5;
+            if (byte_in_group < 4) begin
+                expanded_x = group_index * 4 + byte_in_group;
+                source_x = expanded_x / SCALE;
+                packed_raw10_byte = (output_bank ? line_buffer1[source_x] :
+                                                   line_buffer0[source_x]) ? 8'hff : 8'h00;
+            end else begin
+                packed_raw10_byte = 8'h00;
+                for (k = 0; k < 4; k = k + 1) begin
+                    expanded_x = group_index * 4 + k;
+                    source_x = expanded_x / SCALE;
+                    if (output_bank ? line_buffer1[source_x] : line_buffer0[source_x]) begin
+                        case (k)
+                            0: packed_raw10_byte[1:0] = 2'b11;
+                            1: packed_raw10_byte[3:2] = 2'b11;
+                            2: packed_raw10_byte[5:4] = 2'b11;
+                            3: packed_raw10_byte[7:6] = 2'b11;
+                        endcase
+                    end
+                end
+            end
+        end
+    endfunction
+
+    wire [11:0] byte_index;
+    reg [15:0] packed_word;
+    assign byte_index = {word_index, 1'b0};
+
+    always @(byte_index or output_bank or line_buffer0 or line_buffer1) begin
+        packed_word = {
+            packed_raw10_byte(byte_index), packed_raw10_byte(byte_index + 1'b1)
+        };
+    end
+
+    always @* begin
+        out_valid = (state != ST_CAPTURE);
+        out_token = 18'd0;
+        case (state)
+            ST_FRAME_START: out_token = {2'b01, 16'd0};
+            ST_DATA:       out_token = {2'b00, packed_word};
+            ST_LINE_END:   out_token = {2'b10, OUT_LINE_WC[15:0]};
+            ST_FRAME_END:  out_token = {2'b11, 16'd0};
+            default:       out_token = 18'd0;
+        endcase
+    end
+
+    always @(posedge clk or posedge rst) begin
+        if (rst) begin
+            state <= ST_CAPTURE;
+            capture_bank <= 1'b0;
+            output_bank <= 1'b0;
+            pending_valid <= 1'b0;
+            pending_bank <= 1'b0;
+            pending_y <= 9'd0;
+            source_y_latched <= 9'd0;
+            repeat_index <= 3'd0;
+            word_index <= {WORD_WIDTH{1'b0}};
+            input_overrun <= 1'b0;
+        end else begin
+            if (pixel_valid) begin
+                if (capture_bank)
+                    line_buffer1[pixel_x] <= pixel_data[7];
+                else
+                    line_buffer0[pixel_x] <= pixel_data[7];
+
+                if (pixel_x == SRC_WIDTH - 1) begin
+                    capture_bank <= ~capture_bank;
+                    if (state == ST_CAPTURE && !pending_valid) begin
+                        source_y_latched <= pixel_y;
+                        output_bank <= capture_bank;
+                        repeat_index <= 3'd0;
+                        word_index <= {WORD_WIDTH{1'b0}};
+                        state <= (pixel_y == 0) ? ST_FRAME_START : ST_DATA;
+                    end else if (!pending_valid) begin
+                        pending_valid <= 1'b1;
+                        pending_bank <= capture_bank;
+                        pending_y <= pixel_y;
+                    end else begin
+                        input_overrun <= 1'b1;
+                    end
+                end
+            end
+
+            if (state == ST_CAPTURE && pending_valid &&
+                !(pixel_valid && (pixel_x == SRC_WIDTH - 1))) begin
+                source_y_latched <= pending_y;
+                output_bank <= pending_bank;
+                pending_valid <= 1'b0;
+                repeat_index <= 3'd0;
+                word_index <= {WORD_WIDTH{1'b0}};
+                state <= (pending_y == 0) ? ST_FRAME_START : ST_DATA;
+            end
+
+            if (out_valid && out_ready) begin
+                case (state)
+                    ST_FRAME_START: state <= ST_DATA;
+                    ST_DATA: begin
+                        if (word_index == OUT_WORDS - 1)
+                            state <= ST_LINE_END;
+                        else
+                            word_index <= word_index + 1'b1;
+                    end
+                    ST_LINE_END: begin
+                        if (repeat_index == SCALE - 1) begin
+                            if (source_y_latched == SRC_HEIGHT - 1)
+                                state <= ST_FRAME_END;
+                            else
+                                state <= ST_CAPTURE;
+                        end else begin
+                            repeat_index <= repeat_index + 1'b1;
+                            word_index <= {WORD_WIDTH{1'b0}};
+                            state <= ST_DATA;
+                        end
+                    end
+                    ST_FRAME_END: state <= ST_CAPTURE;
+                    default: state <= ST_CAPTURE;
+                endcase
+            end
+        end
+    end
+endmodule

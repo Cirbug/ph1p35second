@@ -9,6 +9,9 @@ module tb_cnn_result_uart;
 
     cnn_result_uart #(.CLK_HZ(40000000), .BAUD(10000000)) dut (
         .clk(clk), .rst_n(rst_n), .start(start),
+        .record_type(2'b00), .frame_digit_count(5'd0),
+        .frame_ink_pixels(16'd0), .frame_active_rows(9'd0),
+        .frame_band_count(4'd0), .frame_column_segments(12'd0),
         .x(10'd24), .y(9'd45), .w(10'd41), .h(9'd48), .class_id(4'd3),
         .busy(busy), .uart_tx(uart_tx)
     );

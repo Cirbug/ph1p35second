@@ -19,6 +19,7 @@ module dbg_uart #(
 )(
     input  wire        I_clk,
     input  wire        I_rst_n,
+    input  wire        I_enable,
 
     input  wire        I_st_cfg,
     input  wire [15:0] I_st_wc,
@@ -68,14 +69,16 @@ module dbg_uart #(
     input  wire [15:0] I_st_ae_packets,
     input  wire [15:0] I_st_ae_errors,
     input  wire        I_st_ae_remote,
+    input  wire        I_st_cnn_overflow,
 
-    output reg         O_uart_tx
+    output reg         O_uart_tx,
+    output wire        O_busy
 );
 
     localparam DIV     = CLK_HZ / BAUD;
     localparam MS_CNT  = CLK_HZ / 1000;
     localparam GAP_CNT = MS_CNT * GAP_MS;
-    localparam NBYTE   = 341;
+    localparam NBYTE   = 346;
 
     function [7:0] hx;
         input [3:0] n;
@@ -428,8 +431,13 @@ module dbg_uart #(
         9'd336: msg_byte = 8'h41;
         9'd337: msg_byte = 8'h3D;
         9'd338: msg_byte = 8'd48 + {7'd0, I_st_ae_remote};
-        9'd339: msg_byte = 8'h0D;
-        9'd340: msg_byte = 8'h0A;
+        9'd339: msg_byte = 8'h20;
+        9'd340: msg_byte = 8'h51;
+        9'd341: msg_byte = 8'h46;
+        9'd342: msg_byte = 8'h3D;
+        9'd343: msg_byte = 8'd48 + {7'd0, I_st_cnn_overflow};
+        9'd344: msg_byte = 8'h0D;
+        9'd345: msg_byte = 8'h0A;
         default: msg_byte = 8'h20;
         endcase
     end
@@ -445,6 +453,8 @@ module dbg_uart #(
     reg [3:0]  bitn;
     reg [9:0]  shft;
 
+    assign O_busy = (s != S_GAP);
+
     always @(posedge I_clk or negedge I_rst_n) begin
         if (!I_rst_n) begin
             s <= S_GAP; gap_cnt <= 24'd0; div_cnt <= 16'd0;
@@ -454,7 +464,9 @@ module dbg_uart #(
             S_GAP: begin
                 O_uart_tx <= 1'b1;
                 if (gap_cnt >= GAP_CNT[23:0]) begin
-                    gap_cnt <= 24'd0; idx <= 9'd0; s <= S_LOAD;
+                    if (I_enable) begin
+                        gap_cnt <= 24'd0; idx <= 9'd0; s <= S_LOAD;
+                    end
                 end else gap_cnt <= gap_cnt + 24'd1;
             end
             S_LOAD: begin

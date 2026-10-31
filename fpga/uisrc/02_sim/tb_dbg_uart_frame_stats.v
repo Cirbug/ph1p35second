@@ -4,6 +4,7 @@ module tb_dbg_uart_frame_stats;
     reg clk = 1'b0;
     reg rst_n = 1'b0;
     wire uart_tx;
+    wire busy;
     integer received_count = 0;
     integer bit_index;
     reg receiver_busy = 1'b0;
@@ -14,6 +15,7 @@ module tb_dbg_uart_frame_stats;
 
     dbg_uart #(.CLK_HZ(1000), .BAUD(100), .GAP_MS(1)) dut (
         .I_clk(clk), .I_rst_n(rst_n),
+        .I_enable(1'b1),
         .I_st_cfg(1'b1), .I_st_wc(16'h0CA8), .I_st_dt(8'h2B),
         .I_st_burst(16'd0), .I_st_h0(16'd0), .I_st_h1(16'd0),
         .I_st_frame(16'd1), .I_st_rxval(16'd2), .I_st_werr(1'b0),
@@ -37,7 +39,7 @@ module tb_dbg_uart_frame_stats;
         .I_st_tx_error_live(1'b0),
         .I_st_ae_packets(16'h0012), .I_st_ae_errors(16'h0003),
         .I_st_ae_remote(1'b1),
-        .O_uart_tx(uart_tx)
+        .I_st_cnn_overflow(1'b0), .O_busy(busy), .O_uart_tx(uart_tx)
     );
 
     always begin
@@ -71,11 +73,11 @@ module tb_dbg_uart_frame_stats;
     initial begin
         repeat (4) @(negedge clk);
         rst_n = 1'b1;
-        for (i = 0; i < 50000 && received_count < 341; i = i + 1)
+        for (i = 0; i < 50000 && received_count < 346; i = i + 1)
             @(posedge clk);
 
-        if (received_count != 341) begin
-            $display("FAIL UART byte count=%0d expected=341", received_count);
+        if (received_count != 346) begin
+            $display("FAIL UART byte count=%0d expected=346", received_count);
             $fatal(1);
         end
         check_byte(98, 8'h30); check_byte(99, 8'h37);
@@ -123,7 +125,9 @@ module tb_dbg_uart_frame_stats;
         check_byte(332, 8'h30); check_byte(333, 8'h33);
         check_byte(335, 8'h52); check_byte(336, 8'h41);
         check_byte(338, 8'h31);
-        check_byte(339, 8'h0D); check_byte(340, 8'h0A);
+        check_byte(339, 8'h20); check_byte(340, 8'h51);
+        check_byte(341, 8'h46); check_byte(342, 8'h3D);
+        check_byte(343, 8'h30); check_byte(344, 8'h0D); check_byte(345, 8'h0A);
         $display("PASS UART frame and DDR/TX trace fields");
         $finish;
     end

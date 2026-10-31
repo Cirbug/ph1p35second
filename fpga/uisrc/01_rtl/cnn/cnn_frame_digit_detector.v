@@ -17,6 +17,10 @@ module cnn_frame_digit_detector #(
     input  wire       pixel_valid,
     input  wire [7:0] pixel_data,
     input  wire       frame_complete,
+    input  wire       image_dump_active,
+    input  wire       image_dump_read_enable,
+    input  wire [15:0] image_dump_read_address,
+    output wire       image_dump_read_data,
     output reg        digit_done,
     output reg  [3:0] digit_class,
     output reg  [9:0] digit_x,
@@ -25,6 +29,10 @@ module cnn_frame_digit_detector #(
     output reg  [8:0] digit_h,
     output reg        frame_done,
     output reg  [4:0] frame_digit_count,
+    output reg  [15:0] frame_ink_pixels,
+    output reg  [8:0] frame_active_rows,
+    output wire [3:0] frame_band_count,
+    output reg  [11:0] frame_column_segments,
     output reg        busy,
     output wire       model_check_done,
     output wire [31:0] model_weight_crc32,
@@ -98,6 +106,8 @@ module cnn_frame_digit_detector #(
     reg frame_toggle_meta;
     reg frame_toggle_sync;
     reg frame_toggle_seen;
+    reg image_dump_hold_meta;
+    reg image_dump_hold_sync;
 
     reg [8:0] row_read_index;
     reg [8:0] row_ink_accumulator;
@@ -120,10 +130,15 @@ module cnn_frame_digit_detector #(
     reg [15:0] mask_read_address_q;
     wire mask_read_data;
     wire mask_write_enable = pixel_valid &&
+        !image_dump_hold_sync &&
         ((frame_start && !detector_busy_sync) ||
          (!frame_start && frame_capture_enabled));
     wire [15:0] mask_write_address = frame_start ? 16'd0 : capture_address;
     wire mask_write_data = (pixel_data < DARK_THRESHOLD);
+    wire ram_read_enable = image_dump_active ? image_dump_read_enable : mask_read_enable;
+    wire [15:0] ram_read_address = image_dump_active ? image_dump_read_address : mask_read_address;
+
+    assign image_dump_read_data = mask_read_data;
 
     reg [9:0] column_index;
     reg segment_open;
@@ -170,6 +185,8 @@ module cnn_frame_digit_detector #(
     reg [31:0] patch_crc_accumulator;
     reg [31:0] active_patch_crc32;
     reg [5:0] state;
+
+    assign frame_band_count = row_band_count;
 
     wire infer_start = (state == ST_CNN_START);
     wire infer_pixel_valid = (state == ST_CNN_SEND);
@@ -240,8 +257,8 @@ module cnn_frame_digit_detector #(
     end
 
     always @(posedge infer_clk) begin
-        if (mask_read_enable)
-            simulation_mask_read_data <= simulation_mask[mask_read_address];
+        if (ram_read_enable)
+            simulation_mask_read_data <= simulation_mask[ram_read_address];
     end
 `else
 `ifdef CNN_PH1P35
@@ -249,16 +266,16 @@ module cnn_frame_digit_detector #(
     wire [3:0] mask_bank_write_enable;
     wire [3:0] mask_bank_read_enable;
     wire [1:0] mask_write_bank = mask_write_address[15:14];
-    wire [1:0] mask_read_bank = mask_read_address[15:14];
+    wire [1:0] mask_read_bank = ram_read_address[15:14];
     wire [1:0] mask_read_bank_q = mask_read_address_q[15:14];
     assign mask_bank_write_enable[0] = mask_write_enable && (mask_write_bank == 2'd0);
     assign mask_bank_write_enable[1] = mask_write_enable && (mask_write_bank == 2'd1);
     assign mask_bank_write_enable[2] = mask_write_enable && (mask_write_bank == 2'd2);
     assign mask_bank_write_enable[3] = mask_write_enable && (mask_write_bank == 2'd3);
-    assign mask_bank_read_enable[0] = mask_read_enable && (mask_read_bank == 2'd0);
-    assign mask_bank_read_enable[1] = mask_read_enable && (mask_read_bank == 2'd1);
-    assign mask_bank_read_enable[2] = mask_read_enable && (mask_read_bank == 2'd2);
-    assign mask_bank_read_enable[3] = mask_read_enable && (mask_read_bank == 2'd3);
+    assign mask_bank_read_enable[0] = ram_read_enable && (mask_read_bank == 2'd0);
+    assign mask_bank_read_enable[1] = ram_read_enable && (mask_read_bank == 2'd1);
+    assign mask_bank_read_enable[2] = ram_read_enable && (mask_read_bank == 2'd2);
+    assign mask_bank_read_enable[3] = ram_read_enable && (mask_read_bank == 2'd3);
     assign mask_read_data = mask_bank_read_data[mask_read_bank_q];
 
     genvar mask_bank;
@@ -271,7 +288,7 @@ module cnn_frame_digit_detector #(
             .INIT_FILE("NONE"), .FILL_ALL("NONE")
         ) u_mask (
             .dia(mask_write_data), .dib(1'b0),
-            .addra(mask_write_address[13:0]), .addrb(mask_read_address[13:0]),
+            .addra(mask_write_address[13:0]), .addrb(ram_read_address[13:0]),
             .cea(mask_bank_write_enable[mask_bank]), .ceb(mask_bank_read_enable[mask_bank]),
             .ocea(1'b0), .oceb(1'b0), .clka(capture_clk), .clkb(infer_clk),
             .wea(mask_bank_write_enable[mask_bank]), .web(1'b0), .bea(1'b0), .beb(1'b0),
@@ -284,16 +301,16 @@ module cnn_frame_digit_detector #(
     wire [3:0] mask_9k_write_enable;
     wire [3:0] mask_9k_read_enable;
     wire [1:0] mask_9k_write_bank = mask_write_address[14:13];
-    wire [1:0] mask_9k_read_bank = mask_read_address[14:13];
+    wire [1:0] mask_9k_read_bank = ram_read_address[14:13];
     wire [1:0] mask_9k_read_bank_q = mask_read_address_q[14:13];
     assign mask_9k_write_enable[0] = mask_write_enable && mask_write_address[15] && mask_9k_write_bank == 2'd0;
     assign mask_9k_write_enable[1] = mask_write_enable && mask_write_address[15] && mask_9k_write_bank == 2'd1;
     assign mask_9k_write_enable[2] = mask_write_enable && mask_write_address[15] && mask_9k_write_bank == 2'd2;
     assign mask_9k_write_enable[3] = mask_write_enable && mask_write_address[15] && mask_9k_write_bank == 2'd3;
-    assign mask_9k_read_enable[0] = mask_read_enable && mask_read_address[15] && mask_9k_read_bank == 2'd0;
-    assign mask_9k_read_enable[1] = mask_read_enable && mask_read_address[15] && mask_9k_read_bank == 2'd1;
-    assign mask_9k_read_enable[2] = mask_read_enable && mask_read_address[15] && mask_9k_read_bank == 2'd2;
-    assign mask_9k_read_enable[3] = mask_read_enable && mask_read_address[15] && mask_9k_read_bank == 2'd3;
+    assign mask_9k_read_enable[0] = ram_read_enable && ram_read_address[15] && mask_9k_read_bank == 2'd0;
+    assign mask_9k_read_enable[1] = ram_read_enable && ram_read_address[15] && mask_9k_read_bank == 2'd1;
+    assign mask_9k_read_enable[2] = ram_read_enable && ram_read_address[15] && mask_9k_read_bank == 2'd2;
+    assign mask_9k_read_enable[3] = ram_read_enable && ram_read_address[15] && mask_9k_read_bank == 2'd3;
     assign mask_read_data = mask_read_address_q[15] ?
         mask_9k_read_data[mask_9k_read_bank_q] : mask_32k_read_data;
 
@@ -305,9 +322,9 @@ module cnn_frame_digit_detector #(
         .INIT_FILE("NONE"), .FILL_ALL("NONE")
     ) u_frame_mask_32k (
         .dia(mask_write_data), .dib(1'b0),
-        .addra(mask_write_address[14:0]), .addrb(mask_read_address[14:0]),
+        .addra(mask_write_address[14:0]), .addrb(ram_read_address[14:0]),
         .cea(mask_write_enable && !mask_write_address[15]),
-        .ceb(mask_read_enable && !mask_read_address[15]),
+        .ceb(ram_read_enable && !ram_read_address[15]),
         .ocea(1'b0), .oceb(1'b0), .clka(capture_clk), .clkb(infer_clk),
         .wea(mask_write_enable && !mask_write_address[15]), .web(1'b0), .bea(1'b1), .beb(1'b1),
         .rsta(1'b0), .rstb(1'b0), .doa(), .dob(mask_32k_read_data)
@@ -321,7 +338,7 @@ module cnn_frame_digit_detector #(
         .INIT_FILE("NONE"), .FILL_ALL("NONE")
     ) u_frame_mask_9k_bank0 (
         .dia(mask_write_data), .dib(1'b0),
-        .addra(mask_write_address[12:0]), .addrb(mask_read_address[12:0]),
+        .addra(mask_write_address[12:0]), .addrb(ram_read_address[12:0]),
         .cea(mask_9k_write_enable[0]), .ceb(mask_9k_read_enable[0]),
         .ocea(1'b0), .oceb(1'b0), .clka(capture_clk), .clkb(infer_clk),
         .wea(mask_9k_write_enable[0]), .web(1'b0), .bea(1'b1), .beb(1'b1),
@@ -336,7 +353,7 @@ module cnn_frame_digit_detector #(
         .INIT_FILE("NONE"), .FILL_ALL("NONE")
     ) u_frame_mask_9k_bank1 (
         .dia(mask_write_data), .dib(1'b0),
-        .addra(mask_write_address[12:0]), .addrb(mask_read_address[12:0]),
+        .addra(mask_write_address[12:0]), .addrb(ram_read_address[12:0]),
         .cea(mask_9k_write_enable[1]), .ceb(mask_9k_read_enable[1]),
         .ocea(1'b0), .oceb(1'b0), .clka(capture_clk), .clkb(infer_clk),
         .wea(mask_9k_write_enable[1]), .web(1'b0), .bea(1'b1), .beb(1'b1),
@@ -351,7 +368,7 @@ module cnn_frame_digit_detector #(
         .INIT_FILE("NONE"), .FILL_ALL("NONE")
     ) u_frame_mask_9k_bank2 (
         .dia(mask_write_data), .dib(1'b0),
-        .addra(mask_write_address[12:0]), .addrb(mask_read_address[12:0]),
+        .addra(mask_write_address[12:0]), .addrb(ram_read_address[12:0]),
         .cea(mask_9k_write_enable[2]), .ceb(mask_9k_read_enable[2]),
         .ocea(1'b0), .oceb(1'b0), .clka(capture_clk), .clkb(infer_clk),
         .wea(mask_9k_write_enable[2]), .web(1'b0), .bea(1'b1), .beb(1'b1),
@@ -366,7 +383,7 @@ module cnn_frame_digit_detector #(
         .INIT_FILE("NONE"), .FILL_ALL("NONE")
     ) u_frame_mask_9k_bank3 (
         .dia(mask_write_data), .dib(1'b0),
-        .addra(mask_write_address[12:0]), .addrb(mask_read_address[12:0]),
+        .addra(mask_write_address[12:0]), .addrb(ram_read_address[12:0]),
         .cea(mask_9k_write_enable[3]), .ceb(mask_9k_read_enable[3]),
         .ocea(1'b0), .oceb(1'b0), .clka(capture_clk), .clkb(infer_clk),
         .wea(mask_9k_write_enable[3]), .web(1'b0), .bea(1'b1), .beb(1'b1),
@@ -378,8 +395,8 @@ module cnn_frame_digit_detector #(
     always @(posedge infer_clk or posedge rst) begin
         if (rst)
             mask_read_address_q <= 16'd0;
-        else if (mask_read_enable)
-            mask_read_address_q <= mask_read_address;
+        else if (ram_read_enable)
+            mask_read_address_q <= ram_read_address;
     end
 
     cnn_digit_infer u_infer (
@@ -456,15 +473,19 @@ module cnn_frame_digit_detector #(
             frame_toggle <= 1'b0;
             detector_busy_meta <= 1'b0;
             detector_busy_sync <= 1'b0;
+            image_dump_hold_meta <= 1'b0;
+            image_dump_hold_sync <= 1'b0;
         end else begin
             detector_busy_meta <= busy;
             detector_busy_sync <= detector_busy_meta;
+            image_dump_hold_meta <= image_dump_active;
+            image_dump_hold_sync <= image_dump_hold_meta;
 
             if (frame_start) begin
                 capture_x <= pixel_valid ? 10'd1 : 10'd0;
                 capture_y <= 9'd0;
                 capture_address <= pixel_valid ? 16'd1 : 16'd0;
-                frame_capture_enabled <= !detector_busy_sync;
+                frame_capture_enabled <= !detector_busy_sync && !image_dump_hold_sync;
             end else if (pixel_valid) begin
                 if (capture_address == FRAME_PIXELS - 1)
                     capture_address <= 16'd0;
@@ -483,7 +504,7 @@ module cnn_frame_digit_detector #(
             end
 
             if (frame_complete) begin
-                if (frame_capture_enabled && !detector_busy_sync)
+                if (frame_capture_enabled && !detector_busy_sync && !image_dump_hold_sync)
                     frame_toggle <= ~frame_toggle;
                 frame_capture_enabled <= 1'b0;
             end
@@ -568,6 +589,9 @@ module cnn_frame_digit_detector #(
             digit_conv1_first_product <= 16'd0;
             frame_done <= 1'b0;
             frame_digit_count <= 5'd0;
+            frame_ink_pixels <= 16'd0;
+            frame_active_rows <= 9'd0;
+            frame_column_segments <= 12'd0;
             busy <= 1'b0;
         end else begin
             frame_toggle_meta <= frame_toggle;
@@ -586,6 +610,9 @@ module cnn_frame_digit_detector #(
                         row_band_open <= 1'b0;
                         row_band_count <= 4'd0;
                         candidate_count <= 5'd0;
+                        frame_ink_pixels <= 16'd0;
+                        frame_active_rows <= 9'd0;
+                        frame_column_segments <= 12'd0;
                         busy <= 1'b1;
                         state <= ST_ROW_ISSUE;
                     end
@@ -594,11 +621,16 @@ module cnn_frame_digit_detector #(
                 ST_ROW_ISSUE: state <= ST_ROW_CHECK;
 
                 ST_ROW_CHECK: begin
-                    if (mask_read_data)
+                    if (mask_read_data) begin
                         row_ink_accumulator <= row_ink_accumulator + 1'b1;
+                        if (frame_ink_pixels != 16'hffff)
+                            frame_ink_pixels <= frame_ink_pixels + 1'b1;
+                    end
 
                     if (row_scan_x == FRAME_WIDTH - 1) begin
                         if ((row_ink_accumulator + mask_read_data) >= ROW_ACTIVE_MIN) begin
+                            if (frame_active_rows != 9'h1ff)
+                                frame_active_rows <= frame_active_rows + 1'b1;
                             if (!row_band_open) begin
                                 row_band_open <= 1'b1;
                                 row_band_start <= row_read_index;
@@ -705,6 +737,8 @@ module cnn_frame_digit_detector #(
                         segment_end <= column_index;
                         segment_open <= 1'b1;
                         if (column_index == FRAME_WIDTH - 1) begin
+                            if (frame_column_segments != 12'hfff)
+                                frame_column_segments <= frame_column_segments + 1'b1;
                             extent_resume_band <= 1'b1;
                             state <= ST_EXTENT_INIT;
                         end else begin
@@ -712,6 +746,8 @@ module cnn_frame_digit_detector #(
                             state <= ST_COL_ISSUE;
                         end
                     end else if (segment_open) begin
+                        if (frame_column_segments != 12'hfff)
+                            frame_column_segments <= frame_column_segments + 1'b1;
                         segment_end <= column_index - 1'b1;
                         extent_resume_band <= 1'b0;
                         state <= ST_EXTENT_INIT;
