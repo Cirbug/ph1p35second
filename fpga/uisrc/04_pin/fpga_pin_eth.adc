@@ -1,0 +1,52 @@
+# =============================================================================
+#  B 板（MLKPAI-F02 + FC02，PH1P35MDG324）以太网顶层引脚约束
+#  来源：《MLKPAI-F02开发平台硬件使用手册》第 15/16 页“板载以太网”引脚表
+#    ETHA -> RJ45 P1（YT8531DH-CA�?#    ETHB -> RJ45 P2（YT8531DH-CA�?#    两颗 PHY 各自 25MHz 有源晶振；复位共�?ETH_RST_B = H2
+# =============================================================================
+
+# ---------- 系统时钟与复�?----------
+set_pin_assignment { I_sys_clk } { LOCATION = C4;  IOSTANDARD = LVCMOS33; PULLTYPE = PULLUP; }
+set_pin_assignment { I_rst_n   } { LOCATION = R10; IOSTANDARD = LVCMOS33; PULLTYPE = PULLUP; }
+
+# ---------- 指示�?----------
+set_pin_assignment { O_led_beat } { LOCATION = K16; IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 8; PULLTYPE = NONE; }
+set_pin_assignment { O_led_err  } { LOCATION = K17; IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 8; PULLTYPE = NONE; }
+
+# ---------- ETHA : RJ45 P1 ----------
+set_pin_assignment { I_etha_rxd[0]    } { LOCATION = H1; IOSTANDARD = LVCMOS33; }
+set_pin_assignment { I_etha_rxd[1]    } { LOCATION = K1; IOSTANDARD = LVCMOS33; }
+set_pin_assignment { I_etha_rxd[2]    } { LOCATION = K2; IOSTANDARD = LVCMOS33; }
+set_pin_assignment { I_etha_rxd[3]    } { LOCATION = L3; IOSTANDARD = LVCMOS33; }
+set_pin_assignment { I_etha_rx_ctl    } { LOCATION = J1; IOSTANDARD = LVCMOS33; }
+set_pin_assignment { I_etha_rxc       } { LOCATION = N6; IOSTANDARD = LVCMOS33; }
+set_pin_assignment { O_etha_txd[0]    } { LOCATION = P3; IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 16; }
+set_pin_assignment { O_etha_txd[1]    } { LOCATION = R1; IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 16; }
+set_pin_assignment { O_etha_txd[2]    } { LOCATION = R2; IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 16; }
+set_pin_assignment { O_etha_txd[3]    } { LOCATION = U1; IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 16; }
+set_pin_assignment { O_etha_tx_ctl    } { LOCATION = L2; IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 16; }
+set_pin_assignment { O_etha_txc       } { LOCATION = R3; IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 16; }
+set_pin_assignment { O_etha_mdc       } { LOCATION = M5; IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 8; }
+set_pin_assignment { IO_etha_mdio      } { LOCATION = V1; IOSTANDARD = LVCMOS33; PULLTYPE = PULLUP; }
+
+# ---------- ETHB : RJ45 P2 ----------
+set_pin_assignment { I_ethb_rxd[0]    } { LOCATION = L4; IOSTANDARD = LVCMOS33; }
+set_pin_assignment { I_ethb_rxd[1]    } { LOCATION = M2; IOSTANDARD = LVCMOS33; }
+set_pin_assignment { I_ethb_rxd[2]    } { LOCATION = N1; IOSTANDARD = LVCMOS33; }
+set_pin_assignment { I_ethb_rxd[3]    } { LOCATION = T2; IOSTANDARD = LVCMOS33; }
+set_pin_assignment { I_ethb_rx_ctl    } { LOCATION = M1; IOSTANDARD = LVCMOS33; }
+set_pin_assignment { I_ethb_rxc       } { LOCATION = N7; IOSTANDARD = LVCMOS33; }
+set_pin_assignment { O_ethb_txd[0]    } { LOCATION = P4; IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 16; }
+set_pin_assignment { O_ethb_txd[1]    } { LOCATION = P5; IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 16; }
+set_pin_assignment { O_ethb_txd[2]    } { LOCATION = T4; IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 16; }
+set_pin_assignment { O_ethb_txd[3]    } { LOCATION = T3; IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 16; }
+set_pin_assignment { O_ethb_tx_ctl    } { LOCATION = P1; IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 16; }
+set_pin_assignment { O_ethb_txc       } { LOCATION = U2; IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 16; }
+set_pin_assignment { O_ethb_mdc       } { LOCATION = P6; IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 8; }
+set_pin_assignment { IO_ethb_mdio      } { LOCATION = R5; IOSTANDARD = LVCMOS33; PULLTYPE = PULLUP; }
+
+# ---------- PHY 复位（两颗共用）----------
+set_pin_assignment { O_eth_rst_b } { LOCATION = H2; IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 8; PULLTYPE = NONE; }
+
+# ---------- ���Դ��ڣ�115200 8N1��----------
+set_pin_assignment { O_uart_tx } { LOCATION = J3; IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 8; PULLTYPE = PULLUP; }
+
