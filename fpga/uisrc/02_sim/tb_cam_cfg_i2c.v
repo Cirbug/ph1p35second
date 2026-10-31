@@ -32,6 +32,22 @@ module tb_cam_cfg_i2c;
 
     wire cfg_done;
     wire ae_done;
+wire [8:0] reg_idx;
+wire ae_req;
+wire [15:0] applied_ae;
+wire [15:0] applied_ag;
+reg [6:0] gain_idx = 7'd0;
+wire [15:0] gain_reg;
+
+SC500GainTbl gain_tbl (
+    .I_clk(clk), .I_rstn(rst_n), .I(gain_idx), .O(gain_reg)
+);
+
+ae_set ae_set_dut (
+    .I_clk(clk), .I_rst(~rst_n), .I_btn(4'hF),
+    .I_ae_cfg_done(ae_done), .I_cam_cfg_done(cfg_done),
+    .O_ae_req(ae_req), .O_ae(applied_ae), .O_ag(applied_ag)
+);
 
     uicfgcs500 #(
         .CLK_DIV ( CLK_DIV )
@@ -44,7 +60,8 @@ module tb_cam_cfg_i2c;
         .O_cam_scl    ( scl      ),
         .IO_cam_sda   ( sda      ),
         .O_cfg_done   ( cfg_done ),
-        .O_ae_cfg_done( ae_done  )
+        .O_ae_cfg_done( ae_done  ),
+        .O_dbg_regidx ( reg_idx  )
     );
 
     //==================================================================
@@ -110,16 +127,35 @@ module tb_cam_cfg_i2c;
     integer waited;
     integer reg_writes;
 
+    task check_gain;
+        input [6:0] idx;
+        input [15:0] expected;
+        begin
+            gain_idx = idx;
+            @(posedge clk);
+            #1;
+            if (gain_reg !== expected) begin
+                $display("FAIL: gain index %0d = %04h, expected %04h", idx, gain_reg, expected);
+                errs = errs + 1;
+            end
+        end
+    endtask
+
     initial begin
         errs = 0; nbytes = 0; bitcnt = 0; in_xfer = 0; scl_d = 1'b1;
         sh = 0; sda_low = 0; waited = 0;
 
         rst_n = 1'b0;
+        check_gain(7'd73, 16'h0F29);
+        check_gain(7'd74, 16'h0F2A);
+        check_gain(7'd95, 16'h0F3F);
+        check_gain(7'd96, 16'h1F20);
+        check_gain(7'd127, 16'h1F3F);
         repeat (20) @(posedge clk);
         #1 rst_n = 1'b1;
 
         // 等待配置完成，最多约 80ms 仿真时间（24MHz 下约 200 万拍）
-        while (!cfg_done && waited < 2000000) begin
+        while ((!cfg_done || !ae_done) && waited < 2000000) begin
             @(posedge clk);
             waited = waited + 1;
         end
@@ -134,6 +170,26 @@ module tb_cam_cfg_i2c;
 
         if (!cfg_done) begin
             $display("FAIL: cfg_done 未拉高（配置未完成）");
+            errs = errs + 1;
+        end
+
+        if (!ae_done) begin
+            $display("FAIL: ae_cfg_done 未拉高（AE 配置未完成）");
+            errs = errs + 1;
+        end
+
+        if (reg_idx !== 9'd0) begin
+            $display("FAIL: AE 配置完成后 reg_index = %0d，期望归零", reg_idx);
+            errs = errs + 1;
+        end
+
+        if (reg_writes != 118) begin
+            $display("FAIL: 总写入寄存器数 = %0d，期望相机 111 + AE 7", reg_writes);
+            errs = errs + 1;
+        end
+
+        if (applied_ae !== 16'd3990 || applied_ag !== 16'd80) begin
+            $display("FAIL: ae_set defaults ae=%0d ag=%0d, expected 3990/80", applied_ae, applied_ag);
             errs = errs + 1;
         end
 

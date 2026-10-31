@@ -95,6 +95,7 @@ always@(posedge I_clk ) begin
         end 
         else if(reg_index == REG_SIZE && O_ae_cfg_done == 1'b0) begin//如果配置完成
             O_ae_cfg_done <= 1'b1;       //设置 cfg_done标准
+            reg_index  <= 9'd0;   // 2026-10-31: AE table done -> reset index
         end 
         else if(I_ae_req)begin
             O_ae_cfg_done <= 0;
