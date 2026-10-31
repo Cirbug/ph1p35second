@@ -4,7 +4,7 @@
    Executable = D:/TD/bin/run.exe
    Built at =   16:32:07 Jun 12 2025
    Run by =     XIAOXIAO
-   Run Date =   Sat Oct 31 17:54:30 2026
+   Run Date =   Sat Oct 31 19:01:27 2026
 
    Run on =     LAPTOP-T95VR7F4
 ============================================================
@@ -16,9 +16,9 @@ ARC-1001 : ----------------------------------------------------------------
 ARC-1001 :   non_jtag_persist(none)  |        35 IOs         |    gpio    
 ARC-1001 :            jtag           |  P13/P15/L14/R13/T13  |  dedicate  
 ARC-1001 : ----------------------------------------------------------------
-RUN-1003 : finish command "import_device ph1_35p.db -package PH1P35MDG324 -speed 3" in  1.328077s wall, 1.078125s user + 0.062500s system = 1.140625s CPU (85.9%)
+RUN-1003 : finish command "import_device ph1_35p.db -package PH1P35MDG324 -speed 3" in  1.325049s wall, 1.078125s user + 0.015625s system = 1.093750s CPU (82.5%)
 
-RUN-1004 : used memory is 336 MB, reserved memory is 321 MB, peak memory is 336 MB
+RUN-1004 : used memory is 323 MB, reserved memory is 321 MB, peak memory is 323 MB
 RUN-1002 : start command "open_project fpga_prj.prj"
 RUN-1002 : start command "commit_param -step design"
 RUN-1001 : Print Global Property
@@ -206,10 +206,10 @@ HDL-1007 : port 'ecc_dbiterr' remains unconnected for this instance in ../../uis
 HDL-1007 : port 'ecc_sbiterr' remains unconnected for this instance in ../../uisrc/01_rtl/cnn/cnn_digit_infer.v(996)
 HDL-1007 : port 'ecc_dbiterr' remains unconnected for this instance in ../../uisrc/01_rtl/cnn/cnn_digit_infer.v(996)
 HDL-1007 : elaborate module cnn_digit_weight_rom in ../../uisrc/01_rtl/cnn/cnn_digit_infer.v(963)
-HDL-1007 : elaborate module PH1P_LOGIC_ERAM(DATA_WIDTH_A=8,DATA_WIDTH_B=8,ADDR_WIDTH_A=11,ADDR_WIDTH_B=11,DATA_DEPTH_A=2048,DATA_DEPTH_B=2048,MODE="SP",INIT_FILE="D:/2026fpga/ph1p35second/fpga/uisrc/01_rtl/cnn/weights/cnn_digit_weights_0.mif") in D:\TD\arch/ph1p_macro.v(22)
+HDL-1007 : elaborate module PH1P_LOGIC_ERAM(DATA_WIDTH_A=8,DATA_WIDTH_B=8,ADDR_WIDTH_A=11,ADDR_WIDTH_B=11,DATA_DEPTH_A=2048,DATA_DEPTH_B=2048,MODE="SP",INIT_FILE="D:/BaiduNetdiskDownload/02_F02_FC02_PH1P35/fpga_11/ph1p35second/fpga/uisrc/01_rtl/cnn/weights/cnn_digit_weights_0.mif") in D:\TD\arch/ph1p_macro.v(22)
 HDL-5007 WARNING: actual bit length 8 differs from formal bit length 1 for port 'bea' in ../../uisrc/01_rtl/cnn/cnn_digit_infer.v(993)
 HDL-5007 WARNING: actual bit length 8 differs from formal bit length 1 for port 'beb' in ../../uisrc/01_rtl/cnn/cnn_digit_infer.v(993)
-HDL-1007 : elaborate module PH1P_LOGIC_ERAM(DATA_WIDTH_A=8,DATA_WIDTH_B=8,ADDR_WIDTH_A=11,ADDR_WIDTH_B=11,DATA_DEPTH_A=2048,DATA_DEPTH_B=2048,MODE="SP",INIT_FILE="D:/2026fpga/ph1p35second/fpga/uisrc/01_rtl/cnn/weights/cnn_digit_weights_1.mif") in D:\TD\arch/ph1p_macro.v(22)
+HDL-1007 : elaborate module PH1P_LOGIC_ERAM(DATA_WIDTH_A=8,DATA_WIDTH_B=8,ADDR_WIDTH_A=11,ADDR_WIDTH_B=11,DATA_DEPTH_A=2048,DATA_DEPTH_B=2048,MODE="SP",INIT_FILE="D:/BaiduNetdiskDownload/02_F02_FC02_PH1P35/fpga_11/ph1p35second/fpga/uisrc/01_rtl/cnn/weights/cnn_digit_weights_1.mif") in D:\TD\arch/ph1p_macro.v(22)
 HDL-5007 WARNING: actual bit length 8 differs from formal bit length 1 for port 'bea' in ../../uisrc/01_rtl/cnn/cnn_digit_infer.v(1007)
 HDL-5007 WARNING: actual bit length 8 differs from formal bit length 1 for port 'beb' in ../../uisrc/01_rtl/cnn/cnn_digit_infer.v(1007)
 HDL-5317 WARNING: input port 'ecc_sbiterrinj' is not connected on this instance in ../../uisrc/01_rtl/cnn/cnn_digit_infer.v(989)
@@ -420,7 +420,7 @@ HDL-1200 : Current top model is csi2_tx_top
 HDL-5106 WARNING: Initial value omitted on non-DFF net "scl_r" in ../../uisrc/01_rtl/uics500_cfg/uii2c.v(129) 
 HDL-5106 WARNING: Initial value omitted on non-DFF net "sda_o" in ../../uisrc/01_rtl/uics500_cfg/uii2c.v(137) 
 HDL-1100 : Inferred 25 RAMs.
-RUN-1003 : finish command "elaborate -top csi2_tx_top" in  2.162911s wall, 2.078125s user + 0.078125s system = 2.156250s CPU (99.7%)
+RUN-1003 : finish command "elaborate -top csi2_tx_top" in  1.923480s wall, 1.796875s user + 0.109375s system = 1.906250s CPU (99.1%)
 
 RUN-1004 : used memory is 627 MB, reserved memory is 617 MB, peak memory is 627 MB
 RUN-1002 : start command "read_adc ../../uisrc/04_pin/fpga_pin.adc"
@@ -437,7 +437,74 @@ RUN-1002 : start command "set_pin_assignment  O_led_cfg   LOCATION = J18; IOSTAN
 RUN-1002 : start command "set_pin_assignment  O_led_beat   LOCATION = K16; IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 8; PULLTYPE = NONE; "
 RUN-1002 : start command "set_pin_assignment  O_led_err   LOCATION = K17; IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 8; PULLTYPE = NONE; "
 RUN-1001 : Starting of IO setups legality check.
+RUN-1002 : start command "read_ip_adc -ip ddr2 -file ../../uisrc/03_ip/ddr2/src/adc/ddr2.adc"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_ck_p      LOCATION = X0Y44Z2; IOSTANDARD = DIFF_SSTL15; #pl44c"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_ck_n      LOCATION = X0Y44Z3; IOSTANDARD = DIFF_SSTL15; #pl44d"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_cke[0]    LOCATION = X0Y44Z1; IOSTANDARD = SSTL15; #pl44b"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_cs_n[0]   LOCATION = X0Y53Z0; IOSTANDARD = SSTL15; #pl53a"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_odt[0]    LOCATION = X0Y47Z0; IOSTANDARD = SSTL15; #pl47a"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_we_n      LOCATION = X0Y47Z1; IOSTANDARD = SSTL15; #pl47b"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_cas_n     LOCATION = X0Y56Z0; IOSTANDARD = SSTL15; #pl56a"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_ras_n     LOCATION = X0Y44Z0; IOSTANDARD = SSTL15; #pl44a"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_ba[0]     LOCATION = X0Y50Z0; IOSTANDARD = SSTL15; #pl50a"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_ba[1]     LOCATION = X0Y61Z0; IOSTANDARD = SSTL15; #pl61a"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_addr[0]   LOCATION = X0Y64Z0; IOSTANDARD = SSTL15; #pl64a"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_addr[1]   LOCATION = X0Y73Z0; IOSTANDARD = SSTL15; #pl73a"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_addr[2]   LOCATION = X0Y67Z0; IOSTANDARD = SSTL15; #pl67a"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_addr[3]   LOCATION = X0Y50Z1; IOSTANDARD = SSTL15; #pl50b"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_addr[4]   LOCATION = X0Y76Z0; IOSTANDARD = SSTL15; #pl76a"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_addr[5]   LOCATION = X0Y53Z1; IOSTANDARD = SSTL15; #pl53b"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_addr[6]   LOCATION = X0Y76Z1; IOSTANDARD = SSTL15; #pl76b"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_addr[7]   LOCATION = X0Y56Z1; IOSTANDARD = SSTL15; #pl56b"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_addr[8]   LOCATION = X0Y76Z2; IOSTANDARD = SSTL15; #pl76c"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_addr[9]   LOCATION = X0Y61Z1; IOSTANDARD = SSTL15; #pl61b"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_addr[10]  LOCATION = X0Y67Z1; IOSTANDARD = SSTL15; #pl67b"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_addr[11]  LOCATION = X0Y76Z3; IOSTANDARD = SSTL15; #pl76d"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_addr[12]  LOCATION = X0Y64Z1; IOSTANDARD = SSTL15; #pl64b"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_dqs_p[0]    LOCATION = X0Y33Z2; IOSTANDARD = DIFF_SSTL15; #pl33c"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_dqs_n[0]    LOCATION = X0Y33Z3; IOSTANDARD = DIFF_SSTL15; #pl33d"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_dm[0]       LOCATION = X0Y30Z2; IOSTANDARD = SSTL15; #pl30c"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_dq[0]       LOCATION = X0Y33Z0; IOSTANDARD = SSTL15; #pl33a"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_dq[1]       LOCATION = X0Y30Z3; IOSTANDARD = SSTL15; #pl30d"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_dq[2]       LOCATION = X0Y36Z0; IOSTANDARD = SSTL15; #pl36a"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_dq[3]       LOCATION = X0Y36Z1; IOSTANDARD = SSTL15; #pl36b"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_dq[4]       LOCATION = X0Y36Z3; IOSTANDARD = SSTL15; #pl36d"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_dq[5]       LOCATION = X0Y36Z2; IOSTANDARD = SSTL15; #pl36c"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_dq[6]       LOCATION = X0Y30Z0; IOSTANDARD = SSTL15; #pl30a"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_dq[7]       LOCATION = X0Y33Z1; IOSTANDARD = SSTL15; #pl33b"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_dqs_p[1]    LOCATION = X0Y13Z2; IOSTANDARD = DIFF_SSTL15; #pl13c"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_dqs_n[1]    LOCATION = X0Y13Z3; IOSTANDARD = DIFF_SSTL15; #pl13d"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_dm[1]       LOCATION = X0Y16Z0; IOSTANDARD = SSTL15; #pl16a"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_dq[8]       LOCATION = X0Y16Z1; IOSTANDARD = SSTL15; #pl16b"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_dq[9]       LOCATION = X0Y16Z3; IOSTANDARD = SSTL15; #pl16d"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_dq[10]      LOCATION = X0Y10Z0; IOSTANDARD = SSTL15; #pl10a"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_dq[11]      LOCATION = X0Y10Z2; IOSTANDARD = SSTL15; #pl10c"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_dq[12]      LOCATION = X0Y10Z3; IOSTANDARD = SSTL15; #pl10d"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_dq[13]      LOCATION = X0Y10Z1; IOSTANDARD = SSTL15; #pl10b"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_dq[14]      LOCATION = X0Y16Z2; IOSTANDARD = SSTL15; #pl16c"
+RUN-1002 : start command "set_ippin_assignment ddr2  ddr_dq[15]      LOCATION = X0Y13Z0; IOSTANDARD = SSTL15; #pl13a"
+RUN-1002 : start command "set_ipinst_assignment ddr2 ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_clk/u_mlclk_1  LOCATION = X0Y59Z0"
+RUN-1002 : start command "set_ipinst_assignment ddr2 ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_clk/u_mlclk_2  LOCATION = X0Y59Z1"
+RUN-1002 : start command "set_ipinst_assignment ddr2 ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_clk/u_pll0/u_pll_inst  LOCATION = X0Y40Z0"
+RUN-1002 : start command "set_ipinst_assignment ddr2 ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_clk/u_pll1/u_pll_inst  LOCATION = X0Y79Z0"
+RUN-1002 : start command "set_ipinst_assignment ddr2 ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_clk/ioclk[0]$u_ioclk_0  LOCATION = X0Y59Z0;"
+RUN-1002 : start command "set_ipinst_assignment ddr2 ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_clk/ioclk[0]$u_ioclk_1  LOCATION = X0Y59Z1;"
+RUN-1002 : start command "set_ipinst_assignment ddr2 ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_clk/ioclk[1]$u_ioclk_0  LOCATION = X0Y19Z0;"
+RUN-1002 : start command "set_ipinst_assignment ddr2 ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_clk/ioclk[1]$u_ioclk_1  LOCATION = X0Y19Z1;"
+RUN-1002 : start command "set_ipinst_assignment ddr2 ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy/ac_byte[0]$ac_byte_used$u_ddrphy_ac_byte_wrapper/u_ddrphy_byte LOCATION = X0Y70Z0"
+RUN-1002 : start command "set_ipinst_assignment ddr2 ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy/ac_byte[1]$ac_byte_used$u_ddrphy_ac_byte_wrapper/u_ddrphy_byte LOCATION = X0Y60Z0"
+RUN-1002 : start command "set_ipinst_assignment ddr2 ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy/ac_byte[2]$ac_byte_used$u_ddrphy_ac_byte_wrapper/u_ddrphy_byte LOCATION = X0Y50Z0"
+RUN-1002 : start command "set_ipinst_assignment ddr2 ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy/ac_byte[3]$ac_byte_used$u_ddrphy_ac_byte_wrapper/u_ddrphy_byte LOCATION = X0Y40Z0"
+RUN-1002 : start command "set_ipinst_assignment ddr2 ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy/dx_byte[0]$dx_byte_used$u_ddrphy_dx_byte_wrapper/u_ddrphy_byte LOCATION = X0Y30Z0"
+RUN-1002 : start command "set_ipinst_assignment ddr2 ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy/dx_byte[1]$dx_byte_used$u_ddrphy_dx_byte_wrapper/u_ddrphy_byte LOCATION = X0Y10Z0"
+RUN-1002 : start command "set_ipinst_assignment ddr2 ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy/bkref[0]$u_ddrphy_bankref  LOCATION = X0Y19Z0;"
+RUN-1002 : start command "set_ipinst_assignment ddr2 ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy/bkref[1]$u_ddrphy_bankref  LOCATION = X0Y59Z0;"
+RUN-1001 : Starting of IO setups legality check.
+RUN-1003 : finish command "read_ip_adc -ip ddr2 -file ../../uisrc/03_ip/ddr2/src/adc/ddr2.adc" in  5.667165s wall, 5.609375s user + 0.000000s system = 5.609375s CPU (99.0%)
+
+RUN-1004 : used memory is 622 MB, reserved memory is 612 MB, peak memory is 627 MB
 RUN-1002 : start command "read_sdc ../../uisrc/04_pin/timing.sdc"
+RUN-1002 : start command "read_sdc -ip ddr2 ../../uisrc/03_ip/ddr2/src/sdc/ddr2.sdc"
 RUN-1002 : start command "export_db fpga_prj_elaborate.db"
 RUN-1001 : Exported flow parameters
 RUN-1001 : Exported /
@@ -490,8 +557,819 @@ RUN-1002 : start command "optimize_rtl"
 RUN-1001 : Open license file D:/TD/license/Anlogic.lic
 SYN-1001 : Stage 1 | Optimize RTL
 SYN-1001 : Stage 1.1 | Check Design Sanity
-SYN-8142 ERROR: The init file("D:/2026fpga/ph1p35second/fpga/uisrc/01_rtl/cnn/weights/cnn_digit_weights_0.mif") can not be found in ../../uisrc/01_rtl/cnn/cnn_digit_infer.v(963), please check!
-SYN-1001 : End Stage 1.1 | Check Design Sanity; Time: 0.010476s wall, 0.015625s user + 0.000000s system = 0.015625s CPU (149.2%); Memory(MB): used = 649, reserved = 753, peak = 649;
+SYN-5065 WARNING: Register "genCA$op" in ../../uisrc/03_ip/ddr2/src/rtl/mc/alc_mc_top_all.enc.sv(0) is described with both an asynchronous reset and an asynchronous set. It may have an uncertainty of the timing. Please conside rewriting code.
+SYN-1001 : End Stage 1.1 | Check Design Sanity; Time: 0.029767s wall, 0.031250s user + 0.000000s system = 0.031250s CPU (105.0%); Memory(MB): used = 644, reserved = 749, peak = 644;
 
-SYN-1001 : End Stage 1 | Optimize RTL; Time: 0.010684s wall, 0.015625s user + 0.000000s system = 0.015625s CPU (146.2%); Memory(MB): used = 649, reserved = 753, peak = 649;
+SYN-1079 : finish stage Check Design Sanity. Total instances: 54949, Total nets: 141086.
 
+SYN-1001 : Stage 1.2 | Initialize Design
+SYN-1001 : End Stage 1.2 | Initialize Design; Time: 2.993017s wall, 2.937500s user + 0.015625s system = 2.953125s CPU (98.7%); Memory(MB): used = 644, reserved = 749, peak = 644;
+
+SYN-1079 : finish stage Initialize Design. Total instances: 18004, Total nets: 91255.
+
+SYN-1001 : Stage 1.3 | Flatten Module
+SYN-1011 : Flatten model csi2_tx_top
+SYN-1050 : Instances selected by 'keep_hierarchy':
+RUN-1001 : ------------------------------------------------------------------------------------------------------------
+RUN-1001 :           instance           |  keep_hierarchy  |         down_module         |         file(line)          
+RUN-1001 : ------------------------------------------------------------------------------------------------------------
+RUN-1001 :  u_mc_to_user_interface/...  |       true       | soft_fifo_al_f58e8b3e1f...  | ../../uisrc/03_ip/w155_...  
+RUN-1001 : ------------------------------------------------------------------------------------------------------------
+SYN-1001 : End Stage 1.3 | Flatten Module; Time: 0.650368s wall, 0.640625s user + 0.000000s system = 0.640625s CPU (98.5%); Memory(MB): used = 648, reserved = 750, peak = 648;
+
+SYN-1079 : finish stage Flatten Module. Total instances: 20781, Total nets: 86911.
+
+SYN-1001 : Stage 1.4 | Uniform Instance
+SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_cnn_detector/g_mask_bank[0]$u_mask" in ../../uisrc/01_rtl/cnn/cnn_frame_digit_detector.v(272) / pin "ecc_dbiterrinj"
+SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_cnn_detector/g_mask_bank[0]$u_mask" in ../../uisrc/01_rtl/cnn/cnn_frame_digit_detector.v(272) / pin "ecc_sbiterrinj"
+SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_cnn_detector/g_mask_bank[1]$u_mask" in ../../uisrc/01_rtl/cnn/cnn_frame_digit_detector.v(272) / pin "ecc_dbiterrinj"
+SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_cnn_detector/g_mask_bank[1]$u_mask" in ../../uisrc/01_rtl/cnn/cnn_frame_digit_detector.v(272) / pin "ecc_sbiterrinj"
+SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_cnn_detector/g_mask_bank[2]$u_mask" in ../../uisrc/01_rtl/cnn/cnn_frame_digit_detector.v(272) / pin "ecc_dbiterrinj"
+SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_cnn_detector/g_mask_bank[2]$u_mask" in ../../uisrc/01_rtl/cnn/cnn_frame_digit_detector.v(272) / pin "ecc_sbiterrinj"
+SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_cnn_detector/g_mask_bank[3]$u_mask" in ../../uisrc/01_rtl/cnn/cnn_frame_digit_detector.v(272) / pin "ecc_dbiterrinj"
+SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_cnn_detector/g_mask_bank[3]$u_mask" in ../../uisrc/01_rtl/cnn/cnn_frame_digit_detector.v(272) / pin "ecc_sbiterrinj"
+SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_cnn_detector/u_infer/u_bank0/g_activation_bank[0]$u_ram" in ../../uisrc/01_rtl/cnn/cnn_digit_infer.v(936) / pin "ecc_dbiterrinj"
+SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_cnn_detector/u_infer/u_bank0/g_activation_bank[0]$u_ram" in ../../uisrc/01_rtl/cnn/cnn_digit_infer.v(936) / pin "ecc_sbiterrinj"
+SYN-5011 Similar messages will be suppressed.
+SYN-5013 WARNING: Undriven net: model "csi2_tx_top" / net "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/apb_paddr[15]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_wrapper.v(84)
+		the net's pin: pin "i0[3]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_wrapper.v(262)
+		the net's pin: pin "i0[3]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_wrapper.v(263)
+		the net's pin: pin "i0[3]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_wrapper.v(260)
+		the net's pin: pin "i0[3]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_wrapper.v(261)
+		the net's pin: pin "i0[3]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_top.v(416)
+		the net's pin: pin "i0[3]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_top.v(414)
+		the net's pin: pin "i0[3]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_top.v(415)
+SYN-5013 WARNING: Undriven net: model "csi2_tx_top" / net "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/apb_paddr[14]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_wrapper.v(84)
+		the net's pin: pin "i0[2]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_wrapper.v(262)
+		the net's pin: pin "i0[2]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_wrapper.v(263)
+		the net's pin: pin "i0[2]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_wrapper.v(260)
+		the net's pin: pin "i0[2]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_wrapper.v(261)
+		the net's pin: pin "i0[2]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_top.v(416)
+		the net's pin: pin "i0[2]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_top.v(414)
+		the net's pin: pin "i0[2]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_top.v(415)
+SYN-5013 WARNING: Undriven net: model "csi2_tx_top" / net "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/cal_apb_prdata[31]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_wrapper.v(241)
+		the net's pin: pin "i1[31]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_wrapper.v(273)
+SYN-5013 WARNING: Undriven net: model "csi2_tx_top" / net "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/cal_apb_prdata[30]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_wrapper.v(241)
+		the net's pin: pin "i1[30]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_wrapper.v(273)
+SYN-5013 WARNING: Undriven net: model "csi2_tx_top" / net "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/cal_apb_prdata[29]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_wrapper.v(241)
+		the net's pin: pin "i1[29]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_wrapper.v(273)
+SYN-5013 WARNING: Undriven net: model "csi2_tx_top" / net "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/cal_apb_prdata[28]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_wrapper.v(241)
+		the net's pin: pin "i1[28]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_wrapper.v(273)
+SYN-5013 WARNING: Undriven net: model "csi2_tx_top" / net "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/cal_apb_prdata[27]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_wrapper.v(241)
+		the net's pin: pin "i1[27]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_wrapper.v(273)
+SYN-5013 WARNING: Undriven net: model "csi2_tx_top" / net "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/cal_apb_prdata[26]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_wrapper.v(241)
+		the net's pin: pin "i1[26]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_wrapper.v(273)
+SYN-5013 WARNING: Undriven net: model "csi2_tx_top" / net "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/cal_apb_prdata[25]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_wrapper.v(241)
+		the net's pin: pin "i1[25]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_wrapper.v(273)
+SYN-5013 WARNING: Undriven net: model "csi2_tx_top" / net "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/cal_apb_prdata[24]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_wrapper.v(241)
+		the net's pin: pin "i1[24]" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_wrapper.v(273)
+SYN-5013 Similar messages will be suppressed.
+SYN-5025 WARNING: Using 0 for all undriven pins and nets
+SYN-1001 : End Stage 1.4 | Uniform Instance; Time: 0.149496s wall, 0.156250s user + 0.000000s system = 0.156250s CPU (104.5%); Memory(MB): used = 627, reserved = 728, peak = 648;
+
+SYN-1079 : finish stage Uniform Instance. Total instances: 20181, Total nets: 85811.
+
+SYN-1001 : Stage 1.5 | Optimize Design
+SYN-1066 : Inferred FSM for state register 'u_cam_cfg/TS_S_reg' in module 'csi2_tx_top'
+--------------------------------------------
+     Previous Encoding     New Encoding
+--------------------------------------------
+                    00             0001
+                    01             0010
+                    10             0100
+                    11             1000
+--------------------------------------------
+SYN-1067 : encoded FSM with state register 'u_cam_cfg/TS_S_reg' using encoding 'one_hot' in model 'csi2_tx_top'
+SYN-1066 : Inferred FSM for state register 'u_cnn_detector/state_reg' in module 'csi2_tx_top'
+-------------------------------------------------------------------
+     Previous Encoding                            New Encoding
+-------------------------------------------------------------------
+                000000     00000000000000000000000000000000001
+                000001     00000000000000000000000000000000010
+                000010     00000000000000000000000000000000100
+                000011     00000000000000000000000000000001000
+                000100     00000000000000000000000000000010000
+                010000     00000000000000000000000000000100000
+                010001     00000000000000000000000000001000000
+                010010     00000000000000000000000000010000000
+                010011     00000000000000000000000000100000000
+                010100     00000000000000000000000001000000000
+                010101     00000000000000000000000010000000000
+                010110     00000000000000000000000100000000000
+                010111     00000000000000000000001000000000000
+                011000     00000000000000000000010000000000000
+                011001     00000000000000000000100000000000000
+                011010     00000000000000000001000000000000000
+                011011     00000000000000000010000000000000000
+                011100     00000000000000000100000000000000000
+                011101     00000000000000001000000000000000000
+                011110     00000000000000010000000000000000000
+                000101     00000000000000100000000000000000000
+                000110     00000000000001000000000000000000000
+                000111     00000000000010000000000000000000000
+                001000     00000000000100000000000000000000000
+                001001     00000000001000000000000000000000000
+                001010     00000000010000000000000000000000000
+                001111     00000000100000000000000000000000000
+                001011     00000001000000000000000000000000000
+                011111     00000010000000000000000000000000000
+                001100     00000100000000000000000000000000000
+                001101     00001000000000000000000000000000000
+                001110     00010000000000000000000000000000000
+                100000     00100000000000000000000000000000000
+                100001     01000000000000000000000000000000000
+                100010     10000000000000000000000000000000000
+-------------------------------------------------------------------
+SYN-1067 : encoded FSM with state register 'u_cnn_detector/state_reg' using encoding 'one_hot' in model 'csi2_tx_top'
+SYN-1066 : Inferred FSM for state register 'u_cnn_detector/u_infer/state_reg' in module 'csi2_tx_top'
+---------------------------------------------------------
+     Previous Encoding                  New Encoding
+---------------------------------------------------------
+                 10111     0000000000000000000000001
+                 11000     0000000000000000000000010
+                 00000     0000000000000000000000100
+                 00001     0000000000000000000001000
+                 10010     0000000000000000000010000
+                 10011     0000000000000000000100000
+                 00010     0000000000000000001000000
+                 10100     0000000000000000010000000
+                 10000     0000000000000000100000000
+                 00011     0000000000000001000000000
+                 10001     0000000000000010000000000
+                 00100     0000000000000100000000000
+                 00101     0000000000001000000000000
+                 10110     0000000000010000000000000
+                 00110     0000000000100000000000000
+                 00111     0000000001000000000000000
+                 01000     0000000010000000000000000
+                 01001     0000000100000000000000000
+                 01010     0000001000000000000000000
+                 01011     0000010000000000000000000
+                 01100     0000100000000000000000000
+                 01101     0001000000000000000000000
+                 10101     0010000000000000000000000
+                 01110     0100000000000000000000000
+                 01111     1000000000000000000000000
+---------------------------------------------------------
+SYN-1067 : encoded FSM with state register 'u_cnn_detector/u_infer/state_reg' using encoding 'one_hot' in model 'csi2_tx_top'
+SYN-1066 : Inferred FSM for state register 'u_cnn_resize_bin/pack_count_reg' in module 'csi2_tx_top'
+--------------------------------------------
+     Previous Encoding     New Encoding
+--------------------------------------------
+                   000            00001
+                   010            00010
+                   100            00100
+                   001            01000
+                   011            10000
+--------------------------------------------
+SYN-1067 : encoded FSM with state register 'u_cnn_resize_bin/pack_count_reg' using encoding 'one_hot' in model 'csi2_tx_top'
+SYN-1066 : Inferred FSM for state register 'u_cnn_result_uart/state_reg' in module 'csi2_tx_top'
+--------------------------------------------
+     Previous Encoding     New Encoding
+--------------------------------------------
+                    00             0001
+                    01             0010
+                    10             0100
+                    11             1000
+--------------------------------------------
+SYN-1067 : encoded FSM with state register 'u_cnn_result_uart/state_reg' using encoding 'one_hot' in model 'csi2_tx_top'
+SYN-1066 : Inferred FSM for state register 'u_crop_before_ddr/pack_count_reg' in module 'csi2_tx_top'
+--------------------------------------------
+     Previous Encoding     New Encoding
+--------------------------------------------
+                   000            00001
+                   010            00010
+                   100            00100
+                   001            01000
+                   011            10000
+--------------------------------------------
+SYN-1067 : encoded FSM with state register 'u_crop_before_ddr/pack_count_reg' using encoding 'one_hot' in model 'csi2_tx_top'
+SYN-1066 : Inferred FSM for state register 'u_crop_before_ddr/pending_pixels_reg' in module 'csi2_tx_top'
+--------------------------------------------
+     Previous Encoding     New Encoding
+--------------------------------------------
+                    00               01
+                    10               10
+--------------------------------------------
+SYN-1067 : encoded FSM with state register 'u_crop_before_ddr/pending_pixels_reg' using encoding 'one_hot' in model 'csi2_tx_top'
+SYN-1066 : Inferred FSM for state register 'u_dbg_uart/s_reg' in module 'csi2_tx_top'
+--------------------------------------------
+     Previous Encoding     New Encoding
+--------------------------------------------
+                    00             0001
+                    01             0010
+                    10             0100
+                    11             1000
+--------------------------------------------
+SYN-1067 : encoded FSM with state register 'u_dbg_uart/s_reg' using encoding 'one_hot' in model 'csi2_tx_top'
+SYN-1066 : Inferred FSM for state register 'u_dphy_rx/u_ph1p_mipiio_rx_wrapper/u_lane0_hs_detect/S_lp_state_reg' in module 'csi2_tx_top'
+--------------------------------------------
+     Previous Encoding     New Encoding
+--------------------------------------------
+                   000            00001
+                   001            00010
+                   010            00100
+                   011            01000
+                   100            10000
+--------------------------------------------
+SYN-1067 : encoded FSM with state register 'u_dphy_rx/u_ph1p_mipiio_rx_wrapper/u_lane0_hs_detect/S_lp_state_reg' using encoding 'one_hot' in model 'csi2_tx_top'
+SYN-1066 : Inferred FSM for state register 'u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_alc_mc_top/page_ctrl[0]$u_page_ctrl/gr_cas_state_reg' in module 'csi2_tx_top'
+--------------------------------------------
+     Previous Encoding     New Encoding
+--------------------------------------------
+                    01               01
+                    10               10
+--------------------------------------------
+SYN-1067 : encoded FSM with state register 'u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_alc_mc_top/page_ctrl[0]$u_page_ctrl/gr_cas_state_reg' using encoding 'one_hot' in model 'csi2_tx_top'
+SYN-1066 : Inferred FSM for state register 'u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_alc_mc_top/page_ctrl[1]$u_page_ctrl/gr_cas_state_reg' in module 'csi2_tx_top'
+--------------------------------------------
+     Previous Encoding     New Encoding
+--------------------------------------------
+                    01               01
+                    10               10
+--------------------------------------------
+SYN-1067 : encoded FSM with state register 'u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_alc_mc_top/page_ctrl[1]$u_page_ctrl/gr_cas_state_reg' using encoding 'one_hot' in model 'csi2_tx_top'
+SYN-1066 : Inferred FSM for state register 'u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_alc_mc_top/page_ctrl[2]$u_page_ctrl/gr_cas_state_reg' in module 'csi2_tx_top'
+--------------------------------------------
+     Previous Encoding     New Encoding
+--------------------------------------------
+                    01               01
+                    10               10
+--------------------------------------------
+SYN-1067 : encoded FSM with state register 'u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_alc_mc_top/page_ctrl[2]$u_page_ctrl/gr_cas_state_reg' using encoding 'one_hot' in model 'csi2_tx_top'
+SYN-1066 : Inferred FSM for state register 'u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_alc_mc_top/page_ctrl[3]$u_page_ctrl/gr_cas_state_reg' in module 'csi2_tx_top'
+--------------------------------------------
+     Previous Encoding     New Encoding
+--------------------------------------------
+                    01               01
+                    10               10
+--------------------------------------------
+SYN-1067 : encoded FSM with state register 'u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_alc_mc_top/page_ctrl[3]$u_page_ctrl/gr_cas_state_reg' using encoding 'one_hot' in model 'csi2_tx_top'
+SYN-1066 : Inferred FSM for state register 'u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_alc_mc_top/u_ref_ctrl/ref_cst_reg' in module 'csi2_tx_top'
+--------------------------------------------
+     Previous Encoding     New Encoding
+--------------------------------------------
+             000000001        000000001
+             000000010        000000010
+             000000100        000000100
+             000001000        000001000
+             000010000        000010000
+             000100000        000100000
+             001000000        001000000
+             010000000        010000000
+             100000000        100000000
+--------------------------------------------
+SYN-1067 : encoded FSM with state register 'u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_alc_mc_top/u_ref_ctrl/ref_cst_reg' using encoding 'one_hot' in model 'csi2_tx_top'
+SYN-1066 : Inferred FSM for state register 'u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_mdl_cal_wrapper/mdl_cal[0]$u_ddrphy_mdl_cal/lcdl_cal_state_reg' in module 'csi2_tx_top'
+--------------------------------------------
+     Previous Encoding     New Encoding
+--------------------------------------------
+                  0000      00000000001
+                  0001      00000000010
+                  0010      00000000100
+                  0011      00000001000
+                  0100      00000010000
+                  0101      00000100000
+                  0110      00001000000
+                  0111      00010000000
+                  1000      00100000000
+                  1010      01000000000
+                  1001      10000000000
+--------------------------------------------
+SYN-1067 : encoded FSM with state register 'u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_mdl_cal_wrapper/mdl_cal[0]$u_ddrphy_mdl_cal/lcdl_cal_state_reg' using encoding 'one_hot' in model 'csi2_tx_top'
+SYN-1066 : Inferred FSM for state register 'u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_mdl_cal_wrapper/mdl_cal[1]$u_ddrphy_mdl_cal/lcdl_cal_state_reg' in module 'csi2_tx_top'
+--------------------------------------------
+     Previous Encoding     New Encoding
+--------------------------------------------
+                  0000      00000000001
+                  0001      00000000010
+                  0010      00000000100
+                  0011      00000001000
+                  0100      00000010000
+                  0101      00000100000
+                  0110      00001000000
+                  0111      00010000000
+                  1000      00100000000
+                  1010      01000000000
+                  1001      10000000000
+--------------------------------------------
+SYN-1067 : encoded FSM with state register 'u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_mdl_cal_wrapper/mdl_cal[1]$u_ddrphy_mdl_cal/lcdl_cal_state_reg' using encoding 'one_hot' in model 'csi2_tx_top'
+SYN-1066 : Inferred FSM for state register 'u_tx_packet/st_reg' in module 'csi2_tx_top'
+--------------------------------------------
+     Previous Encoding     New Encoding
+--------------------------------------------
+                   000            00001
+                   010            00010
+                   100            00100
+                   001            01000
+                   011            10000
+--------------------------------------------
+SYN-1067 : encoded FSM with state register 'u_tx_packet/st_reg' using encoding 'one_hot' in model 'csi2_tx_top'
+SYN-1057 : Inferred 17 FSM(s)
+SYN-1001 : Optimize 2 less-than instances
+SYN-1032 : 60910/828 useful/useless nets, 15542/52 useful/useless insts
+SYN-1001 : Bypass 2 mux instances
+SYN-1021 : Optimized 17 onehot mux instances.
+SYN-1068 : Optimized 2 binary mux instances.
+SYN-1019 : Optimized 9 mux instances.
+SYN-1021 : Optimized 1 onehot mux instances.
+SYN-1021 : Optimized 3 onehot mux instances.
+SYN-1021 : Optimized 25 onehot mux instances.
+SYN-1016 : Merged 1100 instances.
+SYN-1035 : Inferred 1 ROM(s)
+SYN-1016 : Merged 660 instances.
+SYN-1001 : Optimize 1 decoder instances
+SYN-1001 : End Stage 1.5 | Optimize Design; Time: 6.770980s wall, 6.500000s user + 0.125000s system = 6.625000s CPU (97.8%); Memory(MB): used = 733, reserved = 723, peak = 733;
+
+SYN-1079 : finish stage Optimize Design. Total instances: 33386, Total nets: 38688.
+
+SYN-1001 : Stage 1.6 | Optimize Iteratively
+SYN-1019 : Optimized 53 mux instances.
+SYN-1021 : Optimized 336 onehot mux instances.
+SYN-1014 : Optimize round 1
+SYN-1044 : Optimized 98 inv instances.
+SYN-1017 : Remove 37 const input seq instances
+SYN-1018 : Transformed 6 mux instances.
+SYN-1019 : Optimized 376 mux instances.
+SYN-1020 : Optimized 1830 distributor mux.
+SYN-1001 : Optimize 189 less-than instances
+SYN-1019 : Optimized 125 mux instances.
+SYN-1016 : Merged 7085 instances.
+SYN-1015 : Optimize round 1, 21125 better
+SYN-1014 : Optimize round 2
+SYN-1044 : Optimized 24 inv instances.
+SYN-1017 : Remove 5 const input seq instances
+SYN-1019 : Optimized 883 mux instances.
+SYN-1020 : Optimized 114 distributor mux.
+SYN-1001 : Optimize 1 less-than instances
+SYN-1019 : Optimized 325 mux instances.
+SYN-1016 : Merged 215 instances.
+SYN-1015 : Optimize round 2, 2418 better
+SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_tx_packet/g_packet_buffer$g_ph1p_eram$g_line_bank[0]$u_high_ram" in ../../uisrc/01_rtl/csi2/csi2_tx_packet.v(179) / pin "bea[0]"
+SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_tx_packet/g_packet_buffer$g_ph1p_eram$g_line_bank[0]$u_high_ram" in ../../uisrc/01_rtl/csi2/csi2_tx_packet.v(179) / pin "beb[0]"
+SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_tx_packet/g_packet_buffer$g_ph1p_eram$g_line_bank[1]$u_high_ram" in ../../uisrc/01_rtl/csi2/csi2_tx_packet.v(179) / pin "bea[0]"
+SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_tx_packet/g_packet_buffer$g_ph1p_eram$g_line_bank[1]$u_high_ram" in ../../uisrc/01_rtl/csi2/csi2_tx_packet.v(179) / pin "beb[0]"
+SYN-5025 WARNING: Using 0 for all undriven pins and nets
+SYN-3010 : Optimized 551 DFF(s)
+SYN-1014 : Optimize round 1
+SYN-1017 : Remove 24 const input seq instances
+SYN-1019 : Optimized 8 mux instances.
+SYN-1020 : Optimized 120 distributor mux.
+SYN-1019 : Optimized 11 mux instances.
+SYN-1016 : Merged 526 instances.
+SYN-1015 : Optimize round 1, 784 better
+SYN-1014 : Optimize round 2
+SYN-1044 : Optimized 4 inv instances.
+SYN-1017 : Remove 3 const input seq instances
+SYN-1019 : Optimized 2 mux instances.
+SYN-1020 : Optimized 39 distributor mux.
+SYN-1016 : Merged 78 instances.
+SYN-1015 : Optimize round 2, 133 better
+SYN-1014 : Optimize round 3
+SYN-1044 : Optimized 1 inv instances.
+SYN-1017 : Remove 3 const input seq instances
+SYN-1016 : Merged 1 instances.
+SYN-1015 : Optimize round 3, 8 better
+SYN-1014 : Optimize round 4
+SYN-1017 : Remove 15 const input seq instances
+SYN-1019 : Optimized 84 mux instances.
+SYN-1015 : Optimize round 4, 105 better
+SYN-1014 : Optimize round 5
+SYN-1017 : Remove 12 const input seq instances
+SYN-1019 : Optimized 15 mux instances.
+SYN-1015 : Optimize round 5, 33 better
+SYN-1014 : Optimize round 6
+SYN-1017 : Remove 12 const input seq instances
+SYN-1019 : Optimized 9 mux instances.
+SYN-1016 : Merged 2 instances.
+SYN-1015 : Optimize round 6, 26 better
+SYN-1014 : Optimize round 7
+SYN-1017 : Remove 16 const input seq instances
+SYN-1019 : Optimized 18 mux instances.
+SYN-1016 : Merged 2 instances.
+SYN-1015 : Optimize round 7, 36 better
+SYN-1014 : Optimize round 8
+SYN-1017 : Remove 1 const input seq instances
+SYN-1015 : Optimize round 8, 1 better
+SYN-1001 : End Stage 1.6 | Optimize Iteratively; Time: 22.988196s wall, 22.406250s user + 0.250000s system = 22.656250s CPU (98.6%); Memory(MB): used = 693, reserved = 688, peak = 748;
+
+SYN-1079 : finish stage Optimize Iteratively. Total instances: 27804, Total nets: 32498.
+
+SYN-1001 : Stage 1.7 | Check Design
+SYN-1001 : End Stage 1.7 | Check Design; Time: 0.012338s wall, 0.015625s user + 0.000000s system = 0.015625s CPU (126.6%); Memory(MB): used = 693, reserved = 689, peak = 748;
+
+SYN-1079 : finish stage Check Design. Total instances: 27804, Total nets: 32498.
+
+SYN-1001 : End Stage 1 | Optimize RTL; Time: 33.598768s wall, 32.687500s user + 0.390625s system = 33.078125s CPU (98.5%); Memory(MB): used = 693, reserved = 689, peak = 748;
+
+SYN-1079 : finish stage Optimize RTL. Total instances: 27804, Total nets: 32498.
+
+RUN-1003 : finish command "optimize_rtl" in  33.611067s wall, 32.703125s user + 0.390625s system = 33.093750s CPU (98.5%)
+
+RUN-1004 : used memory is 693 MB, reserved memory is 689 MB, peak memory is 748 MB
+RUN-1002 : start command "report_area -file fpga_prj_rtl.area"
+RUN-1001 : standard
+***Report Model: csi2_tx_top Device: PH1P35MDG324***
+
+IO Statistics
+#IO                        77
+  #input                    4
+  #output                  30
+  #inout                   43
+
+Gate Statistics
+#Basic gates            17057
+  #and                   1239
+  #nand                     0
+  #or                     735
+  #nor                      0
+  #xor                    164
+  #xnor                     0
+  #buf                      0
+  #not                   1179
+  #bufif1                   1
+  #MX21                  5759
+  #FADD                     0
+  #DFF                   7980
+  #LATCH                    0
+#MACRO_ADD                553
+#MACRO_EQ                 336
+#MACRO_MUX               5908
+#MACRO_OTHERS              11
+
+RUN-1002 : start command "export_db fpga_prj_rtl.db"
+RUN-1001 : Exported flow parameters
+RUN-1001 : Exported /
+RUN-1001 : Exported libs
+RUN-1001 : Exported entities
+RUN-1001 : Exported ports
+RUN-1001 : Exported pins
+RUN-1001 : Exported instances
+RUN-1001 : Exported nets
+RUN-1001 : Exported buses
+RUN-1001 : Exported models
+RUN-1001 : Exported packer
+RUN-1001 : Exported congestions
+RUN-1001 : Exported violations
+RUN-1001 : Exported ATMR Setting
+RUN-1001 : Exported timing constraints
+RUN-1001 : Exported IO constraints
+RUN-1001 : Exported Inst constraints
+RUN-1001 : Exported ChipWatcher
+RUN-1002 : start command "commit_param -step gate"
+RUN-1001 : Print Global Property
+RUN-1001 : -------------------------------------------------------------
+RUN-1001 :     Parameters    |   Settings   |  Default Values  |  Note  
+RUN-1001 : -------------------------------------------------------------
+RUN-1001 :    enable_seed    |     off      |       off        |        
+RUN-1001 :    hfn_to_clock   |  1000000000  |    1000000000    |        
+RUN-1001 :      message      |   standard   |     standard     |        
+RUN-1001 :    qor_monitor    |      on      |        on        |        
+RUN-1001 :   speedup_effort  |      0       |        0         |        
+RUN-1001 :    syn_ip_flow    |     off      |       off        |        
+RUN-1001 :       thread      |     auto     |       auto       |        
+RUN-1001 : -------------------------------------------------------------
+RUN-1001 : Print Gate Property
+RUN-1001 : ----------------------------------------------------------------
+RUN-1001 :       Parameters       |  Settings  |  Default Values  |  Note  
+RUN-1001 : ----------------------------------------------------------------
+RUN-1001 :   eram_cascade_height  |    auto    |       auto       |        
+RUN-1001 :        map_mode        |    auto    |       auto       |        
+RUN-1001 :      map_strategy      |     1      |        1         |        
+RUN-1001 :       pack_effort      |   medium   |      medium      |        
+RUN-1001 :     pack_seq_in_io     |    auto    |       auto       |        
+RUN-1001 :         report         |  standard  |     standard     |        
+RUN-1001 : ----------------------------------------------------------------
+RUN-1002 : start command "optimize_gate -packarea fpga_prj_gate.area"
+RUN-1001 : Open license file D:/TD/license/Anlogic.lic
+SYN-1001 : Stage 2 | Optimize Gate
+SYN-1001 : Stage 2.1 | Map Reg
+SYN-1001 : End Stage 2.1 | Map Reg; Time: 1.221181s wall, 1.171875s user + 0.015625s system = 1.187500s CPU (97.2%); Memory(MB): used = 721, reserved = 810, peak = 748;
+
+SYN-1079 : finish stage Map Reg. Total instances: 27804, Total nets: 32498.
+
+SYN-1001 : Stage 2.2 | Map IO
+SYN-2001 : Map 77 IOs to PADs of model 'csi2_tx_top'
+SYN-1001 : End Stage 2.2 | Map IO; Time: 0.473360s wall, 0.453125s user + 0.015625s system = 0.468750s CPU (99.0%); Memory(MB): used = 722, reserved = 811, peak = 748;
+
+SYN-1001 : Stage 2.3 | Map Macro
+RUN-1002 : start command "update_pll_param -module csi2_tx_top"
+SYN-2501 : Processed 0 LOGIC_BUF instances.
+SYN-2501 : 5 BUFG to GCLK
+SYN-5041 WARNING: Ram Inst: u_mc_to_user_interface/U_w155_d512_fifo/soft_fifo_al_f58e8b3e1f3d_Inst/ram_inst/ramread0_syn_22 has wrong RAM_STYLE/ROM_STYLE setting, AUTO is really used in ram inference
+SYN-2571 : Optimize after map_dsp, round 1
+SYN-2571 : Optimize after map_dsp, round 1, 0 better
+SYN-1001 : Throwback 445 control mux instances
+SYN-1001 : clone 1 adder instances
+SYN-1001 : Generate 8 bigger adders
+SYN-1001 : Convert 24 adder
+SYN-1001 : Optimize 50 adders
+SYN-2501 : Optimize round 1
+SYN-1016 : Merged 616 instances.
+SYN-2501 : Optimize round 1, 2692 better
+SYN-2501 : Optimize round 2
+SYN-2501 : Optimize round 2, 0 better
+SYN-2501 : Optimize round 1
+SYN-1016 : Merged 1 instances.
+SYN-2501 : Optimize round 1, 1 better
+SYN-2501 : Optimize round 2
+SYN-2501 : Optimize round 2, 0 better
+SYN-1030 : Map 9 macro adder
+SYN-1031 : Map 6 macro less-than
+SYN-2501 : Map 527 macro adder(s)
+SYN-3009 : Map 16 FxMUX in MapMacro
+SYN-1019 : Optimized 1054 mux instances.
+SYN-1016 : Merged 1864 instances.
+SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_init/ramread0_syn_24" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_init.v(73) / pin "di[7]"
+SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_init/ramread0_syn_24" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_init.v(73) / pin "di[6]"
+SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_init/ramread0_syn_24" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_init.v(73) / pin "di[5]"
+SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_init/ramread0_syn_24" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_init.v(73) / pin "di[4]"
+SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_init/ramread0_syn_24" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_init.v(73) / pin "di[3]"
+SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_init/ramread0_syn_24" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_init.v(73) / pin "di[2]"
+SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_init/ramread0_syn_24" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_init.v(73) / pin "di[1]"
+SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_init/ramread0_syn_24" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_init.v(73) / pin "di[0]"
+SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_init/ramread0_syn_25" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_init.v(73) / pin "di[7]"
+SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_init/ramread0_syn_25" in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_init.v(73) / pin "di[6]"
+SYN-5011 Similar messages will be suppressed.
+SYN-5025 WARNING: Using 0 for all undriven pins and nets
+SYN-1001 : End Stage 2.3 | Map Macro; Time: 12.425069s wall, 11.390625s user + 0.812500s system = 12.203125s CPU (98.2%); Memory(MB): used = 784, reserved = 866, peak = 784;
+
+SYN-1079 : finish stage Map Macro. Total instances: 34196, Total nets: 38757.
+
+SYN-1001 : Stage 2.4 | Map Gate
+SYN-3001 : Collect 7116 PI 4311 PO (114 timing unconstrained) for mapping
+SYN-2581 : Mapping with K=6, #lut = 8931 (4.09), #lev = 11 (3.35), #crit_level = 0
+SYN-2551 : Post LUT mapping optimization.
+SYN-2581 : Mapping with K=6, #lut = 8396 (4.00), #lev = 10 (3.35), #crit_level = 0
+SYN-3001 : Logic optimization opt = 3.69 sec, map = 1.15 sec, post map opt = 5.92 sec.
+SYN-1001 : End Stage 2.4 | Map Gate; Time: 17.749403s wall, 17.187500s user + 0.421875s system = 17.609375s CPU (99.2%); Memory(MB): used = 806, reserved = 866, peak = 806;
+
+SYN-1001 : Packing model "csi2_tx_top" ...
+SYN-1001 : Stage 2.5 | Pack Gate
+SYN-4010 : Pack lib has 43 rtl pack models with 26 top pack blocks
+SYN-1014 : Optimize round 1
+SYN-1015 : Optimize round 1, 0 better
+SYN-4002 : Packing 7065 DFF/LATCH to SEQ ...
+SYN-1001 : Remove 65 carry adders
+RUN-1002 : start command "start_timer"
+RUN-1003 : finish command "start_timer" in  1.056947s wall, 0.984375s user + 0.046875s system = 1.031250s CPU (97.6%)
+
+RUN-1004 : used memory is 767 MB, reserved memory is 760 MB, peak memory is 806 MB
+RUN-1002 : start command "end_timer"
+SYN-4009 : Pack 63 carry chain into lslice
+SYN-1001 : End Stage 2.5 | Pack Gate; Time: 5.284347s wall, 3.406250s user + 1.812500s system = 5.218750s CPU (98.8%); Memory(MB): used = 768, reserved = 760, peak = 806;
+
+RUN-1002 : start command "report_qor -step gate -file gate.qor"
+RUN-1002 : start command "start_timer"
+RUN-1003 : finish command "start_timer" in  1.174950s wall, 1.171875s user + 0.000000s system = 1.171875s CPU (99.7%)
+
+RUN-1004 : used memory is 768 MB, reserved memory is 760 MB, peak memory is 806 MB
+-----------------------------------------------------------
+| QoR metrics               |         value               |
+-----------------------------------------------------------
+| Timing                    |                             |
+|     Setup WNS             |        -2076                |
+|     Setup TNS             |      -401269                |
+|     Num of violated S-EP  |          289                |
+|     Hold WNS              |          114                |
+|     Hold TNS              |            0                |
+|     Num of violated H-EP  |            0                |
+-----------------------------------------------------------
+| Utilization               |                             |
+|     #registers            |         7065                |
+|     #luts                 |         8459                |
+|     #lut1                 |          107                |
+|     #lut1(~A)             |          107                |
+|     #slices               |         1501                |
+|     slices percentage     |        7.07%                |
+|     #RAMs                 |           17                |
+|     #DSPs                 |            0                |
+|     #f7mux                |        0.15%                |
+|     #MACROs               |          135                |
+|     #insts in MACRO       |         1573                |
+-----------------------------------------------------------
+| kept_net                  |                             |
+|     #syn_keep             |         1381                |
+|     #keep_hier            |          310                |
+|     #dont_touch           |            0                |
+|     #mark_debug           |            0                |
+|     #max_fanout_keep      |            0                |
+|     #async_reg            |          380                |
+-----------------------------------------------------------
+| Top 10% datanet fanout#   |        48.82                |
+| dff(single fanout)->dff   |          548                |
+| dff(single fanout)->dram  |          129                |
+-----------------------------------------------------------
+| Over-quota path num*      |                             |
+|     Total                 |            0                |
+-----------------------------------------------------------
+| Rent**                    |                             |
+-----------------------------------------------------------
+Note*: Over-quota path shows the over-path-level-threshold path number of each clock.
+       The clock will not be shown if no path is with path level over the threshold.
+       The threshold is defined as worst path_margin / 800ps.
+Note**: Rent shows the rent exponent value of the modules whose rent value exceeds the threshold.
+        Only modules under top are reported, and the threshold is defined as 0.7.
+
+Logic Level Distribution
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  Clock                                                                              |  Period             |  0     |  1     |  2     |  3     |  4     |  5    |  6    |  7    |  8   |  9   |  10   |  11
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  MIPI_RX_BYTE_CLK                                                                   |  8.888ns (112MHz)   |  1597  |  267   |  190   |  348   |  317   |  218  |  105  |  20   |  3   |  65  |  174  |  0
+  MIPI_TX_BYTE_CLK                                                                   |  13.332ns (75MHz)   |  730   |  480   |  221   |  172   |  67    |  85   |  60   |  16   |  35  |  18  |  60   |  2
+  mipi_rx_ck_pad                                                                     |  2.222ns (450MHz)   |  0     |  0     |  0     |  0     |  0     |  0    |  0    |  0    |  0   |  0   |  0    |  0
+  pll_clk_100m                                                                       |  10.000ns (100MHz)  |  143   |  6     |  2     |  106   |  0     |  0    |  0    |  0    |  0   |  0   |  0    |  0
+  pll_clk_24m                                                                        |  41.668ns (23MHz)   |  884   |  218   |  15    |  35    |  79    |  20   |  0    |  0    |  1   |  3   |  3    |  0
+  sysclk                                                                             |  40.000ns (25MHz)   |  0     |  0     |  0     |  0     |  0     |  0    |  0    |  0    |  0   |  0   |  0    |  0
+  u_dphy_rx/u_ph1p_mipiio_rx_wrapper/u_PH1P_LOGIC_DPHY_MIPI_RX.io_clk_pad_p          |  2.222ns (450MHz)   |  0     |  0     |  0     |  0     |  0     |  0    |  0    |  0    |  0   |  0   |  0    |  0
+  u_dphy_rx/u_ph1p_mipiio_rx_wrapper/u_PH1P_LOGIC_DPHY_MIPI_RX.tif_c16_in            |  8.888ns (112MHz)   |  0     |  0     |  0     |  0     |  0     |  0    |  0    |  0    |  0   |  0   |  0    |  0
+  u_dphy_tx/u_ph1p_mipiio_tx_wrapper/u_PH1P_LOGIC_DPHY_MIPI_TX.i_phy_dpll_ref_clk    |  10.000ns (100MHz)  |  0     |  0     |  0     |  0     |  0     |  0    |  0    |  0    |  0   |  0   |  0    |  0
+  u_dphy_tx/u_ph1p_mipiio_tx_wrapper/u_PH1P_LOGIC_DPHY_MIPI_TX.ln0_data_c16_sample   |  13.332ns (75MHz)   |  16    |  0     |  0     |  0     |  0     |  0    |  0    |  0    |  0   |  0   |  0    |  0
+  u_dphy_tx/u_ph1p_mipiio_tx_wrapper/u_PH1P_LOGIC_DPHY_MIPI_TX.ln1_data_c16_sample   |  13.332ns (75MHz)   |  16    |  0     |  0     |  0     |  0     |  0    |  0    |  0    |  0   |  0   |  0    |  0
+  u_dphy_tx/u_ph1p_mipiio_tx_wrapper/u_PH1P_LOGIC_DPHY_MIPI_TX.ln2_data_c16_sample   |  13.332ns (75MHz)   |  16    |  0     |  0     |  0     |  0     |  0    |  0    |  0    |  0   |  0   |  0    |  0
+  u_dphy_tx/u_ph1p_mipiio_tx_wrapper/u_PH1P_LOGIC_DPHY_MIPI_TX.ln3_data_c16_sample   |  13.332ns (75MHz)   |  16    |  0     |  0     |  0     |  0     |  0    |  0    |  0    |  0   |  0   |  0    |  0
+  u_dphy_tx/u_ph1p_mipiio_tx_wrapper/u_PH1P_LOGIC_DPHY_MIPI_TX.lnck_data_c16_sample  |  13.332ns (75MHz)   |  16    |  0     |  0     |  0     |  0     |  0    |  0    |  0    |  0   |  0   |  0    |  0
+  u_ph1p35_324_ddr_wrapper/u_ddr2/ctl_clk                                            |  7.500ns (133MHz)   |  0     |  0     |  0     |  0     |  0     |  0    |  0    |  0    |  0   |  0   |  0    |  0
+  u_ph1p35_324_ddr_wrapper/u_ddr2/ddr_clk                                            |  1.875ns (533MHz)   |  0     |  0     |  0     |  0     |  0     |  0    |  0    |  0    |  0   |  0   |  0    |  0
+  u_ph1p35_324_ddr_wrapper/u_ddr2/mcu_clk                                            |  19.687ns (50MHz)   |  56    |  15    |  244   |  15    |  0     |  4    |  5    |  0    |  0   |  0   |  0    |  0
+  u_ph1p35_324_ddr_wrapper/u_ddr2/ref_clk                                            |  7.500ns (133MHz)   |  0     |  0     |  0     |  0     |  0     |  0    |  0    |  0    |  0   |  0   |  0    |  0
+  u_ph1p35_324_ddr_wrapper/u_ddr2/usr_clk                                            |  7.500ns (133MHz)   |  2567  |  1466  |  1005  |  1053  |  985   |  654  |  244  |  66   |  3   |  2   |  0    |  0
+  Total                                                                              |  NA                 |  6057  |  2452  |  1677  |  1729  |  1448  |  981  |  414  |  102  |  42  |  88  |  237  |  2
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Note: The table count the worst 100000 paths, each endpoint count only one time.(15229 paths analyzed)
+
+Hierarchical Rent Exponent Report
++---------------------------------------------------------------------------------------------+
+|Inst                       |Model                     |Rent     |Cell     |Pin     |Term     |
++---------------------------------------------------------------------------------------------+
+|top                        |csi2_tx_top               |0.20     |21016    |93621   |33       |
+|  u_ddr_triple_frame_cache |ddr_triple_frame_cache_6  |0.57     |1547     |9702    |413      |
+|  u_ph1p35_324_ddr_wrapper |ph1p35_324_ddr_wrapper_10 |0.47     |10314    |46585   |341      |
+|  u_crop_before_ddr        |csi2_raw10_scale_crop_4   |0.38     |1847     |8495    |80       |
++---------------------------------------------------------------------------------------------+
+Note: Cell represents total number of cells inside module; Pin represents total number of pins
+      which have net connection inside module; Term represents total number of PIs and POs of module.
+      Rent represents the relationship between number of terms and number of cells in module.
+      A module with higher rent corresponds to highly connected logic and strong connectivity with others.
+Report gate stage QoR done.
+
+SYN-1001 : The design has 461 dangling syn_keep insts.
+RUN-1003 : finish command "report_qor -step gate -file gate.qor" in  4.448823s wall, 4.343750s user + 0.046875s system = 4.390625s CPU (98.7%)
+
+RUN-1004 : used memory is 817 MB, reserved memory is 798 MB, peak memory is 817 MB
+RUN-1002 : start command "report_area -file fpga_prj_gate.area"
+SYN-4034 : The count of slices with lut is 71.
+SYN-4035 : The count of slices with lut+ripple is 982.
+RUN-1001 : standard
+***Report Model: csi2_tx_top Device: PH1P35MDG324***
+
+Design Statistics
+#IO                        57   out of    160   35.62%
+  #input                    4
+  #output                  30
+  #inout                   23
+#lut                     9960
+  #lut1                   107
+  #lut2                  1356
+  #lut3                  1890
+  #lut4                  1839
+  #lut5                  1641
+  #lut6                  3127
+#reg                     7065
+  #slice reg             7065   out of  42432   16.65%
+  #pad reg                  0
+
+Utilization Statistics
+#slice*                  7186   out of  21216   33.87%
+  #used ram               448
+    #dram lut             432
+    #shifter lut           16
+  #used logic            6738
+    #with luts*          5470
+    #with adder           982
+    #reg only*            286
+#f7mux                     16   out of  10608    0.15%
+#f8mux                      0   out of   5304    0.00%
+#eram                      17   out of    108   15.74%
+  #eram20k                 17
+  #fifo20k                  0
+#dsp                        0   out of     40    0.00%
+#ddr_byte                   6   out of     12   50.00%
+#mipi_tx                    1   out of      2   50.00%
+#mipi_rx                    1   out of      2   50.00%
+#pad                       12   out of    160    7.50%
+#pll                        3   out of      6   50.00%
+#gclk                       5   out of     32   15.62%
+#lclk                       0   out of     12    0.00%
+#sclk                       0   out of     48    0.00%
+#mlclk                      2   out of      6   33.33%
+#ioclk                      4   out of     18   22.22%
+
+* Note! The LUT and Slice count after Optimize-Gate is not the final value, Run Optimize-place for a more realistic count.
+
+SYN-1001 : End Stage 2 | Optimize Gate; Time: 41.850035s wall, 38.171875s user + 3.140625s system = 41.312500s CPU (98.7%); Memory(MB): used = 817, reserved = 798, peak = 817;
+
+RUN-1003 : finish command "optimize_gate -packarea fpga_prj_gate.area" in  41.864104s wall, 38.187500s user + 3.140625s system = 41.328125s CPU (98.7%)
+
+RUN-1004 : used memory is 817 MB, reserved memory is 798 MB, peak memory is 817 MB
+RUN-1002 : start command "legalize_phy_inst"
+SYN-1001 : Stage 3 | Legalize Phy Inst
+SYN-1011 : Flatten model csi2_tx_top
+SYN-1001 : ADC: Instance "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy/ac_byte[0]$ac_byte_used$u_ddrphy_ac_byte_wrapper/u_ddrphy_byte" LOCATION="X0Y70Z0"
+SYN-1001 : ADC: Instance "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy/ac_byte[1]$ac_byte_used$u_ddrphy_ac_byte_wrapper/u_ddrphy_byte" LOCATION="X0Y60Z0"
+SYN-1001 : ADC: Instance "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy/ac_byte[2]$ac_byte_used$u_ddrphy_ac_byte_wrapper/u_ddrphy_byte" LOCATION="X0Y50Z0"
+SYN-1001 : ADC: Instance "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy/ac_byte[3]$ac_byte_used$u_ddrphy_ac_byte_wrapper/u_ddrphy_byte" LOCATION="X0Y40Z0"
+SYN-1001 : ADC: Instance "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy/bkref[0]$u_ddrphy_bankref" LOCATION="X0Y19Z0"
+SYN-1001 : ADC: Instance "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy/bkref[1]$u_ddrphy_bankref" LOCATION="X0Y59Z0"
+SYN-1001 : ADC: Instance "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy/dx_byte[0]$dx_byte_used$u_ddrphy_dx_byte_wrapper/u_ddrphy_byte" LOCATION="X0Y30Z0"
+SYN-1001 : ADC: Instance "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy/dx_byte[1]$dx_byte_used$u_ddrphy_dx_byte_wrapper/u_ddrphy_byte" LOCATION="X0Y10Z0"
+SYN-1001 : ADC: Instance "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_clk/ioclk[0]$u_ioclk_0" LOCATION="X0Y59Z0"
+SYN-1001 : ADC: Instance "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_clk/ioclk[0]$u_ioclk_1" LOCATION="X0Y59Z1"
+SYN-1001 : ADC: Instance "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_clk/ioclk[1]$u_ioclk_0" LOCATION="X0Y19Z0"
+SYN-1001 : ADC: Instance "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_clk/ioclk[1]$u_ioclk_1" LOCATION="X0Y19Z1"
+SYN-1001 : ADC: Instance "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_clk/u_mlclk_1" LOCATION="X0Y59Z0"
+SYN-1001 : ADC: Instance "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_clk/u_mlclk_2" LOCATION="X0Y59Z1"
+SYN-1001 : ADC: Instance "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_clk/u_pll0/u_pll_inst" LOCATION="X0Y40Z0"
+SYN-1001 : ADC: Instance "u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_clk/u_pll1/u_pll_inst" LOCATION="X0Y79Z0"
+SYN-1001 : End Stage 3 | Legalize Phy Inst; Time: 0.131452s wall, 0.140625s user + 0.000000s system = 0.140625s CPU (107.0%); Memory(MB): used = 817, reserved = 798, peak = 817;
+
+RUN-1002 : start command "update_timing"
+RUN-1002 : start command "start_timer"
+RUN-1003 : finish command "start_timer" in  1.066944s wall, 1.000000s user + 0.046875s system = 1.046875s CPU (98.1%)
+
+RUN-1004 : used memory is 817 MB, reserved memory is 798 MB, peak memory is 817 MB
+RUN-1003 : finish command "update_timing" in  1.941142s wall, 1.859375s user + 0.062500s system = 1.921875s CPU (99.0%)
+
+RUN-1004 : used memory is 817 MB, reserved memory is 798 MB, peak memory is 817 MB
+RUN-1002 : start command "report_timing_status -file fpga_prj_gate.ts"
+RUN-1002 : start command "report_timing_summary -file fpga_prj_gate.timing"
+RUN-1002 : start command "flow_status -file flow.status"
+Location         : D:\BaiduNetdiskDownload\02_F02_FC02_PH1P35\fpga_11\ph1p35second\fpga\fpga_prj_Runs\syn_1
+Running with     : Tang Dynasty v6.2.168116
+                   Copyright (c) 2012-2025 Anlogic Inc.
+Top Model        : csi2_tx_top
+Device           : PH1P35MDG324
+Speed            : 3
+
+Timing Mode      : basic
+Setup            : WNS -2076ps  TNS  -391641ps  NUM_FEPS   244
+Hold             : WNS   114ps  TNS        0ps  NUM_FEPS     0
+
+Flow Statistics  :
+RUN-1001 : Flow Statistics:
+RUN-1001 : --------------------------------------------------------------------------------------------------
+RUN-1001 :      command     |  #calls  |  wall time  |  cpu time(s)  |  used memory(mb)  |  peak memory(mb)  
+RUN-1001 : --------------------------------------------------------------------------------------------------
+RUN-1001 :   optimize_gate  |    1     |  41s(54%)   |    41(55%)    |        817        |        817        
+RUN-1001 :   optimize_rtl   |    1     |  33s(44%)   |    32(43%)    |        693        |        748        
+RUN-1001 :   import_device  |    1     |   1s(1%)    |     1(1%)     |        323        |        323        
+RUN-1001 :     read_adc     |    1     |   0s(0%)    |     0(0%)     |        627        |        627        
+RUN-1001 :     read_sdc     |    2     |   0s(0%)    |     0(0%)     |        622        |        627        
+RUN-1001 : --------------------------------------------------------------------------------------------------
+RUN-1001 :       total      |    6     |    1m15s    |      74       |        817        |        817        
+RUN-1001 : --------------------------------------------------------------------------------------------------
+RUN-1002 : start command "export_db fpga_prj_gate.db"
+RUN-1001 : Exported flow parameters
+RUN-1001 : Exported /
+RUN-1001 : Exported libs
+RUN-1001 : Exported entities
+RUN-1001 : Exported ports
+RUN-1001 : Exported pins
+RUN-1001 : Exported instances
+RUN-1001 : Exported nets
+RUN-1001 : Exported buses
+RUN-1001 : Exported models
+RUN-1001 : Exported packer
+RUN-1001 : Exported congestions
+RUN-1001 : Exported violations
+RUN-1001 : Exported ATMR Setting
+RUN-1001 : Exported timing constraints
+RUN-1001 : Exported IO constraints
+RUN-1001 : Exported Inst constraints
+RUN-1001 : Exported ChipWatcher
+RUN-1002 : start command "export_flow_status -s read_design -e opt_gate"
+RUN-1002 : start command "flow_status"
+
+Location         : D:\BaiduNetdiskDownload\02_F02_FC02_PH1P35\fpga_11\ph1p35second\fpga\fpga_prj_Runs\syn_1
+Running with     : Tang Dynasty v6.2.168116
+                   Copyright (c) 2012-2025 Anlogic Inc.
+Top Model        : csi2_tx_top
+Device           : PH1P35MDG324
+Speed            : 3
+
+Timing Mode      : basic
+Setup            : WNS -2076ps  TNS  -391641ps  NUM_FEPS   244
+Hold             : WNS   114ps  TNS        0ps  NUM_FEPS     0
+
+RUN-1001 : Flow Statistics:
+RUN-1001 : --------------------------------------------------------------------------------------------------
+RUN-1001 :      command     |  #calls  |  wall time  |  cpu time(s)  |  used memory(mb)  |  peak memory(mb)  
+RUN-1001 : --------------------------------------------------------------------------------------------------
+RUN-1001 :   optimize_gate  |    1     |  41s(54%)   |    41(55%)    |        817        |        817        
+RUN-1001 :   optimize_rtl   |    1     |  33s(44%)   |    32(43%)    |        693        |        748        
+RUN-1001 :   import_device  |    1     |   1s(1%)    |     1(1%)     |        323        |        323        
+RUN-1001 :     read_adc     |    1     |   0s(0%)    |     0(0%)     |        627        |        627        
+RUN-1001 :     read_sdc     |    2     |   0s(0%)    |     0(0%)     |        622        |        627        
+RUN-1001 : --------------------------------------------------------------------------------------------------
+RUN-1001 :       total      |    6     |    1m15s    |      74       |        817        |        817        
+RUN-1001 : --------------------------------------------------------------------------------------------------
