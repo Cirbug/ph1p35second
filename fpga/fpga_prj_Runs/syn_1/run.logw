@@ -1,12 +1,12 @@
 ============================================================
    Tang Dynasty, V6.2.168116
    Copyright (c) 2012-2025 Anlogic Inc.
-   Executable = F:/AnlogicFpga/TD_6.2.1_Engineer_6.2.168.116/bin/run.exe
+   Executable = D:/TD/bin/run.exe
    Built at =   16:32:07 Jun 12 2025
-   Run by =     pc
-   Run Date =   Thu Oct 29 21:11:54 2026
+   Run by =     XIAOXIAO
+   Run Date =   Sat Oct 31 17:54:30 2026
 
-   Run on =     CIRBUG
+   Run on =     LAPTOP-T95VR7F4
 ============================================================
 Copyright (c) 1998-2019 The OpenSSL Project.  All rights reserved.
 This product includes software developed by the OpenSSL Project
@@ -18,7 +18,6 @@ HDL-5007 WARNING: block identifier is required on this block in ../../uisrc/01_r
 HDL-5007 WARNING: actual bit length 24 differs from formal bit length 32 for port 'REG_DATA' in ../../uisrc/01_rtl/uics500_cfg/uicfgcs500.v(162)
 HDL-5007 WARNING: actual bit length 32 differs from formal bit length 7 for port 'I' in ../../uisrc/01_rtl/uics500_cfg/uicfgcs500.v(166)
 HDL-5007 WARNING: actual bit length 24 differs from formal bit length 32 for port 'REG_DATA' in ../../uisrc/01_rtl/uics500_cfg/uicfgcs500.v(172)
-HDL-5323 WARNING: input port 'I_VTS[15]' remains unconnected for this instance in ../../uisrc/01_rtl/uics500_cfg/uicfgcs500.v(168)
 HDL-5007 WARNING: actual bit length 8 differs from formal bit length 1 for port 'bea' in ../../uisrc/01_rtl/cnn/cnn_digit_infer.v(993)
 HDL-5007 WARNING: actual bit length 8 differs from formal bit length 1 for port 'beb' in ../../uisrc/01_rtl/cnn/cnn_digit_infer.v(993)
 HDL-5007 WARNING: actual bit length 8 differs from formal bit length 1 for port 'bea' in ../../uisrc/01_rtl/cnn/cnn_digit_infer.v(1007)
@@ -35,73 +34,70 @@ HDL-5007 WARNING: actual bit length 8 differs from formal bit length 1 for port 
 HDL-5007 WARNING: actual bit length 8 differs from formal bit length 1 for port 'beb' in ../../uisrc/01_rtl/cnn/cnn_digit_infer.v(941)
 HDL-5317 WARNING: input port 'ecc_sbiterrinj' is not connected on this instance in ../../uisrc/01_rtl/cnn/cnn_digit_infer.v(936)
 HDL-5317 WARNING: input port 'ecc_sbiterrinj' is not connected on this instance in ../../uisrc/01_rtl/cnn/cnn_frame_digit_detector.v(272)
-HDL-5007 WARNING: actual bit length 32 differs from formal bit length 4 for port 'i_ck_hs_odelay_value' in ../../uisrc/01_rtl/mipi_dphy_tx/ph1p_mipiio_tx_wrapper.v(439)
-HDL-5007 WARNING: actual bit length 32 differs from formal bit length 4 for port 'i_l0_hs_odelay_value' in ../../uisrc/01_rtl/mipi_dphy_tx/ph1p_mipiio_tx_wrapper.v(448)
-HDL-5007 WARNING: actual bit length 32 differs from formal bit length 4 for port 'i_l1_hs_odelay_value' in ../../uisrc/01_rtl/mipi_dphy_tx/ph1p_mipiio_tx_wrapper.v(457)
-HDL-5007 WARNING: actual bit length 32 differs from formal bit length 4 for port 'i_l2_hs_odelay_value' in ../../uisrc/01_rtl/mipi_dphy_tx/ph1p_mipiio_tx_wrapper.v(466)
-HDL-5007 WARNING: actual bit length 32 differs from formal bit length 4 for port 'i_l3_hs_odelay_value' in ../../uisrc/01_rtl/mipi_dphy_tx/ph1p_mipiio_tx_wrapper.v(475)
+HDL-5007 WARNING: actual bit length 18 differs from formal bit length 1 for port 'bea' in ../../uisrc/01_rtl/csi2/csi2_ptr_fifo.v(94)
+HDL-5007 WARNING: actual bit length 18 differs from formal bit length 1 for port 'beb' in ../../uisrc/01_rtl/csi2/csi2_ptr_fifo.v(94)
+HDL-5007 WARNING: actual bit length 18 differs from formal bit length 1 for port 'bea' in ../../uisrc/01_rtl/csi2/csi2_ptr_fifo.v(94)
+HDL-5007 WARNING: actual bit length 18 differs from formal bit length 1 for port 'beb' in ../../uisrc/01_rtl/csi2/csi2_ptr_fifo.v(94)
+HDL-5007 WARNING: actual bit length 18 differs from formal bit length 1 for port 'bea' in ../../uisrc/01_rtl/csi2/csi2_ptr_fifo.v(94)
+HDL-5317 WARNING: input port 'ecc_sbiterrinj' is not connected on this instance in ../../uisrc/01_rtl/csi2/csi2_ptr_fifo.v(87)
+HDL-5317 WARNING: input port 'dib[154]' is not connected on this instance in ../../uisrc/03_ip/w155_d512_fifo/soft_fifo_al_f58e8b3e1f3d.v(201)
+HDL-5314 WARNING: net 'rom_w52' does not have a driver in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_init.v(36)
+HDL-5314 WARNING: net 'usr_vld[8]' does not have a driver in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_fast_init_wrapper.v(132)
+HDL-5314 WARNING: net 'init_gate[80]' does not have a driver in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_fast_init_wrapper.v(134)
+HDL-5314 WARNING: net 'init_wdqs[80]' does not have a driver in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_fast_init_wrapper.v(135)
+HDL-5314 WARNING: net 'init_wdq[80]' does not have a driver in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_fast_init_wrapper.v(136)
+HDL-5314 WARNING: net 'init_rdqsp[80]' does not have a driver in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_fast_init_wrapper.v(137)
+HDL-5314 WARNING: net 'init_rdqsn[80]' does not have a driver in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_fast_init_wrapper.v(138)
+HDL-5314 WARNING: net 'init_wsl[35]' does not have a driver in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_fast_init_wrapper.v(139)
+HDL-5314 WARNING: net 'init_rsl[35]' does not have a driver in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_fast_init_wrapper.v(140)
+HDL-5314 WARNING: net 'lcdl_mdl_r[8]' does not have a driver in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_dcu.v(94)
+HDL-5314 WARNING: net 'phy_rdata[103]' does not have a driver in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_byte_wrapper.v(152)
+HDL-5314 WARNING: net 'phy_rdqs[7]' does not have a driver in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_byte_wrapper.v(157)
+HDL-5317 WARNING: input port 'dl_in' is not connected on this instance in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_byte_wrapper.v(390)
+HDL-5314 WARNING: net 'phy_rdata[103]' does not have a driver in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_byte_wrapper.v(152)
+HDL-5314 WARNING: net 'phy_rdqs[7]' does not have a driver in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_byte_wrapper.v(157)
+HDL-5317 WARNING: input port 'dl_in' is not connected on this instance in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_byte_wrapper.v(390)
+HDL-5314 WARNING: net 'phy_rdata[103]' does not have a driver in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_byte_wrapper.v(152)
+HDL-5317 WARNING: input port 'dl_in' is not connected on this instance in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_byte_wrapper.v(390)
+HDL-5314 WARNING: net 'phy_rdata[103]' does not have a driver in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_byte_wrapper.v(152)
+HDL-5317 WARNING: input port 'dl_in' is not connected on this instance in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_byte_wrapper.v(390)
+HDL-5314 WARNING: net 'phy_rdata[103]' does not have a driver in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_byte_wrapper.v(152)
+HDL-5317 WARNING: input port 'dl_in' is not connected on this instance in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_byte_wrapper.v(390)
+HDL-5314 WARNING: net 'dx2_wdata[103]' does not have a driver in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy.v(187)
+HDL-5314 WARNING: net 'dx3_wdata[103]' does not have a driver in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy.v(188)
+HDL-5314 WARNING: net 'dx4_wdata[103]' does not have a driver in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy.v(189)
+HDL-5317 WARNING: input port 'i_scan_clk' is not connected on this instance in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy.v(438)
+HDL-5323 WARNING: input port 'dqs_pupd_en' remains unconnected for this instance in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy.v(528)
+HDL-5317 WARNING: input port 'dly_full[1]' is not connected on this instance in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_top.v(457)
+HDL-5323 WARNING: input port 'dhi_bg[11]' remains unconnected for this instance in ../../uisrc/03_ip/ddr2/src/rtl/phy/ph1p_ddrphy_top.v(658)
+HDL-5007 WARNING: delay control is not supported for synthesis in ../../uisrc/03_ip/ddr2/src/rtl/misc/ph1p_ddr_fifo_dram_sync.v(49)
+HDL-5007 WARNING: delay control is not supported for synthesis in ../../uisrc/03_ip/ddr2/src/rtl/misc/ph1p_ddr_fifo_dram_sync.v(51)
+HDL-5007 WARNING: delay control is not supported for synthesis in ../../uisrc/03_ip/ddr2/src/rtl/misc/ph1p_ddr_fifo_dram_sync.v(58)
+HDL-5007 WARNING: delay control is not supported for synthesis in ../../uisrc/03_ip/ddr2/src/rtl/misc/ph1p_ddr_fifo_dram_sync.v(60)
+HDL-5007 WARNING: delay control is not supported for synthesis in ../../uisrc/03_ip/ddr2/src/rtl/misc/ph1p_ddr_fifo_dram_sync.v(67)
+HDL-5007 WARNING: delay control is not supported for synthesis in ../../uisrc/03_ip/ddr2/src/rtl/misc/ph1p_ddr_fifo_dram_sync.v(74)
+HDL-5007 WARNING: delay control is not supported for synthesis in ../../uisrc/03_ip/ddr2/src/rtl/misc/ph1p_ddr_fifo_dram_sync.v(75)
+HDL-5007 WARNING: delay control is not supported for synthesis in ../../uisrc/03_ip/ddr2/src/rtl/misc/ph1p_ddr_fifo_dram_sync.v(76)
+HDL-5007 WARNING: delay control is not supported for synthesis in ../../uisrc/03_ip/ddr2/src/rtl/misc/ph1p_ddr_fifo_dram_sync.v(78)
+HDL-5007 WARNING: delay control is not supported for synthesis in ../../uisrc/03_ip/ddr2/src/rtl/misc/ph1p_ddr_fifo_dram_sync.v(79)
+HDL-5007 WARNING: delay control is not supported for synthesis in ../../uisrc/03_ip/ddr2/src/rtl/misc/ph1p_ddr_fifo_dram_sync.v(80)
+HDL-5007 WARNING: delay control is not supported for synthesis in ../../uisrc/03_ip/ddr2/src/rtl/misc/ph1p_ddr_fifo_dram_sync.v(49)
+HDL-5007 WARNING: delay control is not supported for synthesis in ../../uisrc/03_ip/ddr2/src/rtl/misc/ph1p_ddr_fifo_dram_sync.v(51)
+HDL-5007 WARNING: delay control is not supported for synthesis in ../../uisrc/03_ip/ddr2/src/rtl/misc/ph1p_ddr_fifo_dram_sync.v(58)
+HDL-5007 WARNING: delay control is not supported for synthesis in ../../uisrc/03_ip/ddr2/src/rtl/misc/ph1p_ddr_fifo_dram_sync.v(60)
+HDL-5007 WARNING: delay control is not supported for synthesis in ../../uisrc/03_ip/ddr2/src/rtl/misc/ph1p_ddr_fifo_dram_sync.v(67)
+HDL-5007 WARNING: delay control is not supported for synthesis in ../../uisrc/03_ip/ddr2/src/rtl/misc/ph1p_ddr_fifo_dram_sync.v(74)
+HDL-5007 WARNING: delay control is not supported for synthesis in ../../uisrc/03_ip/ddr2/src/rtl/misc/ph1p_ddr_fifo_dram_sync.v(75)
+HDL-5007 WARNING: delay control is not supported for synthesis in ../../uisrc/03_ip/ddr2/src/rtl/misc/ph1p_ddr_fifo_dram_sync.v(76)
+HDL-5007 WARNING: delay control is not supported for synthesis in ../../uisrc/03_ip/ddr2/src/rtl/misc/ph1p_ddr_fifo_dram_sync.v(78)
+HDL-5369 WARNING: latch inferred for net '**' in ../../uisrc/03_ip/ddr2/src/rtl/mc/alc_mc_top_all.enc.sv(2464)
+HDL-5323 WARNING: input port 'apb_psel' remains unconnected for this instance in ../../uisrc/01_rtl/ddr/ph1p35_324_ddr_wrapper.v(81)
+HDL-5317 WARNING: input port 'ecc_sbiterrinj' is not connected on this instance in ../../uisrc/01_rtl/csi2/csi2_tx_packet.v(161)
+HDL-5317 WARNING: input port 'ecc_sbiterrinj' is not connected on this instance in ../../uisrc/01_rtl/csi2/csi2_tx_packet.v(179)
+HDL-5001 WARNING: Contains anonymous inst(s) and/or net(s) that have not been renamed
+HDL-5001 WARNING: Contains anonymous inst(s) and/or net(s) that have not been renamed
+HDL-5001 WARNING: Contains anonymous inst(s) and/or net(s) that have not been renamed
 HDL-5001 WARNING: Contains anonymous inst(s) and/or net(s) that have not been renamed
 HDL-5106 WARNING: Initial value omitted on non-DFF net "scl_r" in ../../uisrc/01_rtl/uics500_cfg/uii2c.v(129) 
 HDL-5106 WARNING: Initial value omitted on non-DFF net "sda_o" in ../../uisrc/01_rtl/uics500_cfg/uii2c.v(137) 
-SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_cnn_detector/g_mask_bank[0]$u_mask" in ../../uisrc/01_rtl/cnn/cnn_frame_digit_detector.v(272) / pin "ecc_dbiterrinj"
-SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_cnn_detector/g_mask_bank[0]$u_mask" in ../../uisrc/01_rtl/cnn/cnn_frame_digit_detector.v(272) / pin "ecc_sbiterrinj"
-SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_cnn_detector/g_mask_bank[1]$u_mask" in ../../uisrc/01_rtl/cnn/cnn_frame_digit_detector.v(272) / pin "ecc_dbiterrinj"
-SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_cnn_detector/g_mask_bank[1]$u_mask" in ../../uisrc/01_rtl/cnn/cnn_frame_digit_detector.v(272) / pin "ecc_sbiterrinj"
-SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_cnn_detector/g_mask_bank[2]$u_mask" in ../../uisrc/01_rtl/cnn/cnn_frame_digit_detector.v(272) / pin "ecc_dbiterrinj"
-SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_cnn_detector/g_mask_bank[2]$u_mask" in ../../uisrc/01_rtl/cnn/cnn_frame_digit_detector.v(272) / pin "ecc_sbiterrinj"
-SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_cnn_detector/g_mask_bank[3]$u_mask" in ../../uisrc/01_rtl/cnn/cnn_frame_digit_detector.v(272) / pin "ecc_dbiterrinj"
-SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_cnn_detector/g_mask_bank[3]$u_mask" in ../../uisrc/01_rtl/cnn/cnn_frame_digit_detector.v(272) / pin "ecc_sbiterrinj"
-SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_cnn_detector/u_infer/u_bank0/g_activation_bank[0]$u_ram" in ../../uisrc/01_rtl/cnn/cnn_digit_infer.v(936) / pin "ecc_dbiterrinj"
-SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_cnn_detector/u_infer/u_bank0/g_activation_bank[0]$u_ram" in ../../uisrc/01_rtl/cnn/cnn_digit_infer.v(936) / pin "ecc_sbiterrinj"
-SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_cnn_detector/u_infer/u_bank0/g_activation_bank[1]$u_ram" in ../../uisrc/01_rtl/cnn/cnn_digit_infer.v(936) / pin "ecc_dbiterrinj"
-SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_cnn_detector/u_infer/u_bank0/g_activation_bank[1]$u_ram" in ../../uisrc/01_rtl/cnn/cnn_digit_infer.v(936) / pin "ecc_sbiterrinj"
-SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_cnn_detector/u_infer/u_bank0/g_activation_bank[2]$u_ram" in ../../uisrc/01_rtl/cnn/cnn_digit_infer.v(936) / pin "ecc_dbiterrinj"
-SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_cnn_detector/u_infer/u_bank0/g_activation_bank[2]$u_ram" in ../../uisrc/01_rtl/cnn/cnn_digit_infer.v(936) / pin "ecc_sbiterrinj"
-SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_cnn_detector/u_infer/u_bank0/g_activation_bank[3]$u_ram" in ../../uisrc/01_rtl/cnn/cnn_digit_infer.v(936) / pin "ecc_dbiterrinj"
-SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_cnn_detector/u_infer/u_bank0/g_activation_bank[3]$u_ram" in ../../uisrc/01_rtl/cnn/cnn_digit_infer.v(936) / pin "ecc_sbiterrinj"
-SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_cnn_detector/u_infer/u_bank1/g_activation_bank[0]$u_ram" in ../../uisrc/01_rtl/cnn/cnn_digit_infer.v(936) / pin "ecc_dbiterrinj"
-SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_cnn_detector/u_infer/u_bank1/g_activation_bank[0]$u_ram" in ../../uisrc/01_rtl/cnn/cnn_digit_infer.v(936) / pin "ecc_sbiterrinj"
-SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_cnn_detector/u_infer/u_bank1/g_activation_bank[1]$u_ram" in ../../uisrc/01_rtl/cnn/cnn_digit_infer.v(936) / pin "ecc_dbiterrinj"
-SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_cnn_detector/u_infer/u_bank1/g_activation_bank[1]$u_ram" in ../../uisrc/01_rtl/cnn/cnn_digit_infer.v(936) / pin "ecc_sbiterrinj"
-SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_cnn_detector/u_infer/u_bank1/g_activation_bank[2]$u_ram" in ../../uisrc/01_rtl/cnn/cnn_digit_infer.v(936) / pin "ecc_dbiterrinj"
-SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_cnn_detector/u_infer/u_bank1/g_activation_bank[2]$u_ram" in ../../uisrc/01_rtl/cnn/cnn_digit_infer.v(936) / pin "ecc_sbiterrinj"
-SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_cnn_detector/u_infer/u_bank1/g_activation_bank[3]$u_ram" in ../../uisrc/01_rtl/cnn/cnn_digit_infer.v(936) / pin "ecc_dbiterrinj"
-SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_cnn_detector/u_infer/u_bank1/g_activation_bank[3]$u_ram" in ../../uisrc/01_rtl/cnn/cnn_digit_infer.v(936) / pin "ecc_sbiterrinj"
-SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_cnn_detector/u_infer/u_weights/u_weight_bank0" in ../../uisrc/01_rtl/cnn/cnn_digit_infer.v(989) / pin "ecc_dbiterrinj"
-SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_cnn_detector/u_infer/u_weights/u_weight_bank0" in ../../uisrc/01_rtl/cnn/cnn_digit_infer.v(989) / pin "ecc_sbiterrinj"
-SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_cnn_detector/u_infer/u_weights/u_weight_bank1" in ../../uisrc/01_rtl/cnn/cnn_digit_infer.v(1003) / pin "ecc_dbiterrinj"
-SYN-5011 WARNING: Undriven pin: model "csi2_tx_top" / inst "u_cnn_detector/u_infer/u_weights/u_weight_bank1" in ../../uisrc/01_rtl/cnn/cnn_digit_infer.v(1003) / pin "ecc_sbiterrinj"
-SYN-5013 WARNING: Undriven net: model "csi2_tx_top" / net "u_cam_cfg/uics500regAE_inst/I_VTS[15]" in ../../uisrc/01_rtl/uics500_cfg/uics500regAE.v(3)
-		the net's pin: pin "i9[7]" in ../../uisrc/01_rtl/uics500_cfg/uics500regAE.v(5)
-SYN-5013 WARNING: Undriven net: model "csi2_tx_top" / net "u_cam_cfg/uics500regAE_inst/I_VTS[14]" in ../../uisrc/01_rtl/uics500_cfg/uics500regAE.v(3)
-		the net's pin: pin "i9[6]" in ../../uisrc/01_rtl/uics500_cfg/uics500regAE.v(5)
-SYN-5013 WARNING: Undriven net: model "csi2_tx_top" / net "u_cam_cfg/uics500regAE_inst/I_VTS[13]" in ../../uisrc/01_rtl/uics500_cfg/uics500regAE.v(3)
-		the net's pin: pin "i9[5]" in ../../uisrc/01_rtl/uics500_cfg/uics500regAE.v(5)
-SYN-5013 WARNING: Undriven net: model "csi2_tx_top" / net "u_cam_cfg/uics500regAE_inst/I_VTS[12]" in ../../uisrc/01_rtl/uics500_cfg/uics500regAE.v(3)
-		the net's pin: pin "i9[4]" in ../../uisrc/01_rtl/uics500_cfg/uics500regAE.v(5)
-SYN-5013 WARNING: Undriven net: model "csi2_tx_top" / net "u_cam_cfg/uics500regAE_inst/I_VTS[11]" in ../../uisrc/01_rtl/uics500_cfg/uics500regAE.v(3)
-		the net's pin: pin "i9[3]" in ../../uisrc/01_rtl/uics500_cfg/uics500regAE.v(5)
-SYN-5013 WARNING: Undriven net: model "csi2_tx_top" / net "u_cam_cfg/uics500regAE_inst/I_VTS[10]" in ../../uisrc/01_rtl/uics500_cfg/uics500regAE.v(3)
-		the net's pin: pin "i9[2]" in ../../uisrc/01_rtl/uics500_cfg/uics500regAE.v(5)
-SYN-5013 WARNING: Undriven net: model "csi2_tx_top" / net "u_cam_cfg/uics500regAE_inst/I_VTS[9]" in ../../uisrc/01_rtl/uics500_cfg/uics500regAE.v(3)
-		the net's pin: pin "i9[1]" in ../../uisrc/01_rtl/uics500_cfg/uics500regAE.v(5)
-SYN-5013 WARNING: Undriven net: model "csi2_tx_top" / net "u_cam_cfg/uics500regAE_inst/I_VTS[8]" in ../../uisrc/01_rtl/uics500_cfg/uics500regAE.v(3)
-		the net's pin: pin "i9[0]" in ../../uisrc/01_rtl/uics500_cfg/uics500regAE.v(5)
-SYN-5013 WARNING: Undriven net: model "csi2_tx_top" / net "u_cam_cfg/uics500regAE_inst/I_VTS[7]" in ../../uisrc/01_rtl/uics500_cfg/uics500regAE.v(3)
-		the net's pin: pin "i8[7]" in ../../uisrc/01_rtl/uics500_cfg/uics500regAE.v(5)
-SYN-5013 WARNING: Undriven net: model "csi2_tx_top" / net "u_cam_cfg/uics500regAE_inst/I_VTS[6]" in ../../uisrc/01_rtl/uics500_cfg/uics500regAE.v(3)
-		the net's pin: pin "i8[6]" in ../../uisrc/01_rtl/uics500_cfg/uics500regAE.v(5)
-SYN-5013 WARNING: Undriven net: model "csi2_tx_top" / net "u_cam_cfg/uics500regAE_inst/I_VTS[5]" in ../../uisrc/01_rtl/uics500_cfg/uics500regAE.v(3)
-		the net's pin: pin "i8[5]" in ../../uisrc/01_rtl/uics500_cfg/uics500regAE.v(5)
-SYN-5013 WARNING: Undriven net: model "csi2_tx_top" / net "u_cam_cfg/uics500regAE_inst/I_VTS[4]" in ../../uisrc/01_rtl/uics500_cfg/uics500regAE.v(3)
-		the net's pin: pin "i8[4]" in ../../uisrc/01_rtl/uics500_cfg/uics500regAE.v(5)
-SYN-5013 WARNING: Undriven net: model "csi2_tx_top" / net "u_cam_cfg/uics500regAE_inst/I_VTS[3]" in ../../uisrc/01_rtl/uics500_cfg/uics500regAE.v(3)
-		the net's pin: pin "i8[3]" in ../../uisrc/01_rtl/uics500_cfg/uics500regAE.v(5)
-SYN-5013 WARNING: Undriven net: model "csi2_tx_top" / net "u_cam_cfg/uics500regAE_inst/I_VTS[2]" in ../../uisrc/01_rtl/uics500_cfg/uics500regAE.v(3)
-		the net's pin: pin "i8[2]" in ../../uisrc/01_rtl/uics500_cfg/uics500regAE.v(5)
-SYN-5013 WARNING: Undriven net: model "csi2_tx_top" / net "u_cam_cfg/uics500regAE_inst/I_VTS[1]" in ../../uisrc/01_rtl/uics500_cfg/uics500regAE.v(3)
-		the net's pin: pin "i8[1]" in ../../uisrc/01_rtl/uics500_cfg/uics500regAE.v(5)
-SYN-5013 WARNING: Undriven net: model "csi2_tx_top" / net "u_cam_cfg/uics500regAE_inst/I_VTS[0]" in ../../uisrc/01_rtl/uics500_cfg/uics500regAE.v(3)
-		the net's pin: pin "i8[0]" in ../../uisrc/01_rtl/uics500_cfg/uics500regAE.v(5)
-SYN-5025 WARNING: Using 0 for all undriven pins and nets
-SYN-5025 WARNING: Using 0 for all undriven pins and nets
+SYN-8142 ERROR: The init file("D:/2026fpga/ph1p35second/fpga/uisrc/01_rtl/cnn/weights/cnn_digit_weights_0.mif") can not be found in ../../uisrc/01_rtl/cnn/cnn_digit_infer.v(963), please check!
