@@ -26,11 +26,14 @@ module csi2_tx_top #(
     parameter LANE_SWAP = 1,
     // 1: VOFA binary mask image on J3 for CNN input diagnostics.
     // 0: text recognition results on J3 (D/FRAME_DONE/STAT).
-    parameter CNN_VOFA_IMAGE_DUMP = 1
+    parameter CNN_VOFA_IMAGE_DUMP = 0
 )(
     input  wire        I_sys_clk,          // 25MHz 单端，C4
 
     input  wire        I_rst_n,
+    // Result-only SPI, mode 0. A is master; physical user wiring is fixed.
+    input wire I_cnn_spi_clk, I_cnn_spi_cs_n, I_cnn_spi_mosi,
+    output wire O_cnn_spi_miso,
 
     // 按键：I_button[0] 减小曝光，I_button[1] 增大曝光（低有效）
     input  wire [1:0]  I_button,
@@ -402,6 +405,15 @@ module csi2_tx_top #(
     wire [31:0] cnn_model_weight_crc32;
     wire [31:0] cnn_digit_patch_crc32;
     wire        cnn_dump_active;
+    cnn_spi_result_slave u_cnn_spi_result_slave (
+        .clk(clk_100m), .rst_n(rst_n_100),
+        .spi_clk(I_cnn_spi_clk), .spi_cs_n(I_cnn_spi_cs_n),
+        .spi_mosi(I_cnn_spi_mosi), .spi_miso(O_cnn_spi_miso),
+        .digit_done(cnn_digit_done), .frame_done(cnn_detector_frame_done),
+        .digit_x(cnn_digit_x), .digit_y(cnn_digit_y),
+        .digit_w(cnn_digit_w), .digit_h(cnn_digit_h), .digit_class(cnn_digit_class),
+        .frame_count(cnn_digit_count), .weight_crc(cnn_model_weight_crc32)
+    );
     wire        cnn_dump_read_enable;
     wire [15:0] cnn_dump_read_address;
     wire        cnn_dump_read_data;

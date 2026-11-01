@@ -42,3 +42,7 @@ set_clock_groups -asynchronous \
 #   静态时序会报 removal 违例（实测 -1.771ns / 10 个端点），但复位只在上电时
 #   释放一次并长期稳定，不构成真实功能风险。
 set_false_path -to [get_pins -hierarchical *asr]
+# SPI is oversampled by pll_clk_100m, never used as a fabric clock.
+# Only asynchronous pad-to-synchronizer entry paths are excepted.
+set_false_path -from [get_ports {I_cnn_spi_clk I_cnn_spi_cs_n I_cnn_spi_mosi}]
+set_max_delay -datapath_only 20.000 -to [get_ports {O_cnn_spi_miso}]
