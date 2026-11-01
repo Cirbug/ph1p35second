@@ -111,3 +111,4 @@ __pycache__/
 /spi_text/MDK-ARM/*.lst
 td_project/.lock.f
 *.stackdump
+fpga/log/ipgen.log
