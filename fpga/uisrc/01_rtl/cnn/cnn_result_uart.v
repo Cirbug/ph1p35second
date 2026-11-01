@@ -192,19 +192,31 @@ module cnn_vofa_image_uart #(
     parameter integer CLK_HZ = 100000000,
     parameter integer BAUD = 115200,
     parameter integer WIDTH = 320,
-    parameter integer HEIGHT = 180
+    parameter integer HEIGHT = 180,
+    parameter integer THUMB_ENABLE = 0,
+    parameter integer REPORT_ENABLE = 0
 )(
     input  wire        clk,
     input  wire        rst_n,
     input  wire        frame_done,
+    input  wire        digit_done,
+    input  wire [9:0]  digit_x, digit_w,
+    input  wire [8:0]  digit_y, digit_h,
+    input  wire [3:0]  digit_class,
+    input  wire [31:0] digit_patch_crc,
+    input  wire [31:0] model_weight_crc,
+    input  wire [4:0]  frame_digit_count,
     input  wire        mask_data,
     output wire        mask_read_enable,
     output wire [15:0] mask_read_address,
+    input  wire [7:0]  thumb_data,
+    output wire        thumb_read_enable,
+    output wire [11:0] thumb_read_address,
     output reg         dump_active,
     output wire        uart_tx
 );
     localparam integer PIXELS = WIDTH * HEIGHT;
-    localparam integer PAYLOAD_BYTES = PIXELS / 8;
+    localparam integer PAYLOAD_BYTES = PIXELS;
     localparam [3:0] ST_WAIT_FRAME = 4'd0;
     localparam [3:0] ST_HEADER = 4'd1;
     localparam [3:0] ST_HEADER_DRAIN = 4'd2;
@@ -212,23 +224,121 @@ module cnn_vofa_image_uart #(
     localparam [3:0] ST_READ_WAIT = 4'd4;
     localparam [3:0] ST_PAYLOAD = 4'd5;
     localparam [3:0] ST_PAYLOAD_DRAIN = 4'd6;
-    localparam [4:0] HEADER_BYTES = 5'd23;
+    localparam [3:0] ST_REPORT_HEADER = 4'd7;
+    localparam [3:0] ST_REPORT_HEADER_DRAIN = 4'd8;
+    localparam [3:0] ST_REPORT_LOAD = 4'd9;
+    localparam [3:0] ST_REPORT_DIGIT = 4'd10;
+    localparam [3:0] ST_REPORT_DIGIT_DRAIN = 4'd11;
+    localparam [3:0] ST_REPORT_END = 4'd12;
+    localparam [3:0] ST_REPORT_END_DRAIN = 4'd13;
+    localparam [4:0] HEADER_BYTES = 5'd25;
 
     reg [3:0] state;
     reg [4:0] header_index;
-    reg [12:0] payload_index;
+    reg [15:0] payload_index;
     reg [15:0] pixel_address;
-    reg [2:0] bit_index;
-    reg [7:0] packed_byte;
     reg [7:0] payload_byte;
+    reg sending_thumbnail;
+    // One inference clock domain, one UART transmitter: text cannot interleave
+    // with image bytes. Unreset array permits compact distributed-RAM mapping.
+    reg [73:0] report_records [0:15];
+    reg [73:0] report_record;
+    reg [4:0] collect_count, report_count, detected_count;
+    reg collect_overflow, report_overflow;
+    reg [15:0] report_frame_id;
+    reg [31:0] report_weight_crc;
+    reg [3:0] report_record_index;
+    reg [5:0] report_byte_index;
+    wire accept_digit = REPORT_ENABLE && digit_done && !dump_active && collect_count < 16;
+    wire [9:0] record_x, record_w;
+    wire [8:0] record_y, record_h;
+    wire [3:0] record_class;
+    wire [31:0] record_crc;
+    assign {record_x,record_y,record_w,record_h,record_class,record_crc} = report_record;
+    wire [15:0] current_payload_bytes = sending_thumbnail ? 16'd3600 : PAYLOAD_BYTES;
+    wire [4:0] current_header_bytes = sending_thumbnail ? 5'd22 : HEADER_BYTES;
     wire tx_busy;
     reg tx_start;
     reg [7:0] tx_data;
     wire tx_line;
 
     assign uart_tx = tx_line;
-    assign mask_read_enable = dump_active && (state == ST_READ_REQ);
+    assign mask_read_enable = dump_active && !sending_thumbnail && (state == ST_READ_REQ);
     assign mask_read_address = pixel_address;
+    assign thumb_read_enable = dump_active && sending_thumbnail && (state == ST_READ_REQ);
+    assign thumb_read_address = pixel_address[11:0];
+
+    function [7:0] thumbnail_header_byte;
+        input [4:0] index;
+        reg [175:0] message;
+        begin
+            message = "image:1,3600,80,45,24\n";
+            thumbnail_header_byte = message >> ((21-index)*8);
+        end
+    endfunction
+
+    function [7:0] report_hex;
+        input [3:0] nibble;
+        begin report_hex = (nibble < 10) ? 8'd48+nibble : 8'd55+nibble; end
+    endfunction
+    function [7:0] report_decimal;
+        input [9:0] number;
+        input [1:0] place;
+        begin
+            case(place)
+            2: report_decimal = 8'd48 + number/100;
+            1: report_decimal = 8'd48 + (number/10)%10;
+            default: report_decimal = 8'd48 + number%10;
+            endcase
+        end
+    endfunction
+    function [7:0] report_text_byte;
+        input [5:0] index;
+        begin
+            report_text_byte = 8'h0a;
+            // F,FFFF,NN,NN,O,WWWWWWWW\n
+            // D,FFFF,II,XXX,YYY,WWW,HHH,C,PPPPPPPP\n
+            // E,FFFF\n
+            if(index==0) report_text_byte = (state==ST_REPORT_HEADER) ? "F" :
+                ((state==ST_REPORT_DIGIT) ? "D" : "E");
+            else if(index==1) report_text_byte = ",";
+            else if(index>=2 && index<=5)
+                report_text_byte = report_hex(report_frame_id >> ((5-index)*4));
+            else if(state==ST_REPORT_HEADER) begin
+                case(index)
+                6,9,12,14: report_text_byte=",";
+                7: report_text_byte=report_decimal({5'd0,detected_count},1);
+                8: report_text_byte=report_decimal({5'd0,detected_count},0);
+                10: report_text_byte=report_decimal({5'd0,report_count},1);
+                11: report_text_byte=report_decimal({5'd0,report_count},0);
+                13: report_text_byte=report_overflow ? "1" : "0";
+                default: if(index>=15 && index<=22)
+                    report_text_byte=report_hex(report_weight_crc >> ((22-index)*4));
+                endcase
+            end else if(state==ST_REPORT_DIGIT) begin
+                case(index)
+                6,9,13,17,21,25,27: report_text_byte=",";
+                7: report_text_byte=report_decimal({6'd0,report_record_index},1);
+                8: report_text_byte=report_decimal({6'd0,report_record_index},0);
+                10: report_text_byte=report_decimal(record_x,2);
+                11: report_text_byte=report_decimal(record_x,1);
+                12: report_text_byte=report_decimal(record_x,0);
+                14: report_text_byte=report_decimal({1'b0,record_y},2);
+                15: report_text_byte=report_decimal({1'b0,record_y},1);
+                16: report_text_byte=report_decimal({1'b0,record_y},0);
+                18: report_text_byte=report_decimal(record_w,2);
+                19: report_text_byte=report_decimal(record_w,1);
+                20: report_text_byte=report_decimal(record_w,0);
+                22: report_text_byte=report_decimal({1'b0,record_h},2);
+                23: report_text_byte=report_decimal({1'b0,record_h},1);
+                24: report_text_byte=report_decimal({1'b0,record_h},0);
+                26: report_text_byte=8'd48+{4'd0,record_class};
+                default: if(index>=28 && index<=35)
+                    report_text_byte=report_hex(record_crc >> ((35-index)*4));
+                endcase
+            end
+        end
+    endfunction
 
     function [7:0] header_byte;
         input [4:0] index;
@@ -242,21 +352,24 @@ module cnn_vofa_image_uart #(
                 5'd5:  header_byte = ":";
                 5'd6:  header_byte = "0";
                 5'd7:  header_byte = ",";
-                5'd8:  header_byte = "7";
-                5'd9:  header_byte = "2";
-                5'd10: header_byte = "0";
+                5'd8:  header_byte = "5";
+                5'd9:  header_byte = "7";
+                5'd10: header_byte = "6";
                 5'd11: header_byte = "0";
-                5'd12: header_byte = ",";
-                5'd13: header_byte = "3";
-                5'd14: header_byte = "2";
-                5'd15: header_byte = "0";
-                5'd16: header_byte = ",";
-                5'd17: header_byte = "1";
-                5'd18: header_byte = "8";
-                5'd19: header_byte = "0";
-                5'd20: header_byte = ",";
-                5'd21: header_byte = "1";
-                default: header_byte = 8'h0a;
+                5'd12: header_byte = "0";
+                5'd13: header_byte = ",";
+                5'd14: header_byte = "3";
+                5'd15: header_byte = "2";
+                5'd16: header_byte = "0";
+                5'd17: header_byte = ",";
+                5'd18: header_byte = "1";
+                5'd19: header_byte = "8";
+                5'd20: header_byte = "0";
+                5'd21: header_byte = ",";
+                5'd22: header_byte = "2";
+                5'd23: header_byte = "4";
+                5'd24: header_byte = 8'h0a;
+                default: header_byte = 8'h00;
             endcase
         end
     endfunction
@@ -264,9 +377,12 @@ module cnn_vofa_image_uart #(
     always @* begin
         tx_start = 1'b0;
         tx_data = 8'd0;
-        if ((state == ST_HEADER) && !tx_busy) begin
+        if ((state==ST_REPORT_HEADER || state==ST_REPORT_DIGIT || state==ST_REPORT_END) && !tx_busy) begin
             tx_start = 1'b1;
-            tx_data = header_byte(header_index);
+            tx_data = report_text_byte(report_byte_index);
+        end else if ((state == ST_HEADER) && !tx_busy) begin
+            tx_start = 1'b1;
+            tx_data = sending_thumbnail ? thumbnail_header_byte(header_index) : header_byte(header_index);
         end else if ((state == ST_PAYLOAD) && !tx_busy) begin
             tx_start = 1'b1;
             tx_data = payload_byte;
@@ -282,29 +398,69 @@ module cnn_vofa_image_uart #(
         if (!rst_n) begin
             state <= ST_WAIT_FRAME;
             header_index <= 5'd0;
-            payload_index <= 13'd0;
+            payload_index <= 16'd0;
             pixel_address <= 16'd0;
-            bit_index <= 3'd0;
-            packed_byte <= 8'd0;
             payload_byte <= 8'd0;
+            sending_thumbnail <= 1'b0;
+            collect_count <= 0; report_count <= 0; detected_count <= 0;
+            collect_overflow <= 0; report_overflow <= 0;
+            report_frame_id <= 0; report_weight_crc <= 0; report_record <= 0;
+            report_record_index <= 0; report_byte_index <= 0;
             dump_active <= 1'b0;
         end else begin
+            if(accept_digit) begin
+                report_records[collect_count[3:0]] <= {
+                    digit_x,digit_y,digit_w,digit_h,digit_class,digit_patch_crc};
+                collect_count <= collect_count + 1'b1;
+            end
+            if(REPORT_ENABLE && digit_done && !dump_active && collect_count==16)
+                collect_overflow <= 1'b1;
             case (state)
                 ST_WAIT_FRAME: begin
                     if (frame_done) begin
                         dump_active <= 1'b1;
                         header_index <= 5'd0;
-                        payload_index <= 13'd0;
+                        payload_index <= 16'd0;
                         pixel_address <= 16'd0;
-                        bit_index <= 3'd0;
-                        packed_byte <= 8'd0;
-                        state <= ST_HEADER;
+                        sending_thumbnail <= 1'b0;
+                        report_frame_id <= report_frame_id + 1'b1;
+                        detected_count <= frame_digit_count;
+                        report_count <= collect_count + accept_digit;
+                        report_overflow <= collect_overflow ||
+                            (REPORT_ENABLE && digit_done && collect_count==16);
+                        report_weight_crc <= model_weight_crc;
+                        report_record_index <= 0;
+                        report_byte_index <= 0;
+                        state <= REPORT_ENABLE ? ST_REPORT_HEADER : ST_HEADER;
                     end
+                end
+
+                ST_REPORT_HEADER: if(tx_start) begin
+                    if(report_byte_index==23) state<=ST_REPORT_HEADER_DRAIN;
+                    else report_byte_index<=report_byte_index+1'b1;
+                end
+                ST_REPORT_HEADER_DRAIN: if(!tx_busy) begin
+                    state <= (report_count==0) ? ST_HEADER : ST_REPORT_LOAD;
+                end
+                ST_REPORT_LOAD: begin
+                    report_record <= report_records[report_record_index];
+                    report_byte_index <= 0;
+                    state <= ST_REPORT_DIGIT;
+                end
+                ST_REPORT_DIGIT: if(tx_start) begin
+                    if(report_byte_index==36) state<=ST_REPORT_DIGIT_DRAIN;
+                    else report_byte_index<=report_byte_index+1'b1;
+                end
+                ST_REPORT_DIGIT_DRAIN: if(!tx_busy) begin
+                    if({1'b0,report_record_index}+5'd1 < report_count) begin
+                        report_record_index<=report_record_index+1'b1;
+                        state<=ST_REPORT_LOAD;
+                    end else state<=ST_HEADER;
                 end
 
                 ST_HEADER: begin
                     if (tx_start) begin
-                        if (header_index == HEADER_BYTES - 1'b1)
+                        if (header_index == current_header_bytes - 1'b1)
                             state <= ST_HEADER_DRAIN;
                         else
                             header_index <= header_index + 1'b1;
@@ -319,16 +475,10 @@ module cnn_vofa_image_uart #(
                 ST_READ_REQ: state <= ST_READ_WAIT;
 
                 ST_READ_WAIT: begin
-                    packed_byte[7 - bit_index] <= ~mask_data;
-                    if (pixel_address < PIXELS - 1)
+                    payload_byte <= sending_thumbnail ? thumb_data : {8{~mask_data}};
+                    if (pixel_address < current_payload_bytes - 1)
                         pixel_address <= pixel_address + 1'b1;
-                    if (bit_index == 3'd7) begin
-                        payload_byte <= {packed_byte[7:1], ~mask_data};
-                        state <= ST_PAYLOAD;
-                    end else begin
-                        bit_index <= bit_index + 1'b1;
-                        state <= ST_READ_REQ;
-                    end
+                    state <= ST_PAYLOAD;
                 end
 
                 ST_PAYLOAD: begin
@@ -338,15 +488,37 @@ module cnn_vofa_image_uart #(
 
                 ST_PAYLOAD_DRAIN: begin
                     if (!tx_busy) begin
-                        if (payload_index == PAYLOAD_BYTES - 1) begin
-                            dump_active <= 1'b0;
-                            state <= ST_WAIT_FRAME;
+                        if (payload_index == current_payload_bytes - 1) begin
+                            if (THUMB_ENABLE && !sending_thumbnail) begin
+                                sending_thumbnail <= 1'b1;
+                                header_index <= 0;
+                                payload_index <= 0;
+                                pixel_address <= 0;
+                                state <= ST_HEADER;
+                            end else begin
+                                if(REPORT_ENABLE) begin
+                                    report_byte_index<=0;
+                                    state<=ST_REPORT_END;
+                                end else begin
+                                    dump_active <= 1'b0;
+                                    state <= ST_WAIT_FRAME;
+                                end
+                            end
                         end else begin
                             payload_index <= payload_index + 1'b1;
-                            bit_index <= 3'd0;
                             state <= ST_READ_REQ;
                         end
                     end
+                end
+
+                ST_REPORT_END: if(tx_start) begin
+                    if(report_byte_index==6) state<=ST_REPORT_END_DRAIN;
+                    else report_byte_index<=report_byte_index+1'b1;
+                end
+                ST_REPORT_END_DRAIN: if(!tx_busy) begin
+                    collect_count<=0; collect_overflow<=0;
+                    dump_active<=0;
+                    state<=ST_WAIT_FRAME;
                 end
 
                 default: begin
@@ -356,6 +528,57 @@ module cnn_vofa_image_uart #(
             endcase
         end
     end
+endmodule
+
+// 80x45 high-byte Bayer thumbnail of exactly the frame accepted by the
+// detector. Its 3600 bytes use two ERAM20K blocks, not a 57600-byte buffer.
+module cnn_gray_thumbnail (
+    input wire wr_clk, rd_clk, rst, frame_start, pixel_accept,
+    input wire [9:0] pixel_x,
+    input wire [8:0] pixel_y,
+    input wire [7:0] gray_data,
+    input wire rd_en,
+    input wire [11:0] rd_addr,
+    output wire [7:0] rd_data
+);
+    reg [11:0] wr_addr;
+    reg rd_bank;
+    wire take = pixel_accept && pixel_x[1:0]==2'b11 && pixel_y[1:0]==2'b11;
+    always @(posedge wr_clk or posedge rst) begin
+        if (rst) wr_addr <= 0;
+        else if (frame_start) wr_addr <= 0;
+        else if (take) wr_addr <= wr_addr + 1'b1;
+    end
+    always @(posedge rd_clk or posedge rst) begin
+        if (rst) rd_bank <= 0;
+        else if (rd_en) rd_bank <= rd_addr[11];
+    end
+`ifdef CNN_SIM
+    reg [7:0] memory [0:4095];
+    reg [7:0] read_value;
+    always @(posedge wr_clk) if(take) memory[wr_addr] <= gray_data;
+    always @(posedge rd_clk) if(rd_en) read_value <= memory[rd_addr];
+    assign rd_data = read_value;
+`else
+    wire [7:0] bank_data [0:1];
+    assign rd_data = bank_data[rd_bank];
+    genvar bank;
+    generate for(bank=0; bank<2; bank=bank+1) begin : g_gray_bank
+        PH1P_LOGIC_ERAM #(
+            .DATA_WIDTH_A(8), .ADDR_WIDTH_A(11), .DATA_DEPTH_A(2048),
+            .DATA_WIDTH_B(8), .ADDR_WIDTH_B(11), .DATA_DEPTH_B(2048),
+            .MODE("PDPW"), .REGMODE_A("NOREG"), .REGMODE_B("NOREG"),
+            .IMPLEMENT("20K"), .DEBUGGABLE("NO"), .PACKABLE("NO"),
+            .INIT_FILE("NONE"), .FILL_ALL("NONE")
+        ) u_memory (
+            .dia(gray_data), .dib(8'd0), .addra(wr_addr[10:0]), .addrb(rd_addr[10:0]),
+            .cea(take && wr_addr[11]==bank), .ceb(rd_en && rd_addr[11]==bank),
+            .ocea(1'b0), .oceb(1'b0), .clka(wr_clk), .clkb(rd_clk),
+            .wea(take && wr_addr[11]==bank), .web(1'b0), .bea(1'b0), .beb(1'b0),
+            .rsta(1'b0), .rstb(1'b0), .doa(), .dob(bank_data[bank])
+        );
+    end endgenerate
+`endif
 endmodule
 
 module cnn_vofa_uart_byte_tx #(

@@ -6,6 +6,7 @@
 // time, while the input packer consumes every payload beat.
 module cnn_raw10_resize_bin #(
     parameter [7:0] THRESHOLD = 8'd128,
+    parameter integer AUTO_THRESHOLD = 0,
     parameter integer SRC_WIDTH = 2592,
     parameter integer SRC_HEIGHT = 1944,
     parameter integer DST_WIDTH = 320,
@@ -20,6 +21,7 @@ module cnn_raw10_resize_bin #(
     output reg         frame_start,
     output reg         pixel_valid,
     output reg  [7:0]  pixel_data,
+    output reg  [7:0]  gray_pixel_data,
     output reg         frame_complete,
     output reg  [9:0]  pixel_x,
     output reg  [8:0]  pixel_y,
@@ -55,6 +57,18 @@ module cnn_raw10_resize_bin #(
     reg [12:0] acc_tmp;
     reg        found_tmp;
     reg [7:0]  pix_tmp;
+    wire [7:0] adaptive_threshold;
+    reg [7:0] frame_threshold;
+
+    generate if (AUTO_THRESHOLD) begin : g_adaptive
+        cnn_gray_background_threshold u_threshold (
+            .clk(clk), .rst(rst), .frame_start(frame_start),
+            .pixel_valid(pixel_valid), .gray_data(gray_pixel_data),
+            .frame_complete(frame_complete), .threshold(adaptive_threshold)
+        );
+    end else begin : g_fixed
+        assign adaptive_threshold = THRESHOLD;
+    end endgenerate
 
     wire [7:0] in_hi = in_data[15:8];
     wire [7:0] in_lo = in_data[7:0];
@@ -62,9 +76,8 @@ module cnn_raw10_resize_bin #(
     function [7:0] raw10_gray;
         input [7:0] msb;
         begin
-            // RAW10 high eight bits are the same luminance ordering used by
-            // the camera's ISP preview.  The two LSBs affect threshold only
-            // at a boundary, so the compact high-byte path is intentional.
+            // This is one Bayer sample's high eight bits, NOT ISP luminance.
+            // Exposure and the A-board gamma/brightness path are different.
             raw10_gray = msb;
         end
     endfunction
@@ -91,6 +104,8 @@ module cnn_raw10_resize_bin #(
             frame_start      <= 1'b0;
             pixel_valid      <= 1'b0;
             pixel_data       <= 8'd0;
+            gray_pixel_data  <= 8'd0;
+            frame_threshold  <= THRESHOLD;
             frame_complete   <= 1'b0;
             pixel_x          <= 10'd0;
             pixel_y          <= 9'd0;
@@ -104,10 +119,14 @@ module cnn_raw10_resize_bin #(
             // least two input clocks apart for this downsampling ratio.
             if (out_pending) begin
                 pixel_valid <= 1'b1;
-                pixel_data  <= out_pending_data;
+                gray_pixel_data <= out_pending_data;
+                pixel_data <= (out_pending_data <
+                    (frame_started ? frame_threshold : adaptive_threshold)) ? 8'h00 : 8'hff;
                 pixel_x     <= out_pending_x;
                 pixel_y     <= out_pending_y;
                 if (!frame_started) begin
+                    // Freeze the threshold for the entire sampled frame.
+                    frame_threshold <= adaptive_threshold;
                     frame_start   <= 1'b1;
                     frame_started <= 1'b1;
                 end
@@ -155,10 +174,10 @@ module cnn_raw10_resize_bin #(
                             if (keep_line && !found_tmp) begin
                                 found_tmp = 1'b1;
                                 case (j)
-                                0: pix_tmp = (raw10_gray(b0) < THRESHOLD) ? 8'h00 : 8'hFF;
-                                1: pix_tmp = (raw10_gray(b1) < THRESHOLD) ? 8'h00 : 8'hFF;
-                                2: pix_tmp = (raw10_gray(b2) < THRESHOLD) ? 8'h00 : 8'hFF;
-                                default: pix_tmp = (raw10_gray(in_hi) < THRESHOLD) ? 8'h00 : 8'hFF;
+                                0: pix_tmp = raw10_gray(b0);
+                                1: pix_tmp = raw10_gray(b1);
+                                2: pix_tmp = raw10_gray(b2);
+                                default: pix_tmp = raw10_gray(in_hi);
                                 endcase
                             end
                         end
@@ -186,10 +205,10 @@ module cnn_raw10_resize_bin #(
                             if (keep_line && !found_tmp) begin
                                 found_tmp = 1'b1;
                                 case (j)
-                                0: pix_tmp = (raw10_gray(b0) < THRESHOLD) ? 8'h00 : 8'hFF;
-                                1: pix_tmp = (raw10_gray(b1) < THRESHOLD) ? 8'h00 : 8'hFF;
-                                2: pix_tmp = (raw10_gray(b2) < THRESHOLD) ? 8'h00 : 8'hFF;
-                                default: pix_tmp = (raw10_gray(b3) < THRESHOLD) ? 8'h00 : 8'hFF;
+                                0: pix_tmp = raw10_gray(b0);
+                                1: pix_tmp = raw10_gray(b1);
+                                2: pix_tmp = raw10_gray(b2);
+                                default: pix_tmp = raw10_gray(b3);
                                 endcase
                             end
                         end
@@ -232,6 +251,72 @@ module cnn_raw10_resize_bin #(
                     dst_y <= 9'd0;
                     v_acc <= 13'd0;
                 end
+        end
+    end
+endmodule
+
+// Previous complete frame's 75th-percentile Bayer sample estimates the white
+// background. Threshold = 3/4 background (32 bins); this is not sensor AE.
+// The camera stream is never stalled. Scan/clear fits in the frame blanking.
+module cnn_gray_background_threshold (
+    input wire clk, rst, frame_start, pixel_valid, frame_complete,
+    input wire [7:0] gray_data,
+    output reg [7:0] threshold
+);
+    localparam [1:0] WAIT_START=0, COLLECT=1, SCAN=2, CLEAR=3;
+    reg [1:0] state;
+    reg [15:0] histogram [0:31];
+    reg [15:0] count, target;
+    reg [16:0] cumulative;
+    reg [4:0] bin_index;
+    wire [16:0] next_sum = cumulative + {1'b0,histogram[bin_index]};
+    wire [7:0] background = {bin_index,3'b100};
+    wire [7:0] candidate = background - (background >> 2);
+    integer i;
+    always @(posedge clk or posedge rst) begin
+        if (rst) begin
+            state <= WAIT_START;
+            threshold <= 8'd128;
+            count <= 0; target <= 0; cumulative <= 0; bin_index <= 0;
+            for (i=0; i<32; i=i+1) histogram[i] <= 0;
+        end else begin
+            case (state)
+            WAIT_START: if (frame_start && pixel_valid) begin
+                histogram[gray_data[7:3]] <= 1;
+                count <= 1;
+                state <= COLLECT;
+            end
+            COLLECT: begin
+                if (pixel_valid) begin
+                    histogram[gray_data[7:3]] <= histogram[gray_data[7:3]] + 1'b1;
+                    count <= count + 1'b1;
+                end
+                if (frame_complete && count != 0) begin
+                    target <= count - (count >> 2);
+                    cumulative <= 0;
+                    bin_index <= 0;
+                    state <= SCAN;
+                end
+            end
+            SCAN: begin
+                if (next_sum >= target || bin_index == 31) begin
+                    threshold <= (candidate < 8) ? 8'd8 : candidate;
+                    bin_index <= 0;
+                    state <= CLEAR;
+                end else begin
+                    cumulative <= next_sum;
+                    bin_index <= bin_index + 1'b1;
+                end
+            end
+            CLEAR: begin
+                histogram[bin_index] <= 0;
+                if (bin_index == 31) begin
+                    count <= 0;
+                    state <= WAIT_START;
+                end else bin_index <= bin_index + 1'b1;
+            end
+            default: state <= WAIT_START;
+            endcase
         end
     end
 endmodule

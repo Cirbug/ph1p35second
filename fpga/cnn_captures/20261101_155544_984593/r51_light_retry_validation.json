@@ -1,0 +1,41 @@
+{
+  "capture_directory": "D:\\2026fpga\\ph1p35second\\fpga\\cnn_captures\\20261101_155544_984593",
+  "received_bytes": 314792,
+  "complete_frame_ids": [
+    "0045",
+    "0046",
+    "0047",
+    "0048"
+  ],
+  "mask_black_fractions": [
+    0.020677,
+    0.020816,
+    0.020747,
+    0.019965
+  ],
+  "frame_id": "0045",
+  "visually_read_digits": [
+    3,
+    6,
+    2,
+    4
+  ],
+  "hardware_classes": [
+    3,
+    8,
+    5,
+    8
+  ],
+  "rtl_classes": [
+    3,
+    8,
+    5,
+    8
+  ],
+  "hardware_rtl_match": true,
+  "differences": [],
+  "labels_origin": "Visual reading of this captured image, not a formal annotated test set",
+  "conclusion": "Four written digits are boxed in this scene; classification still disagrees with visually read labels. Same-frame hardware/RTL agreement is verified.",
+  "rtl_changed": false,
+  "flash_programmed": false
+}

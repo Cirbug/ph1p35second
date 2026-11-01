@@ -1,0 +1,509 @@
+{
+  "bytes": 314792,
+  "images": [
+    {
+      "image_id": 1,
+      "width": 80,
+      "height": 45,
+      "min": 24,
+      "max": 81,
+      "mean": 64.306,
+      "p75": 68,
+      "black_fraction": 0.0,
+      "below_128_fraction": 1.0,
+      "payload_crc32": "0F7220DD",
+      "frame_id": null,
+      "file": "raw8_thumbnail_0001.png"
+    },
+    {
+      "image_id": 0,
+      "width": 320,
+      "height": 180,
+      "min": 0,
+      "max": 255,
+      "mean": 249.727,
+      "p75": 255,
+      "black_fraction": 0.020677,
+      "below_128_fraction": 0.020677,
+      "payload_crc32": "9C85E4BE",
+      "frame_id": "0045",
+      "file": "frame_0045_mask_320x180_0001.png"
+    },
+    {
+      "image_id": 1,
+      "width": 80,
+      "height": 45,
+      "min": 25,
+      "max": 81,
+      "mean": 64.271,
+      "p75": 68,
+      "black_fraction": 0.0,
+      "below_128_fraction": 1.0,
+      "payload_crc32": "4029DF21",
+      "frame_id": "0045",
+      "file": "frame_0045_raw8_thumbnail_0002.png"
+    },
+    {
+      "image_id": 0,
+      "width": 320,
+      "height": 180,
+      "min": 0,
+      "max": 255,
+      "mean": 249.692,
+      "p75": 255,
+      "black_fraction": 0.020816,
+      "below_128_fraction": 0.020816,
+      "payload_crc32": "8AF24071",
+      "frame_id": "0046",
+      "file": "frame_0046_mask_320x180_0002.png"
+    },
+    {
+      "image_id": 1,
+      "width": 80,
+      "height": 45,
+      "min": 24,
+      "max": 80,
+      "mean": 63.981,
+      "p75": 68,
+      "black_fraction": 0.0,
+      "below_128_fraction": 1.0,
+      "payload_crc32": "E6912F9E",
+      "frame_id": "0046",
+      "file": "frame_0046_raw8_thumbnail_0003.png"
+    },
+    {
+      "image_id": 0,
+      "width": 320,
+      "height": 180,
+      "min": 0,
+      "max": 255,
+      "mean": 249.71,
+      "p75": 255,
+      "black_fraction": 0.020747,
+      "below_128_fraction": 0.020747,
+      "payload_crc32": "69E63AF9",
+      "frame_id": "0047",
+      "file": "frame_0047_mask_320x180_0003.png"
+    },
+    {
+      "image_id": 1,
+      "width": 80,
+      "height": 45,
+      "min": 24,
+      "max": 81,
+      "mean": 64.201,
+      "p75": 68,
+      "black_fraction": 0.0,
+      "below_128_fraction": 1.0,
+      "payload_crc32": "7D2E1BB5",
+      "frame_id": "0047",
+      "file": "frame_0047_raw8_thumbnail_0004.png"
+    },
+    {
+      "image_id": 0,
+      "width": 320,
+      "height": 180,
+      "min": 0,
+      "max": 255,
+      "mean": 249.909,
+      "p75": 255,
+      "black_fraction": 0.019965,
+      "below_128_fraction": 0.019965,
+      "payload_crc32": "7E304F29",
+      "frame_id": "0048",
+      "file": "frame_0048_mask_320x180_0004.png"
+    },
+    {
+      "image_id": 1,
+      "width": 80,
+      "height": 45,
+      "min": 24,
+      "max": 82,
+      "mean": 66.469,
+      "p75": 70,
+      "black_fraction": 0.0,
+      "below_128_fraction": 1.0,
+      "payload_crc32": "9489CB28",
+      "frame_id": "0048",
+      "file": "frame_0048_raw8_thumbnail_0005.png"
+    }
+  ],
+  "frames": [
+    {
+      "frame_id": "0045",
+      "detected_count": 4,
+      "stored_count": 4,
+      "overflow": false,
+      "weight_crc32": "EEC8E020",
+      "digits": [
+        {
+          "index": 0,
+          "x": 96,
+          "y": 37,
+          "w": 25,
+          "h": 36,
+          "class": 3,
+          "patch_crc32": "8911E7F3"
+        },
+        {
+          "index": 1,
+          "x": 146,
+          "y": 37,
+          "w": 19,
+          "h": 31,
+          "class": 8,
+          "patch_crc32": "222D9991"
+        },
+        {
+          "index": 2,
+          "x": 137,
+          "y": 90,
+          "w": 47,
+          "h": 34,
+          "class": 5,
+          "patch_crc32": "2CE6F59F"
+        },
+        {
+          "index": 3,
+          "x": 205,
+          "y": 81,
+          "w": 29,
+          "h": 48,
+          "class": 8,
+          "patch_crc32": "466DFD61"
+        }
+      ],
+      "images": [
+        {
+          "image_id": 0,
+          "width": 320,
+          "height": 180,
+          "min": 0,
+          "max": 255,
+          "mean": 249.727,
+          "p75": 255,
+          "black_fraction": 0.020677,
+          "below_128_fraction": 0.020677,
+          "payload_crc32": "9C85E4BE",
+          "frame_id": "0045",
+          "file": "frame_0045_mask_320x180_0001.png"
+        },
+        {
+          "image_id": 1,
+          "width": 80,
+          "height": 45,
+          "min": 25,
+          "max": 81,
+          "mean": 64.271,
+          "p75": 68,
+          "black_fraction": 0.0,
+          "below_128_fraction": 1.0,
+          "payload_crc32": "4029DF21",
+          "frame_id": "0045",
+          "file": "frame_0045_raw8_thumbnail_0002.png"
+        }
+      ],
+      "ended": true,
+      "complete": true,
+      "errors": [],
+      "overlay_file": "hardware_frame_0045_0001.png"
+    },
+    {
+      "frame_id": "0046",
+      "detected_count": 4,
+      "stored_count": 4,
+      "overflow": false,
+      "weight_crc32": "EEC8E020",
+      "digits": [
+        {
+          "index": 0,
+          "x": 96,
+          "y": 37,
+          "w": 25,
+          "h": 36,
+          "class": 3,
+          "patch_crc32": "11D41FF0"
+        },
+        {
+          "index": 1,
+          "x": 146,
+          "y": 37,
+          "w": 19,
+          "h": 31,
+          "class": 8,
+          "patch_crc32": "EC899155"
+        },
+        {
+          "index": 2,
+          "x": 137,
+          "y": 90,
+          "w": 47,
+          "h": 34,
+          "class": 5,
+          "patch_crc32": "CFABF88D"
+        },
+        {
+          "index": 3,
+          "x": 205,
+          "y": 81,
+          "w": 29,
+          "h": 48,
+          "class": 8,
+          "patch_crc32": "466DFD61"
+        }
+      ],
+      "images": [
+        {
+          "image_id": 0,
+          "width": 320,
+          "height": 180,
+          "min": 0,
+          "max": 255,
+          "mean": 249.692,
+          "p75": 255,
+          "black_fraction": 0.020816,
+          "below_128_fraction": 0.020816,
+          "payload_crc32": "8AF24071",
+          "frame_id": "0046",
+          "file": "frame_0046_mask_320x180_0002.png"
+        },
+        {
+          "image_id": 1,
+          "width": 80,
+          "height": 45,
+          "min": 24,
+          "max": 80,
+          "mean": 63.981,
+          "p75": 68,
+          "black_fraction": 0.0,
+          "below_128_fraction": 1.0,
+          "payload_crc32": "E6912F9E",
+          "frame_id": "0046",
+          "file": "frame_0046_raw8_thumbnail_0003.png"
+        }
+      ],
+      "ended": true,
+      "complete": true,
+      "errors": [],
+      "overlay_file": "hardware_frame_0046_0002.png"
+    },
+    {
+      "frame_id": "0047",
+      "detected_count": 4,
+      "stored_count": 4,
+      "overflow": false,
+      "weight_crc32": "EEC8E020",
+      "digits": [
+        {
+          "index": 0,
+          "x": 97,
+          "y": 37,
+          "w": 24,
+          "h": 36,
+          "class": 3,
+          "patch_crc32": "1AD4A052"
+        },
+        {
+          "index": 1,
+          "x": 147,
+          "y": 37,
+          "w": 18,
+          "h": 31,
+          "class": 8,
+          "patch_crc32": "28C41D15"
+        },
+        {
+          "index": 2,
+          "x": 137,
+          "y": 90,
+          "w": 47,
+          "h": 34,
+          "class": 5,
+          "patch_crc32": "C29C9EFF"
+        },
+        {
+          "index": 3,
+          "x": 205,
+          "y": 81,
+          "w": 29,
+          "h": 48,
+          "class": 8,
+          "patch_crc32": "370FB93A"
+        }
+      ],
+      "images": [
+        {
+          "image_id": 0,
+          "width": 320,
+          "height": 180,
+          "min": 0,
+          "max": 255,
+          "mean": 249.71,
+          "p75": 255,
+          "black_fraction": 0.020747,
+          "below_128_fraction": 0.020747,
+          "payload_crc32": "69E63AF9",
+          "frame_id": "0047",
+          "file": "frame_0047_mask_320x180_0003.png"
+        },
+        {
+          "image_id": 1,
+          "width": 80,
+          "height": 45,
+          "min": 24,
+          "max": 81,
+          "mean": 64.201,
+          "p75": 68,
+          "black_fraction": 0.0,
+          "below_128_fraction": 1.0,
+          "payload_crc32": "7D2E1BB5",
+          "frame_id": "0047",
+          "file": "frame_0047_raw8_thumbnail_0004.png"
+        }
+      ],
+      "ended": true,
+      "complete": true,
+      "errors": [],
+      "overlay_file": "hardware_frame_0047_0003.png"
+    },
+    {
+      "frame_id": "0048",
+      "detected_count": 4,
+      "stored_count": 4,
+      "overflow": false,
+      "weight_crc32": "EEC8E020",
+      "digits": [
+        {
+          "index": 0,
+          "x": 97,
+          "y": 37,
+          "w": 24,
+          "h": 36,
+          "class": 3,
+          "patch_crc32": "BF78184E"
+        },
+        {
+          "index": 1,
+          "x": 147,
+          "y": 37,
+          "w": 18,
+          "h": 31,
+          "class": 8,
+          "patch_crc32": "6062D5FB"
+        },
+        {
+          "index": 2,
+          "x": 137,
+          "y": 90,
+          "w": 47,
+          "h": 34,
+          "class": 5,
+          "patch_crc32": "D949D32B"
+        },
+        {
+          "index": 3,
+          "x": 205,
+          "y": 81,
+          "w": 29,
+          "h": 48,
+          "class": 8,
+          "patch_crc32": "3FEF93B6"
+        }
+      ],
+      "images": [
+        {
+          "image_id": 0,
+          "width": 320,
+          "height": 180,
+          "min": 0,
+          "max": 255,
+          "mean": 249.909,
+          "p75": 255,
+          "black_fraction": 0.019965,
+          "below_128_fraction": 0.019965,
+          "payload_crc32": "7E304F29",
+          "frame_id": "0048",
+          "file": "frame_0048_mask_320x180_0004.png"
+        },
+        {
+          "image_id": 1,
+          "width": 80,
+          "height": 45,
+          "min": 24,
+          "max": 82,
+          "mean": 66.469,
+          "p75": 70,
+          "black_fraction": 0.0,
+          "below_128_fraction": 1.0,
+          "payload_crc32": "9489CB28",
+          "frame_id": "0048",
+          "file": "frame_0048_raw8_thumbnail_0005.png"
+        }
+      ],
+      "ended": true,
+      "complete": true,
+      "errors": [],
+      "overlay_file": "hardware_frame_0048_0004.png"
+    },
+    {
+      "frame_id": "0049",
+      "detected_count": 4,
+      "stored_count": 4,
+      "overflow": false,
+      "weight_crc32": "EEC8E020",
+      "digits": [
+        {
+          "index": 0,
+          "x": 98,
+          "y": 37,
+          "w": 23,
+          "h": 35,
+          "class": 3,
+          "patch_crc32": "0D83ECDF"
+        },
+        {
+          "index": 1,
+          "x": 146,
+          "y": 37,
+          "w": 19,
+          "h": 31,
+          "class": 8,
+          "patch_crc32": "08F1DAAC"
+        },
+        {
+          "index": 2,
+          "x": 137,
+          "y": 90,
+          "w": 47,
+          "h": 34,
+          "class": 5,
+          "patch_crc32": "EA1C526B"
+        },
+        {
+          "index": 3,
+          "x": 205,
+          "y": 81,
+          "w": 29,
+          "h": 48,
+          "class": 8,
+          "patch_crc32": "3FEF93B6"
+        }
+      ],
+      "images": [],
+      "ended": false,
+      "complete": false,
+      "errors": []
+    }
+  ],
+  "protocol_errors": [
+    "E without matching F: 0044"
+  ],
+  "incomplete_payload": [
+    0,
+    57600,
+    320,
+    180,
+    24
+  ],
+  "pending_bytes": 27862
+}

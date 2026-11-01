@@ -1,0 +1,134 @@
+[
+  {
+    "frame_id": "000E",
+    "bands": [
+      {
+        "top": 26,
+        "bottom": 179,
+        "height": 154,
+        "column_segments": [
+          {
+            "x": 0,
+            "width": 31,
+            "exceeds_width_96": false
+          },
+          {
+            "x": 33,
+            "width": 287,
+            "exceeds_width_96": true
+          }
+        ]
+      }
+    ],
+    "hardware_digits": [
+      {
+        "index": 0,
+        "x": 0,
+        "y": 119,
+        "w": 31,
+        "h": 61,
+        "class": 5,
+        "patch_crc32": "27B32AF1"
+      }
+    ]
+  },
+  {
+    "frame_id": "000F",
+    "bands": [
+      {
+        "top": 26,
+        "bottom": 179,
+        "height": 154,
+        "column_segments": [
+          {
+            "x": 0,
+            "width": 30,
+            "exceeds_width_96": false
+          },
+          {
+            "x": 33,
+            "width": 287,
+            "exceeds_width_96": true
+          }
+        ]
+      }
+    ],
+    "hardware_digits": [
+      {
+        "index": 0,
+        "x": 0,
+        "y": 119,
+        "w": 30,
+        "h": 61,
+        "class": 5,
+        "patch_crc32": "53AF9E45"
+      }
+    ]
+  },
+  {
+    "frame_id": "0010",
+    "bands": [
+      {
+        "top": 26,
+        "bottom": 179,
+        "height": 154,
+        "column_segments": [
+          {
+            "x": 0,
+            "width": 31,
+            "exceeds_width_96": false
+          },
+          {
+            "x": 33,
+            "width": 287,
+            "exceeds_width_96": true
+          }
+        ]
+      }
+    ],
+    "hardware_digits": [
+      {
+        "index": 0,
+        "x": 0,
+        "y": 108,
+        "w": 31,
+        "h": 72,
+        "class": 8,
+        "patch_crc32": "7A21D868"
+      }
+    ]
+  },
+  {
+    "frame_id": "0011",
+    "bands": [
+      {
+        "top": 26,
+        "bottom": 179,
+        "height": 154,
+        "column_segments": [
+          {
+            "x": 0,
+            "width": 30,
+            "exceeds_width_96": false
+          },
+          {
+            "x": 33,
+            "width": 287,
+            "exceeds_width_96": true
+          }
+        ]
+      }
+    ],
+    "hardware_digits": [
+      {
+        "index": 0,
+        "x": 0,
+        "y": 116,
+        "w": 30,
+        "h": 64,
+        "class": 5,
+        "patch_crc32": "1645CFB5"
+      }
+    ]
+  }
+]

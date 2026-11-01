@@ -1,0 +1,145 @@
+{
+  "bytes": 311717,
+  "images": [
+    {
+      "image_id": 1,
+      "width": 80,
+      "height": 45,
+      "min": 22,
+      "max": 255,
+      "mean": 74.089,
+      "p75": 74,
+      "black_fraction": 0.0,
+      "below_128_fraction": 0.949167,
+      "file": "raw8_thumbnail_0001.png"
+    },
+    {
+      "image_id": 0,
+      "width": 320,
+      "height": 180,
+      "min": 0,
+      "max": 255,
+      "mean": 243.268,
+      "p75": 255,
+      "black_fraction": 0.046007,
+      "below_128_fraction": 0.046007,
+      "file": "mask_320x180_0001.png"
+    },
+    {
+      "image_id": 1,
+      "width": 80,
+      "height": 45,
+      "min": 23,
+      "max": 255,
+      "mean": 76.369,
+      "p75": 78,
+      "black_fraction": 0.0,
+      "below_128_fraction": 0.957222,
+      "file": "raw8_thumbnail_0002.png"
+    },
+    {
+      "image_id": 0,
+      "width": 320,
+      "height": 180,
+      "min": 0,
+      "max": 255,
+      "mean": 237.314,
+      "p75": 255,
+      "black_fraction": 0.069358,
+      "below_128_fraction": 0.069358,
+      "file": "mask_320x180_0002.png"
+    },
+    {
+      "image_id": 1,
+      "width": 80,
+      "height": 45,
+      "min": 24,
+      "max": 255,
+      "mean": 97.156,
+      "p75": 94,
+      "black_fraction": 0.0,
+      "below_128_fraction": 0.888333,
+      "file": "raw8_thumbnail_0003.png"
+    },
+    {
+      "image_id": 0,
+      "width": 320,
+      "height": 180,
+      "min": 0,
+      "max": 255,
+      "mean": 236.84,
+      "p75": 255,
+      "black_fraction": 0.071215,
+      "below_128_fraction": 0.071215,
+      "file": "mask_320x180_0003.png"
+    },
+    {
+      "image_id": 1,
+      "width": 80,
+      "height": 45,
+      "min": 23,
+      "max": 255,
+      "mean": 94.097,
+      "p75": 92,
+      "black_fraction": 0.0,
+      "below_128_fraction": 0.885833,
+      "file": "raw8_thumbnail_0004.png"
+    },
+    {
+      "image_id": 0,
+      "width": 320,
+      "height": 180,
+      "min": 0,
+      "max": 255,
+      "mean": 241.865,
+      "p75": 255,
+      "black_fraction": 0.05151,
+      "below_128_fraction": 0.05151,
+      "file": "mask_320x180_0004.png"
+    },
+    {
+      "image_id": 1,
+      "width": 80,
+      "height": 45,
+      "min": 24,
+      "max": 255,
+      "mean": 88.764,
+      "p75": 86,
+      "black_fraction": 0.0,
+      "below_128_fraction": 0.903889,
+      "file": "raw8_thumbnail_0005.png"
+    },
+    {
+      "image_id": 0,
+      "width": 320,
+      "height": 180,
+      "min": 0,
+      "max": 255,
+      "mean": 239.554,
+      "p75": 255,
+      "black_fraction": 0.060573,
+      "below_128_fraction": 0.060573,
+      "file": "mask_320x180_0005.png"
+    },
+    {
+      "image_id": 1,
+      "width": 80,
+      "height": 45,
+      "min": 24,
+      "max": 255,
+      "mean": 80.556,
+      "p75": 81,
+      "black_fraction": 0.0,
+      "below_128_fraction": 0.940556,
+      "file": "raw8_thumbnail_0006.png"
+    }
+  ],
+  "incomplete_payload": [
+    0,
+    57600,
+    320,
+    180,
+    24
+  ],
+  "pending_bytes": 232
+}

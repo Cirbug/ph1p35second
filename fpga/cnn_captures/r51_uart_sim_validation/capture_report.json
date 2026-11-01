@@ -1,0 +1,608 @@
+{
+  "bytes": 246407,
+  "images": [
+    {
+      "image_id": 0,
+      "width": 320,
+      "height": 180,
+      "min": 0,
+      "max": 255,
+      "mean": 127.5,
+      "p75": 255,
+      "black_fraction": 0.5,
+      "below_128_fraction": 0.5,
+      "payload_crc32": "ED072039",
+      "frame_id": "0001",
+      "file": "frame_0001_mask_320x180_0001.png"
+    },
+    {
+      "image_id": 1,
+      "width": 80,
+      "height": 45,
+      "min": 0,
+      "max": 255,
+      "mean": 126.967,
+      "p75": 191,
+      "black_fraction": 0.004167,
+      "below_128_fraction": 0.502222,
+      "payload_crc32": "8EBB5067",
+      "frame_id": "0001",
+      "file": "frame_0001_raw8_thumbnail_0001.png"
+    },
+    {
+      "image_id": 0,
+      "width": 320,
+      "height": 180,
+      "min": 0,
+      "max": 255,
+      "mean": 127.5,
+      "p75": 255,
+      "black_fraction": 0.5,
+      "below_128_fraction": 0.5,
+      "payload_crc32": "ED072039",
+      "frame_id": "0002",
+      "file": "frame_0002_mask_320x180_0002.png"
+    },
+    {
+      "image_id": 1,
+      "width": 80,
+      "height": 45,
+      "min": 0,
+      "max": 255,
+      "mean": 126.967,
+      "p75": 191,
+      "black_fraction": 0.004167,
+      "below_128_fraction": 0.502222,
+      "payload_crc32": "8EBB5067",
+      "frame_id": "0002",
+      "file": "frame_0002_raw8_thumbnail_0002.png"
+    },
+    {
+      "image_id": 0,
+      "width": 320,
+      "height": 180,
+      "min": 0,
+      "max": 255,
+      "mean": 127.5,
+      "p75": 255,
+      "black_fraction": 0.5,
+      "below_128_fraction": 0.5,
+      "payload_crc32": "ED072039",
+      "frame_id": "0003",
+      "file": "frame_0003_mask_320x180_0003.png"
+    },
+    {
+      "image_id": 1,
+      "width": 80,
+      "height": 45,
+      "min": 0,
+      "max": 255,
+      "mean": 126.967,
+      "p75": 191,
+      "black_fraction": 0.004167,
+      "below_128_fraction": 0.502222,
+      "payload_crc32": "8EBB5067",
+      "frame_id": "0003",
+      "file": "frame_0003_raw8_thumbnail_0003.png"
+    },
+    {
+      "image_id": 0,
+      "width": 320,
+      "height": 180,
+      "min": 0,
+      "max": 255,
+      "mean": 127.5,
+      "p75": 255,
+      "black_fraction": 0.5,
+      "below_128_fraction": 0.5,
+      "payload_crc32": "ED072039",
+      "frame_id": "0004",
+      "file": "frame_0004_mask_320x180_0004.png"
+    },
+    {
+      "image_id": 1,
+      "width": 80,
+      "height": 45,
+      "min": 0,
+      "max": 255,
+      "mean": 126.967,
+      "p75": 191,
+      "black_fraction": 0.004167,
+      "below_128_fraction": 0.502222,
+      "payload_crc32": "8EBB5067",
+      "frame_id": "0004",
+      "file": "frame_0004_raw8_thumbnail_0004.png"
+    }
+  ],
+  "frames": [
+    {
+      "frame_id": "0001",
+      "detected_count": 3,
+      "stored_count": 3,
+      "overflow": false,
+      "weight_crc32": "EEC8E020",
+      "digits": [
+        {
+          "index": 0,
+          "x": 10,
+          "y": 20,
+          "w": 30,
+          "h": 40,
+          "class": 0,
+          "patch_crc32": "12345600"
+        },
+        {
+          "index": 1,
+          "x": 11,
+          "y": 21,
+          "w": 31,
+          "h": 41,
+          "class": 1,
+          "patch_crc32": "12345601"
+        },
+        {
+          "index": 2,
+          "x": 12,
+          "y": 22,
+          "w": 32,
+          "h": 42,
+          "class": 2,
+          "patch_crc32": "12345602"
+        }
+      ],
+      "images": [
+        {
+          "image_id": 0,
+          "width": 320,
+          "height": 180,
+          "min": 0,
+          "max": 255,
+          "mean": 127.5,
+          "p75": 255,
+          "black_fraction": 0.5,
+          "below_128_fraction": 0.5,
+          "payload_crc32": "ED072039",
+          "frame_id": "0001",
+          "file": "frame_0001_mask_320x180_0001.png"
+        },
+        {
+          "image_id": 1,
+          "width": 80,
+          "height": 45,
+          "min": 0,
+          "max": 255,
+          "mean": 126.967,
+          "p75": 191,
+          "black_fraction": 0.004167,
+          "below_128_fraction": 0.502222,
+          "payload_crc32": "8EBB5067",
+          "frame_id": "0001",
+          "file": "frame_0001_raw8_thumbnail_0001.png"
+        }
+      ],
+      "ended": true,
+      "complete": true,
+      "errors": [],
+      "overlay_file": "hardware_frame_0001_0001.png"
+    },
+    {
+      "frame_id": "0002",
+      "detected_count": 0,
+      "stored_count": 0,
+      "overflow": false,
+      "weight_crc32": "EEC8E020",
+      "digits": [],
+      "images": [
+        {
+          "image_id": 0,
+          "width": 320,
+          "height": 180,
+          "min": 0,
+          "max": 255,
+          "mean": 127.5,
+          "p75": 255,
+          "black_fraction": 0.5,
+          "below_128_fraction": 0.5,
+          "payload_crc32": "ED072039",
+          "frame_id": "0002",
+          "file": "frame_0002_mask_320x180_0002.png"
+        },
+        {
+          "image_id": 1,
+          "width": 80,
+          "height": 45,
+          "min": 0,
+          "max": 255,
+          "mean": 126.967,
+          "p75": 191,
+          "black_fraction": 0.004167,
+          "below_128_fraction": 0.502222,
+          "payload_crc32": "8EBB5067",
+          "frame_id": "0002",
+          "file": "frame_0002_raw8_thumbnail_0002.png"
+        }
+      ],
+      "ended": true,
+      "complete": true,
+      "errors": [],
+      "overlay_file": "hardware_frame_0002_0002.png"
+    },
+    {
+      "frame_id": "0003",
+      "detected_count": 16,
+      "stored_count": 16,
+      "overflow": false,
+      "weight_crc32": "EEC8E020",
+      "digits": [
+        {
+          "index": 0,
+          "x": 10,
+          "y": 20,
+          "w": 30,
+          "h": 40,
+          "class": 0,
+          "patch_crc32": "12345600"
+        },
+        {
+          "index": 1,
+          "x": 11,
+          "y": 21,
+          "w": 31,
+          "h": 41,
+          "class": 1,
+          "patch_crc32": "12345601"
+        },
+        {
+          "index": 2,
+          "x": 12,
+          "y": 22,
+          "w": 32,
+          "h": 42,
+          "class": 2,
+          "patch_crc32": "12345602"
+        },
+        {
+          "index": 3,
+          "x": 13,
+          "y": 23,
+          "w": 33,
+          "h": 43,
+          "class": 3,
+          "patch_crc32": "12345603"
+        },
+        {
+          "index": 4,
+          "x": 14,
+          "y": 24,
+          "w": 34,
+          "h": 44,
+          "class": 4,
+          "patch_crc32": "12345604"
+        },
+        {
+          "index": 5,
+          "x": 15,
+          "y": 25,
+          "w": 35,
+          "h": 45,
+          "class": 5,
+          "patch_crc32": "12345605"
+        },
+        {
+          "index": 6,
+          "x": 16,
+          "y": 26,
+          "w": 36,
+          "h": 46,
+          "class": 6,
+          "patch_crc32": "12345606"
+        },
+        {
+          "index": 7,
+          "x": 17,
+          "y": 27,
+          "w": 37,
+          "h": 47,
+          "class": 7,
+          "patch_crc32": "12345607"
+        },
+        {
+          "index": 8,
+          "x": 18,
+          "y": 28,
+          "w": 38,
+          "h": 48,
+          "class": 8,
+          "patch_crc32": "12345608"
+        },
+        {
+          "index": 9,
+          "x": 19,
+          "y": 29,
+          "w": 39,
+          "h": 49,
+          "class": 9,
+          "patch_crc32": "12345609"
+        },
+        {
+          "index": 10,
+          "x": 20,
+          "y": 30,
+          "w": 40,
+          "h": 50,
+          "class": 0,
+          "patch_crc32": "1234560A"
+        },
+        {
+          "index": 11,
+          "x": 21,
+          "y": 31,
+          "w": 41,
+          "h": 51,
+          "class": 1,
+          "patch_crc32": "1234560B"
+        },
+        {
+          "index": 12,
+          "x": 22,
+          "y": 32,
+          "w": 42,
+          "h": 52,
+          "class": 2,
+          "patch_crc32": "1234560C"
+        },
+        {
+          "index": 13,
+          "x": 23,
+          "y": 33,
+          "w": 43,
+          "h": 53,
+          "class": 3,
+          "patch_crc32": "1234560D"
+        },
+        {
+          "index": 14,
+          "x": 24,
+          "y": 34,
+          "w": 44,
+          "h": 54,
+          "class": 4,
+          "patch_crc32": "1234560E"
+        },
+        {
+          "index": 15,
+          "x": 25,
+          "y": 35,
+          "w": 45,
+          "h": 55,
+          "class": 5,
+          "patch_crc32": "1234560F"
+        }
+      ],
+      "images": [
+        {
+          "image_id": 0,
+          "width": 320,
+          "height": 180,
+          "min": 0,
+          "max": 255,
+          "mean": 127.5,
+          "p75": 255,
+          "black_fraction": 0.5,
+          "below_128_fraction": 0.5,
+          "payload_crc32": "ED072039",
+          "frame_id": "0003",
+          "file": "frame_0003_mask_320x180_0003.png"
+        },
+        {
+          "image_id": 1,
+          "width": 80,
+          "height": 45,
+          "min": 0,
+          "max": 255,
+          "mean": 126.967,
+          "p75": 191,
+          "black_fraction": 0.004167,
+          "below_128_fraction": 0.502222,
+          "payload_crc32": "8EBB5067",
+          "frame_id": "0003",
+          "file": "frame_0003_raw8_thumbnail_0003.png"
+        }
+      ],
+      "ended": true,
+      "complete": true,
+      "errors": [],
+      "overlay_file": "hardware_frame_0003_0003.png"
+    },
+    {
+      "frame_id": "0004",
+      "detected_count": 17,
+      "stored_count": 16,
+      "overflow": true,
+      "weight_crc32": "EEC8E020",
+      "digits": [
+        {
+          "index": 0,
+          "x": 10,
+          "y": 20,
+          "w": 30,
+          "h": 40,
+          "class": 0,
+          "patch_crc32": "12345600"
+        },
+        {
+          "index": 1,
+          "x": 11,
+          "y": 21,
+          "w": 31,
+          "h": 41,
+          "class": 1,
+          "patch_crc32": "12345601"
+        },
+        {
+          "index": 2,
+          "x": 12,
+          "y": 22,
+          "w": 32,
+          "h": 42,
+          "class": 2,
+          "patch_crc32": "12345602"
+        },
+        {
+          "index": 3,
+          "x": 13,
+          "y": 23,
+          "w": 33,
+          "h": 43,
+          "class": 3,
+          "patch_crc32": "12345603"
+        },
+        {
+          "index": 4,
+          "x": 14,
+          "y": 24,
+          "w": 34,
+          "h": 44,
+          "class": 4,
+          "patch_crc32": "12345604"
+        },
+        {
+          "index": 5,
+          "x": 15,
+          "y": 25,
+          "w": 35,
+          "h": 45,
+          "class": 5,
+          "patch_crc32": "12345605"
+        },
+        {
+          "index": 6,
+          "x": 16,
+          "y": 26,
+          "w": 36,
+          "h": 46,
+          "class": 6,
+          "patch_crc32": "12345606"
+        },
+        {
+          "index": 7,
+          "x": 17,
+          "y": 27,
+          "w": 37,
+          "h": 47,
+          "class": 7,
+          "patch_crc32": "12345607"
+        },
+        {
+          "index": 8,
+          "x": 18,
+          "y": 28,
+          "w": 38,
+          "h": 48,
+          "class": 8,
+          "patch_crc32": "12345608"
+        },
+        {
+          "index": 9,
+          "x": 19,
+          "y": 29,
+          "w": 39,
+          "h": 49,
+          "class": 9,
+          "patch_crc32": "12345609"
+        },
+        {
+          "index": 10,
+          "x": 20,
+          "y": 30,
+          "w": 40,
+          "h": 50,
+          "class": 0,
+          "patch_crc32": "1234560A"
+        },
+        {
+          "index": 11,
+          "x": 21,
+          "y": 31,
+          "w": 41,
+          "h": 51,
+          "class": 1,
+          "patch_crc32": "1234560B"
+        },
+        {
+          "index": 12,
+          "x": 22,
+          "y": 32,
+          "w": 42,
+          "h": 52,
+          "class": 2,
+          "patch_crc32": "1234560C"
+        },
+        {
+          "index": 13,
+          "x": 23,
+          "y": 33,
+          "w": 43,
+          "h": 53,
+          "class": 3,
+          "patch_crc32": "1234560D"
+        },
+        {
+          "index": 14,
+          "x": 24,
+          "y": 34,
+          "w": 44,
+          "h": 54,
+          "class": 4,
+          "patch_crc32": "1234560E"
+        },
+        {
+          "index": 15,
+          "x": 25,
+          "y": 35,
+          "w": 45,
+          "h": 55,
+          "class": 5,
+          "patch_crc32": "1234560F"
+        }
+      ],
+      "images": [
+        {
+          "image_id": 0,
+          "width": 320,
+          "height": 180,
+          "min": 0,
+          "max": 255,
+          "mean": 127.5,
+          "p75": 255,
+          "black_fraction": 0.5,
+          "below_128_fraction": 0.5,
+          "payload_crc32": "ED072039",
+          "frame_id": "0004",
+          "file": "frame_0004_mask_320x180_0004.png"
+        },
+        {
+          "image_id": 1,
+          "width": 80,
+          "height": 45,
+          "min": 0,
+          "max": 255,
+          "mean": 126.967,
+          "p75": 191,
+          "black_fraction": 0.004167,
+          "below_128_fraction": 0.502222,
+          "payload_crc32": "8EBB5067",
+          "frame_id": "0004",
+          "file": "frame_0004_raw8_thumbnail_0004.png"
+        }
+      ],
+      "ended": true,
+      "complete": true,
+      "errors": [],
+      "overlay_file": "hardware_frame_0004_0004.png"
+    }
+  ],
+  "protocol_errors": [],
+  "incomplete_payload": null,
+  "pending_bytes": 0
+}

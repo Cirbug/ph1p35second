@@ -1,0 +1,49 @@
+{
+  "bytes": 251960,
+  "images": [
+    {
+      "image_id": 0,
+      "width": 320,
+      "height": 180,
+      "min": 0,
+      "max": 255,
+      "mean": 43.306,
+      "p75": 0,
+      "black_fraction": 0.830174,
+      "below_128_fraction": 0.830174,
+      "file": "mask_320x180_0001.png"
+    },
+    {
+      "image_id": 0,
+      "width": 320,
+      "height": 180,
+      "min": 0,
+      "max": 255,
+      "mean": 43.173,
+      "p75": 0,
+      "black_fraction": 0.830694,
+      "below_128_fraction": 0.830694,
+      "file": "mask_320x180_0002.png"
+    },
+    {
+      "image_id": 0,
+      "width": 320,
+      "height": 180,
+      "min": 0,
+      "max": 255,
+      "mean": 42.562,
+      "p75": 0,
+      "black_fraction": 0.83309,
+      "below_128_fraction": 0.83309,
+      "file": "mask_320x180_0003.png"
+    }
+  ],
+  "incomplete_payload": [
+    0,
+    57600,
+    320,
+    180,
+    24
+  ],
+  "pending_bytes": 27585
+}

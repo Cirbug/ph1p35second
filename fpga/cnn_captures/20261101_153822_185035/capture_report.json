@@ -1,0 +1,71 @@
+{
+  "bytes": 171230,
+  "images": [
+    {
+      "image_id": 0,
+      "width": 320,
+      "height": 180,
+      "min": 0,
+      "max": 255,
+      "mean": 202.375,
+      "p75": 255,
+      "black_fraction": 0.206372,
+      "below_128_fraction": 0.206372,
+      "payload_crc32": "1624E470",
+      "frame_id": null,
+      "file": "mask_320x180_0001.png"
+    },
+    {
+      "image_id": 1,
+      "width": 80,
+      "height": 45,
+      "min": 25,
+      "max": 255,
+      "mean": 97.813,
+      "p75": 103,
+      "black_fraction": 0.0,
+      "below_128_fraction": 0.87,
+      "payload_crc32": "287E01E2",
+      "frame_id": null,
+      "file": "raw8_thumbnail_0001.png"
+    },
+    {
+      "image_id": 0,
+      "width": 320,
+      "height": 180,
+      "min": 0,
+      "max": 255,
+      "mean": 202.61,
+      "p75": 255,
+      "black_fraction": 0.205451,
+      "below_128_fraction": 0.205451,
+      "payload_crc32": "787E0834",
+      "frame_id": null,
+      "file": "mask_320x180_0002.png"
+    },
+    {
+      "image_id": 1,
+      "width": 80,
+      "height": 45,
+      "min": 27,
+      "max": 255,
+      "mean": 97.825,
+      "p75": 103,
+      "black_fraction": 0.0,
+      "below_128_fraction": 0.870278,
+      "payload_crc32": "D0863A87",
+      "frame_id": null,
+      "file": "raw8_thumbnail_0002.png"
+    }
+  ],
+  "frames": [],
+  "protocol_errors": [],
+  "incomplete_payload": [
+    0,
+    57600,
+    320,
+    180,
+    24
+  ],
+  "pending_bytes": 48711
+}

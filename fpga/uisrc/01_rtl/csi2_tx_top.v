@@ -24,6 +24,8 @@ module csi2_tx_top #(
     // 两块 14→40 转接板的 D0/D1 顺序相反，实机必须为 1。
     // 提成参数是为了让 testbench 能传 0 来按自然字节序校验。
     parameter LANE_SWAP = 1,
+    // 1: VOFA binary mask image on J3 for CNN input diagnostics.
+    // 0: text recognition results on J3 (D/FRAME_DONE/STAT).
     parameter CNN_VOFA_IMAGE_DUMP = 1
 )(
     input  wire        I_sys_clk,          // 25MHz 单端，C4
@@ -353,6 +355,7 @@ module csi2_tx_top #(
     wire        cnn_frame_start;
     wire        cnn_pixel_valid;
     wire [7:0]  cnn_pixel_data;
+    wire [7:0]  cnn_gray_pixel_data;
     wire        cnn_frame_complete;
     wire [9:0]  cnn_pixel_x;
     wire [8:0]  cnn_pixel_y;
@@ -360,6 +363,7 @@ module csi2_tx_top #(
 
     cnn_raw10_resize_bin #(
         .THRESHOLD ( 8'd128 ),
+        .AUTO_THRESHOLD( 1 ),
         .SRC_WIDTH ( CACHE_WIDTH ),
         .SRC_HEIGHT( CACHE_HEIGHT ),
         .DST_WIDTH ( 320 ),
@@ -374,6 +378,7 @@ module csi2_tx_top #(
         .frame_start  ( cnn_frame_start ),
         .pixel_valid  ( cnn_pixel_valid ),
         .pixel_data   ( cnn_pixel_data ),
+        .gray_pixel_data( cnn_gray_pixel_data ),
         .frame_complete( cnn_frame_complete ),
         .pixel_x      ( cnn_pixel_x ),
         .pixel_y      ( cnn_pixel_y ),
@@ -395,10 +400,15 @@ module csi2_tx_top #(
     wire        cnn_detector_busy;
     wire        cnn_model_check_done;
     wire [31:0] cnn_model_weight_crc32;
+    wire [31:0] cnn_digit_patch_crc32;
     wire        cnn_dump_active;
     wire        cnn_dump_read_enable;
     wire [15:0] cnn_dump_read_address;
     wire        cnn_dump_read_data;
+    wire        cnn_capture_pixel_accept;
+    wire        cnn_thumb_read_enable;
+    wire [11:0] cnn_thumb_read_address;
+    wire [7:0]  cnn_thumb_read_data;
     cnn_frame_digit_detector #(
         .DARK_THRESHOLD(8'd128),
         .MAX_BANDS(8),
@@ -415,6 +425,7 @@ module csi2_tx_top #(
         .image_dump_read_enable(cnn_dump_read_enable),
         .image_dump_read_address(cnn_dump_read_address),
         .image_dump_read_data(cnn_dump_read_data),
+        .capture_pixel_accept(cnn_capture_pixel_accept),
         .digit_done   ( cnn_digit_done ),
         .digit_class  ( cnn_digit_class ),
         .digit_x      ( cnn_digit_x ),
@@ -430,7 +441,7 @@ module csi2_tx_top #(
         .busy         ( cnn_detector_busy ),
         .model_check_done( cnn_model_check_done ),
         .model_weight_crc32( cnn_model_weight_crc32 ),
-        .digit_patch_crc32(),
+        .digit_patch_crc32(cnn_digit_patch_crc32),
         .digit_conv1_signature(),
         .digit_pool1_signature(),
         .digit_conv2_signature(),
@@ -1393,14 +1404,28 @@ module csi2_tx_top #(
     );
 
     wire cnn_vofa_uart_tx;
+    cnn_gray_thumbnail u_cnn_gray_thumbnail (
+        .wr_clk(ddr_clk), .rd_clk(clk_100m), .rst(~sys_rst_n),
+        .frame_start(cnn_frame_start), .pixel_accept(cnn_capture_pixel_accept),
+        .pixel_x(cnn_pixel_x), .pixel_y(cnn_pixel_y), .gray_data(cnn_gray_pixel_data),
+        .rd_en(cnn_thumb_read_enable), .rd_addr(cnn_thumb_read_address),
+        .rd_data(cnn_thumb_read_data)
+    );
     cnn_vofa_image_uart #(
-        .CLK_HZ(100000000), .BAUD(115200), .WIDTH(320), .HEIGHT(180)
+        .CLK_HZ(100000000), .BAUD(115200), .WIDTH(320), .HEIGHT(180),
+        .THUMB_ENABLE(1), .REPORT_ENABLE(1)
     ) u_cnn_vofa_image_uart (
         .clk(clk_100m), .rst_n(rst_n_100),
         .frame_done(CNN_VOFA_IMAGE_DUMP ? cnn_detector_frame_done : 1'b0),
+        .digit_done(cnn_digit_done), .digit_x(cnn_digit_x), .digit_y(cnn_digit_y),
+        .digit_w(cnn_digit_w), .digit_h(cnn_digit_h), .digit_class(cnn_digit_class),
+        .digit_patch_crc(cnn_digit_patch_crc32), .model_weight_crc(cnn_model_weight_crc32),
+        .frame_digit_count(cnn_digit_count),
         .mask_data(cnn_dump_read_data),
         .mask_read_enable(cnn_dump_read_enable),
         .mask_read_address(cnn_dump_read_address),
+        .thumb_read_enable(cnn_thumb_read_enable),
+        .thumb_read_address(cnn_thumb_read_address), .thumb_data(cnn_thumb_read_data),
         .dump_active(cnn_dump_active), .uart_tx(cnn_vofa_uart_tx)
     );
 

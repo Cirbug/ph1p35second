@@ -1,0 +1,133 @@
+{
+  "origin": "Hardware F/D records compared with current RTL replay of their same-frame captured mask",
+  "frame_id": "0045",
+  "mask_file": "D:\\2026fpga\\ph1p35second\\fpga\\cnn_captures\\20261101_155544_984593\\frame_0045_mask_320x180_0001.png",
+  "report": "D:\\2026fpga\\ph1p35second\\fpga\\cnn_captures\\20261101_155544_984593\\capture_report.json",
+  "hardware": {
+    "frame_id": "0045",
+    "detected_count": 4,
+    "stored_count": 4,
+    "overflow": false,
+    "weight_crc32": "EEC8E020",
+    "digits": [
+      {
+        "index": 0,
+        "x": 96,
+        "y": 37,
+        "w": 25,
+        "h": 36,
+        "class": 3,
+        "patch_crc32": "8911E7F3"
+      },
+      {
+        "index": 1,
+        "x": 146,
+        "y": 37,
+        "w": 19,
+        "h": 31,
+        "class": 8,
+        "patch_crc32": "222D9991"
+      },
+      {
+        "index": 2,
+        "x": 137,
+        "y": 90,
+        "w": 47,
+        "h": 34,
+        "class": 5,
+        "patch_crc32": "2CE6F59F"
+      },
+      {
+        "index": 3,
+        "x": 205,
+        "y": 81,
+        "w": 29,
+        "h": 48,
+        "class": 8,
+        "patch_crc32": "466DFD61"
+      }
+    ],
+    "images": [
+      {
+        "image_id": 0,
+        "width": 320,
+        "height": 180,
+        "min": 0,
+        "max": 255,
+        "mean": 249.727,
+        "p75": 255,
+        "black_fraction": 0.020677,
+        "below_128_fraction": 0.020677,
+        "payload_crc32": "9C85E4BE",
+        "frame_id": "0045",
+        "file": "frame_0045_mask_320x180_0001.png"
+      },
+      {
+        "image_id": 1,
+        "width": 80,
+        "height": 45,
+        "min": 25,
+        "max": 81,
+        "mean": 64.271,
+        "p75": 68,
+        "black_fraction": 0.0,
+        "below_128_fraction": 1.0,
+        "payload_crc32": "4029DF21",
+        "frame_id": "0045",
+        "file": "frame_0045_raw8_thumbnail_0002.png"
+      }
+    ],
+    "ended": true,
+    "complete": true,
+    "errors": [],
+    "overlay_file": "hardware_frame_0045_0001.png"
+  },
+  "rtl": {
+    "detected_count": 4,
+    "weight_crc32": "EEC8E020",
+    "digits": [
+      {
+        "x": 96,
+        "y": 37,
+        "w": 25,
+        "h": 36,
+        "class": 3,
+        "patch_crc32": "8911E7F3"
+      },
+      {
+        "x": 146,
+        "y": 37,
+        "w": 19,
+        "h": 31,
+        "class": 8,
+        "patch_crc32": "222D9991"
+      },
+      {
+        "x": 137,
+        "y": 90,
+        "w": 47,
+        "h": 34,
+        "class": 5,
+        "patch_crc32": "2CE6F59F"
+      },
+      {
+        "x": 205,
+        "y": 81,
+        "w": 29,
+        "h": 48,
+        "class": 8,
+        "patch_crc32": "466DFD61"
+      }
+    ]
+  },
+  "match": true,
+  "differences": [],
+  "elapsed_seconds": 149.66,
+  "current_source_sha256": {
+    "uisrc/02_sim/tb_cnn_captured_mask.v": "F0598545325F4C2292531F14A07971F2E9E45F9F9C54BE13D82FA1B876EA3410",
+    "uisrc/01_rtl/cnn/cnn_frame_digit_detector.v": "58FA0E270EA6CC61736722B39F722DADA4C52624D50DF4005481CC9ABB15C57B",
+    "uisrc/01_rtl/cnn/cnn_digit_infer.v": "61B7F7AEE20F6AB8EEC39E529D5BC5FBAEBCD381965F56BDBC85596D76B48C4C",
+    "uisrc/01_rtl/cnn/cnn_digit_params.v": "FD33314D7516B3D91C15578BCDB3F9685F005E7C5884931C2BEB553A925ABD90"
+  },
+  "accuracy_note": "Implementation agreement does not establish the handwritten ground-truth class. Current RTL sources must correspond to the downloaded bit."
+}

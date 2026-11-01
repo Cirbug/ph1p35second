@@ -1,0 +1,42 @@
+{
+  "origin": "OFFLINE RTL replay of board-captured mask; not hardware class UART",
+  "weight_crc": "eec8e020",
+  "digits": [
+    {
+      "x": 60,
+      "y": 26,
+      "w": 14,
+      "h": 61,
+      "class": 1,
+      "expected": "1",
+      "patch_crc": "749cac7c"
+    },
+    {
+      "x": 108,
+      "y": 35,
+      "w": 54,
+      "h": 66,
+      "class": 3,
+      "expected": "2",
+      "patch_crc": "ff307182"
+    },
+    {
+      "x": 184,
+      "y": 56,
+      "w": 40,
+      "h": 65,
+      "class": 3,
+      "expected": "3",
+      "patch_crc": "16388d82"
+    },
+    {
+      "x": 290,
+      "y": 125,
+      "w": 30,
+      "h": 55,
+      "class": 8,
+      "expected": "shadow",
+      "patch_crc": "fe8934bd"
+    }
+  ]
+}

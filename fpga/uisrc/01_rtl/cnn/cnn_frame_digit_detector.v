@@ -21,6 +21,7 @@ module cnn_frame_digit_detector #(
     input  wire       image_dump_read_enable,
     input  wire [15:0] image_dump_read_address,
     output wire       image_dump_read_data,
+    output wire       capture_pixel_accept,
     output reg        digit_done,
     output reg  [3:0] digit_class,
     output reg  [9:0] digit_x,
@@ -135,6 +136,7 @@ module cnn_frame_digit_detector #(
          (!frame_start && frame_capture_enabled));
     wire [15:0] mask_write_address = frame_start ? 16'd0 : capture_address;
     wire mask_write_data = (pixel_data < DARK_THRESHOLD);
+    assign capture_pixel_accept = mask_write_enable;
     wire ram_read_enable = image_dump_active ? image_dump_read_enable : mask_read_enable;
     wire [15:0] ram_read_address = image_dump_active ? image_dump_read_address : mask_read_address;
 
